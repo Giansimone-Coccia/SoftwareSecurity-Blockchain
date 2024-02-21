@@ -35,7 +35,7 @@ class db:
     
     def ottieniDati(self):
          # Nome della tabella da cui desideri recuperare i dati
-            table_name = 'ProfessioneCifrata'
+            table_name = 'Utenti'
     
             cursor = self.conn.cursor()
             # Esegui una query per selezionare tutti i dati dalla tabella specificata
@@ -52,6 +52,9 @@ class db:
                 utenti.append(tuplaDict)
             
             return utenti
+    
+
+
             
         
 
