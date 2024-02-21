@@ -17,12 +17,12 @@ if __name__ == '__main__':
     istanzaDB = db()
     utentiOttenunti = istanzaDB.ottieniDati()
     for utente in utentiOttenunti:
-        print('***********************************')
         print('Professione: ' + utente['Professione'])
         print('Email: ' + utente['Email'])
         print('Password: ' + utente['Password'])
         print('***********************************')
 
+    # Inizio la sessione e mi autentico 
     currentSession = session()
     currentSession.eseguiAccesso()
     print("Status utente: " + currentSession.status)
