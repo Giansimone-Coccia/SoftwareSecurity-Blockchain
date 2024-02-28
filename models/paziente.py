@@ -1,4 +1,4 @@
-class Paziente(User):
+class Paziente():
     def __init__(self, nome, cognome, ruolo, password, email):
         self.nome = nome
         self.cognome = cognome
@@ -11,3 +11,4 @@ def registerInfo():
 
 def accessData():
     pass
+
