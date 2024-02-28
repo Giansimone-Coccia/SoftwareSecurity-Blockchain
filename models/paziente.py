@@ -7,8 +7,8 @@ class Paziente():
         self.email = email
 
 def registerInfo():
-    pass
+    return
 
 def accessData():
-    pass
+    return
 
