@@ -4,10 +4,4 @@ class User:
         self.cognome = cognome
         self.email = email
 
-    def descrizione(self):
-        return f"{self.nome} {self.cognome}, Email: {self.email}"
-
-    def saluta(self):
-        return f"Ciao, sono {self.nome}!"
-    
 
