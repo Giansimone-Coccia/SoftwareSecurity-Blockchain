@@ -12,7 +12,7 @@ from cryptography.hazmat.backends import default_backend
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
         
-    # Ha l'unico scopo di osservare i dati presenti nel db 
+    # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     istanzaDB = db()
     utentiOttenunti = istanzaDB.ottieniDati()
     for utente in utentiOttenunti:
@@ -22,11 +22,11 @@ if __name__ == '__main__':
         print('***********************************')
 
         # Inizio la sessione e mi autentico 
-    email = input("Inserisci email: ")
-    password = input("Inserisci la password: ")
+
     currentSession = session()
-    currentSession.eseguiAccesso(email,password)
+    currentSession.eseguiAccesso()
     print("Status utente: " + currentSession.status)
+    print(currentSession.email + " " + currentSession.password)
 
 
 
