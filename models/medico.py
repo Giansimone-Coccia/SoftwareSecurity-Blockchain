@@ -5,3 +5,14 @@ class Medico:
         self.ruolo = ruolo
         self.password = password
 
+def registerData():
+    return
+
+def accessData():
+    return
+
+def prescribeExam():
+    return
+
+def prescribeDrug():
+    return
