@@ -29,7 +29,7 @@ class db:
 
         finally:
             # Chiudi la connessione
-            if 'conn' in locals() and conn.is_connected():
+            if 'conn' in locals() and self.conn.is_connected():
                 self.conn.close()
 
     
@@ -53,14 +53,26 @@ class db:
             
             return utenti
     
-    def gestisciAccesso(self,professione,email,password):
+    def gestisciAccesso(self,email,password):
         utenti = self.ottieniDati()
-        print(utenti)
         for u in utenti:
-              if(u['Professione']==professione and u['Email']==email and u['Password']==password):
+              if(u['Email']==email and u['Password']==password):
                   return True
         
         return False
+    
+
+    def ottieniProfessione(self,email,password):
+         utenti = self.ottieniDati()
+
+         for utente in utenti:
+              if(utente['Email'] == email and utente['Password'] == password):
+                return utente['Professione']
+        
+    
+
+                  
+         
 
           
          
