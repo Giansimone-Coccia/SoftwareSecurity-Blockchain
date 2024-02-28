@@ -14,6 +14,8 @@ class session:
         istanzaDB = db()
         _contaAccessi = 1
         _isLogin = True
+        _cinquineSbagliate = 1
+
 
         while(_isLogin):
 
@@ -29,23 +31,35 @@ class session:
                 
             else:
                 print("ACCESSO NEGATO !")
-                self._controlloAccessi(_contaAccessi)
+
+                self._controlloAccessi(_contaAccessi, _cinquineSbagliate)
                 _contaAccessi = _contaAccessi + 1
-                if(_contaAccessi == 6):
+                if(_contaAccessi == self._getMaxiAccessi()+1):
                     _contaAccessi = 0
+                    _cinquineSbagliate = _cinquineSbagliate + 1
 
 
 
-    def _controlloAccessi(self,tentativi):
-        _maxAccessi = 5
+    def _controlloAccessi(self,tentativi, cinquineSbagliate):
+        _maxAccessi = self._getMaxiAccessi()
 
         if(tentativi == _maxAccessi):
-            print("Hai eseguito troppi tentativi, aspetta 1 minuto")
-            for i in range(60, -1, -1):
+
+            # Se sbaglio piu di venti volta di fila(5 cinquine), vado in errore e il programma termina l'esecuzione
+            if(cinquineSbagliate == 3):
+                print("")
+                print("Hai effettuato troppi tentativi")
+                sys.exit()
+            
+            print("Hai eseguito troppi tentativi, aspetta: ")
+            for i in range(60*cinquineSbagliate, -1, -1):
                 #print(f"Tempo rimasto: {i // 60}:{i % 60:02}", end='\r')
                 sys.stdout.write(f"\rTempo rimasto: {i // 60}:{i % 60:02}")
                 sys.stdout.flush()
                 time.sleep(1)
+            print("")
+
+    def _getMaxiAccessi(self): return 5
             
 
 
