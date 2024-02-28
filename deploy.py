@@ -12,7 +12,7 @@ from web3.middleware import geth_poa_middleware
 load_dotenv()
 
 
-with open("./SimpleStorage.sol", "r") as file:
+with open("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/solidityContracts/medico.sol", "r") as file:
     simple_storage_file = file.read()
 
 # We add these two lines that we forgot from the video!
