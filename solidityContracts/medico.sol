@@ -2,6 +2,15 @@ pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
 contract Dottore {
+    string nomePaziente;
+    string pressione;
+    string battito;
+    string glicemia;
+    string temperatura;
+    string[] medicine;
+    uint256 DataOraVisita;
+    string luogo;
+
     struct Visita {
         string nomePaziente;
         string pressione;
@@ -19,8 +28,13 @@ contract Dottore {
         dottore[msg.sender][_nomePaziente] = Visita(_nomePaziente, _pressione, _battito, _glicemia, _temperatura, _medicine, _dataOraVisita, _luogo);
     }
 
-    function returnData(string memory _nomePaziente) public view returns (string memory, string memory, string memory, string memory, string memory, string[] memory, uint256, string memory) {
-        Visita memory visita = dottore[msg.sender][_nomePaziente];
-        return (visita.nomePaziente, visita.pressione, visita.battito, visita.glicemia, visita.temperatura, visita.medicine, visita.DataOraVisita, visita.luogo);
+    function addValues(string memory _battito, string memory _pressione) public {
+        battito = _battito;
+        pressione = _pressione;
     }
+
+    function retrieve() public view returns (string memory, string memory, string memory, string memory, string memory, string[] memory, uint256, string memory) {
+        return (nomePaziente, pressione, battito, glicemia, temperatura, medicine,DataOraVisita, luogo);
+    }
+
 }

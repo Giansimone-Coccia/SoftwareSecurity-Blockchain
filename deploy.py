@@ -55,8 +55,8 @@ abi = json.loads(
 w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
 chain_id = 1337
 
-my_address = "0x489618f881C84dD5f5Bc40f78368cB979ba143c4"
-private_key = "0x4fd9c4db4528ed91f2f24eb2676f1f9bfe6b43cee79f0c94d4114a4da65665a7"
+my_address = "0x4818170B0628c325a72e96449e504b651b702B20"
+private_key = "0xb014d1e97d41fa34e2203698219178c18deaa19570cadeabd119fdd244bac6d4"
 
 # Create the contract in Python
 Medico = w3.eth.contract(abi=abi, bytecode=bytecode)
@@ -84,29 +84,39 @@ print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
 # Working with deployed Contracts
 medico = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
-nome_paziente = "Nome del Paziente"
-pressione = "120/80 mmHg"
-battito = "70 bpm"
-glicemia = "100 mg/dL"
-temperatura = "36.5 °C"
-medicine = ["Medicina 1", "Medicina 2"]
-data_ora_visita = 1643889600  # Unix timestamp per la data e l'ora della visita
-luogo = "Nome dell'Ospedale"
+
+
 
 # Invia la transazione per inserire i dati della visita medica
-greeting_transaction = medico.functions.addMedicalRecord(
-    nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo
-).build_transaction(
-    {
-        "chainId": chain_id,
-        "gasPrice": w3.eth.gas_price,
-        "from": my_address,
-        "nonce": nonce + 1,
-    }
-)
+# greeting_transaction = medico.functions.addMedicalRecord(
+#     nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo
+# ).build_transaction(
+#     {
+#         "chainId": chain_id,
+#         "gasPrice": w3.eth.gas_price,
+#         "from": my_address,
+#         "nonce": nonce + 1,
+#     }
+# )
+greeting_transaction = medico.functions.addValues("Mario", "alta").build_transaction(
+     {
+         "chainId": chain_id,
+         "gasPrice": w3.eth.gas_price,
+         "from": my_address,
+         "nonce": nonce + 1,
+     }
+ )
+
 signed_greeting_txn = w3.eth.account.sign_transaction(
     greeting_transaction, private_key=private_key
 )
 tx_greeting_hash = w3.eth.send_raw_transaction(signed_greeting_txn.rawTransaction)
 print("Updating stored Value...")
 tx_receipt = w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
+
+if tx_receipt.status == 1:
+    # Transaction successful, retrieve updated values
+    updated_values = medico.functions.retrieve().call()
+    print(f"Updated Stored Values: {updated_values}")
+else:
+    print("Transaction failed or reverted")
