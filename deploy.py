@@ -39,13 +39,13 @@ with open("compiled_code.json", "w") as file:
     json.dump(compiled_sol, file)
 
 # get bytecode
-bytecode = compiled_sol["contracts"]["medico.sol"]["medico"]["evm"][
+bytecode = compiled_sol["contracts"]["medico.sol"]["Dottore"]["evm"][
     "bytecode"
 ]["object"]
 
 # get abi
 abi = json.loads(
-    compiled_sol["contracts"]["medico.sol"]["medico"]["metadata"]
+    compiled_sol["contracts"]["medico.sol"]["Dottore"]["metadata"]
 )["output"]["abi"]
 
 # w3 = Web3(Web3.HTTPProvider(os.getenv("SEPOLIA_RPC_URL")))
@@ -55,8 +55,8 @@ abi = json.loads(
 w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
 chain_id = 1337
 
-my_address = "0x8DB4ae822Ce55fBd25b2C4764DA86303B8172Efe"
-private_key = "0x71b618e619b4ae65b3bf0b693afd7550b4f6062b9f3d6b9e9553cd4967406cbc"
+my_address = "0x489618f881C84dD5f5Bc40f78368cB979ba143c4"
+private_key = "0x4fd9c4db4528ed91f2f24eb2676f1f9bfe6b43cee79f0c94d4114a4da65665a7"
 
 # Create the contract in Python
 Medico = w3.eth.contract(abi=abi, bytecode=bytecode)
