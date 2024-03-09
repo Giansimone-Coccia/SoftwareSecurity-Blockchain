@@ -38,11 +38,12 @@ if __name__ == '__main__':
     print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
 
-"""     if currentSession.status == "Medico":
-
-    else if currentSession.status == "Paziente":
-
-    else if currentSession.status == "Operatore Sanitario": """
+    if currentSession.status == "Medico":
+        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+    elif currentSession.status == "Paziente":
+        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+    elif currentSession.status == "OperatoreSanitario":
+        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
 
 
 
