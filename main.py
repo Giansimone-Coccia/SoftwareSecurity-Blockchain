@@ -6,6 +6,7 @@
 
 from controllers.controllerMedico import ControllerMedico
 from database.db import db
+from models.medico import Medico
 from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
@@ -37,7 +38,11 @@ if __name__ == '__main__':
     print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
 
-    
+"""     if currentSession.status == "Medico":
+
+    else if currentSession.status == "Paziente":
+
+    else if currentSession.status == "Operatore Sanitario": """
 
 
 
