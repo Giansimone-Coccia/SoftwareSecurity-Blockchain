@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
-contract Dottore {
+contract Medico {
     string nomePaziente;
     string pressione;
     string battito;
