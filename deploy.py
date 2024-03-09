@@ -12,8 +12,9 @@ from web3.middleware import geth_poa_middleware
 load_dotenv()
 
 class Deploy:
-    def __init__(self, path_file):
-        self._path_file = path_file
+    def __init__(self, file_name):
+        self._file_name = file_name
+        self._path_file = os.path.join(os.getcwd(), "solidityContracts", file_name)
 
 
     def create_contract(self):

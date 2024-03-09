@@ -6,8 +6,7 @@ from deploy import Deploy
 class ControllerMedico:
     def __init__(self):
 
-        deploy = Deploy("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/solidityContracts/Medico.sol")
-
+        deploy = Deploy("Medico.sol") 
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         Medico = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)

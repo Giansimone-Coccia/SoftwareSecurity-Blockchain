@@ -37,7 +37,7 @@ if __name__ == '__main__':
     print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
 
-
+    
 
 
 
