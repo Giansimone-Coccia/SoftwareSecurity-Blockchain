@@ -1,12 +1,14 @@
-from controller_medico import ControllerMedico
+
+
+from controllers.controllerMedico import ControllerMedico
+
 
 class Medico:
-    def __init__(self, nome, cognome, ruolo):
-        self.nome = nome
-        self.cognome = cognome
+    def __init__(self, email, ruolo):
+        self.email = email
         self.ruolo = ruolo
-        #self.password = password
-        #self.controller = ControllerMedico(web3_provider, contract_address)
+       #self.password = password
+       #self.controller = ControllerMedico(web3_provider, contract_address)
 
     def registerData(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
         receipt = self.controller.add_medical_record(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo)
