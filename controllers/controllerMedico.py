@@ -73,4 +73,7 @@ class ControllerMedico:
 
     def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
         return  self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
+    
+    def visualizzaTuttiRecordMedici(self):
+        return self.medico_contract.functions.getAllVisiteMedico()
 

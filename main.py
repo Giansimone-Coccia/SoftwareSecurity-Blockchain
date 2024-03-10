@@ -38,14 +38,15 @@ if __name__ == '__main__':
     print(currentSession.email + " " + currentSession.password)
 
     if currentSession.status == "Medico":
-
         medico = Medico(currentSession.status)
-
         medico.menuMedico()
- 
-    """elif currentSession.status == "Paziente":
-        medico = Medico(currentSession.email, currentSession.status)
+    
     elif currentSession.status == "OperatoreSanitario":
-        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)"""
+        pass
+    
+    elif currentSession.status == "Paziente":
+        pass
+ 
+
     
 

@@ -14,7 +14,7 @@ class Medico:
         return receipt
 
 
-
+ 
     def menuMedico(self):
 
         _loop = True
@@ -34,6 +34,7 @@ class Medico:
             if(scelta == "0"):
                 print("Arrividerci !")
                 sys.exit()
+                
             elif(scelta == "1"):
                 if(self._addNewVisita() == True):
                     print("Visita correttamente salvata nel sistema !")
@@ -41,8 +42,8 @@ class Medico:
                 else:
                     print("Visita non salvata, prego riprovare")
                     print("")
-            elif(scelta == "2"):
-                
+
+            elif(scelta == "2"):               
                 nomePaziente, pressione, battito, glicemia, temperatura, farmaci, data, luogo = self._visualizzaVisitaFromNomePaziente()
                 print("***********************************")
                 print("* Nome paziente: " + nomePaziente )

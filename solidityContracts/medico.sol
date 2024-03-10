@@ -15,6 +15,7 @@ contract Medico {
     }
     
     mapping(address => mapping(string => Visita)) public medico;
+    
 
     function addMedicalRecord(string memory _nomePaziente, string memory _pressione, string memory _battito, string memory _glicemia, string memory _temperatura, string[] memory _medicine, string memory  _dataOraVisita, string memory _luogo) public {
         Visita memory newVisit = Visita(_nomePaziente, _pressione, _battito, _glicemia, _temperatura, _medicine, _dataOraVisita, _luogo);
@@ -39,6 +40,12 @@ contract Medico {
             visita.luogo
         );
     }
+
+
+    function getAllVisiteMedico() public view returns (Visita[] memory) {
+        return visiteMedico[msg.sender];
+    }
+
 }
 
 
