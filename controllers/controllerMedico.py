@@ -57,7 +57,7 @@ class ControllerMedico:
 
         if tx_receipt.status == 1:
             # Transaction successful, retrieve updated values
-            updated_values = self.medico_contract.functions.retrieve().call()
+            updated_values = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
             print(f"Updated Stored Values: {updated_values}")
         else:
             print("Transaction failed or reverted")
