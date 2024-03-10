@@ -69,3 +69,8 @@ class ControllerMedico:
         # Attendere la conferma della transazione
         receipt = self.web3.eth.waitForTransactionReceipt(tx_hash) """
         return tx_receipt
+    
+
+    def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
+        return  self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
+

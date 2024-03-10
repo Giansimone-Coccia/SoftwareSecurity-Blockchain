@@ -41,20 +41,11 @@ if __name__ == '__main__':
 
         medico = Medico(currentSession.status)
 
-        nome_paziente = input("Inserisci il nome del paziente: ")
-        pressione = input("Inserisci la pressione: ")
-        battito = input("Inserisci il battito cardiaco: ")
-        glicemia = input("Inserisci la glicemia: ")
-        temperatura = input("Inserisci la temperatura: ")
-        medicine_input = input("Inserisci i farmaci prescritti (separati da virgola): ")
-        medicine = medicine_input.split(',')
-        print(type(medicine))
-        data_ora_visita = input("Inserisci la data: ")
-        luogo = input("Inserisci il luogo della visita: ")
-
-        medico.addDataVisita(nome_paziente, pressione, battito, glicemia, temperatura, medicine, 1638352800, luogo)
-
+        medico.menuMedico()
+ 
     """elif currentSession.status == "Paziente":
         medico = Medico(currentSession.email, currentSession.status)
     elif currentSession.status == "OperatoreSanitario":
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)"""
+    
+
