@@ -1,2 +1,1 @@
-basedidati = db
-    basedidati.db.salvataggioUtenti
+pass

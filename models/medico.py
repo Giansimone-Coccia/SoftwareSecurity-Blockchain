@@ -26,15 +26,16 @@ class Medico:
             print("0. Per uscire dal programma")
             print("1. Per inserire una nuova visita medica")
             print("2. Per visualizzare una visita medica effettuata")
+            print("3. Visualizza tutte le visite mediche effettuate")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta != "0" and scelta != "1" and scelta != "2"):
+            while(scelta != "0" and scelta != "1" and scelta != "2" and scelta != "3"):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
                 print("Arrividerci !")
                 sys.exit()
-                
+
             elif(scelta == "1"):
                 if(self._addNewVisita() == True):
                     print("Visita correttamente salvata nel sistema !")
@@ -45,16 +46,16 @@ class Medico:
 
             elif(scelta == "2"):               
                 nomePaziente, pressione, battito, glicemia, temperatura, farmaci, data, luogo = self._visualizzaVisitaFromNomePaziente()
-                print("***********************************")
-                print("* Nome paziente: " + nomePaziente )
-                print("* Pressione: " + pressione )
-                print("* Battito cardiaco: " + battito )
-                print("* Glicemia: " + glicemia )
-                for farmaco in farmaci:
-                    print("*** Farmaco prescritto: " + farmaco)
-                print("* Data visita: " + data )
-                print("* Luogo visita: " + luogo )
-                print("***********************************")
+                visita = {"nome_paziente": nomePaziente, "pressione": pressione, 
+                                                        "battito": battito, "glicemia": glicemia, 
+                                                        "temperatura": temperatura, "farmaci": farmaci, 
+                                                        "data": data, "luogo": luogo
+                                        }
+                listaVisite = [visita]
+                self._formattaVisita(listaVisite)
+                
+            elif scelta == "3":
+                self._formattaVisita(self._visualizzaTutteVisiteMediche())
 
     
 
@@ -89,11 +90,29 @@ class Medico:
 
         nomePaziente = input("Inserisci il nome del paziente: ")
         values = self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)
-        
         return values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7]
         
         
+    def _visualizzaTutteVisiteMediche(self):
+        return self.controller.visualizzaTuttiRecordMedici()
+ 
+        
 
+
+
+    def _formattaVisita(self, listVisiteMediche):
+        for visita in listVisiteMediche:
+            print("***********************************")
+            print("* Nome paziente: " + visita["nome_paziente"] )
+            print("* Pressione: " + visita["pressione"] )
+            print("* Battito cardiaco: " + visita["battito"] )
+            print("* Glicemia: " + visita["glicemia"] )
+            print("* Temperatura: " + visita["temperatura"] )
+            for farmaco in visita["farmaci"]:
+                print("*** Farmaco prescritto: " + farmaco)
+            print("* Data visita: " + visita["data"] )
+            print("* Luogo visita: " + visita["luogo"] )
+            print("***********************************")
 
             
             

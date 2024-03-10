@@ -54,6 +54,7 @@ class ControllerMedico:
         print(tx_greeting_hash)
         print("Updating stored Value...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
+        self.nonce += 1
 
         if tx_receipt.status == 1:
             # Transaction successful, retrieve updated values
@@ -75,5 +76,14 @@ class ControllerMedico:
         return  self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
     
     def visualizzaTuttiRecordMedici(self):
-        return self.medico_contract.functions.getAllVisiteMedico()
+        visite = self.medico_contract.functions.getAllVisiteMediche(self.my_address).call()
+        out = []
+        for visita in visite:
+            new_dict = {"nome_paziente":visita[0], "pressione":visita[1], 
+                        "battito":visita[2], "glicemia":visita[3], 
+                        "temperatura":visita[4], "farmaci":visita[5],
+                        "data":visita[6], "luogo":visita[7]}
+            out.append(new_dict)
+        return out
+        
 
