@@ -1,10 +1,10 @@
+
 from controllers.controllerMedico import ControllerMedico
 
 
 class Medico:
-    def __init__(self, nome, cognome, ruolo):
-        self.nome = nome
-        self.cognome = cognome
+    def __init__(self, email, ruolo):
+        self.email = email
         self.ruolo = ruolo
         #self.password = password
         self.controller = ControllerMedico()

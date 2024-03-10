@@ -32,7 +32,7 @@ if __name__ == '__main__':
         print('Password: ' + utente['Password'])
         print('***********************************')
 
-        # Inizio la sessione e mi autentico 
+        # Inizio la sessione e mpi autentico 
 
     currentSession = session()
     currentSession.eseguiAccesso()
@@ -40,6 +40,7 @@ if __name__ == '__main__':
     print(currentSession.email + " " + currentSession.password)
 
     if currentSession.status == "Medico":
+
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
 
         nome_paziente = input("Inserisci il nome del paziente: ")
@@ -53,7 +54,8 @@ if __name__ == '__main__':
         luogo = input("Inserisci il luogo della visita: ")
 
         medico.addDataVisita
+
     elif currentSession.status == "Paziente":
-        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+        medico = Medico(currentSession.email, currentSession.status)
     elif currentSession.status == "OperatoreSanitario":
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
