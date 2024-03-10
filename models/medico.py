@@ -3,8 +3,7 @@ from controllers.controllerMedico import ControllerMedico
 
 
 class Medico:
-    def __init__(self, email, ruolo):
-        self.email = email
+    def __init__(self, ruolo):
         self.ruolo = ruolo
         #self.password = password
         self.controller = ControllerMedico()
@@ -15,6 +14,7 @@ class Medico:
 
     def getData(self):
         return
+    
     def accessData(self):
         return
 

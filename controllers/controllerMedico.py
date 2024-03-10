@@ -51,6 +51,7 @@ class ControllerMedico:
             greeting_transaction, private_key=self.private_key
         )
         tx_greeting_hash = self.w3.eth.send_raw_transaction(signed_greeting_txn.rawTransaction)
+        print(tx_greeting_hash)
         print("Updating stored Value...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
 

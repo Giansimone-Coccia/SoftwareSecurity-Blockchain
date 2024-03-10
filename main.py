@@ -22,8 +22,6 @@ if __name__ == '__main__':
         
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
 
-    medico = ControllerMedico()
-    receipt = medico.add_medical_record()
     istanzaDB = db()
     utentiOttenunti = istanzaDB.ottieniDati()
     for utente in utentiOttenunti:
@@ -41,7 +39,7 @@ if __name__ == '__main__':
 
     if currentSession.status == "Medico":
 
-        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+        medico = Medico(currentSession.status)
 
         nome_paziente = input("Inserisci il nome del paziente: ")
         pressione = input("Inserisci la pressione: ")
@@ -50,12 +48,13 @@ if __name__ == '__main__':
         temperatura = input("Inserisci la temperatura: ")
         medicine_input = input("Inserisci i farmaci prescritti (separati da virgola): ")
         medicine = medicine_input.split(',')
-        data_ora_visita = input("Inserisci i farmaci prescritti (separati da virgola): ")
+        print(type(medicine))
+        data_ora_visita = input("Inserisci la data: ")
         luogo = input("Inserisci il luogo della visita: ")
 
-        medico.addDataVisita
+        medico.addDataVisita(nome_paziente, pressione, battito, glicemia, temperatura, medicine, 1638352800, luogo)
 
-    elif currentSession.status == "Paziente":
+    """elif currentSession.status == "Paziente":
         medico = Medico(currentSession.email, currentSession.status)
     elif currentSession.status == "OperatoreSanitario":
-        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+        medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)"""
