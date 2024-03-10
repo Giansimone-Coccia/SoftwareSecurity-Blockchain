@@ -35,10 +35,10 @@ class ControllerMedico:
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
     #def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
-    def add_medical_record(self):
+    def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
         # Trasmissione della transazione al contratto
 
-        greeting_transaction = self.medico_contract.functions.addValues("Mario", "alta").build_transaction(
+        greeting_transaction = self.medico_contract.functions.addMedicalRecord(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo).build_transaction(
             {
                 "chainId": self.chain_id,
                 "gasPrice": self.w3.eth.gas_price,

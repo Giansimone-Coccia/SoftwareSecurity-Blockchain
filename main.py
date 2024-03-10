@@ -4,6 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
+import datetime
 from controllers.controllerMedico import ControllerMedico
 from database.db import db
 from models.medico import Medico
@@ -40,12 +41,19 @@ if __name__ == '__main__':
 
     if currentSession.status == "Medico":
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
+
+        nome_paziente = input("Inserisci il nome del paziente: ")
+        pressione = input("Inserisci la pressione: ")
+        battito = input("Inserisci il battito cardiaco: ")
+        glicemia = input("Inserisci la glicemia: ")
+        temperatura = input("Inserisci la temperatura: ")
+        medicine_input = input("Inserisci i farmaci prescritti (separati da virgola): ")
+        medicine = medicine_input.split(',')
+        data_ora_visita = input("Inserisci i farmaci prescritti (separati da virgola): ")
+        luogo = input("Inserisci il luogo della visita: ")
+
+        medico.addDataVisita
     elif currentSession.status == "Paziente":
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
     elif currentSession.status == "OperatoreSanitario":
         medico = Medico(currentSession.nome, currentSession.cognome, currentSession.status)
-
-
-
-
-

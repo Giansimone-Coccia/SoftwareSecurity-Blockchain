@@ -37,4 +37,19 @@ contract Medico {
         return (nomePaziente, pressione, battito, glicemia, temperatura, medicine,DataOraVisita, luogo);
     }
 
+    function getMedicalRecord(address _medico, string memory _nomePaziente) public view returns (string memory, string memory, string memory, string memory, string memory, string[] memory, string memory, string memory) {
+        Visita memory visita = dottore[_medico][_nomePaziente];
+        return (
+            visita.nomePaziente,
+            visita.pressione,
+            visita.battito,
+            visita.glicemia,
+            visita.temperatura,
+            visita.medicine,
+            visita.dataOraVisita,
+            visita.luogo
+        );
+    }
+
+
 }
