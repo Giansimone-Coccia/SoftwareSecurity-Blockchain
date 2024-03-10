@@ -23,13 +23,13 @@ class ControllerMedico:
         )
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
-        print("Deploying Contract!")
+        #print("Deploying Contract!")
         # Send it!
         tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
         # Wait for the transaction to be mined, and get the transaction receipt
-        print("Waiting for transaction to finish...")
+        #print("Waiting for transaction to finish...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
-        print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
+        #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
@@ -51,15 +51,15 @@ class ControllerMedico:
             greeting_transaction, private_key=self.private_key
         )
         tx_greeting_hash = self.w3.eth.send_raw_transaction(signed_greeting_txn.rawTransaction)
-        print(tx_greeting_hash)
-        print("Updating stored Value...")
+        #print(tx_greeting_hash)
+        #print("Updating stored Value...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
         self.nonce += 1
 
         if tx_receipt.status == 1:
             # Transaction successful, retrieve updated values
             updated_values = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
-            print(f"Updated Stored Values: {updated_values}")
+            #print(f"Updated Stored Values: {updated_values}")
         else:
             print("Transaction failed or reverted")
 
@@ -73,7 +73,14 @@ class ControllerMedico:
     
 
     def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
-        return  self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
+        visita = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
+        new_dict = {"nome_paziente":visita[0], "pressione":visita[1], 
+            "battito":visita[2], "glicemia":visita[3], 
+            "temperatura":visita[4], "farmaci":visita[5],
+            "data":visita[6], "luogo":visita[7]}
+        out = [new_dict]
+        return out
+
     
     def visualizzaTuttiRecordMedici(self):
         visite = self.medico_contract.functions.getAllVisiteMediche(self.my_address).call()

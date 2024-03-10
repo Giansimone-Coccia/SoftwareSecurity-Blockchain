@@ -45,14 +45,7 @@ class Medico:
                     print("")
 
             elif(scelta == "2"):               
-                nomePaziente, pressione, battito, glicemia, temperatura, farmaci, data, luogo = self._visualizzaVisitaFromNomePaziente()
-                visita = {"nome_paziente": nomePaziente, "pressione": pressione, 
-                                                        "battito": battito, "glicemia": glicemia, 
-                                                        "temperatura": temperatura, "farmaci": farmaci, 
-                                                        "data": data, "luogo": luogo
-                                        }
-                listaVisite = [visita]
-                self._formattaVisita(listaVisite)
+                self._formattaVisita(self._visualizzaVisitaFromNomePaziente())
                 
             elif scelta == "3":
                 self._formattaVisita(self._visualizzaTutteVisiteMediche())
@@ -77,7 +70,7 @@ class Medico:
                                        battito if battito!="" else "Misurazione cardiaca non pervenuta", 
                                         glicemia if glicemia!="" else "Misuarazione glicemica non pervenuta", 
                                         temperatura if temperatura!="" else "Misurazione della temperatura non pervenuta",
-                                        medicine if medicine_input!="" else "Aa,Bb,Cc", #Nessuna medicina somministrata
+                                        medicine if medicine_input!="" else "Nessuna medicina somministrata", 
                                         data_ora_visita, 
                                         luogo)
         
@@ -85,12 +78,13 @@ class Medico:
             return True
         else:
             return False
-        
-    def _visualizzaVisitaFromNomePaziente(self):
 
+
+
+    def _visualizzaVisitaFromNomePaziente(self):
         nomePaziente = input("Inserisci il nome del paziente: ")
-        values = self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)
-        return values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7]
+        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)
+
         
         
     def _visualizzaTutteVisiteMediche(self):
