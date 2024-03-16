@@ -33,56 +33,43 @@ class db:
                 self.conn.close()
 
     
-    def ottieniDati(self):
+    def ottieniDatiAuth(self):
          # Nome della tabella da cui desideri recuperare i dati
-            table_name = 'Utenti'
+            table_name = 'Autenticazione'
     
             cursor = self.conn.cursor()
             # Esegui una query per selezionare tutti i dati dalla tabella specificata
-            cursor.execute(f"SELECT AES_DECRYPT(professione,'{self.key}'), AES_DECRYPT(email,'{self.key}'), AES_DECRYPT(password,'{self.key}') FROM {table_name}")
+            cursor.execute(f"SELECT AES_DECRYPT(Id,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
+
 
             # Recupera tutte le tuple
             rows = cursor.fetchall()
 
             # Stampa i valori decodificati per ogni tupla
             utenti = []
+            print(rows)
             for tupla in rows:
-                tuplaDict = {'Professione':tupla[0].decode('utf-8'), 'Email':tupla[1].decode('utf-8'),
-                             'Password':tupla[2].decode('utf-8')}
+                print(tupla)
+                tuplaDict = {'Id':tupla[0].decode('utf-8'), 'Username':tupla[1].decode('utf-8'),
+                    'Password':tupla[2].decode('utf-8'), 'Ruolo':tupla[3].decode('utf-8')}
+
                 utenti.append(tuplaDict)
             
             return utenti
     
-    def gestisciAccesso(self,email,password):
-        utenti = self.ottieniDati()
+    def gestisciAccesso(self,username,password):
+        utenti = self.ottieniDatiAuth()
         for u in utenti:
-              if(u['Email']==email and u['Password']==password):
+              if(u['Username']==username and u['Password']==password):
                   return True
         
         return False
     
 
-    def ottieniProfessione(self,email,password):
-         utenti = self.ottieniDati()
+    def ottieniProfessione(self,username,password):
+         utenti = self.ottieniDatiAuth()
 
          for utente in utenti:
-              if(utente['Email'] == email and utente['Password'] == password):
-                return utente['Professione']
-        
-    
-
-                  
-         
-
-          
-         
-    
-
-
-            
-        
-
-
-
-        
+              if(utente['Username'] == username and utente['Password'] == password):
+                return utente['Ruolo']
         
