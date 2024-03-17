@@ -6,7 +6,7 @@ from deploy import Deploy
 class ControllerMedico:
     def __init__(self):
 
-        deploy = Deploy("Medico.sol") 
+        deploy = Deploy("Medico.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         Medico = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
@@ -70,7 +70,6 @@ class ControllerMedico:
         # Attendere la conferma della transazione
         receipt = self.web3.eth.waitForTransactionReceipt(tx_hash) """
         return tx_receipt
-    
 
     def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
         visita = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
@@ -80,7 +79,6 @@ class ControllerMedico:
             "data":visita[6], "luogo":visita[7]}
         out = [new_dict]
         return out
-
     
     def visualizzaTuttiRecordMedici(self):
         visite = self.medico_contract.functions.getAllVisiteMediche(self.my_address).call()
@@ -93,4 +91,3 @@ class ControllerMedico:
             out.append(new_dict)
         return out
         
-
