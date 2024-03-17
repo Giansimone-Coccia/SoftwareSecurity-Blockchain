@@ -25,8 +25,8 @@ if __name__ == '__main__':
     istanzaDB = db()
     utentiOttenunti = istanzaDB.ottieniDatiAuth()
     for utente in utentiOttenunti:
-        print('Professione: ' + utente['Professione'])
-        print('Email: ' + utente['Email'])
+        print('Professione: ' + utente['Ruolo'])
+        print('Email: ' + utente['Username'])
         print('Password: ' + utente['Password'])
         print('***********************************')
 
