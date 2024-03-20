@@ -2,8 +2,8 @@
 import sys
 from controllers.controllerMedico import ControllerMedico
 
-
 class Medico:
+    
     def __init__(self, ruolo):
         self.ruolo = ruolo
         #self.password = password
@@ -12,6 +12,8 @@ class Medico:
     def _addDataVisita(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
         receipt = self.controller.add_medical_record(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo)
         return receipt
+
+
  
     def menuMedico(self):
 
@@ -48,10 +50,6 @@ class Medico:
             elif scelta == "3":
                 self._formattaVisita(self._visualizzaTutteVisiteMediche())
 
-    
-
-
-
     def _addNewVisita(self):
         
         nome_paziente = input("Inserisci il nome del paziente: ")
@@ -77,21 +75,13 @@ class Medico:
         else:
             return False
 
-
-
     def _visualizzaVisitaFromNomePaziente(self):
         nomePaziente = input("Inserisci il nome del paziente: ")
-        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)
-
-        
+        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)      
         
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()
  
-        
-
-
-
     def _formattaVisita(self, listVisiteMediche):
         for visita in listVisiteMediche:
             print("***********************************")
@@ -105,8 +95,3 @@ class Medico:
             print("* Data visita: " + visita["data"] )
             print("* Luogo visita: " + visita["luogo"] )
             print("***********************************")
-
-            
-            
-
-

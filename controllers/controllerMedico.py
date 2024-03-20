@@ -3,10 +3,14 @@ import json
 
 from deploy import Deploy
 
+import sys
+sys.path.append("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/database")
+import db
+
 class ControllerMedico:
     def __init__(self):
 
-        deploy = Deploy("Medico.sol") 
+        deploy = Deploy("Medico.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         Medico = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
@@ -33,6 +37,45 @@ class ControllerMedico:
 
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
+
+        self.database = db()
+
+    def addVisitaMedica(self, DataOra, CFpaziente, IdMedico, NomePrestazione, Esito, Luogo):
+
+        cursor = self.database.conn.cursor()
+
+        select_query = """
+            SELECT Id
+            FROM Paziente
+            WHERE CodiceFiscale = %s
+            """
+
+        # Esecuzione dell'istruzione per recuperare l'Id del paziente
+        cursor.execute(select_query, (CFpaziente))
+
+        IdPaziente = cursor.fetchone()[0]
+        
+        nome_tabella = "VisitaMedico"
+
+        insert_query = f"""
+        INSERT INTO {nome_tabella} (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
+
+        # Dati da inserire nella visita medica
+        data_visita = (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+
+        # Esecuzione dell'istruzione per inserire la visita medica
+        cursor.execute(insert_query, data_visita)
+
+        # Commit delle modifiche
+        self.database.conn.commit()
+
+        # Chiusura del cursore e della connessione
+        cursor.close()
+        self.database.conn.close()
+
+
 
     #def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
     def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
@@ -70,7 +113,6 @@ class ControllerMedico:
         # Attendere la conferma della transazione
         receipt = self.web3.eth.waitForTransactionReceipt(tx_hash) """
         return tx_receipt
-    
 
     def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
         visita = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
@@ -80,7 +122,6 @@ class ControllerMedico:
             "data":visita[6], "luogo":visita[7]}
         out = [new_dict]
         return out
-
     
     def visualizzaTuttiRecordMedici(self):
         visite = self.medico_contract.functions.getAllVisiteMediche(self.my_address).call()
@@ -93,4 +134,3 @@ class ControllerMedico:
             out.append(new_dict)
         return out
         
-
