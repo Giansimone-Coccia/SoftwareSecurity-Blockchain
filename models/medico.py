@@ -12,8 +12,6 @@ class Medico:
     def _addDataVisita(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
         receipt = self.controller.add_medical_record(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo)
         return receipt
-
-
  
     def menuMedico(self):
 
