@@ -1,4 +1,5 @@
 
+import datetime
 import sys
 from controllers.controllerMedico import ControllerMedico
 
@@ -9,8 +10,8 @@ class Medico:
         #self.password = password
         self.controller = ControllerMedico()
 
-    def _addDataVisita(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
-        receipt = self.controller.add_medical_record(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo)
+    def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
+        receipt = self.controller.addVisitaMedica(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
         return receipt
 
 
@@ -51,6 +52,44 @@ class Medico:
                 self._formattaVisita(self._visualizzaTutteVisiteMediche())
 
     def _addNewVisita(self):
+
+        data_ora_visita = datetime.datetime.now()
+        cf_paziente = input("Inserisci il codice fiscale del paziente: ")
+        nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
+        esito = input("Inserisci l'esito della prestazione: ")
+        luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
+
+        ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
+        
+        if(ricevuta.status == 1):
+            return True
+        else:
+            return False
+
+
+    def _visualizzaVisitaFromNomePaziente(self):
+        nomePaziente = input("Inserisci il nome del paziente: ")
+        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)      
+        
+    def _visualizzaTutteVisiteMediche(self):
+        return self.controller.visualizzaTuttiRecordMedici()
+ 
+    def _formattaVisita(self, listVisiteMediche):
+        for visita in listVisiteMediche:
+            print("***********************************")
+            print("* Nome paziente: " + visita["nome_paziente"] )
+            print("* Pressione: " + visita["pressione"] )
+            print("* Battito cardiaco: " + visita["battito"] )
+            print("* Glicemia: " + visita["glicemia"] )
+            print("* Temperatura: " + visita["temperatura"] )
+            for farmaco in visita["farmaci"]:
+                print("*** Farmaco prescritto: " + farmaco)
+            print("* Data visita: " + visita["data"] )
+            print("* Luogo visita: " + visita["luogo"] )
+            print("***********************************")
+
+"""
+    def _addNewVisita(self):
         
         nome_paziente = input("Inserisci il nome del paziente: ")
         pressione = input("Inserisci la pressione: ")
@@ -74,24 +113,4 @@ class Medico:
             return True
         else:
             return False
-
-    def _visualizzaVisitaFromNomePaziente(self):
-        nomePaziente = input("Inserisci il nome del paziente: ")
-        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)      
-        
-    def _visualizzaTutteVisiteMediche(self):
-        return self.controller.visualizzaTuttiRecordMedici()
- 
-    def _formattaVisita(self, listVisiteMediche):
-        for visita in listVisiteMediche:
-            print("***********************************")
-            print("* Nome paziente: " + visita["nome_paziente"] )
-            print("* Pressione: " + visita["pressione"] )
-            print("* Battito cardiaco: " + visita["battito"] )
-            print("* Glicemia: " + visita["glicemia"] )
-            print("* Temperatura: " + visita["temperatura"] )
-            for farmaco in visita["farmaci"]:
-                print("*** Farmaco prescritto: " + farmaco)
-            print("* Data visita: " + visita["data"] )
-            print("* Luogo visita: " + visita["luogo"] )
-            print("***********************************")
+"""
