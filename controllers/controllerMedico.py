@@ -3,6 +3,10 @@ import json
 
 from deploy import Deploy
 
+import sys
+sys.path.append("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/database")
+import db
+
 class ControllerMedico:
     def __init__(self):
 
@@ -33,6 +37,45 @@ class ControllerMedico:
 
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
+
+        self.database = db()
+
+    def addVisitaMedica(self, DataOra, CFpaziente, IdMedico, NomePrestazione, Esito, Luogo):
+
+        cursor = self.database.conn.cursor()
+
+        select_query = """
+            SELECT Id
+            FROM Paziente
+            WHERE CodiceFiscale = %s
+            """
+
+        # Esecuzione dell'istruzione per recuperare l'Id del paziente
+        cursor.execute(select_query, (CFpaziente))
+
+        IdPaziente = cursor.fetchone()[0]
+        
+        nome_tabella = "VisitaMedico"
+
+        insert_query = f"""
+        INSERT INTO {nome_tabella} (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
+
+        # Dati da inserire nella visita medica
+        data_visita = (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+
+        # Esecuzione dell'istruzione per inserire la visita medica
+        cursor.execute(insert_query, data_visita)
+
+        # Commit delle modifiche
+        self.database.conn.commit()
+
+        # Chiusura del cursore e della connessione
+        cursor.close()
+        self.database.conn.close()
+
+
 
     #def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
     def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):

@@ -4,8 +4,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
 class db:
-
-
+    
     def __init__(self):
         # Parametri di connessione al database
         config = {
@@ -72,4 +71,4 @@ class db:
          for utente in utenti:
               if(utente['Username'] == username and utente['Password'] == password):
                 return utente['Ruolo']
-        
+              
