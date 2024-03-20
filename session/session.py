@@ -16,7 +16,6 @@ class session:
         _isLogin = True
         _cinquineSbagliate = 1
 
-
         while(_isLogin):
 
             email = input("Inserisci email: ")
@@ -37,8 +36,6 @@ class session:
                 if(_contaAccessi == self._getMaxiAccessi()+1):
                     _contaAccessi = 0
                     _cinquineSbagliate = _cinquineSbagliate + 1
-
-
 
     def _controlloAccessi(self,tentativi, cinquineSbagliate):
         _maxAccessi = self._getMaxiAccessi()
@@ -61,14 +58,3 @@ class session:
 
     def _getMaxiAccessi(self): return 5
             
-
-
-
-   
-
-
-
-            
-
-
-

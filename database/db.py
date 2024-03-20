@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
 class db:
-    
+
     def __init__(self):
         # Parametri di connessione al database
         config = {
@@ -30,7 +30,6 @@ class db:
             # Chiudi la connessione
             if 'conn' in locals() and self.conn.is_connected():
                 self.conn.close()
-
     
     def ottieniDatiAuth(self):
          # Nome della tabella da cui desideri recuperare i dati
@@ -39,7 +38,6 @@ class db:
             cursor = self.conn.cursor()
             # Esegui una query per selezionare tutti i dati dalla tabella specificata
             cursor.execute(f"SELECT AES_DECRYPT(Id,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
-
 
             # Recupera tutte le tuple
             rows = cursor.fetchall()
@@ -64,7 +62,6 @@ class db:
         
         return False
     
-
     def ottieniProfessione(self,username,password):
          utenti = self.ottieniDatiAuth()
 

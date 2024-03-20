@@ -47,6 +47,3 @@ if __name__ == '__main__':
     elif currentSession.status == "Paziente":
         pass
  
-
-    
-
