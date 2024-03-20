@@ -44,6 +44,8 @@ class ControllerMedico:
 
         cursor = self.database.conn.cursor()
 
+        idMedico= self.database.ottieniDatiAuth()[0]['Id']
+
         select_query = """
             SELECT Id
             FROM Paziente
