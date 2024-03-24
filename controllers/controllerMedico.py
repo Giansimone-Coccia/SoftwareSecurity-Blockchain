@@ -1,11 +1,12 @@
 from web3 import Web3
 import json
 
+from database.db import db
 from deploy import Deploy
 
-import sys
-sys.path.append("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/database")
-import db
+""" import sys
+sys.path.append("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/database") 
+from db import db"""
 
 class ControllerMedico:
     def __init__(self):
@@ -40,42 +41,49 @@ class ControllerMedico:
 
         self.database = db()
 
-    def addVisitaMedica(self, DataOra, CFpaziente, IdMedico, NomePrestazione, Esito, Luogo):
-
+    def addVisitaMedica(self, DataOra, CFpaziente, NomePrestazione, Esito, Luogo):
         cursor = self.database.conn.cursor()
 
-        idMedico= self.database.ottieniDatiAuth()[0]['Id']
+        IdMedico = self.database.ottieniDatiAuth()[0]['Id']
 
         select_query = """
             SELECT Id
             FROM Paziente
-            WHERE CodiceFiscale = %s
+            WHERE CF = %s
             """
 
         # Esecuzione dell'istruzione per recuperare l'Id del paziente
-        cursor.execute(select_query, (CFpaziente))
+        cursor.execute(select_query, (CFpaziente,))
 
-        IdPaziente = cursor.fetchone()[0]
-        
-        nome_tabella = "VisitaMedico"
+        # Recupera il risultato della query
+        result = cursor.fetchone()
 
-        insert_query = f"""
-        INSERT INTO {nome_tabella} (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
-        VALUES (%s, %s, %s, %s, %s, %s)
-        """
+        if result is not None:
+            IdPaziente = result[0]
 
-        # Dati da inserire nella visita medica
-        data_visita = (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+            nome_tabella = "VisitaMedico"
 
-        # Esecuzione dell'istruzione per inserire la visita medica
-        cursor.execute(insert_query, data_visita)
+            insert_query = f"""
+            INSERT INTO {nome_tabella} (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            """
 
-        # Commit delle modifiche
-        self.database.conn.commit()
+            # Dati da inserire nella visita medica
+            data_visita = (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
 
-        # Chiusura del cursore e della connessione
-        cursor.close()
-        self.database.conn.close()
+            # Esecuzione dell'istruzione per inserire la visita medica
+            cursor.execute(insert_query, data_visita)
+
+            # Commit delle modifiche
+            self.database.conn.commit()
+
+            # Chiusura del cursore e della connessione
+            cursor.close()
+            self.database.conn.close()
+        else:
+            # Gestione del caso in cui la query non ha restituito alcun risultato
+            print("Il paziente non è presente nel database.")
+
 
 
 

@@ -11,7 +11,7 @@ class Medico:
         self.controller = ControllerMedico()
 
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
-        receipt = self.controller.addVisitaMedica(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
+        receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
         return receipt
 
 
@@ -61,10 +61,7 @@ class Medico:
 
         ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
         
-        if(ricevuta.status == 1):
-            return True
-        else:
-            return False
+        return True
 
 
     def _visualizzaVisitaFromNomePaziente(self):
