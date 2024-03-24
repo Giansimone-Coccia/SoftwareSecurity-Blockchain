@@ -23,6 +23,9 @@ if __name__ == '__main__':
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
 
     istanzaDB = db()
+
+
+
     utentiOttenunti = istanzaDB.ottieniDatiAuth()
     for utente in utentiOttenunti:
         print('Professione: ' + utente['Ruolo'])

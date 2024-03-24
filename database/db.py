@@ -69,3 +69,59 @@ class db:
               if(utente['Username'] == username and utente['Password'] == password):
                 return utente['Ruolo']
               
+
+    def addTupla(self, nomeTabella, *valori):
+        try:
+            # Crea un cursore dalla connessione al database
+            cursor = self.conn.cursor()
+
+            cursor.execute("SELECT * FROM {} LIMIT 1".format(nomeTabella))
+            colonne = [desc[0] for desc in cursor.description]
+
+            # Leggi tutti i risultati della query SELECT
+            cursor.fetchall()
+
+            # Costruisci la query di inserimento dinamica
+            query = f"INSERT INTO {nomeTabella} ({', '.join(colonne)}) VALUES ({', '.join(['%s'] * len(colonne))})"
+
+            # Esegui l'inserimento
+            cursor.execute(query, valori)
+            self.conn.commit()
+            print("Nuova tupla inserita correttamente")
+        
+        except mysql.connector.Error as err:
+            print("Errore durante l'aggiunta della tupla:", err)
+
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+
+
+    def fromValueToId(self, nomeTabella, input_value):
+        try:
+            # Crea un cursore dalla connessione al database
+            cursor = self.conn.cursor()
+
+            # Esegui una query per selezionare tutte le tuple dalla tabella specificata
+            cursor.execute(f"SELECT * FROM {nomeTabella}")
+
+            # Recupera tutte le tuple
+            rows = cursor.fetchall()
+
+            # Cerca il primo valore della prima tupla in cui è presente l'input
+            for tupla in rows:
+                if input_value in tupla:
+                    # Ritorna il primo valore della tupla
+                    return tupla[0]
+
+            # Se non viene trovata nessuna tupla con l'input, ritorna None
+            return None
+        
+        except mysql.connector.Error as err:
+            print("Errore durante l'accesso ai dati:", err)
+
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+
+
