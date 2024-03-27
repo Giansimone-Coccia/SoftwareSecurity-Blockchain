@@ -33,11 +33,11 @@ class db:
     
     def ottieniDatiAuth(self):
          # Nome della tabella da cui desideri recuperare i dati
-            table_name = 'Autenticazione'
+            table_name = 'autenticazione'
     
             cursor = self.conn.cursor()
             # Esegui una query per selezionare tutti i dati dalla tabella specificata
-            cursor.execute(f"SELECT AES_DECRYPT(Id,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
+            cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
 
             # Recupera tutte le tuple
             rows = cursor.fetchall()
@@ -47,7 +47,7 @@ class db:
             print(rows)
             for tupla in rows:
                 print(tupla)
-                tuplaDict = {'Id':tupla[0].decode('utf-8'), 'Username':tupla[1].decode('utf-8'),
+                tuplaDict = {'CF':tupla[0].decode('utf-8'), 'Username':tupla[1].decode('utf-8'),
                     'Password':tupla[2].decode('utf-8'), 'Ruolo':tupla[3].decode('utf-8')}
 
                 utenti.append(tuplaDict)

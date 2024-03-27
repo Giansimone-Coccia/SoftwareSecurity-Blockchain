@@ -3,22 +3,19 @@ import json
 
 from database.db import db
 from deploy import Deploy
-
-""" import sys
-sys.path.append("/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/database") 
-from db import db"""
+import hashlib
 
 class ControllerMedico:
     def __init__(self):
 
-        deploy = Deploy("Medico.sol")
+        deploy = Deploy("Visita.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
-        Medico = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
+        Visita = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
         # Get the latest transaction
         self.nonce = self.w3.eth.get_transaction_count(self.my_address)
         # Submit the transaction that deploys the contract
-        transaction = Medico.constructor().build_transaction(
+        transaction = Visita.constructor().build_transaction(
             {
                 "chainId": self.chain_id,
                 "gasPrice": self.w3.eth.gas_price,
@@ -40,58 +37,39 @@ class ControllerMedico:
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
         self.database = db()
+        #self.utilities = utilities.Utilities()
 
-    def addVisitaMedica(self, DataOra, CFpaziente, NomePrestazione, Esito, Luogo):
+    def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
         cursor = self.database.conn.cursor()
 
-        IdMedico = self.database.ottieniDatiAuth()[0]['Id']
+        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
 
-        select_query = """
-            SELECT Id
-            FROM Paziente
-            WHERE CF = %s
-            """
+        nome_tabella = "visitaMedico"
 
-        # Esecuzione dell'istruzione per recuperare l'Id del paziente
-        cursor.execute(select_query, (CFpaziente,))
+        insert_query = f"""
+        INSERT INTO {nome_tabella} (CFPaziente, CFMedico, Dati, DataOra, TipoPrestazione, Luogo)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
 
-        # Recupera il risultato della query
-        result = cursor.fetchone()
+        # Dati da inserire nella visita medica
+        data_visita = (CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo)
 
-        if result is not None:
-            IdPaziente = result[0]
+        # Esecuzione dell'istruzione per inserire la visita medica
+        cursor.execute(insert_query, data_visita)
 
-            nome_tabella = "VisitaMedico"
+        # Commit delle modifiche
+        self.database.conn.commit()
 
-            insert_query = f"""
-            INSERT INTO {nome_tabella} (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
-            VALUES (%s, %s, %s, %s, %s, %s)
-            """
+        lista_dati = [CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo]
+        hash = self.hash_row(lista_dati)
+        print(hash)
 
-            # Dati da inserire nella visita medica
-            data_visita = (DataOra, IdPaziente, IdMedico, NomePrestazione, Esito, Luogo)
+        # Chiusura del cursore e della connessione
+        cursor.close()
+        self.database.conn.close()
 
-            # Esecuzione dell'istruzione per inserire la visita medica
-            cursor.execute(insert_query, data_visita)
-
-            # Commit delle modifiche
-            self.database.conn.commit()
-
-            # Chiusura del cursore e della connessione
-            cursor.close()
-            self.database.conn.close()
-        else:
-            # Gestione del caso in cui la query non ha restituito alcun risultato
-            print("Il paziente non è presente nel database.")
-
-
-
-
-    #def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
-    def add_medical_record(self, nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo):
-        # Trasmissione della transazione al contratto
-
-        greeting_transaction = self.medico_contract.functions.addMedicalRecord(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo).build_transaction(
+        # Chiamata alla funzione storeHash del contratto Visita
+        greeting_transaction = self.medico_contract.functions.storeHash(IdMedico, CFpaziente, hash).build_transaction(
             {
                 "chainId": self.chain_id,
                 "gasPrice": self.w3.eth.gas_price,
@@ -109,38 +87,35 @@ class ControllerMedico:
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
         self.nonce += 1
 
-        if tx_receipt.status == 1:
-            # Transaction successful, retrieve updated values
-            updated_values = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
-            #print(f"Updated Stored Values: {updated_values}")
-        else:
-            print("Transaction failed or reverted")
+        visite = self.getVisiteMedico(CFpaziente)
+        return visite
 
+    def getVisiteMedico(self, CFpaziente):
+        # Ottieni l'ID del medico
+        #CFMedico = self.database.ottieniDatiAuth()[0]['CF']
+        CFMedico = self.database.ottieniDatiAuth()[0]['CF']
 
+        # Chiamata alla funzione retrieveHash del contratto Visita
+        visite = self.medico_contract.functions.retrieveHash(CFMedico, CFpaziente).call()
 
-        """         
-        tx_hash = self.medico_contract.functions.addMedicalRecord(nome_paziente, pressione, battito, glicemia, temperatura, medicine, data_ora_visita, luogo).transact({'from': self.web3.eth.defaultAccount})
-        # Attendere la conferma della transazione
-        receipt = self.web3.eth.waitForTransactionReceipt(tx_hash) """
-        return tx_receipt
-
-    def visualizzaRecordMedicoFromNomePaziente(self, nome_paziente):
-        visita = self.medico_contract.functions.getMedicalRecord(self.my_address, nome_paziente).call()
-        new_dict = {"nome_paziente":visita[0], "pressione":visita[1], 
-            "battito":visita[2], "glicemia":visita[3], 
-            "temperatura":visita[4], "farmaci":visita[5],
-            "data":visita[6], "luogo":visita[7]}
-        out = [new_dict]
-        return out
-    
-    def visualizzaTuttiRecordMedici(self):
-        visite = self.medico_contract.functions.getAllVisiteMediche(self.my_address).call()
-        out = []
+        # Converti i risultati ottenuti in una struttura comprensibile
+        visite_comprensibili = []
         for visita in visite:
-            new_dict = {"nome_paziente":visita[0], "pressione":visita[1], 
-                        "battito":visita[2], "glicemia":visita[3], 
-                        "temperatura":visita[4], "farmaci":visita[5],
-                        "data":visita[6], "luogo":visita[7]}
-            out.append(new_dict)
-        return out
-        
+            # Qui puoi fare ulteriori elaborazioni se necessario
+            visite_comprensibili.append(visita)
+            print(visita)
+
+        return visite_comprensibili
+
+    def hash_row(self, sql_row):
+        row_string = ','.join(map(str, sql_row))
+
+        hash_object = hashlib.md5()
+
+        hash_object.update(row_string.encode())
+
+        hash_result = hash_object.hexdigest()
+
+        return hash_result
+
+        #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']

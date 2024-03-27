@@ -1,9 +1,3 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 import datetime
 from controllers.controllerMedico import ControllerMedico
 from database.db import db
@@ -23,8 +17,6 @@ if __name__ == '__main__':
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
 
     istanzaDB = db()
-
-
 
     utentiOttenunti = istanzaDB.ottieniDatiAuth()
     for utente in utentiOttenunti:
