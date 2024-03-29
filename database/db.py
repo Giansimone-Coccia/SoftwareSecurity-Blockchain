@@ -85,6 +85,32 @@ class db:
 
         return rows
     
+    def ottieniFarmaci(self):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'farmaci'
+    
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name}")
+
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+
+        return rows
+    
+    def ottieniPatologie(self):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'patologie'
+    
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name}")
+
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+
+        return rows
+    
     def ottieniDatiPaziente(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'paziente'

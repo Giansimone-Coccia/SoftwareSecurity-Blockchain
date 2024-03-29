@@ -65,11 +65,11 @@ class Medico:
                     print("")
             
             elif(scelta == "5"):
-                if(self._updateCartellaClinica(self._selectPaziente()) == True):
+                if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
                     print("Cartella clinica correttamente aggiornata!")
                     print("")
                 else:
-                    print("Cartella Clinica non aggiornata, prego riprovare")
+                    print("Farmaco già presente!")
                     print("")
 
     def _addNewVisita(self):
@@ -105,8 +105,9 @@ class Medico:
         print("Seleziona un paziente:")
 
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
+            print(contatore)
             print(pazienteCurato)
-            print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[contatore][1]} {pazienteCurato[contatore][2]}")
+            print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
 
         counter = len(pazienti_curati) - 1
 
@@ -125,24 +126,64 @@ class Medico:
 
         print("0. Per modificare le allergie")
         print("1. Per modificare i trattamenti")
-        print("2. Per modificare i farmaci")
-        print("3. Per modificare le patologie")
+        print("2. Per inserire un farmaco")
+        print("3. Per modificare un farmaco")
+        print("4. Per inserire una patologia")
+        print("5. Per modificare le patologie")
 
-        scelta = input("Digitare la scelta: ")
+        option = input("Digitare la scelta: ")
+        print(option)
 
-        while(scelta not in map(str, range(4))):
-            scelta = input("Digitare la scelta: ")
+        while(option not in map(str, range(6))):
+            option = input("Digitare la scelta: ")
 
-        if(scelta == 0):
+        if(option == "0"):
             nuove_allergie = input("Modifica allergie: ")
+            
+            update = self.controller.updateCartellaClinica(paziente, "Allergie", nuove_allergie)
+            return update
         
-        elif(scelta == 1):
+        elif(option == "1"):
             modifica_trattamento = input("Inserisci il nome del trattamento attuale: ")
+            
+            update = self.controller.updateCartellaClinica(paziente, "Trattamento", modifica_trattamento)
+            return update
 
-        elif(scelta == 2):
+        elif(option == "2"):
+
+            nome_farmaco = input("Inserisci il nome del farmaco che vuoi inserire: ")
+            dosaggio = input("Inserisci il dosaggio del farmaco: ")
+            data_prescrizione = datetime.datetime.now()
+            cf_paziente = paziente
+            
+            insert = self.controller.addFarmaco(cf_paziente, nome_farmaco, data_prescrizione, dosaggio)
+            
+            return insert
+        
+        elif(option == "3"):
+            
             return
         
-        elif(scelta == 3):
+        elif(option == "4"):
+            nome_patologia = input("Inserisci il nome della patologia che vuoi inserire: ")
+            while True:
+                inCorso = input("In corso? (SI/NO): ").strip().upper()
+                if inCorso == "SI":
+                    inCorso = 1
+                    break
+                elif inCorso == "NO":
+                    inCorso = 0
+                    break
+                else:
+                    print("Risposta non valida. Inserisci 'SI' o 'NO'.")
+            data_prescrizione = datetime.datetime.now()
+            cf_paziente = paziente
+            
+            insert = self.controller.addPatologia(cf_paziente, nome_patologia, data_prescrizione, inCorso)
+            
+            return insert
+        
+        elif(option == "5"):
             return
         
         return

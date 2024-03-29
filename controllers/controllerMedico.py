@@ -88,8 +88,8 @@ class ControllerMedico:
 
         visite = self.getVisiteMedico(CFpaziente)
 
-        cursor.close()
-        self.database.conn.close()
+        """ cursor.close()
+        self.database.conn.close() """
 
         return visite
 
@@ -131,12 +131,43 @@ class ControllerMedico:
 
             self.addCartellaClinica(CFpaziente)
             
-            cursor.close()
-            self.database.conn.close()
+            """ cursor.close()
+            self.database.conn.close() """
 
             return True
         else:
             return False
+        
+    def addPatologia(self, IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso):
+        cursor = self.database.conn.cursor()
+        
+        if  not any((patologia[0] == IdCartellaClinica and patologia[1] == NomePatologia )for farmaco in self.database.ottieniPatologie()):
+
+            nome_tabella = "patologie"
+
+            insert_query = f"""
+            INSERT INTO {nome_tabella} (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
+            VALUES (%s, %s, %s, %s)
+            """
+
+            # Dati da inserire nella visita medica
+            patologia = (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
+            print(patologia)
+
+            # Esecuzione dell'istruzione per inserire la visita medica
+            cursor.execute(insert_query, patologia)
+
+            # Commit delle modifiche
+            self.database.conn.commit()
+            
+            "cursor.close()"
+            "self.database.conn.close()"
+
+            return True
+        else:
+            return False
+        
+        
         
     def addCartellaClinica(self, CFpaziente):
         cursor = self.database.conn.cursor()
@@ -154,12 +185,61 @@ class ControllerMedico:
 
             self.database.conn.commit()
 
-            cursor.close()
-            self.database.conn.close()
+            """ cursor.close()
+            self.database.conn.close() """
 
             return True
         else:
             return False
+    
+    def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
+        cursor = self.database.conn.cursor()
+        
+        if any((cartella[0] == CFpaziente )for cartella in self.database.ottieniCartelle()):
+        
+            update_query = f"""
+                        UPDATE cartellaClinica
+                        SET {nomeCampo} = %s
+                        WHERE CFpaziente = %s
+                        """
+            cursor.execute(update_query, (nuovo_valore, CFpaziente))
+            # Commit delle modifiche al database
+            self.database.conn.commit()
+            print(f"Aggiornamento di {nomeCampo} con successo.")
+            return True
+        else:
+            return False
+    
+    def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
+        
+        cursor = self.database.conn.cursor()
+        
+        if  not any((farmaco[0] == IdCartellaClinica and farmaco[1] == NomeFarmaco )for farmaco in self.database.ottieniFarmaci()):
+
+            nome_tabella = "farmaci"
+
+            insert_query = f"""
+            INSERT INTO {nome_tabella} (IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
+            VALUES (%s, %s, %s, %s)
+            """
+
+            # Dati da inserire nella visita medica
+            farmaco = (IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
+            print(farmaco)
+
+            # Esecuzione dell'istruzione per inserire la visita medica
+            cursor.execute(insert_query, farmaco)
+
+            # Commit delle modifiche
+            self.database.conn.commit()
+            
+            "cursor.close()"
+            "self.database.conn.close()"
+
+            return True
+        else:
+            return False
+
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
