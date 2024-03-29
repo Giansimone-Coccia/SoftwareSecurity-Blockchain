@@ -14,7 +14,9 @@ class Medico:
         receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
         return receipt
 
-
+    def _addCurato(self, cf_paziente):
+        receipt = self.controller.addCurato(cf_paziente)
+        return receipt
  
     def menuMedico(self):
 
@@ -28,9 +30,11 @@ class Medico:
             print("1. Per inserire una nuova visita medica")
             print("2. Per visualizzare una visita medica effettuata")
             print("3. Visualizza tutte le visite mediche effettuate")
+            print("4. Per aggiungere un nuovo paziente in cura")
+            print("5. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta != "0" and scelta != "1" and scelta != "2" and scelta != "3"):
+            while(scelta not in map(str, range(6))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -51,18 +55,77 @@ class Medico:
             elif scelta == "3":
                 self._formattaVisita(self._visualizzaTutteVisiteMediche())
 
+            elif(scelta == "4"):
+                if(self._addNewCurato() == True):
+                    print("Paziente in cura correttamente salvato nel sistema !")
+                    print("")
+                else:
+                    print("Paziente in cura non salvato, prego riprovare")
+                    print("")
+            
+            elif(scelta == "5"):
+                if(self._updateCartellaClinica(self._selectPaziente()) == True):
+                    print("Cartella clinica correttamente aggiornata!")
+                    print("")
+                else:
+                    print("Cartella Clinica non aggiornata, prego riprovare")
+                    print("")
+
     def _addNewVisita(self):
 
         data_ora_visita = datetime.datetime.now()
-        cf_paziente = input("Inserisci il codice fiscale del paziente: ")
+        cf_paziente = self._selectPaziente()[0]
         nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
 
+        print(cf_paziente)
+
         ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
         
         return True
+    
+    def _addNewCurato(self):
 
+        cf_paziente = input("Inserisci il codice fiscale del paziente: ")
+
+        ricevuta = self._addCurato(cf_paziente)
+
+        while(ricevuta != True):
+            cf_paziente = input("Inserisci il codice fiscale del paziente:")
+
+            ricevuta = self._addCurato(cf_paziente)
+        
+        return ricevuta
+    
+    def _selectPaziente(self):
+        pazienti_curati = list(self.controller.datiPazientiCurati())
+
+        print("Seleziona un paziente:")
+
+        for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
+            print(pazienteCurato)
+            print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[contatore][1]} {pazienteCurato[contatore][2]}")
+
+        counter = len(pazienti_curati) - 1
+
+        scelta = input("Digitare la scelta: ")
+
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+
+        paziente_selezionato = pazienti_curati[int(scelta)]
+
+        return paziente_selezionato[0]
+
+
+
+    def _updateCartellaClinica(self, paziente):
+
+        nuove_allergie = input("Modifica allergie: ")
+        modifica_trattamento = input("Inserisci il nome del trattamento attuale: ")
+        
+        return
 
     def _visualizzaVisitaFromNomePaziente(self):
         nomePaziente = input("Inserisci il nome del paziente: ")

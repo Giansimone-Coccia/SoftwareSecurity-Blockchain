@@ -65,8 +65,7 @@ class ControllerMedico:
         print(hash)
 
         # Chiusura del cursore e della connessione
-        cursor.close()
-        self.database.conn.close()
+        
 
         # Chiamata alla funzione storeHash del contratto Visita
         greeting_transaction = self.medico_contract.functions.storeHash(IdMedico, CFpaziente, hash).build_transaction(
@@ -88,11 +87,14 @@ class ControllerMedico:
         self.nonce += 1
 
         visite = self.getVisiteMedico(CFpaziente)
+
+        cursor.close()
+        self.database.conn.close()
+        
         return visite
 
     def getVisiteMedico(self, CFpaziente):
         # Ottieni l'ID del medico
-        #CFMedico = self.database.ottieniDatiAuth()[0]['CF']
         CFMedico = self.database.ottieniDatiAuth()[0]['CF']
 
         # Chiamata alla funzione retrieveHash del contratto Visita
@@ -106,6 +108,42 @@ class ControllerMedico:
             print(visita)
 
         return visite_comprensibili
+    
+    def addCurato(self, CFpaziente):
+        cursor = self.database.conn.cursor()
+
+        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
+
+        if  not any((curato[0] == IdMedico and curato[1] ==CFpaziente )for curato in self.database.ottieniCurati()):
+            nome_tabella = "curato"
+
+            print('ciao')
+
+            insert_query = f"""
+            INSERT INTO {nome_tabella} (CFPaziente, CFMedico)
+            VALUES (%s, %s)
+            """
+            nuovo_curato = (CFpaziente, IdMedico)
+
+            cursor.execute(insert_query, nuovo_curato)
+
+            self.database.conn.commit()
+
+            cursor.close()
+            self.database.conn.close()
+
+            return True
+        else:
+            return False
+
+    def pazientiCurati(self):
+        medico_cf = self.database.ottieniDatiAuth()[0]['CF']
+        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
+        return filter(lambda curato: curato[0] == medico_cf, self.database.ottieniCurati())
+
+    def datiPazientiCurati(self):
+        #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
+        return map(lambda pazienteCurato: self.database.ottieniDatiPaziente(pazienteCurato[1]), self.pazientiCurati())
 
     def hash_row(self, sql_row):
         row_string = ','.join(map(str, sql_row))

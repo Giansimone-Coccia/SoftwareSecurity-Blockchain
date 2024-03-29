@@ -32,28 +32,72 @@ class db:
                 self.conn.close()
     
     def ottieniDatiAuth(self):
-         # Nome della tabella da cui desideri recuperare i dati
-            table_name = 'autenticazione'
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'autenticazione'
     
-            cursor = self.conn.cursor()
-            # Esegui una query per selezionare tutti i dati dalla tabella specificata
-            cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
 
-            # Recupera tutte le tuple
-            rows = cursor.fetchall()
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
 
             # Stampa i valori decodificati per ogni tupla
-            utenti = []
-            print(rows)
-            for tupla in rows:
-                print(tupla)
-                tuplaDict = {'CF':tupla[0].decode('utf-8'), 'Username':tupla[1].decode('utf-8'),
-                    'Password':tupla[2].decode('utf-8'), 'Ruolo':tupla[3].decode('utf-8')}
+        utenti = []
+        print(rows)
+        for tupla in rows:
+            print(tupla)
+            CF_decoded = tupla[0].decode('utf-8') if tupla[0] is not None else None
+            Username_decoded = tupla[1].decode('utf-8') if tupla[1] is not None else None
+            Password_decoded = tupla[2].decode('utf-8') if tupla[2] is not None else None
+            Ruolo_decoded = tupla[3].decode('utf-8') if tupla[3] is not None else None
 
-                utenti.append(tuplaDict)
-            
-            return utenti
+            tuplaDict = {'CF': CF_decoded, 'Username': Username_decoded,
+                        'Password': Password_decoded, 'Ruolo': Ruolo_decoded}
+
+            utenti.append(tuplaDict)
+
+        return utenti
     
+    def ottieniCurati(self):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'curato'
+    
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name}")
+
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+
+        return rows
+    
+    def ottieniDatiPaziente(self, CF):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'paziente'
+
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare solo le righe con il CF specificato
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
+
+        # Recupera le righe filtrate
+        rows = cursor.fetchall()
+
+        return rows
+    
+    def ottieniCartellaClinicaPaziente(self, CF):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'caretllaClinica'
+
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare solo le righe con il CF specificato
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
+
+        # Recupera le righe filtrate
+        rows = cursor.fetchall()
+
+        return rows
+
     def gestisciAccesso(self,username,password):
         utenti = self.ottieniDatiAuth()
         for u in utenti:
