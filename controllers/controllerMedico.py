@@ -90,7 +90,7 @@ class ControllerMedico:
 
         cursor.close()
         self.database.conn.close()
-        
+
         return visite
 
     def getVisiteMedico(self, CFpaziente):
@@ -126,6 +126,31 @@ class ControllerMedico:
             nuovo_curato = (CFpaziente, IdMedico)
 
             cursor.execute(insert_query, nuovo_curato)
+
+            self.database.conn.commit()
+
+            self.addCartellaClinica(CFpaziente)
+            
+            cursor.close()
+            self.database.conn.close()
+
+            return True
+        else:
+            return False
+        
+    def addCartellaClinica(self, CFpaziente):
+        cursor = self.database.conn.cursor()
+
+        if  not any((cartella[0] == CFpaziente )for cartella in self.database.ottieniCartelle()):
+            nome_tabella = "cartellaClinica"
+
+            insert_query = f"""
+            INSERT INTO {nome_tabella} (CFPaziente)
+            VALUES (%s)
+            """
+            nuova_cartella = (CFpaziente,)
+
+            cursor.execute(insert_query, nuova_cartella)
 
             self.database.conn.commit()
 

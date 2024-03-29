@@ -17,6 +17,7 @@ class Medico:
     def _addCurato(self, cf_paziente):
         receipt = self.controller.addCurato(cf_paziente)
         return receipt
+        
  
     def menuMedico(self):
 
