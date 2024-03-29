@@ -123,8 +123,27 @@ class Medico:
 
     def _updateCartellaClinica(self, paziente):
 
-        nuove_allergie = input("Modifica allergie: ")
-        modifica_trattamento = input("Inserisci il nome del trattamento attuale: ")
+        print("0. Per modificare le allergie")
+        print("1. Per modificare i trattamenti")
+        print("2. Per modificare i farmaci")
+        print("3. Per modificare le patologie")
+
+        scelta = input("Digitare la scelta: ")
+
+        while(scelta not in map(str, range(4))):
+            scelta = input("Digitare la scelta: ")
+
+        if(scelta == 0):
+            nuove_allergie = input("Modifica allergie: ")
+        
+        elif(scelta == 1):
+            modifica_trattamento = input("Inserisci il nome del trattamento attuale: ")
+
+        elif(scelta == 2):
+            return
+        
+        elif(scelta == 3):
+            return
         
         return
 
@@ -148,30 +167,3 @@ class Medico:
             print("* Data visita: " + visita["data"] )
             print("* Luogo visita: " + visita["luogo"] )
             print("***********************************")
-
-"""
-    def _addNewVisita(self):
-        
-        nome_paziente = input("Inserisci il nome del paziente: ")
-        pressione = input("Inserisci la pressione: ")
-        battito = input("Inserisci il battito cardiaco: ")
-        glicemia = input("Inserisci la glicemia: ")
-        temperatura = input("Inserisci la temperatura: ")
-        medicine_input = input("Inserisci i farmaci prescritti (separati da virgola): ")
-        medicine = medicine_input.split(',')
-        data_ora_visita = input("Inserisci la data: ")
-        luogo = input("Inserisci il luogo della visita: ")
-
-        ricevuta = self._addDataVisita(nome_paziente, pressione if pressione!="" else "Pressione non pervenuta",
-                                       battito if battito!="" else "Misurazione cardiaca non pervenuta", 
-                                        glicemia if glicemia!="" else "Misuarazione glicemica non pervenuta", 
-                                        temperatura if temperatura!="" else "Misurazione della temperatura non pervenuta",
-                                        medicine if medicine_input!="" else "Nessuna medicina somministrata", 
-                                        data_ora_visita, 
-                                        luogo)
-        
-        if(ricevuta.status == 1):
-            return True
-        else:
-            return False
-"""
