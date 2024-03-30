@@ -59,7 +59,13 @@ class Deploy:
         w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
         chain_id = 1337
 
-        my_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb"
+        #my_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb"
+        accounts = w3.eth.accounts
+
+
+        # Use the first account as my_address
+        my_address = accounts[0]
+        print(f"Deploy = {my_address}")
         private_key = "0xe80ec7d4115796939443227729485f06c3a8eaafd50c0713d4ebdc1a49b21d6a"
 
         return abi, bytecode, w3, chain_id, my_address, private_key

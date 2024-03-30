@@ -22,19 +22,15 @@ class Utilities:
         Attenzione : il to_check è la tupla non l'hash della tupla """
     def check_integrity(self,blockchain_hash, to_check):
         hash_to_check = self.hash_row(to_check)
-        print("DENTRO CHECK INTEGRITY: ")
-        print(hash_to_check)
-        print(blockchain_hash)
         return blockchain_hash == hash_to_check
     
     
-    def modify_hash(contratto, codice_fiscale_paziente, new_hash):
+    def modify_hash(self,contratto, codice_fiscale_paziente, new_hash, controller):
         try:
             # Chiama la funzione modifyHash del contratto
-            tx_hash = contratto.functions.modifyHash(codice_fiscale_paziente, new_hash).transact()
-            # Attendere la conferma della transazione
-            web3.eth.waitForTransactionReceipt(tx_hash)
-            print("Hash modificato con successo.")
+            accounts = controller.w3.eth.accounts
+            address = accounts[0]
+            contratto.functions.modifyHash(codice_fiscale_paziente, new_hash).transact({'from': address})
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 

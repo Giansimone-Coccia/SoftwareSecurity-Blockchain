@@ -43,7 +43,6 @@ class ControllerMedico:
         #self.utilities = utilities.Utilities()
 
     def _deploy_cartella_clinica(self, nomeSmartContract):
-        print(f"{nomeSmartContract}.sol")
         deploy = Deploy(f"{nomeSmartContract}.sol")
         abi, bytecode, w3, chain_id, my_address, private_key = deploy.create_contract()
 
@@ -222,23 +221,21 @@ class ControllerMedico:
 
             self.database.conn.commit()
 
-            print("TUPLA SALVATA !")
             # Ora occorre aggiungere l'hash alla blockchain. Per farlo riprendiamo la tupla
             tupla = self.database.ottieniCartellaFromCF(CFpaziente)
-            print(tupla)
-            print("TUPLA OTTENUTA")
-            hash_tupla = ut.hash_row(tupla)
-            print("TUPLA HASHATA")
+            hash_tupla = ut.hash_row(tupla[0])
 
+            #contract_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb" #self.cartella_clinica.address
+                    #my_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb"
+            accounts = self.w3.eth.accounts
+            address = accounts[0]
+            
 
-            contract_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb" #self.cartella_clinica.address
-            self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': contract_address})
+            self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': address})
             """ cursor.close()
             self.database.conn.close() """
 
-            print("HASH SALVATO IN BLOCKCHAIN")
             hashes = self.cartella_clinica.functions.retrieveHash(CFpaziente).call()
-            print(hashes)
 
             return True
         else:
@@ -257,13 +254,9 @@ class ControllerMedico:
         
         # Check per verificare che è stata ruspettata l'integrità del dato
         for cartella in cartelle:
-            print(cartella[0])
             if(cartella[0] == CFpaziente):
-                print("ciao 1")
                 #print(self._get_cartella_clinica_from_CF(CFpaziente) + " ** " + cartella + " ** " + ut.hash_row(cartella))
-                print(cartella)
                 if(ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella)):
-                    print("ciao 2")
                     update_query = f"""
                         UPDATE cartellaClinica
                         SET {nomeCampo} = %s
@@ -272,13 +265,12 @@ class ControllerMedico:
                     cursor.execute(update_query, (nuovo_valore, CFpaziente))
                     # Commit delle modifiche al database
                     self.database.conn.commit()
-                    # TODO LUCA: Add parte di inserimento dati nella blockchain(riaggiorno l'hash)
-                    new_hash = ut.hash_row(cartella)
-                    ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash)
+                    cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
+                    new_hash = ut.hash_row(cartellaAggiornato)
+                    ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash,self)
                     print(f"Aggiornamento di {nomeCampo} con successo.")
                     return True
-                return False
-            
+                return False             
         
 
 
