@@ -22,6 +22,9 @@ class Utilities:
         Attenzione : il to_check è la tupla non l'hash della tupla """
     def check_integrity(self,blockchain_hash, to_check):
         hash_to_check = self.hash_row(to_check)
+        print("DENTRO CHECK INTEGRITY: ")
+        print(hash_to_check)
+        print(blockchain_hash)
         return blockchain_hash == hash_to_check
     
     

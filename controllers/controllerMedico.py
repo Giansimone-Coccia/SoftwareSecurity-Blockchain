@@ -209,6 +209,7 @@ class ControllerMedico:
         cursor = self.database.conn.cursor()
 
         if  not any((cartella[0] == CFpaziente )for cartella in self.database.ottieniCartelle()):
+            ut = Utilities()
             nome_tabella = "cartellaClinica"
 
             insert_query = f"""
@@ -221,8 +222,23 @@ class ControllerMedico:
 
             self.database.conn.commit()
 
+            print("TUPLA SALVATA !")
+            # Ora occorre aggiungere l'hash alla blockchain. Per farlo riprendiamo la tupla
+            tupla = self.database.ottieniCartellaFromCF(CFpaziente)
+            print(tupla)
+            print("TUPLA OTTENUTA")
+            hash_tupla = ut.hash_row(tupla)
+            print("TUPLA HASHATA")
+
+
+            contract_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb" #self.cartella_clinica.address
+            self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': contract_address})
             """ cursor.close()
             self.database.conn.close() """
+
+            print("HASH SALVATO IN BLOCKCHAIN")
+            hashes = self.cartella_clinica.functions.retrieveHash(CFpaziente).call()
+            print(hashes)
 
             return True
         else:
@@ -231,14 +247,23 @@ class ControllerMedico:
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
         ut = Utilities()
+        
+
+        # Se il paziente esiste ma non ha una cartella clinica, ne viene creata una provvisoria e viene
+        # aggiunto l'hash nella blockchain        
+        adding = self.addCartellaClinica(CFpaziente)
         cartelle = self.database.ottieniCartelle()
-        #if any((cartella[0] == CFpaziente )for cartella in cartelle):
+        
         
         # Check per verificare che è stata ruspettata l'integrità del dato
         for cartella in cartelle:
+            print(cartella[0])
             if(cartella[0] == CFpaziente):
-                
+                print("ciao 1")
+                #print(self._get_cartella_clinica_from_CF(CFpaziente) + " ** " + cartella + " ** " + ut.hash_row(cartella))
+                print(cartella)
                 if(ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella)):
+                    print("ciao 2")
                     update_query = f"""
                         UPDATE cartellaClinica
                         SET {nomeCampo} = %s
@@ -252,6 +277,16 @@ class ControllerMedico:
                     ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash)
                     print(f"Aggiornamento di {nomeCampo} con successo.")
                     return True
+                return False
+            
+        
+
+
+        # Salvataggio delle modifiche
+        #conn.commit()
+
+        # Chiusura della connessione
+        #conn.close()
                 
         return False
 
@@ -318,6 +353,7 @@ class ControllerMedico:
         try:
             # Chiama la funzione retrieveHash del contratto
             hashes = self.cartella_clinica.functions.retrieveHash(cf).call()
+            #print(str(hashes))
             return hashes
         except Exception as e:
             print(f"Errore durante il recupero degli hash: {e}")
