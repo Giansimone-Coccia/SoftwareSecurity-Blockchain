@@ -1,6 +1,7 @@
 from web3 import Web3
 import json
 
+from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
 import hashlib
@@ -36,7 +37,42 @@ class ControllerMedico:
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
+        # Attivo lo smart contract: "Cartella Clinica"
+        self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
+        #self.utilities = utilities.Utilities()
+
+    def _deploy_cartella_clinica(self, nomeSmartContract):
+        print(f"{nomeSmartContract}.sol")
+        deploy = Deploy(f"{nomeSmartContract}.sol")
+        abi, bytecode, w3, chain_id, my_address, private_key = deploy.create_contract()
+
+        Visita = w3.eth.contract(abi=abi, bytecode=bytecode)
+        # Get the latest transaction
+        nonce = w3.eth.get_transaction_count(my_address)
+        # Submit the transaction that deploys the contract
+        transaction = Visita.constructor().build_transaction(
+            {
+                "chainId": chain_id,
+                "gasPrice": w3.eth.gas_price,
+                "from": my_address,
+                "nonce": nonce,
+            }
+        )
+        # Sign the transaction
+        signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
+        #print("Deploying Contract!")
+        # Send it!
+        tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
+        # Wait for the transaction to be mined, and get the transaction receipt
+        #print("Waiting for transaction to finish...")
+        tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
+
+        # Working with deployed Contracts
+        contratto = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
+
+        return contratto
         #self.utilities = utilities.Utilities()
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
@@ -194,21 +230,34 @@ class ControllerMedico:
     
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
+        ut = Utilities()
+        cartelle = self.database.ottieniCartelle()
+        #if any((cartella[0] == CFpaziente )for cartella in cartelle):
         
-        if any((cartella[0] == CFpaziente )for cartella in self.database.ottieniCartelle()):
-        
-            update_query = f"""
+        # Check per verificare che è stata ruspettata l'integrità del dato
+        for cartella in cartelle:
+            if(cartella[0] == CFpaziente):
+                
+                if(ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella)):
+                    update_query = f"""
                         UPDATE cartellaClinica
                         SET {nomeCampo} = %s
                         WHERE CFpaziente = %s
                         """
-            cursor.execute(update_query, (nuovo_valore, CFpaziente))
-            # Commit delle modifiche al database
-            self.database.conn.commit()
-            print(f"Aggiornamento di {nomeCampo} con successo.")
-            return True
-        else:
-            return False
+                    cursor.execute(update_query, (nuovo_valore, CFpaziente))
+                    # Commit delle modifiche al database
+                    self.database.conn.commit()
+                    # TODO LUCA: Add parte di inserimento dati nella blockchain(riaggiorno l'hash)
+                    new_hash = ut.hash_row(cartella)
+                    ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash)
+                    print(f"Aggiornamento di {nomeCampo} con successo.")
+                    return True
+                
+        return False
+
+        
+        #else:
+            #return False
     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         
@@ -232,6 +281,8 @@ class ControllerMedico:
 
             # Commit delle modifiche
             self.database.conn.commit()
+
+            # Inserisco la nuova cartella clinica 
             
             "cursor.close()"
             "self.database.conn.close()"
@@ -262,3 +313,12 @@ class ControllerMedico:
         return hash_result
 
         #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
+    
+    def _get_cartella_clinica_from_CF(self,cf):
+        try:
+            # Chiama la funzione retrieveHash del contratto
+            hashes = self.cartella_clinica.functions.retrieveHash(cf).call()
+            return hashes
+        except Exception as e:
+            print(f"Errore durante il recupero degli hash: {e}")
+            return None

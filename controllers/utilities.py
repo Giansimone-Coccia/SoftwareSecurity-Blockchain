@@ -1,8 +1,10 @@
 import hashlib
 
+import web3
+
 class Utilities:
 
-    def hash_row(sql_row):
+    def hash_row(self,sql_row):
         row_string = ','.join(map(str, sql_row))
 
         hash_object = hashlib.md5()
@@ -14,3 +16,24 @@ class Utilities:
         return hash_result
 
     #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
+
+
+    """Prende in input l'hash nella blockchain e la tupla su cui fare il check
+        Attenzione : il to_check è la tupla non l'hash della tupla """
+    def check_integrity(self,blockchain_hash, to_check):
+        hash_to_check = self.hash_row(to_check)
+        return blockchain_hash == hash_to_check
+    
+    
+    def modify_hash(contratto, codice_fiscale_paziente, new_hash):
+        try:
+            # Chiama la funzione modifyHash del contratto
+            tx_hash = contratto.functions.modifyHash(codice_fiscale_paziente, new_hash).transact()
+            # Attendere la conferma della transazione
+            web3.eth.waitForTransactionReceipt(tx_hash)
+            print("Hash modificato con successo.")
+        except Exception as e:
+            print(f"Errore durante la modifica dell'hash: {e}")
+
+
+
