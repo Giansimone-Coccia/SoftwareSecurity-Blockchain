@@ -69,7 +69,7 @@ class Medico:
                     print("Cartella clinica correttamente aggiornata!")
                     print("")
                 else:
-                    print("Farmaco già presente!")
+                    print("Cartella clinica non aggiornata correttamente")
                     print("")
 
     def _addNewVisita(self):

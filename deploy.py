@@ -60,7 +60,7 @@ class Deploy:
         w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
         chain_id = 1337
 
-        my_address = "0x9eE8d6ED1805BeaD51517dCDcE6D1f0D083ad983"
-        private_key = "0x38564b9f4ded780d791cdfada4808d631c7e66c1f828c0b603051e4df411a30a"
+        my_address = "0x30De8e51b6bd4b9569075cd27acFC669ea975785"
+        private_key = "0x088fea19805aea0519c0affcc405f6303c2e2b4a15121f503e2d313c1bb80cb5"
 
         return abi, bytecode, w3, chain_id, my_address, private_key

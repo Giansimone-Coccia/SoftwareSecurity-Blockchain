@@ -249,6 +249,8 @@ class ControllerMedico:
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
         ut = Utilities()
+        ganache_url = "HTTP://127.0.0.1:7545"
+        web3 = Web3(Web3.HTTPProvider(ganache_url))
         
         # Se il paziente esiste ma non ha una cartella clinica, ne viene creata una provvisoria e viene
         # aggiunto l'hash nella blockchain        
@@ -277,15 +279,13 @@ class ControllerMedico:
                     
                     # Stampare i dettagli della transazione
                     for hash in self.valoriHashContratto:
-                        ganache_url = "HTTP://127.0.0.1:7545"
-                        web3 = Web3(Web3.HTTPProvider(ganache_url))
                         transaction = web3.eth.get_transaction(hash)
                         print("Dettagli della transazione:")
                         print(f"Hash: {transaction['hash'].hex()}")
                         print(f"Mittente: {transaction['from']}")
-                        print(f"Destinatario: {transaction['to']}")
+                        print(f"Destinatario: {transaction['to']}") 
                     
-                    self.visualizza_contenuto_contratto(self.cartella_clinica, self.ca)
+                    #self.visualizza_contenuto_contratto(self.cartella_clinica, self.ca)
                     
                     return True
                 return False
