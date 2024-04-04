@@ -1,6 +1,8 @@
 from web3 import Web3
 import json
 
+import web3
+
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -8,6 +10,8 @@ import hashlib
 
 class ControllerMedico:
     def __init__(self):
+
+        self.valoriHashContratto = []
 
         deploy = Deploy("Visita.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
@@ -71,7 +75,7 @@ class ControllerMedico:
         # Working with deployed Contracts
         contratto = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 
-        return contratto
+        return contratto 
         #self.utilities = utilities.Utilities()
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
@@ -231,11 +235,12 @@ class ControllerMedico:
             address = accounts[0]
             
 
-            self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': address})
+            tx_hash = self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': address})
+            self.valoriHashContratto.append(tx_hash)
             """ cursor.close()
             self.database.conn.close() """
 
-            hashes = self.cartella_clinica.functions.retrieveHash(CFpaziente).call()
+            #hashes = self.cartella_clinica.functions.retrieveHash(CFpaziente).call()
 
             return True
         else:
@@ -245,18 +250,15 @@ class ControllerMedico:
         cursor = self.database.conn.cursor()
         ut = Utilities()
         
-
         # Se il paziente esiste ma non ha una cartella clinica, ne viene creata una provvisoria e viene
         # aggiunto l'hash nella blockchain        
         adding = self.addCartellaClinica(CFpaziente)
         cartelle = self.database.ottieniCartelle()
         
-        
-        # Check per verificare che è stata ruspettata l'integrità del dato
+        # Check per verificare che è stata rispettata l'integrità del dato
         for cartella in cartelle:
-            if(cartella[0] == CFpaziente):
-                #print(self._get_cartella_clinica_from_CF(CFpaziente) + " ** " + cartella + " ** " + ut.hash_row(cartella))
-                if(ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella)):
+            if cartella[0] == CFpaziente:
+                if ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
                     update_query = f"""
                         UPDATE cartellaClinica
                         SET {nomeCampo} = %s
@@ -267,24 +269,31 @@ class ControllerMedico:
                     self.database.conn.commit()
                     cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
                     new_hash = ut.hash_row(cartellaAggiornato)
-                    ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash,self)
+                    
+                    # Chiamare la funzione modifyHash del contratto Solidity
+                    tx_hash = ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash,self)                    
+                    self.valoriHashContratto.append(tx_hash)
                     print(f"Aggiornamento di {nomeCampo} con successo.")
+                    
+                    # Stampare i dettagli della transazione
+                    for hash in self.valoriHashContratto:
+                        transaction = web3.eth.get_transaction_receipt(hash)
+                        print("Dettagli della transazione:")
+                        print(f"Hash: {transaction['hash'].hex()}")
+                        print(f"Mittente: {transaction['from']}")
+                        print(f"Destinatario: {transaction['to']}")
+                        print(f"Valore trasferito: {web3.fromWei(transaction['value'], 'ether')} Ether")
+                        print(f"Gas Price: {web3.fromWei(transaction['gasPrice'], 'gwei')} Gwei")
+                        print(f"Gas Limit: {transaction['gas']}")
+                        print(f"Nonce: {transaction['nonce']}")
+                    
+                    self.visualizza_contenuto_contratto(self.cartella_clinica, self.ca)
+                    
                     return True
-                return False             
-        
+                return False
 
-
-        # Salvataggio delle modifiche
-        #conn.commit()
-
-        # Chiusura della connessione
-        #conn.close()
-                
         return False
 
-        
-        #else:
-            #return False
     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         
@@ -350,3 +359,13 @@ class ControllerMedico:
         except Exception as e:
             print(f"Errore durante il recupero degli hash: {e}")
             return None
+        
+    def visualizza_contenuto_contratto(self,contratto, tx_receipt):
+        # Ottieni l'evento 'ContentSet' dal contratto
+        event = contratto.events.ContentSet()
+
+        # Ottieni il contenuto utilizzando la ricevuta di transazione
+        event_filter = event.processReceipt(tx_receipt)
+        contenuto = event_filter[0]['args']['content']
+
+        return contenuto

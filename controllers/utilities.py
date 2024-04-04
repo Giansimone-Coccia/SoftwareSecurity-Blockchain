@@ -30,7 +30,8 @@ class Utilities:
             # Chiama la funzione modifyHash del contratto
             accounts = controller.w3.eth.accounts
             address = accounts[0]
-            contratto.functions.modifyHash(codice_fiscale_paziente, new_hash).transact({'from': address})
+            tx_hash = contratto.functions.modifyHash(codice_fiscale_paziente, new_hash).transact({'from': address})
+            return tx_hash
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 

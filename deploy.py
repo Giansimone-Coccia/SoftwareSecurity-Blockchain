@@ -66,6 +66,6 @@ class Deploy:
         # Use the first account as my_address
         my_address = accounts[0]
         print(f"Deploy = {my_address}")
-        private_key = "0xe80ec7d4115796939443227729485f06c3a8eaafd50c0713d4ebdc1a49b21d6a"
+        private_key = "0xcf8802bdc178d9fc3402a26edd03941ac9b7b62921c52c9a217e196aee35c747"
 
         return abi, bytecode, w3, chain_id, my_address, private_key
