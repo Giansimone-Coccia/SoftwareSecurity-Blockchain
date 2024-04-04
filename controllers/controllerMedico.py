@@ -277,15 +277,13 @@ class ControllerMedico:
                     
                     # Stampare i dettagli della transazione
                     for hash in self.valoriHashContratto:
-                        transaction = web3.eth.get_transaction_receipt(hash)
+                        ganache_url = "HTTP://127.0.0.1:7545"
+                        web3 = Web3(Web3.HTTPProvider(ganache_url))
+                        transaction = web3.eth.get_transaction(hash)
                         print("Dettagli della transazione:")
                         print(f"Hash: {transaction['hash'].hex()}")
                         print(f"Mittente: {transaction['from']}")
                         print(f"Destinatario: {transaction['to']}")
-                        print(f"Valore trasferito: {web3.fromWei(transaction['value'], 'ether')} Ether")
-                        print(f"Gas Price: {web3.fromWei(transaction['gasPrice'], 'gwei')} Gwei")
-                        print(f"Gas Limit: {transaction['gas']}")
-                        print(f"Nonce: {transaction['nonce']}")
                     
                     self.visualizza_contenuto_contratto(self.cartella_clinica, self.ca)
                     
@@ -293,8 +291,7 @@ class ControllerMedico:
                 return False
 
         return False
-
-    
+                    
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         
         cursor = self.database.conn.cursor()
