@@ -64,19 +64,14 @@ class ControllerMedico:
         )
         # Sign the transaction
         signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
-        #print("Deploying Contract!")
-        # Send it!
+        
         tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-        # Wait for the transaction to be mined, and get the transaction receipt
-        #print("Waiting for transaction to finish...")
+        
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
-
-        # Working with deployed Contracts
+        
         contratto = w3.eth.contract(address=tx_receipt.contractAddress, abi=abi)
 
         return contratto 
-        #self.utilities = utilities.Utilities()
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
         cursor = self.database.conn.cursor()
@@ -90,23 +85,16 @@ class ControllerMedico:
         VALUES (%s, %s, %s, %s, %s, %s)
         """
 
-        # Dati da inserire nella visita medica
         data_visita = (CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo)
 
-        # Esecuzione dell'istruzione per inserire la visita medica
         cursor.execute(insert_query, data_visita)
 
-        # Commit delle modifiche
         self.database.conn.commit()
 
         lista_dati = [CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo]
-        hash = self.hash_row(lista_dati)
+        hash = self.ut.hash_row(lista_dati)
         print(hash)
 
-        # Chiusura del cursore e della connessione
-        
-
-        # Chiamata alla funzione storeHash del contratto Visita
         greeting_transaction = self.medico_contract.functions.storeHash(IdMedico, CFpaziente, hash).build_transaction(
             {
                 "chainId": self.chain_id,
@@ -154,25 +142,7 @@ class ControllerMedico:
         IdMedico = self.database.ottieniDatiAuth()[0]['CF']
 
         if  not any((curato[0] == IdMedico and curato[1] ==CFpaziente )for curato in self.database.ottieniCurati()):
-            nome_tabella = "curato"
-
-            print('ciao')
-
-            insert_query = f"""
-            INSERT INTO {nome_tabella} (CFPaziente, CFMedico)
-            VALUES (%s, %s)
-            """
-            nuovo_curato = (CFpaziente, IdMedico)
-
-            cursor.execute(insert_query, nuovo_curato)
-
-            self.database.conn.commit()
-
-            self.addCartellaClinica(CFpaziente)
-            
-            """ cursor.close()
-            self.database.conn.close() """
-
+            self.database.addTupla("curato",IdMedico,CFpaziente)
             return True
         else:
             return False
@@ -189,18 +159,12 @@ class ControllerMedico:
             VALUES (%s, %s, %s, %s)
             """
 
-            # Dati da inserire nella visita medica
             patologia = (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
             print(patologia)
 
-            # Esecuzione dell'istruzione per inserire la visita medica
             cursor.execute(insert_query, patologia)
 
-            # Commit delle modifiche
             self.database.conn.commit()
-            
-            "cursor.close()"
-            "self.database.conn.close()"
 
             return True
         else:
@@ -225,22 +189,15 @@ class ControllerMedico:
 
             self.database.conn.commit()
 
-            # Ora occorre aggiungere l'hash alla blockchain. Per farlo riprendiamo la tupla
             tupla = self.database.ottieniCartellaFromCF(CFpaziente)
             hash_tupla = ut.hash_row(tupla[0])
 
-            #contract_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb" #self.cartella_clinica.address
-                    #my_address = "0x94324c9C4F1D1786a38Cd9CF6c54f230f25aE7Eb"
             accounts = self.w3.eth.accounts
             address = accounts[0]
             
 
             tx_hash = self.cartella_clinica.functions.storeHash(CFpaziente, hash_tupla).transact({'from': address})
             self.valoriHashContratto.append(tx_hash)
-            """ cursor.close()
-            self.database.conn.close() """
-
-            #hashes = self.cartella_clinica.functions.retrieveHash(CFpaziente).call()
 
             return True
         else:
@@ -251,46 +208,33 @@ class ControllerMedico:
         ut = Utilities()
         ganache_url = "HTTP://127.0.0.1:7545"
         web3 = Web3(Web3.HTTPProvider(ganache_url))
-        
-        # Se il paziente esiste ma non ha una cartella clinica, ne viene creata una provvisoria e viene
-        # aggiunto l'hash nella blockchain        
+
         adding = self.addCartellaClinica(CFpaziente)
         cartelle = self.database.ottieniCartelle()
-        
-        # Check per verificare che è stata rispettata l'integrità del dato
-        for cartella in cartelle:
-            if cartella[0] == CFpaziente:
-                if ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
-                    update_query = f"""
-                        UPDATE cartellaClinica
-                        SET {nomeCampo} = %s
-                        WHERE CFpaziente = %s
-                        """
-                    cursor.execute(update_query, (nuovo_valore, CFpaziente))
-                    # Commit delle modifiche al database
-                    self.database.conn.commit()
-                    cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
-                    new_hash = ut.hash_row(cartellaAggiornato)
-                    
-                    # Chiamare la funzione modifyHash del contratto Solidity
-                    tx_hash = ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash,self)                    
-                    self.valoriHashContratto.append(tx_hash)
-                    print(f"Aggiornamento di {nomeCampo} con successo.")
-                    
-                    # Stampare i dettagli della transazione
-                    for hash in self.valoriHashContratto:
-                        transaction = web3.eth.get_transaction(hash)
-                        print("Dettagli della transazione:")
-                        print(f"Hash: {transaction['hash'].hex()}")
-                        print(f"Mittente: {transaction['from']}")
-                        print(f"Destinatario: {transaction['to']}") 
-                    
-                    #self.visualizza_contenuto_contratto(self.cartella_clinica, self.ca)
-                    
-                    return True
-                return False
 
+        for cartella in cartelle:
+            if cartella[0] == CFpaziente and ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
+                update_query = f"""
+                    UPDATE cartellaClinica
+                    SET {nomeCampo} = %s
+                    WHERE CFpaziente = %s
+                    """
+                cursor.execute(update_query, (nuovo_valore, CFpaziente))
+                self.database.conn.commit()
+                cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
+                new_hash = ut.hash_row(cartellaAggiornato)
+                tx_hash = ut.modify_hash(self.cartella_clinica, CFpaziente, new_hash,self)                    
+                self.valoriHashContratto.append(tx_hash)
+                print(f"Aggiornamento di {nomeCampo} con successo.")
+                for hash in self.valoriHashContratto:
+                    transaction = web3.eth.get_transaction(hash)
+                    print("Dettagli della transazione:")
+                    print(f"Hash: {transaction['hash'].hex()}")
+                    print(f"Mittente: {transaction['from']}")
+                    print(f"Destinatario: {transaction['to']}")
+                return True
         return False
+
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         
@@ -305,20 +249,12 @@ class ControllerMedico:
             VALUES (%s, %s, %s, %s)
             """
 
-            # Dati da inserire nella visita medica
             farmaco = (IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
             print(farmaco)
 
-            # Esecuzione dell'istruzione per inserire la visita medica
             cursor.execute(insert_query, farmaco)
 
-            # Commit delle modifiche
             self.database.conn.commit()
-
-            # Inserisco la nuova cartella clinica 
-            
-            "cursor.close()"
-            "self.database.conn.close()"
 
             return True
         else:
@@ -334,19 +270,6 @@ class ControllerMedico:
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
         return map(lambda pazienteCurato: self.database.ottieniDatiPaziente(pazienteCurato[1]), self.pazientiCurati())
 
-    def hash_row(self, sql_row):
-        row_string = ','.join(map(str, sql_row))
-
-        hash_object = hashlib.md5()
-
-        hash_object.update(row_string.encode())
-
-        hash_result = hash_object.hexdigest()
-
-        return hash_result
-
-        #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
-    
     def _get_cartella_clinica_from_CF(self,cf):
         try:
             # Chiama la funzione retrieveHash del contratto

@@ -180,6 +180,7 @@ class db:
 
             # Costruisci la query di inserimento dinamica
             query = f"INSERT INTO {nomeTabella} ({', '.join(colonne)}) VALUES ({', '.join(['%s'] * len(colonne))})"
+            print(query)
 
             # Esegui l'inserimento
             cursor.execute(query, valori)
