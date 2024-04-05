@@ -14,14 +14,14 @@ class ControllerMedico:
         self.valoriHashContratto = []
 
         self.ut = Utilities()
-        deploy = Deploy("Visita.sol")
+        deploy = Deploy("MedicoContract.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
-        Visita = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
+        MedicoContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
         # Get the latest transaction
         self.nonce = self.w3.eth.get_transaction_count(self.my_address)
         # Submit the transaction that deploys the contract
-        transaction = Visita.constructor().build_transaction(
+        transaction = MedicoContract.constructor().build_transaction(
             {
                 "chainId": self.chain_id,
                 "gasPrice": self.w3.eth.gas_price,
@@ -113,58 +113,48 @@ class ControllerMedico:
             return False
         
     def addPatologia(self, IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso):
-        cursor = self.database.conn.cursor()
-        
-        if  not any((patologia[0] == IdCartellaClinica and patologia[1] == NomePatologia )for farmaco in self.database.ottieniPatologie()):
-
-            nome_tabella = "patologie"
-
-            insert_query = f"""
-            INSERT INTO {nome_tabella} (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
-            VALUES (%s, %s, %s, %s)
-            """
-
+        try:
+            # Costruisci la tupla dei valori da inserire
             patologia = (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
-            print(patologia)
-
-            cursor.execute(insert_query, patologia)
-
-            self.database.conn.commit()
-
-            return True
-        else:
+            
+            # Chiama il metodo addTupla di db.py per inserire la nuova patologia
+            inserimento_riuscito = self.database.addTupla("patologie", *patologia)
+            
+            # Restituisci True se l'inserimento è riuscito, False altrimenti
+            return inserimento_riuscito
+            
+        except Exception as e:
+            print("Errore durante l'aggiunta della patologia:", e)
             return False
+
         
     def addCartellaClinica(self, CFpaziente):
-        cursor = self.database.conn.cursor()
-
-        if  not any((cartella[0] == CFpaziente )for cartella in self.database.ottieniCartelle()):
-            nome_tabella = "cartellaClinica"
-
-            insert_query = f"""
-            INSERT INTO {nome_tabella} (CFPaziente)
-            VALUES (%s)
-            """
-            nuova_cartella = (CFpaziente,)
-
-            cursor.execute(insert_query, nuova_cartella)
-
-            self.database.conn.commit()
-
-            tupla = self.database.ottieniCartellaFromCF(CFpaziente)
-            hash_tupla = self.ut.hash_row(tupla[0])
-
-            accounts = self.w3.eth.accounts
-            address = accounts[0]
-            
-
-            tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
-            self.valoriHashContratto.append(tx_hash)
-
-            return True
-        else:
+        try:
+            # Verifica se esiste già una cartella clinica per il paziente
+            if not any((cartella[0] == CFpaziente) for cartella in self.database.ottieniCartelle()):
+                # Crea una nuova cartella clinica nel database
+                inserimento_riuscito = self.database.addTupla("cartellaClinica", CFpaziente)
+                if inserimento_riuscito:
+                    # Ottieni la tupla della cartella clinica dal database
+                    tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
+                    # Calcola l'hash della tupla della cartella clinica
+                    hash_tupla = self.ut.hash_row(tupla_cartella[0])
+                    # Ottieni l'indirizzo dell'account Ethereum da utilizzare per la transazione
+                    address = self.w3.eth.accounts[0]
+                    # Effettua la transazione per memorizzare l'hash della cartella clinica nel contratto medico
+                    tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
+                    # Aggiungi l'hash della transazione alla lista dei valori hash del contratto
+                    self.valoriHashContratto.append(tx_hash)
+                    return True
+                else:
+                    return False
+            else:
+                # Se esiste già una cartella clinica per il paziente, restituisci False
+                return False
+        except Exception as e:
+            print("Errore durante l'aggiunta della cartella clinica:", e)
             return False
-    
+
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
         ganache_url = "HTTP://127.0.0.1:7545"
@@ -192,29 +182,21 @@ class ControllerMedico:
         return False
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
-        
-        cursor = self.database.conn.cursor()
-        
-        if  not any((farmaco[0] == IdCartellaClinica and farmaco[1] == NomeFarmaco )for farmaco in self.database.ottieniFarmaci()):
-
-            nome_tabella = "farmaci"
-
-            insert_query = f"""
-            INSERT INTO {nome_tabella} (IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
-            VALUES (%s, %s, %s, %s)
-            """
-
-            farmaco = (IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
-            print(farmaco)
-
-            cursor.execute(insert_query, farmaco)
-
-            self.database.conn.commit()
-
-            return True
-        else:
+        try:
+            # Verifica se esiste già un farmaco con lo stesso nome nella cartella clinica specificata
+            if not any((farmaco[0] == IdCartellaClinica and farmaco[1] == NomeFarmaco) for farmaco in self.database.ottieniFarmaci()):
+                # Crea una nuova tupla per il farmaco nel database
+                inserimento_riuscito = self.database.addTupla("farmaci", IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
+                if inserimento_riuscito:
+                    return True
+                else:
+                    return False
+            else:
+                # Se esiste già un farmaco con lo stesso nome nella cartella clinica specificata, restituisci False
+                return False
+        except Exception as e:
+            print("Errore durante l'aggiunta del farmaco:", e)
             return False
-
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']

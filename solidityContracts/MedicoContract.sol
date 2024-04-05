@@ -1,7 +1,7 @@
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
 
-contract Visita {
+contract MedicoContract {
 
     mapping(string => mapping(string => string[])) public visita;
     mapping(string => string) public cartellaClinica;
