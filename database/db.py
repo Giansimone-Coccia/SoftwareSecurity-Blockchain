@@ -138,13 +138,13 @@ class db:
 
         return rows
     
-    def ottieniCartellaClinicaPaziente(self, CF):
+    def ottieniDatiVisite(self, CFMedico):
         # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'caretllaClinica'
+        table_name ='visitaMedico'
 
         cursor = self.conn.cursor()
         # Esegui una query per selezionare solo le righe con il CF specificato
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFMedico = %s", (CFMedico,))
 
         # Recupera le righe filtrate
         rows = cursor.fetchall()
@@ -222,4 +222,16 @@ class db:
             # Chiudi il cursore
             cursor.close()
 
+    
+    """  def ottieniDatiVisitaPaziente(self, CF):
+            # Nome della tabella da cui desideri recuperare i dati
+            table_name ='visitaMedico'
 
+            cursor = self.conn.cursor()
+            # Esegui una query per selezionare solo le righe con il CF specificato
+            cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
+
+            # Recupera le righe filtrate
+            rows = cursor.fetchall()
+
+            return rows """

@@ -50,8 +50,14 @@ class Medico:
                     print("Visita non salvata, prego riprovare")
                     print("")
 
-            elif(scelta == "2"):               
-                self._formattaVisita(self._visualizzaVisitaFromNomePaziente())
+            elif(scelta == "2"):
+                CF_paziente = self._selectPaziente()
+                if (self._formattaVisita(CF_paziente) == True):
+                    print("Ecco la visita medica")
+                    print("")
+                else:
+                    print("Non sono presenti visite mediche relative a questo paziente!")
+                    print("")
                 
             elif scelta == "3":
                 self._formattaVisita(self._visualizzaTutteVisiteMediche())
@@ -195,8 +201,9 @@ class Medico:
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()
  
-    def _formattaVisita(self, listVisiteMediche):
-        for visita in listVisiteMediche:
+    def _formattaVisita(self, CFpaziente):
+        visite= self.controller.getVisiteMedico(CFpaziente)
+        for visita in visite:
             print("***********************************")
             print("* Nome paziente: " + visita["nome_paziente"] )
             print("* Pressione: " + visita["pressione"] )

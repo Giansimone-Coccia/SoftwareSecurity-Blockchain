@@ -289,3 +289,17 @@ class ControllerMedico:
         contenuto = event_filter[0]['args']['content']
 
         return contenuto
+    
+    def visualizzaTuttiRecordMedici(self):
+        # indichiamo qual'è il CF del medico loggato
+        CFMedico = self.database.ottieniDatiAuth()[0]['CF']
+
+        visite = self.database.ottieniDatiVisite(CFMedico)
+        for visita in visite:
+            print("***********************************")
+            print("* Codice fiscale paziente: " + visita[0] )
+            print("* Dati: " + visita[2] )
+            print("* Data e Ora: " + visita[3].strftime("%Y-%m-%d %H:%M:%S") )
+            print("* Prestazione fornita: " + visita[4] )
+            print("* Luogo visita: " + visita[5] )
+            print("***********************************")
