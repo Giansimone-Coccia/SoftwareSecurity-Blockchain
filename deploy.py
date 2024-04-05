@@ -16,7 +16,6 @@ class Deploy:
         self._file_name = file_name
         self._path_file = os.path.join(os.getcwd(), "solidityContracts", file_name)
 
-
     def create_contract(self):
 
         with open(self._path_file, "r") as file:
@@ -60,7 +59,7 @@ class Deploy:
         w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
         chain_id = 1337
 
-        my_address = "0x421EcfeF67fB286679B43d09666e555543F28399"
-        private_key = "0xfc46ed545261e9eb2b370498957da7c6b527d3f3a524eb8431b1b81a45ced4e9"
+        my_address = "0xe98Ba47e853d49f317D4802e68f2681AC1Ed5BbF"
+        private_key = "0xe44215365ed839e5e00087c323be94745f4c870dec017142872d1d25f046e5d9"
 
         return abi, bytecode, w3, chain_id, my_address, private_key
