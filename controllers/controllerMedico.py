@@ -180,14 +180,34 @@ class ControllerMedico:
                 print(f"Aggiornamento di {nomeCampo} con successo.")
                 return True
         return False
+    
+    def ottieniFarmacoPaziente(self, CFpaziente):
+        cursor = self.database.conn.cursor()
+        ganache_url = "HTTP://127.0.0.1:7545"
+        web3 = Web3(Web3.HTTPProvider(ganache_url))
+        medicinali = []
+
+        farmaci = self.database.ottieniFarmaci(CFpaziente)
+        address = self.w3.eth.accounts[0]
+        hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
+
+        for farmaco in farmaci:
+            print(farmaco)
+            #if cartella[0] == CFpaziente and self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
+            medicinali.append(farmaco)
+        return medicinali
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         try:
             # Verifica se esiste già un farmaco con lo stesso nome nella cartella clinica specificata
-            if not any((farmaco[0] == IdCartellaClinica and farmaco[1] == NomeFarmaco) for farmaco in self.database.ottieniFarmaci()):
+            if not any((farmaco[0] == IdCartellaClinica and farmaco[1] == NomeFarmaco) for farmaco in self.database.ottieniFarmaci(IdCartellaClinica)):
                 # Crea una nuova tupla per il farmaco nel database
                 inserimento_riuscito = self.database.addTupla("farmaci", IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
                 if inserimento_riuscito:
+                    # Memorizza l'hash del farmaco nella blockchain
+                    hash_tupla = self.ut.hash_row((IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio))
+                    address = self.w3.eth.accounts[0]
+                    self.medico_contract.functions.storeHashFarmaco(IdCartellaClinica, hash_tupla).transact({'from': address})
                     return True
                 else:
                     return False
@@ -197,6 +217,7 @@ class ControllerMedico:
         except Exception as e:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
+
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']

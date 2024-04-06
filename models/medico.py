@@ -120,8 +120,6 @@ class Medico:
 
         return paziente_selezionato[0]
 
-
-
     def _updateCartellaClinica(self, paziente):
 
         print("0. Per modificare le allergie")
@@ -150,18 +148,17 @@ class Medico:
             return update
 
         elif(option == "2"):
-
             nome_farmaco = input("Inserisci il nome del farmaco che vuoi inserire: ")
             dosaggio = input("Inserisci il dosaggio del farmaco: ")
             data_prescrizione = datetime.datetime.now()
             cf_paziente = paziente
-            
             insert = self.controller.addFarmaco(cf_paziente, nome_farmaco, data_prescrizione, dosaggio)
-            
             return insert
         
         elif(option == "3"):
-            
+            farmaci = self.controller.ottieniFarmacoPaziente(paziente)
+            print(farmaci)
+            return farmaci
             return
         
         elif(option == "4"):

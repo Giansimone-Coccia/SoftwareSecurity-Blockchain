@@ -97,19 +97,16 @@ class db:
         rows = cursor.fetchall()
 
         return rows
-
     
-    def ottieniFarmaci(self):
+    def ottieniFarmaci(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
-    
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name}")
-
+        cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s", (CF,))
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-
+        print(rows)
         return rows
     
     def ottieniPatologie(self):
@@ -136,6 +133,18 @@ class db:
         # Recupera le righe filtrate
         rows = cursor.fetchall()
 
+        return rows
+    
+    def ottieniFarmaciPaziente(self, CF):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'farmaci'
+
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare solo le righe con il CF specificato
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
+
+        # Recupera le righe filtrate
+        rows = cursor.fetchall()
         return rows
     
     def ottieniCartellaClinicaPaziente(self, CF):
@@ -174,22 +183,19 @@ class db:
 
             cursor.execute("SELECT * FROM {} LIMIT 1".format(nomeTabella))
             colonne = [desc[0] for desc in cursor.description]
-
             # Leggi tutti i risultati della query SELECT
             cursor.fetchall()
-
             # Costruisci la query di inserimento dinamica
             query = f"INSERT INTO {nomeTabella} ({', '.join(colonne)}) VALUES ({', '.join(['%s'] * len(colonne))})"
             print(query)
-
             # Esegui l'inserimento
             cursor.execute(query, valori)
             self.conn.commit()
             print("Nuova tupla inserita correttamente")
-        
+            return True
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della tupla:", err)
-
+            return False
         finally:
             # Chiudi il cursore
             cursor.close()
