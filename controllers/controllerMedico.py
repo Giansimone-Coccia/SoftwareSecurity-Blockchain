@@ -12,8 +12,6 @@ import hashlib
 class ControllerMedico:
 
     _instance = None
-
-
     def __init__(self):
 
         self.valoriHashContratto = []
@@ -228,6 +226,35 @@ class ControllerMedico:
         except Exception as e:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
+
+    def visualizzaRecordVisite(self, CFPaziente):
+        pazienti = self.database.ottieniDatiPaziente(CFPaziente)
+        if pazienti:
+            for index, paziente in enumerate(pazienti):
+                tupla = paziente[0]
+                #print(f"{index}: {paziente[1]} {paziente[2]}")
+                print(f"{index}: {tupla[1]} {tupla[2]}")
+            while True:
+                nomePaziente = input("Scegli il paziente di cui visualizzare la visita: ")
+                if nomePaziente.isdigit() and int(nomePaziente) < len(pazienti):
+                    break
+                else:
+                    print("Input non valido. Inserisci un numero valido.")
+            # Ora puoi fare qualcosa con il nomePaziente selezionato, come stamparlo o elaborarlo ulteriormente.
+        else:
+            print("Nessun paziente trovato con il codice fiscale specificato.")
+
+    """ def visualizzaRecordVisite(self, CFPaziente):
+        pazienti = self.database.ottieniDatiPaziente(CFPaziente)
+        index = 0
+        for paziente in pazienti:
+            tupla = paziente[0]
+            print(f"{index}: {tupla[1]} {tupla[2]}")
+            if (index < pazienti.__len__()):
+                index +=1
+        nomePaziente = input("Scegli il paziente di cui visualizzare la visita: ")
+        pass """
+
 
     def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
