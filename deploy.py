@@ -61,5 +61,13 @@ class Deploy:
 
         my_address = "0xe4E81c3087D33E7f1D30372aABF3bF0f8972263b"
         private_key = "0x759c787fdff885aa3c706f6ef5a6f6ddc6e1ebca53e09d0b739134531625867c"
+        my_address = ""
+        private_key = ""
+
+        with open('address_key.txt', 'r') as file:
+            my_address = file.read().split()[0]
+
+        with open('private_key.txt', 'r') as file:
+            private_key = file.read().split()[0]
 
         return abi, bytecode, w3, chain_id, my_address, private_key
