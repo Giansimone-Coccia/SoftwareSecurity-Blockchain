@@ -21,9 +21,10 @@ class Utilities:
     #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
 
 
-    """Prende in input l'hash nella blockchain e la tupla su cui fare il check
-        Attenzione : il to_check è la tupla non l'hash della tupla """
+
     def check_integrity(self,blockchain_hash, to_check):
+        """Prende in input l'hash nella blockchain e la tupla su cui fare il check
+        Attenzione : il to_check è la tupla non l'hash della tupla """
         hash_to_check = self.hash_row(to_check)
         return blockchain_hash == hash_to_check
     
@@ -37,6 +38,21 @@ class Utilities:
             return tx_hash
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
+
+    def resetHashBlockchain(self, contratto):
+        """"Questo metodo re-setta gli hash nella blockchain"""
+        self._resetHashCartellaClinica(contratto)
+        
+
+
+    def _resetHashCartellaClinica(self,controller):
+        """Re-inserisco gli hash nella cartella clinica"""
+        tuple_cartella_clinica = self._db.ottieniCartelle()
+        address = controller.w3.eth.accounts[0]       
+        for tupla in tuple_cartella_clinica:
+            hash_tupla = self.hash_row(tupla)
+            # Salvo nella blockchain
+            controller.function.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
 
 
     

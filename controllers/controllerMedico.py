@@ -142,10 +142,12 @@ class ControllerMedico:
                 if inserimento_riuscito:
                     # Ottieni la tupla della cartella clinica dal database
                     tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
+                    print(f"TUPLA INIZIALE ADDCARTELLA: {tupla_cartella}")
                     # Calcola l'hash della tupla della cartella clinica
-                    hash_tupla = self.ut.hash_row(tupla_cartella[0])
+                    hash_tupla = self.ut.hash_row(tupla_cartella)
                     # Ottieni l'indirizzo dell'account Ethereum da utilizzare per la transazione
                     address = self.w3.eth.accounts[0]
+                    #print("hash tupla iniziale: " + hash_tupla)
                     # Effettua la transazione per memorizzare l'hash della cartella clinica nel contratto medico
                     tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
                     # Aggiungi l'hash della transazione alla lista dei valori hash del contratto
@@ -169,8 +171,11 @@ class ControllerMedico:
         cartelle = self.database.ottieniCartelle()
 
         for cartella in cartelle:
-            print(cartella)
+            print(f"Cartella {cartella}")
+            #print(f"Hash tupla blockchain: {self._get_cartella_clinica_from_CF(CFpaziente)}")
+            #print(f"Hash tuola database: {self.ut.hash_row(cartella)}")
             if cartella[0] == CFpaziente and self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
+
                 update_query = f"""
                     UPDATE cartellaClinica
                     SET {nomeCampo} = %s
@@ -178,7 +183,7 @@ class ControllerMedico:
                     """
                 cursor.execute(update_query, (nuovo_valore, CFpaziente))
                 self.database.conn.commit()
-                cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
+                cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)
                 new_hash = self.ut.hash_row(cartellaAggiornato)
                 tx_hash = self.ut.modify_hash(self.medico_contract,CFpaziente, new_hash,self)                    
                 self.valoriHashContratto.append(tx_hash)

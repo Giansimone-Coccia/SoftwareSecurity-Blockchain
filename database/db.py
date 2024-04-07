@@ -96,7 +96,7 @@ class db:
         # Recupera tutte le tuple
         rows = cursor.fetchall()
 
-        return rows
+        return rows[0]
     
     def ottieniFarmaci(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
