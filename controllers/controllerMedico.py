@@ -3,6 +3,7 @@ import json
 
 import web3
 
+from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -183,6 +184,7 @@ class ControllerMedico:
         address = self.w3.eth.accounts[0]
         hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
         return medicinali
+
 
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
