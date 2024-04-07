@@ -23,6 +23,8 @@ if __name__ == '__main__':
     controller = ControllerMedico.get_instance()
     ut = Utilities()
     ut.resetHashBlockchain(controller)
+
+    #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
     istanzaDB = db()
