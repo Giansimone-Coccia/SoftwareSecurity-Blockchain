@@ -200,13 +200,9 @@ class ControllerMedico:
         farmaci = self.database.ottieniFarmaci(CFpaziente)
         address = web3.eth.accounts[0]
         blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
-        print(blockchain_hash)
 
         for farmaco in farmaci:
-            print(f"nome farmaco {farmaco}")
-            print(f"hash farmaco {self.ut.hash_row(farmaco)}")
             for hash in blockchain_hash:
-                print(f"hash blockchain {hash}")
                 if self.ut.check_integrity(hash, farmaco):
                     medicinali.append(farmaco)
         return medicinali
@@ -234,6 +230,11 @@ class ControllerMedico:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
 
+    def modificaDoseFarmaco(self, IdCartella, NomeFarmaco, NuovaDose):
+        if (self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)):
+            print("Dosaggio del farmaco modificato correttamente")
+        else:
+            print("Modifica non avvenuta")
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
