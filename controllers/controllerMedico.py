@@ -3,6 +3,7 @@ import json
 
 import web3
 
+from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -187,15 +188,17 @@ class ControllerMedico:
         web3 = Web3(Web3.HTTPProvider(ganache_url))
         medicinali = []
 
-        farmaci = self.database.ottieniFarmaci(CFpaziente)
+        farmaci = self.database.ottieniFarmaci(CFpaziente) # lista di tuple di farmaci
+        hash_farmaci_db =  map(lambda tupla: self.ut.hash_row(tupla), farmaci)
         address = self.w3.eth.accounts[0]
         hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
+        #print(f"hash farmaci dal DB: ",)
 
-        for farmaco in farmaci:
-            print(farmaco)
-            #if cartella[0] == CFpaziente and self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
-            medicinali.append(farmaco)
-        return medicinali
+        # if(sorted(hash_farmaci_db) == sorted(hash_farmaci)):
+        #     return farmaci
+        # else:
+        #     raise IntegrityCheckError("Violazione di integrità")
+
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         try:
