@@ -36,5 +36,20 @@ class Utilities:
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 
+    def resetHashBlockchain(self, contratto):
+        """"Questo metodo re-setta gli hash nella blockchain"""
+        self._resetHashCartellaClinica(contratto)
+
+
+    def _resetHashCartellaClinica(self,controller):
+        """Re-inserisco gli hash nella cartella clinica"""
+
+        tuple_cartella_clinica = self._db.ottieniCartelle()
+
+        for tupla in tuple_cartella_clinica:
+            hash_tupla = self.hash_row(tupla)
+            # Salvo nella blockchain
+            controller
+
 
     
