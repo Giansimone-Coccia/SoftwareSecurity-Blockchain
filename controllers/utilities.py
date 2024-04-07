@@ -46,6 +46,7 @@ class Utilities:
         """"Questo metodo re-setta gli hash nella blockchain"""
         self._resetHashCartellaClinica(controller)
         self._resetHashFarmaci(controller)
+        self._resetHashVisiteMedico(controller)
         
 
 
@@ -66,6 +67,17 @@ class Utilities:
         for tupla in tupleFarmaci:
             hash_farmaco = self.hash_row(tupla)
             controller.medico_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+    
+    def _resetHashVisiteMedico(self,controller):
+        """Re-inserisco gli hash di tutte le visite-mediche effettuate nello smart contract"""
+        tuple_visite = self._db.retrieve_all_rows("visitaMedico")
+        address = controller.w3.eth.accounts[0]
+        for tupla in tuple_visite:
+            hash_visita = self.hash_row(tupla)
+            controller.medico_contract.functions.storeHashVisita(tupla[1],tupla[0],hash_visita).transact({'from': address})
+
+
+        
 
         
 
