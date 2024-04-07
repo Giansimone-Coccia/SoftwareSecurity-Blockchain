@@ -100,16 +100,11 @@ class ControllerMedico:
         CFMedico = self.database.ottieniDatiAuth()[0]['CF']
 
         # Chiamata alla funzione retrieveHash del contratto Visita
-        visite = self.medico_contract.functions.retrieveHashVisita(CFMedico, CFpaziente).call()
+        visite = [visita for visita in self.medico_contract.functions.retrieveHashVisita(CFMedico, CFpaziente).call()]
 
-        # Converti i risultati ottenuti in una struttura comprensibile
-        visite_comprensibili = []
-        for visita in visite:
-            # Qui puoi fare ulteriori elaborazioni se necessario
-            visite_comprensibili.append(visita)
-            print(visita)
+        # Converti i risultati ottenuti direttamente in una struttura comprensibile
+        return visite
 
-        return visite_comprensibili
     
     def addCurato(self, CFpaziente):
         cursor = self.database.conn.cursor()
@@ -193,20 +188,12 @@ class ControllerMedico:
     
     def ottieniFarmacoPaziente(self, CFpaziente):
         cursor = self.database.conn.cursor()
-        ganache_url = "HTTP://127.0.0.1:7545"
-        web3 = Web3(Web3.HTTPProvider(ganache_url))
-        medicinali = []
-
-        farmaci = self.database.ottieniFarmaci(CFpaziente) # lista di tuple di farmaci
-        hash_farmaci_db =  map(lambda tupla: self.ut.hash_row(tupla), farmaci)
+        web3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
+        medicinali = [farmaco for farmaco in self.database.ottieniFarmaci(CFpaziente)]
         address = self.w3.eth.accounts[0]
         hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
-        #print(f"hash farmaci dal DB: ",)
+        return medicinali
 
-        # if(sorted(hash_farmaci_db) == sorted(hash_farmaci)):
-        #     return farmaci
-        # else:
-        #     raise IntegrityCheckError("Violazione di integrità")
 
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
