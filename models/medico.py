@@ -155,12 +155,21 @@ class Medico:
             insert = self.controller.addFarmaco(cf_paziente, nome_farmaco, data_prescrizione, dosaggio)
             return insert
         
-        elif(option == "3"):
+        elif option == "3":
             farmaci = self.controller.ottieniFarmacoPaziente(paziente)
-            print(farmaci)
-            for f in farmaci:
-                print(f)
-            return farmaci
+            for index, farmaco in enumerate(farmaci):
+                print(f"{index}: {farmaco}")
+            da_modificare = input("Scegli il farmaco da modificare: ")
+            nuovo_dosaggio = input("Inserisci il nuovo dosaggio: ")
+            cf_paziente = paziente
+            try:
+                farmaco_da_modificare = farmaci[int(da_modificare)][1]
+                print(f"farmaco da modificare {farmaco_da_modificare}")
+                insert = self.controller.modificaDoseFarmaco(cf_paziente, farmaco_da_modificare, nuovo_dosaggio)
+                return insert
+            except IndexError:
+                print("Indice non valido. Riprova.")
+                return False
         
         elif(option == "4"):
             nome_patologia = input("Inserisci il nome della patologia che vuoi inserire: ")

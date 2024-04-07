@@ -202,7 +202,6 @@ class ControllerMedico:
         blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
 
         for farmaco in farmaci:
-            print(f"hash farmaco {self.ut.hash_row(farmaco)}")
             for hash in blockchain_hash:
                 print(hash)
                 if self.ut.check_integrity(hash, farmaco):
@@ -218,7 +217,8 @@ class ControllerMedico:
                 inserimento_riuscito = self.database.addTupla("farmaci", IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio)
                 if inserimento_riuscito:
                     # Memorizza l'hash del farmaco nella blockchain
-                    hash_tupla = self.ut.hash_row((IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio))
+                    farmaco = self.database.ottieniFarmaco(IdCartellaClinica, NomeFarmaco)
+                    hash_tupla = self.ut.hash_row(farmaco[0])
                     address = self.w3.eth.accounts[0]
                     self.medico_contract.functions.storeHashFarmaco(IdCartellaClinica, hash_tupla).transact({'from': address})
                     return True
@@ -231,6 +231,11 @@ class ControllerMedico:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
 
+    def modificaDoseFarmaco(self, IdCartella, NomeFarmaco, NuovaDose):
+        if (self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)):
+            print("Dosaggio del farmaco modificato correttamente")
+        else:
+            print("Modifica non avvenuta")
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']

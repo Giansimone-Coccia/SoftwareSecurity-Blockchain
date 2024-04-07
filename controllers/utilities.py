@@ -9,13 +9,16 @@ class Utilities:
     _db = db()
 
     def hash_row(self,sql_row):
+        print(f"sql_row {sql_row}")
         row_string = ','.join(map(str, sql_row))
-
+        #print(f"sql_row {row_string}")
         hash_object = hashlib.md5()
 
         hash_object.update(row_string.encode())
+        #print(f"sql_row {hash_object}")
 
         hash_result = hash_object.hexdigest()
+        #print(f"sql_row {hash_result}")
 
         return hash_result
 
