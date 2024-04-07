@@ -188,16 +188,17 @@ class ControllerMedico:
         web3 = Web3(Web3.HTTPProvider(ganache_url))
         medicinali = []
 
-        farmaci = self.database.ottieniFarmaci(CFpaziente) # lista di tuple di farmaci
-        hash_farmaci_db =  map(lambda tupla: self.ut.hash_row(tupla), farmaci)
-        address = self.w3.eth.accounts[0]
-        hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
-        #print(f"hash farmaci dal DB: ",)
+        farmaci = self.database.ottieniFarmaci(CFpaziente)
+        address = web3.eth.accounts[0]
+        blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
 
-        # if(sorted(hash_farmaci_db) == sorted(hash_farmaci)):
-        #     return farmaci
-        # else:
-        #     raise IntegrityCheckError("Violazione di integrità")
+        for farmaco in farmaci:
+            print(f"hash farmaco {self.ut.hash_row(farmaco)}")
+            for hash in blockchain_hash:
+                print(hash)
+                if self.ut.check_integrity(hash, self.ut.hash_row(farmaco)):
+                    medicinali.append(farmaco)
+        return medicinali
 
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
