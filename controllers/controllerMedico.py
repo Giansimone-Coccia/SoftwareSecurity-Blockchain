@@ -13,16 +13,11 @@ class ControllerMedico:
 
     _instance = None
 
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
 
     def __init__(self):
 
         self.valoriHashContratto = []
-
+        
         self.ut = Utilities()
         deploy = Deploy("MedicoContract.sol")
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
@@ -55,8 +50,14 @@ class ControllerMedico:
         # Attivo lo smart contract: "Cartella Clinica"
         #self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
-        self.ut.resetHashBlockchain(self)
+        #self.ut.resetHashBlockchain(self)
         #self.utilities = utilities.Utilities()
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = cls() #super().__new__(cls)
+        return cls._instance
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
         IdMedico = self.database.ottieniDatiAuth()[0]['CF']

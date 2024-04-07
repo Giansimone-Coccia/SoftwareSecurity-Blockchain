@@ -8,7 +8,7 @@ class Medico:
     def __init__(self, ruolo):
         self.ruolo = ruolo
         #self.password = password
-        self.controller = ControllerMedico()
+        self.controller = ControllerMedico.get_instance()
 
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
         receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
