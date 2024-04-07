@@ -3,6 +3,8 @@ import datetime
 import web3.eth
 
 
+from controllers.controllerMedico import ControllerMedico
+from controllers.utilities import Utilities
 from database.db import db
 from models.medico import Medico
 from session.session import session
@@ -16,7 +18,11 @@ Inoltre, importare mysql per l'utilizzo del DB """
 
 
 if __name__ == '__main__':
-        
+    
+    # Re-set blockchain:
+    #controller = ControllerMedico()
+    #ut = Utilities()
+    #ut.resetHashBlockchain(controller)
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
     istanzaDB = db()

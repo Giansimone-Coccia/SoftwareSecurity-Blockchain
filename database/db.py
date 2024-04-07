@@ -227,5 +227,36 @@ class db:
         finally:
             # Chiudi il cursore
             cursor.close()
+    
+
+
+    def retrieve_all_rows(self,table_name):
+        """
+        Metodo per recuperare tutte le tuple da una tabella nel database.
+
+        Args:
+            table_name (str): Il nome della tabella da cui recuperare le tuple.
+            conn (sqlite3.Connection): Oggetto di connessione al database.
+
+        Returns:
+            list: Una lista di tuple rappresentanti le righe della tabella.
+        """
+        try:
+            cursor = self.conn.cursor()
+            # Esecuzione della query per recuperare tutte le tuple dalla tabella
+            cursor.execute(f"SELECT * FROM {table_name}")
+
+            # Recupero di tutte le righe dalla query
+            rows = cursor.fetchall()
+        
+        except mysql.connector.Error as err:
+            print("Errore durante l'accesso ai dati:", err)
+
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+    
+
+        return rows
 
 

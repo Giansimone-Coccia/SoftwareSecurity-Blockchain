@@ -2,7 +2,11 @@ import hashlib
 
 import web3
 
+from database.db import db
+
 class Utilities:
+
+    _db = db()
 
     def hash_row(self,sql_row):
         row_string = ','.join(map(str, sql_row))
@@ -36,9 +40,10 @@ class Utilities:
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 
-    def resetHashBlockchain(self, contratto):
+    def resetHashBlockchain(self, controller):
         """"Questo metodo re-setta gli hash nella blockchain"""
-        self._resetHashCartellaClinica(contratto)
+        self._resetHashCartellaClinica(controller)
+        self._resetHashFarmaci(controller)
         
 
 
@@ -48,8 +53,25 @@ class Utilities:
         address = controller.w3.eth.accounts[0]       
         for tupla in tuple_cartella_clinica:
             hash_tupla = self.hash_row(tupla)
+            #print(f"Hash tupla salvata {hash_tupla}")
             # Salvo nella blockchain
-            controller.function.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
+            controller.medico_contract.functions.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
+        
+        # # mi stampo tutte le tuple che ritorna
+        # for tupla in tuple_cartella_clinica:
+        #     cf = tupla[0]
+        #     tupleRitornateHash = controller.medico_contract.functions.retrieveHashCartellaClinica(cf).call()
+        #     print(f"hash ritornata dalla blockchain {tupleRitornateHash}")
+    
+    def _resetHashFarmaci(self,controller):
+        """Re-inserisco gli hash di tutti i farmaci dei vari pazineti nello smart contract"""
+        tupleFarmaci = self._db.retrieve_all_rows("farmaci")
+        address = controller.w3.eth.accounts[0]   
+        for tupla in tupleFarmaci:
+            hash_farmaco = self.hash_row(tupla)
+            controller.medico_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+
+        
 
 
     

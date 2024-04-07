@@ -55,6 +55,7 @@ class ControllerMedico:
         # Attivo lo smart contract: "Cartella Clinica"
         #self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
+        self.ut.resetHashBlockchain(self)
         #self.utilities = utilities.Utilities()
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
@@ -167,7 +168,6 @@ class ControllerMedico:
         ganache_url = "HTTP://127.0.0.1:7545"
         web3 = Web3(Web3.HTTPProvider(ganache_url))
 
-        adding = self.addCartellaClinica(CFpaziente)
         cartelle = self.database.ottieniCartelle()
 
         for cartella in cartelle:
@@ -205,7 +205,7 @@ class ControllerMedico:
             print(f"hash farmaco {self.ut.hash_row(farmaco)}")
             for hash in blockchain_hash:
                 print(hash)
-                if self.ut.check_integrity(hash, self.ut.hash_row(farmaco)):
+                if self.ut.check_integrity(hash, farmaco):
                     medicinali.append(farmaco)
         return medicinali
 
