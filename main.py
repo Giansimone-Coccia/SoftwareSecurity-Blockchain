@@ -3,7 +3,6 @@ import datetime
 import web3.eth
 
 
-from controllers.controllerMedico import ControllerMedico
 from database.db import db
 from models.medico import Medico
 from session.session import session
