@@ -10,6 +10,15 @@ from deploy import Deploy
 import hashlib
 
 class ControllerMedico:
+
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+
     def __init__(self):
 
         self.valoriHashContratto = []
@@ -134,7 +143,7 @@ class ControllerMedico:
             # Verifica se esiste già una cartella clinica per il paziente
             if not any((cartella[0] == CFpaziente) for cartella in self.database.ottieniCartelle()):
                 # Crea una nuova cartella clinica nel database
-                inserimento_riuscito = self.database.addTupla("cartellaClinica", CFpaziente)
+                inserimento_riuscito = self.database.addTupla("cartellaClinica", CFpaziente, "", "")
                 if inserimento_riuscito:
                     # Ottieni la tupla della cartella clinica dal database
                     tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
@@ -176,7 +185,7 @@ class ControllerMedico:
                 self.database.conn.commit()
                 cartellaAggiornato = self.database.ottieniCartellaFromCF(CFpaziente)[0]
                 new_hash = self.ut.hash_row(cartellaAggiornato)
-                tx_hash = self.ut.modify_hash(self.medico_contract, CFpaziente, new_hash,self)                    
+                tx_hash = self.ut.modify_hash(self.medico_contract,CFpaziente, new_hash,self)                    
                 self.valoriHashContratto.append(tx_hash)
                 print(f"Aggiornamento di {nomeCampo} con successo.")
                 return True
@@ -250,3 +259,6 @@ class ControllerMedico:
         contenuto = event_filter[0]['args']['content']
 
         return contenuto
+    
+
+    

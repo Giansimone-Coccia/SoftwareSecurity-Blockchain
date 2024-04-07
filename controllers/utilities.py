@@ -36,4 +36,4 @@ class Utilities:
             print(f"Errore durante la modifica dell'hash: {e}")
 
 
-
+    
