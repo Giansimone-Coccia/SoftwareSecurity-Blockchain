@@ -9,7 +9,6 @@ class Utilities:
     _db = db()
 
     def hash_row(self,sql_row):
-        print(f"sql_row {sql_row}")
         row_string = ','.join(map(str, sql_row))
         #print(f"sql_row {row_string}")
         hash_object = hashlib.md5()
@@ -59,12 +58,6 @@ class Utilities:
             #print(f"Hash tupla salvata {hash_tupla}")
             # Salvo nella blockchain
             controller.medico_contract.functions.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
-        
-        # # mi stampo tutte le tuple che ritorna
-        # for tupla in tuple_cartella_clinica:
-        #     cf = tupla[0]
-        #     tupleRitornateHash = controller.medico_contract.functions.retrieveHashCartellaClinica(cf).call()
-        #     print(f"hash ritornata dalla blockchain {tupleRitornateHash}")
     
     def _resetHashFarmaci(self,controller):
         """Re-inserisco gli hash di tutti i farmaci dei vari pazineti nello smart contract"""

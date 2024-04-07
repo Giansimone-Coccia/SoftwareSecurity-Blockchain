@@ -69,7 +69,7 @@ class ControllerMedico:
             
             # Calcola l'hash dei dati
             hash = self.ut.hash_row(lista_dati)
-            print(hash)
+           
             
             # Chiamata al contratto medico per memorizzare l'hash
             greeting_transaction = self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).build_transaction(
@@ -144,7 +144,6 @@ class ControllerMedico:
                 if inserimento_riuscito:
                     # Ottieni la tupla della cartella clinica dal database
                     tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
-                    print(f"TUPLA INIZIALE ADDCARTELLA: {tupla_cartella}")
                     # Calcola l'hash della tupla della cartella clinica
                     hash_tupla = self.ut.hash_row(tupla_cartella)
                     # Ottieni l'indirizzo dell'account Ethereum da utilizzare per la transazione
@@ -172,7 +171,6 @@ class ControllerMedico:
         cartelle = self.database.ottieniCartelle()
 
         for cartella in cartelle:
-            print(f"Cartella {cartella}")
             #print(f"Hash tupla blockchain: {self._get_cartella_clinica_from_CF(CFpaziente)}")
             #print(f"Hash tuola database: {self.ut.hash_row(cartella)}")
             if cartella[0] == CFpaziente and self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
@@ -204,7 +202,6 @@ class ControllerMedico:
 
         for farmaco in farmaci:
             for hash in blockchain_hash:
-                print(hash)
                 if self.ut.check_integrity(hash, farmaco):
                     medicinali.append(farmaco)
         return medicinali
@@ -232,11 +229,25 @@ class ControllerMedico:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
 
-    def modificaDoseFarmaco(self, IdCartella, NomeFarmaco, NuovaDose):
-        if (self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)):
+    def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
+        """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
+        e la blockchain"""
+        # Ritorna una lista di hash di farmaci
+        hash_farmaco_blockchain = self.medico_contract.functions.retrieveHashFarmaco(tupla_farmaco[0]).call()
+        check = False
+        for hash_bc in hash_farmaco_blockchain:
+            if(self.ut.check_integrity(hash_bc, tupla_farmaco)):
+                check = True
+                break
+        #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
+        if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
+            address = self.w3.eth.accounts[0]
+            self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
             print("Dosaggio del farmaco modificato correttamente")
+            return True
         else:
             print("Modifica non avvenuta")
+            return False
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
@@ -251,7 +262,6 @@ class ControllerMedico:
         try:
             # Chiama la funzione retrieveHash del contratto
             hashes = self.medico_contract.functions.retrieveHashCartellaClinica(cf).call()
-            print(str(hashes))
             return hashes
         except Exception as e:
             print(f"Errore durante il recupero degli hash: {e}")

@@ -165,7 +165,7 @@ class Medico:
             try:
                 farmaco_da_modificare = farmaci[int(da_modificare)][1]
                 print(f"farmaco da modificare {farmaco_da_modificare}")
-                insert = self.controller.modificaDoseFarmaco(cf_paziente, farmaco_da_modificare, nuovo_dosaggio)
+                insert = self.controller.modificaDoseFarmaco(nuovo_dosaggio, farmaci[int(da_modificare)])
                 return insert
             except IndexError:
                 print("Indice non valido. Riprova.")
