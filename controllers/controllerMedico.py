@@ -193,12 +193,21 @@ class ControllerMedico:
     
     def ottieniFarmacoPaziente(self, CFpaziente):
         cursor = self.database.conn.cursor()
-        web3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
-        medicinali = [farmaco for farmaco in self.database.ottieniFarmaci(CFpaziente)]
-        address = self.w3.eth.accounts[0]
-        hash_farmaci = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).transact({'from': address})
-        return medicinali
+        ganache_url = "HTTP://127.0.0.1:7545"
+        web3 = Web3(Web3.HTTPProvider(ganache_url))
+        medicinali = []
 
+        farmaci = self.database.ottieniFarmaci(CFpaziente)
+        address = web3.eth.accounts[0]
+        blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
+
+        for farmaco in farmaci:
+            print(f"hash farmaco {self.ut.hash_row(farmaco)}")
+            for hash in blockchain_hash:
+                print(hash)
+                if self.ut.check_integrity(hash, self.ut.hash_row(farmaco)):
+                    medicinali.append(farmaco)
+        return medicinali
 
                     
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
