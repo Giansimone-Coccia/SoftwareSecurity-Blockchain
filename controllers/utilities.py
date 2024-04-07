@@ -39,17 +39,17 @@ class Utilities:
     def resetHashBlockchain(self, contratto):
         """"Questo metodo re-setta gli hash nella blockchain"""
         self._resetHashCartellaClinica(contratto)
+        
 
 
     def _resetHashCartellaClinica(self,controller):
         """Re-inserisco gli hash nella cartella clinica"""
-
         tuple_cartella_clinica = self._db.ottieniCartelle()
-
+        address = controller.w3.eth.accounts[0]       
         for tupla in tuple_cartella_clinica:
             hash_tupla = self.hash_row(tupla)
             # Salvo nella blockchain
-            controller
+            controller.function.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
 
 
     
