@@ -157,10 +157,10 @@ class Medico:
         
         elif(option == "3"):
             farmaci = self.controller.ottieniFarmacoPaziente(paziente)
-            print(farmaci)
+            """ print(farmaci)
             for f in farmaci:
                 print(f)
-            return farmaci
+            return farmaci """
         
         elif(option == "4"):
             nome_patologia = input("Inserisci il nome della patologia che vuoi inserire: ")
