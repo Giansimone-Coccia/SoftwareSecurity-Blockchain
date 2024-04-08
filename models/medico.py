@@ -142,7 +142,7 @@ class Medico:
             return update
         
         elif(option == "1"):
-            modifica_trattamento = input("Inserisci il nome del trattamento attuale: ")
+            modifica_trattamento = input("Nuovo trattamento: ")
             
             update = self.controller.updateCartellaClinica(paziente, "Trattamento", modifica_trattamento)
             return update

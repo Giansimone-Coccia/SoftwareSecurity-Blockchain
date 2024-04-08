@@ -124,11 +124,34 @@ class ControllerMedico:
             # Costruisci la tupla dei valori da inserire
             patologia = (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
             
-            # Chiama il metodo addTupla di db.py per inserire la nuova patologia
-            inserimento_riuscito = self.database.addTupla("patologie", *patologia)
             
+            # Chiama il metodo addTupla di db.py per inserire la nuova patologia
+            inserimento_riuscito_db = self.database.addTupla("patologie", *patologia)
+            
+            
+            if(inserimento_riuscito):
+                # La inserisco nella blockchain, nessun check di integrità tanto è nuova la patologia
+            
+                address = self.w3.eth.accounts[0]
+                self.medico_contract.functions.storeHashPatologie(IdCartellaClinica, self.ut.hash_row(patologia)).transact({'from': address})
+
+
+
+            
+
+
+            """IN PIU"""
+            listaPatologieDB = self.database.retrieve_all_rows("patologie")
+            for patologiaa in listaPatologieDB:
+                print(f"HASH DAL DB = {self.ut.hash_row(patologiaa)}")
+            print("***********************************************")
+            listaPatologieBlockchain = self.medico_contract.functions.retrieveHashPatologie("CFPaziente2").call()
+            for pt in listaPatologieBlockchain:
+                print(f"HASH BLOCKCHAIN = {pt}")
+            """in piu """
+
             # Restituisci True se l'inserimento è riuscito, False altrimenti
-            return inserimento_riuscito
+            return inserimento_riuscito_db
             
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
