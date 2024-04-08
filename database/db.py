@@ -137,15 +137,34 @@ class db:
             # Gestione degli errori
             print("Errore durante la modifica del dosaggio del farmaco:", e)
             return False
+    
+    def modificaStatoPatologia(self, CF, nomePatologia, stato):
+        try:
+            # Nome della tabella da cui desideri recuperare i dati
+            table_name = 'patologie'
+            cursor = self.conn.cursor()         
+            # Esegui una query per aggiornare il dosaggio del farmaco nella tabella specificata
+            cursor.execute(f"UPDATE {table_name} SET InCorso = %s WHERE IdCartellaClinica = %s AND NomePatologia = %s", (stato, CF, nomePatologia))
+            # Commit delle modifiche al database
+            self.conn.commit()
+            # Verifica se è stata effettuata almeno una modifica
+            if cursor.rowcount > 0:
+                return True
+            else:
+                return False
+        except Exception as e:
+            # Gestione degli errori
+            print("Errore durante la modifica del dosaggio del farmaco:", e)
+            return False
 
     
-    def ottieniPatologie(self):
+    def ottieniPatologie(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'patologie'
     
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name}")
+        cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s", (CF,))
 
         # Recupera tutte le tuple
         rows = cursor.fetchall()
