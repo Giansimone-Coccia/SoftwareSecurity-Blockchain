@@ -25,13 +25,12 @@ class Medico:
         while(_loop):
             print("0. Per uscire dal programma")
             print("1. Per inserire una nuova visita medica")
-            print("2. Per visualizzare una visita medica effettuata")
-            print("3. Visualizza tutte le visite mediche effettuate")
-            print("4. Per aggiungere un nuovo paziente in cura")
-            print("5. Per aggiornare la Cartella Clinica di un paziente")
+            print("2. Per visualizzare le visite mediche effettuate")
+            print("3. Per aggiungere un nuovo paziente in cura")
+            print("4. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(6))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -49,12 +48,9 @@ class Medico:
             elif(scelta == "2"):
                 lista = self._selectPaziente()
                 tupla = lista[0]
-                self._visualizzaVisitaFromNomePaziente(tupla[0])
-                
-            elif scelta == "3":
-                self._formattaVisita(self._visualizzaTutteVisiteMediche())
+                self._visualizzaVisitaFromNomePaziente(tupla)
 
-            elif(scelta == "4"):
+            elif(scelta == "3"):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
@@ -62,7 +58,7 @@ class Medico:
                     print("Paziente in cura non salvato, prego riprovare")
                     print("")
             
-            elif(scelta == "5"):
+            elif(scelta == "4"):
                 if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
                     print("Cartella clinica correttamente aggiornata!")
                     print("")
@@ -186,8 +182,8 @@ class Medico:
         
         return
 
-    def _visualizzaVisitaFromNomePaziente(self, CFPaziente):
-        return self.controller.visualizzaRecordVisite(CFPaziente)      
+    def _visualizzaVisitaFromNomePaziente(self, CFP):
+        return self.controller.visualizzaRecordVisite(CFP)    
         
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()

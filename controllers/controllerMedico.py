@@ -229,32 +229,22 @@ class ControllerMedico:
 
     def visualizzaRecordVisite(self, CFPaziente):
         pazienti = self.database.ottieniDatiPaziente(CFPaziente)
+        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
         if pazienti:
             for index, paziente in enumerate(pazienti):
-                tupla = paziente[0]
-                #print(f"{index}: {paziente[1]} {paziente[2]}")
-                print(f"{index}: {tupla[1]} {tupla[2]}")
-            while True:
-                nomePaziente = input("Scegli il paziente di cui visualizzare la visita: ")
-                if nomePaziente.isdigit() and int(nomePaziente) < len(pazienti):
-                    break
-                else:
-                    print("Input non valido. Inserisci un numero valido.")
-            # Ora puoi fare qualcosa con il nomePaziente selezionato, come stamparlo o elaborarlo ulteriormente.
+                #tupla = paziente[0]
+                print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
+                visite = self.database.ottieniVisitePaziente(paziente[0], IdMedico)
+                print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
+                indice = 0
+                for visita in visite:
+                    print(f"{indice} - Dati: {visita[2]}")
+                    print(f"    Data e ora: {visita[3]}")
+                    print(f"    Tipo prestazione: {visita[4]}")
+                    print(f"    Luogo: {visita[5]}")
+                    indice +=1
         else:
             print("Nessun paziente trovato con il codice fiscale specificato.")
-
-    """ def visualizzaRecordVisite(self, CFPaziente):
-        pazienti = self.database.ottieniDatiPaziente(CFPaziente)
-        index = 0
-        for paziente in pazienti:
-            tupla = paziente[0]
-            print(f"{index}: {tupla[1]} {tupla[2]}")
-            if (index < pazienti.__len__()):
-                index +=1
-        nomePaziente = input("Scegli il paziente di cui visualizzare la visita: ")
-        pass """
-
 
     def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
