@@ -34,15 +34,12 @@ class db:
     def ottieniDatiAuth(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'autenticazione'
-    
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
         cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
-
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-
-            # Stampa i valori decodificati per ogni tupla
+        # Stampa i valori decodificati per ogni tupla
         utenti = []
         print(rows)
         for tupla in rows:
@@ -54,7 +51,6 @@ class db:
 
             tuplaDict = {'CF': CF_decoded, 'Username': Username_decoded,
                         'Password': Password_decoded, 'Ruolo': Ruolo_decoded}
-
             utenti.append(tuplaDict)
 
         return utenti
@@ -62,42 +58,43 @@ class db:
     def ottieniCurati(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'curato'
-    
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
         cursor.execute(f"SELECT * FROM {table_name}")
-
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-
         return rows
     
     def ottieniCartelle(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
-    
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
         cursor.execute(f"SELECT * FROM {table_name}")
-
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-
         return rows
     
     def ottieniCartellaFromCF(self,cf):
-                # Nome della tabella da cui desideri recuperare i dati
+        # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
-    
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
         cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = '{cf}'")
-
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-
         return rows[0]
     
+    def ottieniVisitePaziente(self, CFPaziente, CFMedico):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaMedico'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+
     def ottieniFarmaci(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
@@ -174,14 +171,11 @@ class db:
     def ottieniDatiPaziente(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'paziente'
-
         cursor = self.conn.cursor()
         # Esegui una query per selezionare solo le righe con il CF specificato
         cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
-
         # Recupera le righe filtrate
         rows = cursor.fetchall()
-
         return rows
     
     def ottieniFarmaciPaziente(self, CF):
@@ -199,14 +193,11 @@ class db:
     def ottieniCartellaClinicaPaziente(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'caretllaClinica'
-
         cursor = self.conn.cursor()
         # Esegui una query per selezionare solo le righe con il CF specificato
         cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
-
         # Recupera le righe filtrate
         rows = cursor.fetchall()
-
         return rows
 
     def gestisciAccesso(self,username,password):
@@ -254,30 +245,22 @@ class db:
         try:
             # Crea un cursore dalla connessione al database
             cursor = self.conn.cursor()
-
             # Esegui una query per selezionare tutte le tuple dalla tabella specificata
             cursor.execute(f"SELECT * FROM {nomeTabella}")
-
             # Recupera tutte le tuple
             rows = cursor.fetchall()
-
             # Cerca il primo valore della prima tupla in cui è presente l'input
             for tupla in rows:
                 if input_value in tupla:
                     # Ritorna il primo valore della tupla
                     return tupla[0]
-
             # Se non viene trovata nessuna tupla con l'input, ritorna None
             return None
-        
         except mysql.connector.Error as err:
             print("Errore durante l'accesso ai dati:", err)
-
         finally:
             # Chiudi il cursore
             cursor.close()
-    
-
 
     def retrieve_all_rows(self,table_name):
         """
@@ -294,18 +277,11 @@ class db:
             cursor = self.conn.cursor()
             # Esecuzione della query per recuperare tutte le tuple dalla tabella
             cursor.execute(f"SELECT * FROM {table_name}")
-
             # Recupero di tutte le righe dalla query
             rows = cursor.fetchall()
-        
         except mysql.connector.Error as err:
             print("Errore durante l'accesso ai dati:", err)
-
         finally:
             # Chiudi il cursore
             cursor.close()
-    
-
         return rows
-
-

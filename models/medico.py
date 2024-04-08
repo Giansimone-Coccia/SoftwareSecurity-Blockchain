@@ -20,22 +20,17 @@ class Medico:
         
  
     def menuMedico(self):
-
         _loop = True
-
         print("Menù per " + self.ruolo)
-
         while(_loop):
-
             print("0. Per uscire dal programma")
             print("1. Per inserire una nuova visita medica")
-            print("2. Per visualizzare una visita medica effettuata")
-            print("3. Visualizza tutte le visite mediche effettuate")
-            print("4. Per aggiungere un nuovo paziente in cura")
-            print("5. Per aggiornare la Cartella Clinica di un paziente")
+            print("2. Per visualizzare le visite mediche effettuate")
+            print("3. Per aggiungere un nuovo paziente in cura")
+            print("4. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(6))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -50,13 +45,12 @@ class Medico:
                     print("Visita non salvata, prego riprovare")
                     print("")
 
-            elif(scelta == "2"):               
-                self._formattaVisita(self._visualizzaVisitaFromNomePaziente())
-                
-            elif scelta == "3":
-                self._formattaVisita(self._visualizzaTutteVisiteMediche())
+            elif(scelta == "2"):
+                lista = self._selectPaziente()
+                tupla = lista[0]
+                self._visualizzaVisitaFromNomePaziente(tupla)
 
-            elif(scelta == "4"):
+            elif(scelta == "3"):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
@@ -64,7 +58,7 @@ class Medico:
                     print("Paziente in cura non salvato, prego riprovare")
                     print("")
             
-            elif(scelta == "5"):
+            elif(scelta == "4"):
                 if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
                     print("Cartella clinica correttamente aggiornata!")
                     print("")
@@ -101,27 +95,20 @@ class Medico:
     
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCurati())
-
         print("Seleziona un paziente:")
-
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
-            print(contatore)
-            print(pazienteCurato)
-            print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
-
+            print(f"{contatore}: ")
+            print(f"{pazienteCurato}")
+            #print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
         counter = len(pazienti_curati) - 1
-
         scelta = input("Digitare la scelta: ")
-
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
-
         paziente_selezionato = pazienti_curati[int(scelta)]
-
+        print(paziente_selezionato)
         return paziente_selezionato[0]
 
     def _updateCartellaClinica(self, paziente):
-
         print("0. Per modificare le allergie")
         print("1. Per modificare i trattamenti")
         print("2. Per inserire un farmaco")
@@ -219,9 +206,8 @@ class Medico:
         
         return
 
-    def _visualizzaVisitaFromNomePaziente(self):
-        nomePaziente = input("Inserisci il nome del paziente: ")
-        return self.controller.visualizzaRecordMedicoFromNomePaziente(nomePaziente)      
+    def _visualizzaVisitaFromNomePaziente(self, CFP):
+        return self.controller.visualizzaRecordVisite(CFP)    
         
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()
