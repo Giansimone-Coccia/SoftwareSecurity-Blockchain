@@ -191,7 +191,31 @@ class Medico:
             return insert
         
         elif(option == "5"):
-            return
+            patologie = self.controller.ottieniPatologiePaziente(paziente)
+            for index, patologia in enumerate(patologie):
+                print(f"Seleziona {index} per modificare la patologia: {patologia[1]}")
+            da_modificare = input("Scegli la patologia di cui modificare lo stato: ")
+            
+            while True:
+                inCorso = input("Inserisci il nuovo stato, patologia in corso? (SI/NO):").strip().upper()
+                if inCorso == "SI":
+                    inCorso = 1
+                    break
+                elif inCorso == "NO":
+                    inCorso = 0
+                    break
+                else:
+                    print("Risposta non valida. Inserisci 'SI' o 'NO'.")
+            
+            try:
+                patologia_da_modificare = patologie[int(inCorso)][1]
+                print(f"patologia da modificare {patologia_da_modificare}")
+                insert = self.controller.modificaStatoPatologia(inCorso, patologie[int(da_modificare)])
+                return insert
+            except IndexError:
+                print("Indice non valido. Riprova.")
+                return False
+            
         
         return
 

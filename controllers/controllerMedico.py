@@ -156,7 +156,22 @@ class ControllerMedico:
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
             return False
+        
+    def ottieniPatologiePaziente(self, CFpaziente):
+        cursor = self.database.conn.cursor()
+        #ganache_url = "HTTP://127.0.0.1:7545"
+        #web3 = Web3(Web3.HTTPProvider(ganache_url))
+        patologielist = []
 
+        patologie = self.database.ottieniPatologie(CFpaziente)
+        #address = web3.eth.accounts[0]
+        #blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
+
+        for patologia in patologie:
+            #for hash in blockchain_hash:
+            #if self.ut.check_integrity(hash, farmaco):
+            patologielist.append(patologia)
+        return patologielist
         
     def addCartellaClinica(self, CFpaziente):
         try:
@@ -271,6 +286,10 @@ class ControllerMedico:
         else:
             print("Modifica non avvenuta")
             return False
+    
+    def modificaStatoPatologia(self, nuovoStato, tupla_patologia):
+        self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
+        return
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
