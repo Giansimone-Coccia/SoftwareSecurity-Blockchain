@@ -151,7 +151,7 @@ class db:
                 return False
         except Exception as e:
             # Gestione degli errori
-            print("Errore durante la modifica del dosaggio del farmaco:", e)
+            print("Errore durante la modifica dello stato della patologia:", e)
             return False
 
     
