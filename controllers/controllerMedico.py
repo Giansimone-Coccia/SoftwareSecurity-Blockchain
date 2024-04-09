@@ -332,10 +332,6 @@ class ControllerMedico:
             print(e)
             return False
         
-                        
-         
-        
-
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso

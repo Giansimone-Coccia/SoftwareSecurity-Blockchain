@@ -1,42 +1,58 @@
 import sys
 
+from controllers.controllerPaziente import ControllerPaziente
 
 class Paziente():
-    def __init__(self, nome, cognome, ruolo, password, email):
-        self.nome = nome
-        self.cognome = cognome
+    def __init__(self, ruolo):
         self.ruolo = ruolo
-        self.password = password
-        self.email = email
+        self.controller = ControllerPaziente.get_instance()
 
-def registerInfo():
-    return
+    def registerInfo():
+        return
 
-def accessData():
-    return
+    def accessData():
+        return
 
+    def menuPaziente(self):
+        _loop = True
+        print("Menù per " + self.ruolo)
+        while(_loop):
+            print("0. Per uscire dal programma")
+            print("1. Per visualizzare le visite mediche")
+            print("2. Per visionare la propria cartella clinica")
+            print("3. Per visionare i farmaci prescritti")
 
-def menuPaziente(self):
-
-    _loop = True
-
-    while(_loop):
-        print("0. Per uscire dal programma")
-        print("1. Per visionare il referto dell'ultima visita")
-        print("2. Per visionare il referto in base all'medico")
-
-        scelta = input("Digitare la scelta: ")
-        while(scelta != "0" and scelta != "1" and scelta != "2"):
             scelta = input("Digitare la scelta: ")
+            while(scelta not in map(str, range(4))):
+                scelta = input("Digitare la scelta: ")
 
-    if scelta == "0":
-        print("Arrivederci !")
-        sys.exit()
-    elif scelta == "1":
-        pass
-    elif scelta == "2":
-        pass
+            if scelta == "0":
+                print("Arrivederci !")
+                sys.exit()
+            elif scelta == "1":
+                #CFP = self.controller.database.ottieniDatiAuth[0]
+                medico = self._selectMedico()
+                tupla = medico[0]
+                self._visualizzaVisiteDelPaziente(tupla)
+            elif scelta == "2":
+                pass
+            elif scelta == "3":
+                pass
 
-    
+    def _visualizzaVisiteDelPaziente(self, CFMedico):
+        self.controller.getVisitePaziente(CFMedico)
 
-
+    def _selectMedico(self):
+        medici = list(self.controller.datiMedici())
+        print("Seleziona un medico:")
+        for contatore, medico in enumerate(medici, start=0):
+            print(f"{contatore}: ")
+            print(f"{medico}")
+            #print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
+        counter = len(medici) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+        paziente_selezionato = medici[int(scelta)]
+        print(paziente_selezionato)
+        return paziente_selezionato[0]

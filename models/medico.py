@@ -1,4 +1,3 @@
-
 import datetime
 import sys
 from controllers.controllerMedico import ControllerMedico
@@ -18,7 +17,6 @@ class Medico:
         receipt = self.controller.addCurato(cf_paziente)
         return receipt
         
- 
     def menuMedico(self):
         _loop = True
         print("Menù per " + self.ruolo)
@@ -30,7 +28,7 @@ class Medico:
             print("4. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(5))):
+            while(scelta not in map(str, range(4))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -67,30 +65,21 @@ class Medico:
                     print("")
 
     def _addNewVisita(self):
-
         data_ora_visita = datetime.datetime.now()
         cf_paziente = self._selectPaziente()[0]
         nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
-
         print(cf_paziente)
-
         ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
-        
         return True
     
     def _addNewCurato(self):
-
         cf_paziente = input("Inserisci il codice fiscale del paziente: ")
-
         ricevuta = self._addCurato(cf_paziente)
-
         while(ricevuta != True):
             cf_paziente = input("Inserisci il codice fiscale del paziente:")
-
             ricevuta = self._addCurato(cf_paziente)
-        
         return ricevuta
     
     def _selectPaziente(self):

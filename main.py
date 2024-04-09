@@ -1,12 +1,12 @@
 import datetime
-
 import web3.eth
 
-
 from controllers.controllerMedico import ControllerMedico
+from controllers.controllerPaziente import ControllerPaziente
 from controllers.utilities import Utilities
 from database.db import db
 from models.medico import Medico
+from models.paziente import Paziente
 from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
@@ -21,6 +21,7 @@ if __name__ == '__main__':
     
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
+    controllerP = ControllerPaziente.get_instance()
     ut = Utilities()
     ut.resetHashBlockchain(controller)
 
@@ -51,5 +52,6 @@ if __name__ == '__main__':
         pass
 
     elif currentSession.status == "Paziente":
-        pass
+        paziente = Paziente(currentSession.status)
+        paziente.menuPaziente()
   

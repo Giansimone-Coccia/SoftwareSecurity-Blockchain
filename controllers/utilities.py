@@ -23,14 +23,11 @@ class Utilities:
 
     #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
 
-
-
     def check_integrity(self,blockchain_hash, to_check):
         """Prende in input l'hash nella blockchain e la tupla su cui fare il check
         Attenzione : il to_check è la tupla non l'hash della tupla """
         hash_to_check = self.hash_row(to_check)
         return blockchain_hash == hash_to_check
-    
     
     def modify_hash(self,contratto, codice_fiscale_paziente, new_hash, controller):
         try:
