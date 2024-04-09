@@ -265,30 +265,33 @@ class ControllerMedico:
             return False
 
     def visualizzaRecordVisite(self, CFPaziente):
-        pazienti = self.database.ottieniDatiPaziente(CFPaziente)
-        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
-        hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
-        if pazienti:
-            for index, paziente in enumerate(pazienti):
-                print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
-                visite = self.database.ottieniVisitePaziente(paziente[0], IdMedico)
-                print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
-                indice = 0
-                integrita_verificata = False
-                for visita in visite:
-                    for hash_v in hash_visite:
-                        if self.ut.check_integrity(hash_v, visita):
-                            print(f"{indice} - Dati: {visita[2]}")
-                            print(f"    Data e ora: {visita[3]}")
-                            print(f"    Tipo prestazione: {visita[4]}")
-                            print(f"    Luogo: {visita[5]}")
-                            indice += 1
-                            integrita_verificata = True
-                            break
-                if not integrita_verificata:
-                    print("Problemi con il controllo dell'integrità")
-        else:
-            print("Nessun paziente trovato con il codice fiscale specificato.")
+        try:
+            pazienti = self.database.ottieniDatiPaziente(CFPaziente)
+            IdMedico = self.database.ottieniDatiAuth()[0]['CF']
+            hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
+            if pazienti:
+                for index, paziente in enumerate(pazienti):
+                    print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
+                    visite = self.database.ottieniVisitePaziente(paziente[0], IdMedico)
+                    print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
+                    indice = 0
+                    integrita_verificata = False
+                    for visita in visite:
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"    Data e ora: {visita[3]}")
+                                print(f"    Tipo prestazione: {visita[4]}")
+                                print(f"    Luogo: {visita[5]}")
+                                indice += 1
+                                integrita_verificata = True
+                                break
+                    if not integrita_verificata:
+                        print("Problemi con il controllo dell'integrità")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
 
     def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
