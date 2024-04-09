@@ -122,11 +122,33 @@ class ControllerMedico:
             # Costruisci la tupla dei valori da inserire
             patologia = (IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso)
             
-            # Chiama il metodo addTupla di db.py per inserire la nuova patologia
-            inserimento_riuscito = self.database.addTupla("patologie", *patologia)
             
+            # Chiama il metodo addTupla di db.py per inserire la nuova patologia
+            inserimento_riuscito_db = self.database.addTupla("patologie", *patologia)
+            
+            
+            if(inserimento_riuscito_db):
+                # La inserisco nella blockchain, nessun check di integrità tanto è nuova la patologia
+                all_patologie = self.ottieniPatologiePaziente(IdCartellaClinica)
+                for tupla_patologia in all_patologie:
+                    if(tupla_patologia[1]==NomePatologia):
+                        address = self.w3.eth.accounts[0]
+                        self.medico_contract.functions.storeHashPatologie(IdCartellaClinica, self.ut.hash_row(tupla_patologia)).transact({'from': address})
+                        return inserimento_riuscito_db
+
+
+            # """IN PIU"""
+            # listaPatologieDB = self.database.retrieve_all_rows("patologie")
+            # for patologiaa in listaPatologieDB:
+            #     print(f"HASH DAL DB = {self.ut.hash_row(patologiaa)}")
+            # print("***********************************************")
+            # listaPatologieBlockchain = self.medico_contract.functions.retrieveHashPatologie("CFPaziente2").call()
+            # for pt in listaPatologieBlockchain:
+            #     print(f"HASH BLOCKCHAIN = {pt}")
+            # """in piu """
+
             # Restituisci True se l'inserimento è riuscito, False altrimenti
-            return inserimento_riuscito
+            #return inserimento_riuscito_db
             
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
@@ -289,8 +311,27 @@ class ControllerMedico:
             return False
     
     def modificaStatoPatologia(self, nuovoStato, tupla_patologia):
-        self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
-        return
+        try:
+            all_patologie = self.ottieniPatologiePaziente(tupla_patologia[0])
+            for tupla in all_patologie:
+                if(tupla[1]==tupla_patologia[1]):
+                    all_tuple_blockchain = self.medico_contract.functions.retrieveHashPatologie(tupla[0]).call()
+                    for tupla_blockchain in all_tuple_blockchain:
+                        if(self.ut.check_integrity(tupla_blockchain,tupla)):
+                            self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
+                            address = self.w3.eth.accounts[0]
+                            self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                            print("HASH CORRETTAMENTE SALVATO IN BLOCKCHAIN !")
+                            return True
+                    raise IntegrityCheckError("Integrità dati PATOLOGIE non rispettata")
+        
+        except IntegrityCheckError as e:
+            print(e)
+            return False
+        
+                        
+         
+        
 
     def pazientiCurati(self):
         medico_cf = self.database.ottieniDatiAuth()[0]['CF']
