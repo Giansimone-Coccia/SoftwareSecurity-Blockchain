@@ -30,7 +30,7 @@ class Paziente():
                 print("Arrivederci !")
                 sys.exit()
             elif scelta == "1":
-                #CFP = self.controller.database.ottieniDatiAuth[0]
+                #CFP = self.controller.database.ottieniDatiAuth[1]
                 medico = self._selectMedico()
                 tupla = medico[0]
                 self._visualizzaVisiteDelPaziente(tupla)

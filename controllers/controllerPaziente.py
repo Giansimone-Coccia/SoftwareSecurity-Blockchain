@@ -53,13 +53,13 @@ class ControllerPaziente:
 
     def getVisitePaziente(self, CFMedico):
         try:
-            CFPaziente = self.database.ottieniDatiAuth()[0]['CF']
+            CFPaziente = self.database.ottieniDatiAuth()[1]['CF']
             medici = self.database.ottieniDatiMedico(CFMedico)
             #hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
             if medici:
                 for index, medico in enumerate(medici):
                     print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
-                    visite = self.database.ottieniVisitePaziente(medico[0], CFPaziente)
+                    visite = self.database.ottieniVisitePaziente(CFPaziente, medico[0])
                     print(f"Elenco delle visite effettuate per il medico {medico[0]}")
                     indice = 0
                     integrita_verificata = False
@@ -72,7 +72,6 @@ class ControllerPaziente:
                         print(f"    Luogo: {visita[5]}")
                         indice += 1
                         integrita_verificata = True
-                        break
                     if not integrita_verificata:
                         print("Problemi con il controllo dell'integrità")
             else:
@@ -81,10 +80,10 @@ class ControllerPaziente:
             print(f"Si è verificato un'errore: {e}")
     
     def mediciPresenti(self):
-        paziente_cf = self.database.ottieniDatiAuth()[0]['CF']
+        paziente_cf = self.database.ottieniDatiAuth()[1]['CF']
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFPaziente è uguale al Cf del paziente che ha fatto l'accesso
-        return filter(lambda curato: curato[0] == paziente_cf, self.database.ottieniCurati())
+        return filter(lambda curato: curato[1] == paziente_cf, self.database.ottieniCurati())
 
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
-        return map(lambda medico: self.database.ottieniDatiMedico(medico[1]), self.mediciPresenti())
+        return map(lambda medico: self.database.ottieniDatiMedico(medico[0]), self.mediciPresenti())
