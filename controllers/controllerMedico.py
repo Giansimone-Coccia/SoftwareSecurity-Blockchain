@@ -15,6 +15,9 @@ class ControllerMedico:
     def __init__(self):
 
         self.valoriHashContratto = []
+
+        self._utente = None
+        self._utente_inizializzato = False
         
         self.ut = Utilities()
         deploy = Deploy("MedicoContract.sol")
@@ -56,9 +59,21 @@ class ControllerMedico:
         if cls._instance is None:
             cls._instance = cls() #super().__new__(cls)
         return cls._instance
+    
+    @property
+    def utente(self):
+        return self._utente
+
+    @utente.setter
+    def utente(self, value):
+        if not self._utente_inizializzato:
+            self._utente = value
+            self._utente_inizializzato = True
+        else:
+            raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
 
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
-        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
+        IdMedico = self.utente[0]
         nome_tabella = "visitaMedico"
         lista_dati = [CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo]
         
@@ -97,7 +112,7 @@ class ControllerMedico:
 
     def getVisiteMedico(self, CFpaziente):
         # Ottieni l'ID del medico
-        CFMedico = self.database.ottieniDatiAuth()[0]['CF']
+        CFMedico = self.utente[0]
 
         # Chiamata alla funzione retrieveHash del contratto Visita
         visite = [visita for visita in self.medico_contract.functions.retrieveHashVisita(CFMedico, CFpaziente).call()]
@@ -109,7 +124,7 @@ class ControllerMedico:
     def addCurato(self, CFpaziente):
         cursor = self.database.conn.cursor()
 
-        IdMedico = self.database.ottieniDatiAuth()[0]['CF']
+        IdMedico = self.utente[0]
 
         if  not any((curato[0] == IdMedico and curato[1] ==CFpaziente )for curato in self.database.ottieniCurati()):
             self.database.addTupla("curato",IdMedico,CFpaziente)
@@ -267,7 +282,7 @@ class ControllerMedico:
     def visualizzaRecordVisite(self, CFPaziente):
         try:
             pazienti = self.database.ottieniDatiPaziente(CFPaziente)
-            IdMedico = self.database.ottieniDatiAuth()[0]['CF']
+            IdMedico = self.utente[0]
             hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
             if pazienti:
                 for index, paziente in enumerate(pazienti):
@@ -333,7 +348,8 @@ class ControllerMedico:
             return False
         
     def pazientiCurati(self):
-        medico_cf = self.database.ottieniDatiAuth()[0]['CF']
+        print(f"yoylo {self.utente}")
+        medico_cf = self.utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
         return filter(lambda curato: curato[0] == medico_cf, self.database.ottieniCurati())
 

@@ -8,6 +8,7 @@ class session:
         self.status = status
         self.email = None
         self.password = None
+        self.utente = None
         
         
     def eseguiAccesso(self):
@@ -21,13 +22,21 @@ class session:
             email = input("Inserisci email: ")
             password = input("Inserisci la password: ")
 
-            if(istanzaDB.gestisciAccesso(email,password)):
-                self.status = istanzaDB.ottieniProfessione(email,password)
+            if istanzaDB.gestisciAccesso(email, password):
+                self.status = istanzaDB.ottieniProfessione(email, password)
                 self.email = email
                 self.password = password
                 print("ACCESSO EFFETTUATO !")
+                CF = istanzaDB.ottieniCF(email, password)
+
+                if self.status == "Medico":
+                    self.utente = istanzaDB.ottieniDatiMedico(CF)[0]
+                elif self.status == "OperatoreSanitario":
+                    pass
+                elif self.status == "Paziente":
+                    self.utente = istanzaDB.ottieniDatiPaziente(CF)[0]
                 _isLogin = False
-                
+
             else:
                 print("ACCESSO NEGATO !")
 

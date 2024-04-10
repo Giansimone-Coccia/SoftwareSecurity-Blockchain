@@ -4,10 +4,12 @@ from controllers.controllerMedico import ControllerMedico
 
 class Medico:
     
-    def __init__(self, ruolo):
-        self.ruolo = ruolo
+    def __init__(self, session):
+        self.ruolo = session.status
+        self.utente = session.utente
         #self.password = password
         self.controller = ControllerMedico.get_instance()
+        self.controller.utente = self.utente 
 
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
         receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)

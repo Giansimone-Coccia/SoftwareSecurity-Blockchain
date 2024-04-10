@@ -47,15 +47,16 @@ if __name__ == '__main__':
     currentSession.eseguiAccesso()
     print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
+    print(currentSession.utente)
 
     if currentSession.status == "Medico":
-        medico = Medico(currentSession.status)
+        medico = Medico(currentSession)
         medico.menuMedico()
     
     elif currentSession.status == "OperatoreSanitario":
         pass
 
     elif currentSession.status == "Paziente":
-        paziente = Paziente(currentSession.status)
+        paziente = Paziente(currentSession)
         paziente.menuPaziente()
   
