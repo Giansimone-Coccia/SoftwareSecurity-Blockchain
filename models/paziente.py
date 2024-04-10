@@ -3,9 +3,13 @@ import sys
 from controllers.controllerPaziente import ControllerPaziente
 
 class Paziente():
-    def __init__(self, ruolo):
-        self.ruolo = ruolo
+    def __init__(self, session):
+        self.ruolo = session.status
+        self.utente = session.utente
+        #self.password = password
         self.controller = ControllerPaziente.get_instance()
+        self.controller.utente = self.utente 
+
 
     def registerInfo():
         return

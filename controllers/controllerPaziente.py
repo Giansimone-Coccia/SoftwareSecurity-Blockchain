@@ -10,6 +10,9 @@ class ControllerPaziente:
     def __init__(self):
 
         self.valoriHashContratto = []
+
+        self._utente = None
+        self._utente_inizializzato = False
         
         self.ut = Utilities()
         deploy = Deploy("PazienteContract.sol")
@@ -50,9 +53,20 @@ class ControllerPaziente:
             cls._instance = cls() #super().__new__(cls)
         return cls._instance
 
+    @property
+    def utente(self):
+        return self._utente
+
+    @utente.setter
+    def utente(self, value):
+        if not self._utente_inizializzato:
+            self._utente = value
+            self._utente_inizializzato = True
+        else:
+            raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
     def getVisitePaziente(self, CFMedico):
         try:
-            CFPaziente = self.database.ottieniDatiAuth()[1]['CF']
+            CFPaziente = self.utente[0]
             medici = self.database.ottieniDatiMedico(CFMedico)
             hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFMedico, CFPaziente).call()
             if medici:
@@ -79,7 +93,7 @@ class ControllerPaziente:
             print(f"Si è verificato un'errore: {e}")
     
     def mediciPresenti(self):
-        paziente_cf = self.database.ottieniDatiAuth()[1]['CF']
+        paziente_cf = self.utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFPaziente è uguale al Cf del paziente che ha fatto l'accesso
         return filter(lambda curato: curato[1] == paziente_cf, self.database.ottieniCurati())
 
