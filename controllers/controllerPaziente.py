@@ -1,4 +1,5 @@
 
+from controllers.controllerMedico import ControllerMedico
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -12,9 +13,12 @@ class ControllerPaziente:
         
         self.ut = Utilities()
         deploy = Deploy("PazienteContract.sol")
+        #deploy = Deploy("MedicoContract.sol")
+        #deploy = ControllerMedico().me
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         PazienteContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
+        #MedicoContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
         # Get the latest transaction
         self.nonce = self.w3.eth.get_transaction_count(self.my_address)
         # Submit the transaction that deploys the contract
@@ -37,6 +41,7 @@ class ControllerPaziente:
         #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
         # Working with deployed Contracts
+        #self.paziente_contract = ControllerMedico().medico_contract
         self.paziente_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
         # Attivo lo smart contract: "Cartella Clinica"
@@ -55,7 +60,7 @@ class ControllerPaziente:
         try:
             CFPaziente = self.database.ottieniDatiAuth()[1]['CF']
             medici = self.database.ottieniDatiMedico(CFMedico)
-            #hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
+            hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFMedico, CFPaziente).call()
             if medici:
                 for index, medico in enumerate(medici):
                     print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
@@ -64,14 +69,14 @@ class ControllerPaziente:
                     indice = 0
                     integrita_verificata = False
                     for visita in visite:
-                        #for hash_v in hash_visite:
-                            #if self.ut.check_integrity(hash_v, visita):
-                        print(f"{indice} - Dati: {visita[2]}")
-                        print(f"    Data e ora: {visita[3]}")
-                        print(f"    Tipo prestazione: {visita[4]}")
-                        print(f"    Luogo: {visita[5]}")
-                        indice += 1
-                        integrita_verificata = True
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"    Data e ora: {visita[3]}")
+                                print(f"    Tipo prestazione: {visita[4]}")
+                                print(f"    Luogo: {visita[5]}")
+                                indice += 1
+                                integrita_verificata = True
                     if not integrita_verificata:
                         print("Problemi con il controllo dell'integrità")
             else:

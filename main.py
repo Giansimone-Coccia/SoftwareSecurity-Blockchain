@@ -23,7 +23,11 @@ if __name__ == '__main__':
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
     ut = Utilities()
-    ut.resetHashBlockchain(controller)
+    #ut.resetHashBlockchain(controller)
+    ut._resetHashCartellaClinica(controller)
+    ut._resetHashFarmaci(controller)
+    ut._resetHashPatologie(controller)
+    ut._resetHashVisiteMedico(controllerP)
 
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
