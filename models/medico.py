@@ -28,7 +28,7 @@ class Medico:
             print("4. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(4))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -88,7 +88,6 @@ class Medico:
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
             print(f"{contatore}: ")
             print(f"{pazienteCurato}")
-            #print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:

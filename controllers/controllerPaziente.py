@@ -13,8 +13,6 @@ class ControllerPaziente:
         
         self.ut = Utilities()
         deploy = Deploy("PazienteContract.sol")
-        #deploy = Deploy("MedicoContract.sol")
-        #deploy = ControllerMedico().me
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         PazienteContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
@@ -41,14 +39,10 @@ class ControllerPaziente:
         #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
         # Working with deployed Contracts
-        #self.paziente_contract = ControllerMedico().medico_contract
         self.paziente_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
         # Attivo lo smart contract: "Cartella Clinica"
-        #self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
-        #self.ut.resetHashBlockchain(self)
-        #self.utilities = utilities.Utilities()
 
     @classmethod
     def get_instance(cls):
