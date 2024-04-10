@@ -30,7 +30,7 @@ class Paziente():
                 print("Arrivederci !")
                 sys.exit()
             elif scelta == "1":
-                #CFP = self.controller.database.ottieniDatiAuth[0]
+                #CFP = self.controller.database.ottieniDatiAuth[1]
                 medico = self._selectMedico()
                 tupla = medico[0]
                 self._visualizzaVisiteDelPaziente(tupla)
@@ -47,6 +47,7 @@ class Paziente():
         print("Seleziona un medico:")
         for contatore, medico in enumerate(medici, start=0):
             print(f"{contatore}: ")
+            #print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
             print(f"{medico}")
             #print(f"Premi {contatore} per selezionare il paziente {pazienteCurato[0][1]} {pazienteCurato[0][2]}")
         counter = len(medici) - 1

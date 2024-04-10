@@ -46,12 +46,10 @@ class Utilities:
         self._resetHashVisiteMedico(controller)
         self._resetHashPatologie(controller)
         
-
-
     def _resetHashCartellaClinica(self,controller):
         """Re-inserisco gli hash nella cartella clinica"""
         tuple_cartella_clinica = self._db.ottieniCartelle()
-        address = controller.w3.eth.accounts[0]       
+        address = controller.w3.eth.accounts[0]     
         for tupla in tuple_cartella_clinica:
             hash_tupla = self.hash_row(tupla)
             #print(f"Hash tupla salvata {hash_tupla}")
@@ -81,6 +79,14 @@ class Utilities:
         for tupla in tuplePatologie:
             hash_patologia = self.hash_row(tupla)
             controller.medico_contract.functions.storeHashPatologie(tupla[0], hash_patologia).transact({'from': address})
+
+    def _resetHashVisiteMedico(self,controller):
+        """Re-inserisco tutti gli hash riferiti alla tabella visitaMedico nella blockchain"""
+        tupleVisiteM = self._db.retrieve_all_rows("visitaMedico")
+        address = controller.w3.eth.accounts[0]   
+        for tupla in tupleVisiteM:
+            hash_visita = self.hash_row(tupla)
+            controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
 
 
         

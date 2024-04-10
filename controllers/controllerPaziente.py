@@ -1,4 +1,5 @@
 
+from controllers.controllerMedico import ControllerMedico
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -12,9 +13,12 @@ class ControllerPaziente:
         
         self.ut = Utilities()
         deploy = Deploy("PazienteContract.sol")
+        #deploy = Deploy("MedicoContract.sol")
+        #deploy = ControllerMedico().me
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         PazienteContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
+        #MedicoContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
         # Get the latest transaction
         self.nonce = self.w3.eth.get_transaction_count(self.my_address)
         # Submit the transaction that deploys the contract
@@ -37,6 +41,7 @@ class ControllerPaziente:
         #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
         # Working with deployed Contracts
+        #self.paziente_contract = ControllerMedico().medico_contract
         self.paziente_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
         # Attivo lo smart contract: "Cartella Clinica"
@@ -53,26 +58,25 @@ class ControllerPaziente:
 
     def getVisitePaziente(self, CFMedico):
         try:
-            CFPaziente = self.database.ottieniDatiAuth()[0]['CF']
+            CFPaziente = self.database.ottieniDatiAuth()[1]['CF']
             medici = self.database.ottieniDatiMedico(CFMedico)
-            #hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
+            hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFMedico, CFPaziente).call()
             if medici:
                 for index, medico in enumerate(medici):
                     print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
-                    visite = self.database.ottieniVisitePaziente(medico[0], CFPaziente)
+                    visite = self.database.ottieniVisitePaziente(CFPaziente, medico[0])
                     print(f"Elenco delle visite effettuate per il medico {medico[0]}")
                     indice = 0
                     integrita_verificata = False
                     for visita in visite:
-                        #for hash_v in hash_visite:
-                            #if self.ut.check_integrity(hash_v, visita):
-                        print(f"{indice} - Dati: {visita[2]}")
-                        print(f"    Data e ora: {visita[3]}")
-                        print(f"    Tipo prestazione: {visita[4]}")
-                        print(f"    Luogo: {visita[5]}")
-                        indice += 1
-                        integrita_verificata = True
-                        break
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"    Data e ora: {visita[3]}")
+                                print(f"    Tipo prestazione: {visita[4]}")
+                                print(f"    Luogo: {visita[5]}")
+                                indice += 1
+                                integrita_verificata = True
                     if not integrita_verificata:
                         print("Problemi con il controllo dell'integrità")
             else:
@@ -81,10 +85,10 @@ class ControllerPaziente:
             print(f"Si è verificato un'errore: {e}")
     
     def mediciPresenti(self):
-        paziente_cf = self.database.ottieniDatiAuth()[0]['CF']
+        paziente_cf = self.database.ottieniDatiAuth()[1]['CF']
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFPaziente è uguale al Cf del paziente che ha fatto l'accesso
-        return filter(lambda curato: curato[0] == paziente_cf, self.database.ottieniCurati())
+        return filter(lambda curato: curato[1] == paziente_cf, self.database.ottieniCurati())
 
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
-        return map(lambda medico: self.database.ottieniDatiMedico(medico[1]), self.mediciPresenti())
+        return map(lambda medico: self.database.ottieniDatiMedico(medico[0]), self.mediciPresenti())
