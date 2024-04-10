@@ -30,7 +30,7 @@ class Medico:
             print("4. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(5))):
+            while(scelta not in map(str, range(6))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):

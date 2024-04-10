@@ -64,6 +64,7 @@ class ControllerPaziente:
             self._utente_inizializzato = True
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
+        
     def getVisitePaziente(self, CFMedico):
         try:
             CFPaziente = self.utente[0]
@@ -100,3 +101,7 @@ class ControllerPaziente:
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
         return map(lambda medico: self.database.ottieniDatiMedico(medico[0]), self.mediciPresenti())
+    
+    def getCartellaClinica(self):
+        paziente_cf = self.utente[0]
+        return self.database.ottieniCartellaFromCF(paziente_cf)

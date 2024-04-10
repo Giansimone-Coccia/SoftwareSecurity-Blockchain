@@ -39,7 +39,7 @@ class Paziente():
                 tupla = medico[0]
                 self._visualizzaVisiteDelPaziente(tupla)
             elif scelta == "2":
-                pass
+               self._visualizzaCartellaClinica()
             elif scelta == "3":
                 pass
 
@@ -59,3 +59,15 @@ class Paziente():
         paziente_selezionato = medici[int(scelta)]
         print(paziente_selezionato)
         return paziente_selezionato[0]
+    
+    def _visualizzaCartellaClinica(self):
+        cartellaClinica = self.controller.getCartellaClinica()
+        print(f"Trattamento: {cartellaClinica[1]}")
+        print(f"Allergie: {cartellaClinica[0]}")
+        _loop = True
+        print("")
+        print("Menù")
+        while(_loop):
+            
+            print("0. Per visualizzare i farmaci")
+            print("1. Per visualizzare le parologie")
