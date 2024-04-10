@@ -224,7 +224,13 @@ class db:
          for utente in utenti:
               if(utente['Username'] == username and utente['Password'] == password):
                 return utente['Ruolo']
-              
+    
+    def ottieniCF(self,username,password):
+         utenti = self.ottieniDatiAuth()
+
+         for utente in utenti:
+              if(utente['Username'] == username and utente['Password'] == password):
+                return utente['CF']
 
     def addTupla(self, nomeTabella, *valori):
         try:
