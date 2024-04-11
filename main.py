@@ -2,10 +2,12 @@ import datetime
 import web3.eth
 
 from controllers.controllerMedico import ControllerMedico
+from controllers.controllerOS import ControllerOS
 from controllers.controllerPaziente import ControllerPaziente
 from controllers.utilities import Utilities
 from database.db import db
 from models.medico import Medico
+from models.operatoreSanitario import OperatoreSanitario
 from models.paziente import Paziente
 from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
@@ -22,6 +24,7 @@ if __name__ == '__main__':
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
+    controllerOS = ControllerOS.get_instance()
     ut = Utilities()
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
@@ -55,7 +58,8 @@ if __name__ == '__main__':
         medico.menuMedico()
     
     elif currentSession.status == "OperatoreSanitario":
-        pass
+        os = OperatoreSanitario(currentSession)
+        os.menuOS()
 
     elif currentSession.status == "Paziente":
         paziente = Paziente(currentSession)

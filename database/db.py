@@ -41,9 +41,7 @@ class db:
         rows = cursor.fetchall()
         # Stampa i valori decodificati per ogni tupla
         utenti = []
-        print(rows)
         for tupla in rows:
-            print(tupla)
             CF_decoded = tupla[0].decode('utf-8') if tupla[0] is not None else None
             Username_decoded = tupla[1].decode('utf-8') if tupla[1] is not None else None
             Password_decoded = tupla[2].decode('utf-8') if tupla[2] is not None else None
@@ -288,3 +286,25 @@ class db:
             # Chiudi il cursore
             cursor.close()
         return rows
+    
+    def updateCartellaClinica(self, CF, nuovo_trattamento):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'cartellaClinica'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per aggiornare il campo "Trattamento" per il paziente con il CF specificato
+            cursor.execute(f"UPDATE {table_name} SET Trattamento = %s WHERE CF = %s", (nuovo_trattamento, CF))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe aggiornate
+            num_rows_updated = cursor.rowcount
+            return num_rows_updated
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'aggiornamento della cartella clinica:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+
