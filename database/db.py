@@ -103,7 +103,6 @@ class db:
         cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s", (CF,))
         # Recupera tutte le tuple
         rows = cursor.fetchall()
-        print(rows)
         return rows
     
     def ottieniFarmaco(self, CF, nomeFarmaco):
@@ -184,18 +183,6 @@ class db:
         cursor = self.conn.cursor()
         # Esegui una query per selezionare solo le righe con il CF specificato
         cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
-        # Recupera le righe filtrate
-        rows = cursor.fetchall()
-        return rows
-    
-    def ottieniFarmaciPaziente(self, CF):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'farmaci'
-
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare solo le righe con il CF specificato
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
-
         # Recupera le righe filtrate
         rows = cursor.fetchall()
         return rows

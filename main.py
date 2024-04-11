@@ -25,7 +25,7 @@ if __name__ == '__main__':
     ut = Utilities()
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
-    ut._resetHashFarmaci(controller)
+    ut._resetHashFarmaci(controllerP)
     ut._resetHashPatologie(controller)
     ut._resetHashVisiteMedico(controllerP)
     ut._resetHashCartellaClinica(controllerP)

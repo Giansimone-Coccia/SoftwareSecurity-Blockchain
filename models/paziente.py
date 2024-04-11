@@ -10,7 +10,6 @@ class Paziente():
         self.controller = ControllerPaziente.get_instance()
         self.controller.utente = self.utente 
 
-
     def registerInfo():
         return
 
@@ -41,7 +40,7 @@ class Paziente():
             elif scelta == "2":
                self._visualizzaCartellaClinica()
             elif scelta == "3":
-                pass
+                self._visualizzaFarmaciPrescritti()
 
     def _visualizzaVisiteDelPaziente(self, CFMedico):
         self.controller.getVisitePaziente(CFMedico)
@@ -61,12 +60,7 @@ class Paziente():
         return paziente_selezionato[0]
     
     def _visualizzaCartellaClinica(self):
-        cartellaClinica = self.controller.getCartellaClinica()
-        """ print(f"Trattamento: {cartellaClinica[1]}")
-        print(f"Allergie: {cartellaClinica[2]}")
-        _loop = True
-        print("")
-        print("Menù")
-        while(_loop):
-            print("0. Per visualizzare i farmaci")
-            print("1. Per visualizzare le parologie") """
+        self.controller.getCartellaClinica()
+
+    def _visualizzaFarmaciPrescritti(self):
+        self.controller.getFarmaciPrescritti()

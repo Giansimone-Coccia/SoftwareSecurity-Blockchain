@@ -119,3 +119,25 @@ class ControllerPaziente:
                     print("Nessuna cartella clinica trovata con il codice fiscale specificato.")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
+
+    def getFarmaciPrescritti(self):
+        try:
+            paziente_cf = self.utente[0]
+            farmaci = self.database.ottieniFarmaci(paziente_cf)
+            hash_farmaci = self.paziente_contract.functions.retrieveHashFarmaco(paziente_cf).call()
+            integrita_verificata = False
+            contatore = 0
+            if farmaci:
+                print("Lista dei farmaci prescritti: ")
+                for farmaco in farmaci:
+                    for hash in hash_farmaci:
+                        if self.ut.check_integrity(hash, farmaco):
+                            print(f"{contatore} - {farmaco[1]} prescritto il {farmaco[2]}, dosaggio: {farmaco[3]}")
+                            integrita_verificata = True
+                            contatore += 1
+                if not integrita_verificata:
+                    print("Problemi con il controllo dell'integrità")
+            else:
+                print("Nessun farmaco trovato con il codice fiscale specificato.")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")

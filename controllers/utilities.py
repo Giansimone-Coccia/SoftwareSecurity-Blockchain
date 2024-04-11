@@ -39,12 +39,12 @@ class Utilities:
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 
-    def resetHashBlockchain(self, controller):
-        """"Questo metodo re-setta gli hash nella blockchain"""
+    """ def resetHashBlockchain(self, controller):
+        #Questo metodo re-setta gli hash nella blockchain. Da scartare questo metodo
         self._resetHashCartellaClinica(controller)
         self._resetHashFarmaci(controller)
         self._resetHashVisiteMedico(controller)
-        self._resetHashPatologie(controller)
+        self._resetHashPatologie(controller) """
         
     def _resetHashCartellaClinica(self,controller):
         """Re-inserisco gli hash nella cartella clinica"""
@@ -62,7 +62,7 @@ class Utilities:
         address = controller.w3.eth.accounts[0]   
         for tupla in tupleFarmaci:
             hash_farmaco = self.hash_row(tupla)
-            controller.medico_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+            controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
     
     def _resetHashVisiteMedico(self,controller):
         """Re-inserisco gli hash di tutte le visite-mediche effettuate nello smart contract"""
