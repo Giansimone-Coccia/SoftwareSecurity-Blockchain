@@ -103,5 +103,19 @@ class ControllerPaziente:
         return map(lambda medico: self.database.ottieniDatiMedico(medico[0]), self.mediciPresenti())
     
     def getCartellaClinica(self):
-        paziente_cf = self.utente[0]
-        return self.database.ottieniCartellaFromCF(paziente_cf)
+        try:
+            paziente_cf = self.utente[0]
+            cartella = self.database.ottieniCartellaFromCF(paziente_cf)
+            hash_cartella = self.paziente_contract.functions.retrieveHashCartellaClinica(paziente_cf).call()
+            integrita_verificata = False
+            if cartella:
+                if self.ut.check_integrity(hash_cartella, cartella):
+                    print(f"Trattamenti: {cartella[1]}")
+                    print(f"Patologie: {cartella[2]}")
+                    integrita_verificata = True
+                    if not integrita_verificata:
+                        print("Problemi con il controllo dell'integrità")
+                else:
+                    print("Nessuna cartella clinica trovata con il codice fiscale specificato.")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")

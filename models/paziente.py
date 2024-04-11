@@ -62,12 +62,11 @@ class Paziente():
     
     def _visualizzaCartellaClinica(self):
         cartellaClinica = self.controller.getCartellaClinica()
-        print(f"Trattamento: {cartellaClinica[1]}")
-        print(f"Allergie: {cartellaClinica[0]}")
+        """ print(f"Trattamento: {cartellaClinica[1]}")
+        print(f"Allergie: {cartellaClinica[2]}")
         _loop = True
         print("")
         print("Menù")
         while(_loop):
-            
             print("0. Per visualizzare i farmaci")
-            print("1. Per visualizzare le parologie")
+            print("1. Per visualizzare le parologie") """

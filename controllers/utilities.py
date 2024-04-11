@@ -23,7 +23,7 @@ class Utilities:
 
     #sql_row = [1, 'John', 'Doe', 'john.doe@example.com']
 
-    def check_integrity(self,blockchain_hash, to_check):
+    def check_integrity(self, blockchain_hash, to_check):
         """Prende in input l'hash nella blockchain e la tupla su cui fare il check
         Attenzione : il to_check è la tupla non l'hash della tupla """
         hash_to_check = self.hash_row(to_check)
@@ -54,7 +54,7 @@ class Utilities:
             hash_tupla = self.hash_row(tupla)
             #print(f"Hash tupla salvata {hash_tupla}")
             # Salvo nella blockchain
-            controller.medico_contract.functions.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
+            controller.paziente_contract.functions.storeHashCartellaClinica(tupla[0], hash_tupla).transact({'from': address})
     
     def _resetHashFarmaci(self,controller):
         """Re-inserisco gli hash di tutti i farmaci dei vari pazineti nello smart contract"""
@@ -83,7 +83,7 @@ class Utilities:
     def _resetHashVisiteMedico(self,controller):
         """Re-inserisco tutti gli hash riferiti alla tabella visitaMedico nella blockchain"""
         tupleVisiteM = self._db.retrieve_all_rows("visitaMedico")
-        address = controller.w3.eth.accounts[0]   
+        address = controller.w3.eth.accounts[0]
         for tupla in tupleVisiteM:
             hash_visita = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})

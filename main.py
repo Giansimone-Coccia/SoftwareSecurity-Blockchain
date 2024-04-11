@@ -24,10 +24,11 @@ if __name__ == '__main__':
     controllerP = ControllerPaziente.get_instance()
     ut = Utilities()
     #ut.resetHashBlockchain(controller)
-    ut._resetHashCartellaClinica(controller)
+    #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controller)
     ut._resetHashPatologie(controller)
     ut._resetHashVisiteMedico(controllerP)
+    ut._resetHashCartellaClinica(controllerP)
 
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
@@ -45,9 +46,9 @@ if __name__ == '__main__':
 
     currentSession = session()
     currentSession.eseguiAccesso()
-    print("Status utente: " + currentSession.status)
+    """ print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
-    print(currentSession.utente)
+    print(currentSession.utente) """
 
     if currentSession.status == "Medico":
         medico = Medico(currentSession)

@@ -3,7 +3,7 @@ pragma experimental ABIEncoderV2;
 
 contract PazienteContract {
 
-    mapping(string => string[]) public cartellaClinica;
+    mapping(string => string) public cartellaClinica;
     mapping(string => mapping(string => string[])) public visita;
 
 
@@ -12,8 +12,13 @@ contract PazienteContract {
         visita[_codiceFiscaleMedico][_codiceFiscalePaziente].push(_hashDati);
     }
 
+    // Funzione per memorizzare un hash nella mappatura
+    function storeHashCartellaClinica(string memory _codiceFiscalePaziente, string memory _hashDati) public {
+        cartellaClinica[_codiceFiscalePaziente] = _hashDati;
+    }
+
     // Funzione per recuperare l'hash per un determinato codice fiscale del paziente
-    function retrieveHashCartellaClinica(string memory _codiceFiscalePaziente) public view returns (string[] memory) {
+    function retrieveHashCartellaClinica(string memory _codiceFiscalePaziente) public view returns (string memory) {
         return cartellaClinica[_codiceFiscalePaziente];
     }
 
