@@ -57,24 +57,25 @@ class ControllerOS:
 
     @utente.setter
     def utente(self, value):
+        print(self._utente_inizializzato)
         if not self._utente_inizializzato:
             self._utente = value
             self._utente_inizializzato = True
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
         
-    """ def pazientiCurati(self):
-        print(f"yoylo {self.utente}")
-        medico_cf = self.utente[0]
+    def pazientiAssistiti(self):
+        os_cf = self._utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
-        return filter(lambda curato: curato[0] == medico_cf, self.database.ottieniCurati()) """
-        
+        return filter(lambda curato: curato[0] == os_cf, self.database.ottieniAssistiti())
+
     def datiPazientiCuratiOS(self):
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
-        return map(lambda assistito: self.database.ottieniDatiPaziente(assistito[1]))
+        return map(lambda assistito: self.database.ottieniDatiUtente('paziente', assistito[1]), self.pazientiAssistiti())
         
     def modificaDatiCartellaAssistito(self, CFPaziente):
         cartella = self.database.ottieniCartellaFromCF(CFPaziente)
+        print(cartella)
         print("Ok")
 
     

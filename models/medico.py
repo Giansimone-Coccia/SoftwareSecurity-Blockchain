@@ -95,7 +95,6 @@ class Medico:
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
         paziente_selezionato = pazienti_curati[int(scelta)]
-        print(paziente_selezionato)
         return paziente_selezionato[0]
 
     def _updateCartellaClinica(self, paziente):

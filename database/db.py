@@ -63,6 +63,16 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    def ottieniAssistiti(self):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'assistito'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name}")
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+    
     def ottieniCartelle(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
@@ -165,19 +175,9 @@ class db:
 
         return rows
     
-    def ottieniDatiPaziente(self, CF):
+    def ottieniDatiUtente(self, nomeTabella, CF):
         # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'paziente'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare solo le righe con il CF specificato
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
-        # Recupera le righe filtrate
-        rows = cursor.fetchall()
-        return rows
-    
-    def ottieniDatiMedico(self, CF):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'medico'
+        table_name = nomeTabella
         cursor = self.conn.cursor()
         # Esegui una query per selezionare solo le righe con il CF specificato
         cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))

@@ -44,8 +44,8 @@ class OperatoreSanitario():
         pazienti_curati = list(self.controller.datiPazientiCuratiOS())
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
-            print(f"{contatore}: ")
-            print(f"{pazienteCurato}")
+            print(f"{contatore}: {pazienteCurato[contatore-1][1]} {pazienteCurato[contatore-1][2]}, {pazienteCurato[contatore-1][3]}")
+            #print(f"{pazienteCurato}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:

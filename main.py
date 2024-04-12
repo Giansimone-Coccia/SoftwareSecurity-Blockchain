@@ -29,9 +29,12 @@ if __name__ == '__main__':
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controllerP)
+    ut._resetHashFarmaciM(controller)
     ut._resetHashPatologie(controller)
     ut._resetHashVisiteMedico(controllerP)
+    ut._resetHashVisiteMedicoM(controller)
     ut._resetHashCartellaClinica(controllerP)
+    ut._resetHashCartellaClinicaM(controller)
 
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 

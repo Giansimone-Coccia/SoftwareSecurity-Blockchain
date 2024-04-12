@@ -281,7 +281,7 @@ class ControllerMedico:
 
     def visualizzaRecordVisite(self, CFPaziente):
         try:
-            pazienti = self.database.ottieniDatiPaziente(CFPaziente)
+            pazienti = self.database.ottieniDatiUtente('paziente', CFPaziente)
             IdMedico = self.utente[0]
             hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
             if pazienti:
@@ -355,7 +355,7 @@ class ControllerMedico:
 
     def datiPazientiCurati(self):
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
-        return map(lambda pazienteCurato: self.database.ottieniDatiPaziente(pazienteCurato[1]), self.pazientiCurati())
+        return map(lambda pazienteCurato: self.database.ottieniDatiUtente('paziente', pazienteCurato[1]), self.pazientiCurati())
 
     def _get_cartella_clinica_from_CF(self,cf):
         try:

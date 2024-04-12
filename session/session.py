@@ -30,11 +30,11 @@ class session:
                 CF = istanzaDB.ottieniCF(email, password)
 
                 if self.status == "Medico":
-                    self.utente = istanzaDB.ottieniDatiMedico(CF)[0]
+                    self.utente = istanzaDB.ottieniDatiUtente('medico', CF)[0]
                 elif self.status == "OperatoreSanitario":
-                    pass
+                    self.utente = istanzaDB.ottieniDatiUtente('operatoreSanitario', CF)[0]
                 elif self.status == "Paziente":
-                    self.utente = istanzaDB.ottieniDatiPaziente(CF)[0]
+                    self.utente = istanzaDB.ottieniDatiUtente('paziente', CF)[0]
                 _isLogin = False
 
             else:

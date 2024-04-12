@@ -68,7 +68,7 @@ class ControllerPaziente:
     def getVisitePaziente(self, CFMedico):
         try:
             CFPaziente = self.utente[0]
-            medici = self.database.ottieniDatiMedico(CFMedico)
+            medici = self.database.ottieniDatiUtente('medico', CFMedico)
             hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFMedico, CFPaziente).call()
             if medici:
                 for index, medico in enumerate(medici):
@@ -100,7 +100,7 @@ class ControllerPaziente:
 
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
-        return map(lambda medico: self.database.ottieniDatiMedico(medico[0]), self.mediciPresenti())
+        return map(lambda medico: self.database.ottieniDatiUtente('medico', medico[0]), self.mediciPresenti())
     
     def getCartellaClinica(self):
         try:
