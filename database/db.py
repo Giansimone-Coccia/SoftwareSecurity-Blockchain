@@ -54,14 +54,18 @@ class db:
         return utenti
     
     def ottieniCurati(self):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'curato'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name}")
-        # Recupera tutte le tuple
-        rows = cursor.fetchall()
-        return rows
+        try:
+            # Nome della tabella da cui desideri recuperare i dati
+            table_name = 'curato'
+            cursor = self.conn.cursor()
+            # Esegui una query per selezionare tutti i dati dalla tabella specificata
+            cursor.execute(f"SELECT * FROM {table_name}")
+            # Recupera tutte le tuple
+            rows = cursor.fetchall()
+            return rows
+        except mysql.connector.Error as err:
+            print(f"ERRORE ! {err}")
+            return []
     
     def ottieniAssistiti(self):
         # Nome della tabella da cui desideri recuperare i dati

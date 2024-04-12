@@ -114,13 +114,11 @@ class ControllerMedico:
 
     
     def addCurato(self, CFpaziente):
-        cursor = self.database.conn.cursor()
 
         IdMedico = self.utente[0]
 
         if  not any((curato[0] == IdMedico and curato[1] ==CFpaziente )for curato in self.database.ottieniCurati()):
-            self.database.addTupla("curato",IdMedico,CFpaziente)
-            return True
+            return self.database.addTupla("curato",IdMedico,CFpaziente)
         else:
             return False
         
@@ -162,20 +160,26 @@ class ControllerMedico:
             return False
         
     def ottieniPatologiePaziente(self, CFpaziente):
-        cursor = self.database.conn.cursor()
-        #ganache_url = "HTTP://127.0.0.1:7545"
-        #web3 = Web3(Web3.HTTPProvider(ganache_url))
         patologielist = []
 
         patologie = self.database.ottieniPatologie(CFpaziente)
-        #address = web3.eth.accounts[0]
-        #blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
 
-        for patologia in patologie:
-            #for hash in blockchain_hash:
-            #if self.ut.check_integrity(hash, farmaco):
-            patologielist.append(patologia)
-        return patologielist
+        blockchain_hash = self.medico_contract.functions.retrieveHashPatologie(CFpaziente).call()
+
+        try:
+
+            for patologia in patologie:
+                _check = True
+                for hash in blockchain_hash:
+                    if self.ut.check_integrity(hash, patologia):
+                        patologielist.append(patologia)
+                        _check = False
+                if(_check):
+                    raise IntegrityCheckError("Integrità dati: patologie non rispettata !")
+            return patologielist
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+            return []
         
     def addCartellaClinica(self, CFpaziente):
         try:
@@ -294,9 +298,11 @@ class ControllerMedico:
                                 integrita_verificata = True
                                 break
                     if not integrita_verificata:
-                        print("Problemi con il controllo dell'integrità")
+                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
@@ -304,21 +310,26 @@ class ControllerMedico:
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
         e la blockchain"""
         # Ritorna una lista di hash di farmaci
-        hash_farmaco_blockchain = self.medico_contract.functions.retrieveHashFarmaco(tupla_farmaco[0]).call()
-        check = False
-        for hash_bc in hash_farmaco_blockchain:
-            if(self.ut.check_integrity(hash_bc, tupla_farmaco)):
-                check = True
-                break
-        #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
-        if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
-            address = self.w3.eth.accounts[0]
-            self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
-            print("Dosaggio del farmaco modificato correttamente")
-            return True
-        else:
-            print("Modifica non avvenuta")
-            return False
+        try:
+            hash_farmaco_blockchain = self.medico_contract.functions.retrieveHashFarmaco(tupla_farmaco[0]).call()
+            check = False
+            for hash_bc in hash_farmaco_blockchain:
+                if(self.ut.check_integrity(hash_bc, tupla_farmaco)):
+                    check = True
+                    break
+            #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
+            if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
+                address = self.w3.eth.accounts[0]
+                self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
+                print("Dosaggio del farmaco modificato correttamente")
+                return True
+            else:
+                if(check == False): 
+                    raise IntegrityCheckError("Integrità dati: farmaci non rispettata !")
+                
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        
     
     def modificaStatoPatologia(self, nuovoStato, tupla_patologia):
         try:
