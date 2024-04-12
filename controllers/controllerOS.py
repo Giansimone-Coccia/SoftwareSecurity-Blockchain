@@ -78,4 +78,7 @@ class ControllerOS:
         print(cartella)
         print("Ok")
 
-    
+    def aggiungiPrestazioneVisita(self, tuplaDaAggiungere):
+        """Questo metodo aggiunge una visita al db all'interno della tabella
+           visitaOperatore"""
+        return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    

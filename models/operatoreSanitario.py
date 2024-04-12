@@ -1,3 +1,4 @@
+import datetime
 import sys
 from controllers.controllerOS import ControllerOS
 
@@ -12,6 +13,7 @@ class OperatoreSanitario():
     def registerInfo():
         return
     
+    # TODO : Eliminare impostazioni superflue. l'OP può solo visualizzare e al più aggiungere una prestazione
     def menuOS(self):
         _loop = True
         print("Menù per " + self.ruolo)
@@ -34,7 +36,19 @@ class OperatoreSanitario():
                 tupla = lista[0]
                 self._modificaDatiCartellaClinicaAssistito(tupla)
             elif scelta == "2":
-               pass
+                lista = self._selectPaziente()
+                _cfPaziente = lista[0]
+                _statoSalute = input("Stato salute del paziente: ")
+                _prestazione = input("Insersci la prestazione effettuata: ")
+                _luogoPrestazione = input("Inserisci il luogo: ")
+                _dataVisita = datetime.datetime.now()
+                _cfOpSanitario = self.utente[0]
+                _toAdd = [_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione]
+                
+                if(self._aggiungiVisita(_toAdd)):
+                    print("Prestazione aggiunta correttamente !")
+                else:
+                    print("Prestazione NON aggiunta")
             elif scelta == "3":
                 pass
             elif scelta == "4":
@@ -56,3 +70,6 @@ class OperatoreSanitario():
 
     def _modificaDatiCartellaClinicaAssistito(self,  CFPaziente):
         self.controller.modificaDatiCartellaAssistito(CFPaziente)
+    
+    def _aggiungiVisita(self, toAdd):
+        return self.controller.aggiungiPrestazioneVisita(toAdd)

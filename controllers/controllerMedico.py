@@ -35,6 +35,11 @@ class ControllerMedico:
                 "nonce": self.nonce,
             }
         )
+
+        current_nonce = self.w3.eth.get_transaction_count(self.my_address)
+        if transaction["nonce"] != current_nonce:
+            transaction["nonce"] = current_nonce
+
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
         #print("Deploying Contract!")
