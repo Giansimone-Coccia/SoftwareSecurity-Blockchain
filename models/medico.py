@@ -105,6 +105,8 @@ class Medico:
         print("4. Per inserire una patologia")
         print("5. Per modificare le patologie")
 
+        self._verificaPazienteHaveCartella(paziente)
+
         option = input("Digitare la scelta: ")
         print(option)
 
@@ -215,3 +217,8 @@ class Medico:
             print("* Data visita: " + visita["data"] )
             print("* Luogo visita: " + visita["luogo"] )
             print("***********************************")
+
+    def _verificaPazienteHaveCartella(self, CFpaziente):
+        """Questo metodo verifica se il paziente selezionato dispone di una 
+           cartella clinica, in caso contrario, ne crea una ed aggiorna la blockchain"""
+        self.controller.pazienteHaveCartella(CFpaziente)

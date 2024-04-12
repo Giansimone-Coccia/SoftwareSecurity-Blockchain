@@ -1,3 +1,4 @@
+import datetime
 from web3 import Web3
 import json
 
@@ -36,9 +37,9 @@ class ControllerMedico:
             }
         )
 
-        current_nonce = self.w3.eth.get_transaction_count(self.my_address)
-        if transaction["nonce"] != current_nonce:
-            transaction["nonce"] = current_nonce
+        # current_nonce = self.w3.eth.get_transaction_count(self.my_address)
+        # if transaction["nonce"] != current_nonce:
+        #     transaction["nonce"] = current_nonce
 
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
@@ -129,31 +130,17 @@ class ControllerMedico:
             
             
             # Chiama il metodo addTupla di db.py per inserire la nuova patologia
-            inserimento_riuscito_db = self.database.addTupla("patologie", *patologia)
+            _statusTransactionDb = self.database.addTupla("patologie", *patologia)
+            # Aggiungo la transazione al db
+            address = self.w3.eth.accounts[0]
+            _tuple = self.database.retrieve_all_rows("patologie")
+            for tupla in _tuple:
+                if tupla[0] == IdCartellaClinica:
+                    self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                    break
+
+            return _statusTransactionDb
             
-            
-            if(inserimento_riuscito_db):
-                # La inserisco nella blockchain, nessun check di integrità tanto è nuova la patologia
-                all_patologie = self.ottieniPatologiePaziente(IdCartellaClinica)
-                for tupla_patologia in all_patologie:
-                    if(tupla_patologia[1]==NomePatologia):
-                        address = self.w3.eth.accounts[0]
-                        self.medico_contract.functions.storeHashPatologie(IdCartellaClinica, self.ut.hash_row(tupla_patologia)).transact({'from': address})
-                        return inserimento_riuscito_db
-
-
-            # """IN PIU"""
-            # listaPatologieDB = self.database.retrieve_all_rows("patologie")
-            # for patologiaa in listaPatologieDB:
-            #     print(f"HASH DAL DB = {self.ut.hash_row(patologiaa)}")
-            # print("***********************************************")
-            # listaPatologieBlockchain = self.medico_contract.functions.retrieveHashPatologie("CFPaziente2").call()
-            # for pt in listaPatologieBlockchain:
-            #     print(f"HASH BLOCKCHAIN = {pt}")
-            # """in piu """
-
-            # Restituisci True se l'inserimento è riuscito, False altrimenti
-            #return inserimento_riuscito_db
             
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
@@ -174,6 +161,7 @@ class ControllerMedico:
                     if self.ut.check_integrity(hash, patologia):
                         patologielist.append(patologia)
                         _check = False
+                        break
                 if(_check):
                     raise IntegrityCheckError("Integrità dati: patologie non rispettata !")
             return patologielist
@@ -378,6 +366,16 @@ class ControllerMedico:
         contenuto = event_filter[0]['args']['content']
 
         return contenuto
+    
+    def pazienteHaveCartella(self, CFpaziente):
+        """Questo metodo verifica se il paziente ha la cartella clinica, in caso contrario
+            ne crea una di default ed aggiorna la blockchain ed il database."""
+        allCartelle = self.database.retrieve_all_rows("cartellaClinica")
+        if(not any(tupla[0] == CFpaziente for tupla in allCartelle)):
+            self.database.addTupla("cartellaClinica", CFpaziente, "NESSUN TRATTAMENTO", "NESSUNA ALLERGIA")
+            hash = self.ut.hash_row(self.database.ottieniCartellaFromCF(CFpaziente))
+            address = self.w3.eth.accounts[0]
+            self.medico_contract.functions.storeHashCartellaClinica(CFpaziente,hash).transact({'from': address})
     
 
     
