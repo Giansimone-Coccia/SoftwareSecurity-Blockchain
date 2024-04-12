@@ -12,8 +12,8 @@ class Medico:
         self.controller.utente = self.utente 
 
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
-        receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
-        return receipt
+        status = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
+        return status
 
     def _addCurato(self, cf_paziente):
         receipt = self.controller.addCurato(cf_paziente)

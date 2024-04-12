@@ -90,29 +90,16 @@ class ControllerMedico:
            
             
             # Chiamata al contratto medico per memorizzare l'hash
-            greeting_transaction = self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).build_transaction(
-                {
-                    "chainId": self.chain_id,
-                    "gasPrice": self.w3.eth.gas_price,
-                    "from": self.my_address,
-                    "nonce": self.nonce + 1,
-                }
-            )
-            
-            signed_greeting_txn = self.w3.eth.account.sign_transaction(
-                greeting_transaction, private_key=self.private_key
-            )
-            tx_greeting_hash = self.w3.eth.send_raw_transaction(signed_greeting_txn.rawTransaction)
-
-            tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
-            self.nonce += 1
+            self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
             
             # Ottieni e restituisci le visite mediche del paziente
             visite = self.getVisiteMedico(CFpaziente)
-            return visite
+            return True
         
         except Exception as e:
             print("Errore durante l'aggiunta della visita medica:", e)
+            return False
+        
 
 
     def getVisiteMedico(self, CFpaziente):
