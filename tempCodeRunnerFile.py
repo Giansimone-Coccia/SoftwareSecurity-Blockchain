@@ -1,1 +1,1 @@
-pass
+#ut.resetHashBlockchain(controller)

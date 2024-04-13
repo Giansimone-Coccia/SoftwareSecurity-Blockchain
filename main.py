@@ -1,11 +1,14 @@
 import datetime
-
 import web3.eth
 
-
 from controllers.controllerMedico import ControllerMedico
+from controllers.controllerOS import ControllerOS
+from controllers.controllerPaziente import ControllerPaziente
+from controllers.utilities import Utilities
 from database.db import db
 from models.medico import Medico
+from models.operatoreSanitario import OperatoreSanitario
+from models.paziente import Paziente
 from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
@@ -17,7 +20,23 @@ Inoltre, importare mysql per l'utilizzo del DB """
 
 
 if __name__ == '__main__':
-        
+    
+    # Re-set blockchain:
+    controller = ControllerMedico.get_instance()
+    controllerP = ControllerPaziente.get_instance()
+    controllerOS = ControllerOS.get_instance()
+    ut = Utilities()
+    #ut.resetHashBlockchain(controller)
+    #ut._resetHashCartellaClinica(controller)
+    ut._resetHashFarmaci(controllerP)
+    ut._resetHashFarmaciM(controller)
+    ut._resetHashPatologie(controller)
+    ut._resetHashVisiteMedico(controllerP)
+    ut._resetHashVisiteMedicoM(controller)
+    ut._resetHashCartellaClinica(controllerP)
+    ut._resetHashCartellaClinicaM(controller)
+
+    #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
     istanzaDB = db()
@@ -33,16 +52,19 @@ if __name__ == '__main__':
 
     currentSession = session()
     currentSession.eseguiAccesso()
-    print("Status utente: " + currentSession.status)
+    """ print("Status utente: " + currentSession.status)
     print(currentSession.email + " " + currentSession.password)
+    print(currentSession.utente) """
 
     if currentSession.status == "Medico":
-        medico = Medico(currentSession.status)
+        medico = Medico(currentSession)
         medico.menuMedico()
     
     elif currentSession.status == "OperatoreSanitario":
-        pass
+        os = OperatoreSanitario(currentSession)
+        os.menuOS()
 
     elif currentSession.status == "Paziente":
-        pass
+        paziente = Paziente(currentSession)
+        paziente.menuPaziente()
   
