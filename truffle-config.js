@@ -9,4 +9,16 @@
       },
       // Puoi aggiungere altre reti qui, ad esempio reti di testnet o mainnet
     },
+    compilers: {
+      solc: {
+        version: "0.6.0",    // Versione del compilatore Solidity da utilizzare
+        settings: {
+          optimizer: {
+            enabled: false,   // Abilita l'ottimizzazione dei contratti (default: false)
+            runs: 200,        // Numero di iterazioni per l'ottimizzazione (default: 200)
+          },
+        },
+      },
+    },
+  };
   

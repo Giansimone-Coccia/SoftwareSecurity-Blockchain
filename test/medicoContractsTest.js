@@ -53,4 +53,13 @@ contract("MedicoContract", (accounts) => {
   });
 
   it("should store and retrieve patologie hash correctly", async () => {
-    co
+    const idCartellaClinica = "idCartellaClinica";
+    const hashDati = "hashDatiPatologie";
+
+    await medicoContractInstance.storeHashPatologie(idCartellaClinica, hashDati);
+    const retrievedHashes = await medicoContractInstance.retrieveHashPatologie(idCartellaClinica);
+
+    assert.equal(retrievedHashes.length, 1, "Il numero di hash memorizzati non è corretto");
+    assert.equal(retrievedHashes[0], hashDati, "L'hash recuperato non corrisponde all'hash memorizzato");
+  });
+});
