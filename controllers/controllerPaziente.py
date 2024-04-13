@@ -183,5 +183,19 @@ class ControllerPaziente(Ilog):
                 break
         # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
-
+        medici = self.database.ottieniMedici()
+        print("Seleziona con quale medico vuoi metterti in cura: ")
+        contatore = 0
+        medico_scelto = 0
+        for medico in medici:
+            print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
+            contatore +=1
+        counter = len(medici) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+            medico_scelto = scelta
         self.database.addNuovoPaziente(cf, nome, cognome, residenza)
+        m = medici[medico_scelto]
+        cf_medico = m[0]
+        self.database.addNuovoCurato(cf, cf_medico)

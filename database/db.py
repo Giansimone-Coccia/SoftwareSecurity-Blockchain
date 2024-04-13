@@ -353,3 +353,56 @@ class db(Ilog):
             # Chiudi il cursore
             cursor.close()
 
+    def addNuovoPaziente(self, cf, nome, cognome, residenza):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'paziente'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CF, Nome, Cognome, Residenza) VALUES (%s, %s, %s, %s)", (cf, nome, cognome, residenza))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            print("Paziente registrato con successo")
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati del paziente:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+
+    def ottieniMedici(self):
+        table_name = 'medico'
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(f"SELECT * FROM {table_name}")
+                result = cursor.fetchall()  # Ottieni tutte le righe risultanti dalla query
+                return result
+        except Exception as e:
+            print("Si è verificato un errore durante l'ottenimento dei dati dal database:", e)
+            return None  # Ritorna None in caso di errore
+
+    def addNuovoCurato(self, CFPaziente, CFMedico):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'curato'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CFMedico, CFPaziente) VALUES (%s, %s)", (CFMedico, CFPaziente))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati nel database:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
