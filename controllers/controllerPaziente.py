@@ -73,7 +73,7 @@ class ControllerPaziente:
             if medici:
                 for index, medico in enumerate(medici):
                     print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
-                    visite = self.database.ottieniVisitePaziente(CFPaziente, medico[0])
+                    visite = self.database.ottieniVisiteMedico(CFPaziente, medico[0])
                     print(f"Elenco delle visite effettuate per il medico {medico[0]}")
                     indice = 0
                     integrita_verificata = False

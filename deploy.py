@@ -59,8 +59,8 @@ class Deploy:
         w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
         chain_id = 1337
 
-        my_address = "0xa0f9693007786187250e8Cfe8fc7b633efEcac3f"
-        private_key = "0x75364a5803ce3c658b8a1866785ae4675e998f33a3d0dcb5031de27db1d72c57"
+        my_address = ""
+        private_key = ""
 
         with open('address_key.txt', 'r') as file:
             my_address = file.read().split()[0]

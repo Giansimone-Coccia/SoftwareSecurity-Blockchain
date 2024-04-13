@@ -1,3 +1,4 @@
+from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -66,7 +67,7 @@ class ControllerOS:
         
     def pazientiAssistiti(self):
         os_cf = self._utente[0]
-        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
+        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFOperatore è uguale al Cf dell'operatore che ha fatto l'accesso
         return filter(lambda curato: curato[0] == os_cf, self.database.ottieniAssistiti())
 
     def datiPazientiCuratiOS(self):
@@ -82,3 +83,41 @@ class ControllerOS:
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
         return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
+    
+    def visualizzaRecordVisite(self, CFPaziente):
+        try:
+            pazienti = self.database.ottieniDatiUtente('paziente', CFPaziente)
+            IdOS = self.utente[0]
+            hash_visite = self.os_contract.functions.retrieveHashVisita(IdOS, CFPaziente).call()
+            if pazienti:
+                for index, paziente in enumerate(pazienti):
+                    print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
+                    visite = self.database.ottieniVisisteOS(paziente[0], IdOS)
+                    print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
+                    indice = 0
+                    integrita_verificata = False
+                    for visita in visite:
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"    Data e ora: {visita[3]}")
+                                print(f"    Tipo prestazione: {visita[4]}")
+                                print(f"    Luogo: {visita[5]}")
+                                indice += 1
+                                integrita_verificata = True
+                                break
+                    if not integrita_verificata:
+                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
+    def addAssistito(self, CFpaziente):
+        IdOperatore = self.utente[0]
+
+        if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
+            return self.database.addTupla("assistito",IdOperatore,CFpaziente)
+        else:
+            return False
