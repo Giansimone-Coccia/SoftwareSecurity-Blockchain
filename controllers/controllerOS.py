@@ -1,13 +1,18 @@
+import logging
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
+from interface.Ilog import Ilog
 
 
-class ControllerOS:
+class ControllerOS(Ilog):
 
     _instance = None
     def __init__(self):
+
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
         self.valoriHashContratto = []
 
         self._utente = None
@@ -65,25 +70,37 @@ class ControllerOS:
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
         
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Utente: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+        
+    @log_actions
     def pazientiAssistiti(self):
         os_cf = self._utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFOperatore è uguale al Cf dell'operatore che ha fatto l'accesso
         return filter(lambda curato: curato[0] == os_cf, self.database.ottieniAssistiti())
 
+    @log_actions
     def datiPazientiCuratiOS(self):
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
         return map(lambda assistito: self.database.ottieniDatiUtente('paziente', assistito[1]), self.pazientiAssistiti())
-        
+
+    @log_actions  
     def modificaDatiCartellaAssistito(self, CFPaziente):
         cartella = self.database.ottieniCartellaFromCF(CFPaziente)
         print(cartella)
         print("Ok")
 
+    @log_actions
     def aggiungiPrestazioneVisita(self, tuplaDaAggiungere):
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
         return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
     
+    @log_actions
     def getRecordVisite(self, CFPaziente):
         vistePaziente = []
         try:
@@ -101,9 +118,10 @@ class ControllerOS:
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 vistePaziente.append(visita)
+                                print(visita)
                                 integrita_verificata = True
                                 break
-                    if not integrita_verificata:
+                    if not integrita_verificata and visite:
                         raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
@@ -112,6 +130,8 @@ class ControllerOS:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
         return vistePaziente
+    
+    @log_actions
     def addAssistito(self, CFpaziente):
         IdOperatore = self.utente[0]
 
