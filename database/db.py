@@ -6,7 +6,9 @@ from cryptography.hazmat.backends import default_backend
 from datetime import datetime
 
 
-class db:
+from interface.Ilog import Ilog
+
+class db(Ilog):
 
     def __init__(self):
         # Parametri di connessione al database
@@ -126,16 +128,6 @@ class db:
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
-    
-    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'visitaOperatore'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
-        # Recupera tutte le tuple
-        rows = cursor.fetchall()
-        return rows
 
     @log_actions
     def ottieniFarmaci(self, CF):
@@ -233,6 +225,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def ottieniCartellaClinicaPaziente(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'caretllaClinica'
@@ -406,3 +399,35 @@ class db:
             print("Visita eliminata con successo.")
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
+
+    def ottieniMedici(self):
+        table_name = 'medico'
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(f"SELECT * FROM {table_name}")
+                result = cursor.fetchall()  # Ottieni tutte le righe risultanti dalla query
+                return result
+        except Exception as e:
+            print("Si è verificato un errore durante l'ottenimento dei dati dal database:", e)
+            return None  # Ritorna None in caso di errore
+
+    def addNuovoCurato(self, CFPaziente, CFMedico):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'curato'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CFMedico, CFPaziente) VALUES (%s, %s)", (CFMedico, CFPaziente))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati nel database:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()

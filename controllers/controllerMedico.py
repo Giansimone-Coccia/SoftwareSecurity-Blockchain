@@ -11,7 +11,9 @@ from database.db import db
 from deploy import Deploy
 import hashlib
 
-class ControllerMedico:
+from interface.Ilog import Ilog
+
+class ControllerMedico(Ilog):
 
     _instance = None
     def __init__(self):
@@ -220,7 +222,14 @@ class ControllerMedico:
         for cartella in cartelle:
             #print(f"Hash tupla blockchain: {self._get_cartella_clinica_from_CF(CFpaziente)}")
             #print(f"Hash tuola database: {self.ut.hash_row(cartella)}")
-            if cartella[0] == CFpaziente and self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella):
+            _check_integrity = self.ut.check_integrity(self._get_cartella_clinica_from_CF(CFpaziente), cartella)
+            if cartella[0] == CFpaziente:
+                try:
+                    if(_check_integrity==False):
+                        raise IntegrityCheckError("ERRORE ! Integrità nella cartella clinica non rispettata")
+                except IntegrityCheckError as err:
+                    print(err)
+                    return False
 
                 update_query = f"""
                     UPDATE cartellaClinica
@@ -235,7 +244,6 @@ class ControllerMedico:
                 self.valoriHashContratto.append(tx_hash)
                 print(f"Aggiornamento di {nomeCampo} con successo.")
                 return True
-        return False
     
     @log_actions
     def ottieniFarmacoPaziente(self, CFpaziente):
@@ -248,11 +256,19 @@ class ControllerMedico:
         address = web3.eth.accounts[0]
         blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
 
-        for farmaco in farmaci:
-            for hash in blockchain_hash:
-                if self.ut.check_integrity(hash, farmaco):
-                    medicinali.append(farmaco)
-        return medicinali
+        try:
+            for farmaco in farmaci:
+                _check = True
+                for hash in blockchain_hash:
+                    if self.ut.check_integrity(hash, farmaco):
+                        medicinali.append(farmaco)
+                        _check = False
+                if(_check):
+                    raise IntegrityCheckError("ERRORE ! Integrità visualizzazione farmaci compromessa")
+            return medicinali
+        except IntegrityCheckError as err:
+            print(err)
+            return []
 
     @log_actions               
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
