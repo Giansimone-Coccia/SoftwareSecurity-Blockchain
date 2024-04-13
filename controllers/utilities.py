@@ -112,7 +112,7 @@ class Utilities:
         address = controller.w3.eth.accounts[0]
         for tupla in tupleVisiteO:
             hash_visita = self.hash_row(tupla)
-            controller.OS_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
+            controller.os_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
 
 
         
