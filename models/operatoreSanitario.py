@@ -19,10 +19,9 @@ class OperatoreSanitario():
         print("Menù per " + self.ruolo)
         while(_loop):
             print("0. Per uscire dal programma")
-            print("1. Per modificare alcuni dati della cartella clinica di un paziente")
-            print("2. Per inserire una visita presso un paziente")
-            print("3. Per modificare una visita inserita")
-            print("4. Per aggiungere un paziente come assistito")
+            print("1. Per inserire una visita presso un paziente")
+            print("2. Per modificare una visita inserita")
+            print("3. Per aggiungere un paziente come assistito")
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(5))):
@@ -32,10 +31,6 @@ class OperatoreSanitario():
                 print("Arrivederci !")
                 sys.exit()
             elif scelta == "1":
-                lista = self._selectPaziente()
-                tupla = lista[0]
-                self._modificaDatiCartellaClinicaAssistito(tupla)
-            elif scelta == "2":
                 lista = self._selectPaziente()
                 _cfPaziente = lista[0]
                 _statoSalute = input("Stato salute del paziente: ")
@@ -49,9 +44,9 @@ class OperatoreSanitario():
                     print("Prestazione aggiunta correttamente !")
                 else:
                     print("Prestazione NON aggiunta")
-            elif scelta == "3":
+            elif scelta == "2":
                 pass
-            elif scelta == "4":
+            elif scelta == "3":
                 pass
 
     def _selectPaziente(self):

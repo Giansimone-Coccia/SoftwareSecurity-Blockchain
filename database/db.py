@@ -198,15 +198,15 @@ class db:
         rows = cursor.fetchall()
         return rows
     
-    def ottieniDatiVisite(self, CFMedico):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'caretllaClinica'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare solo le righe con il CF specificato
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
-        # Recupera le righe filtrate
-        rows = cursor.fetchall()
-        return rows
+    # def ottieniDatiVisite(self, CFMedico):
+    #     # Nome della tabella da cui desideri recuperare i dati
+    #     table_name = 'caretllaClinica'
+    #     cursor = self.conn.cursor()
+    #     # Esegui una query per selezionare solo le righe con il CF specificato
+    #     cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
+    #     # Recupera le righe filtrate
+    #     rows = cursor.fetchall()
+    #     return rows
 
     def gestisciAccesso(self,username,password):
         utenti = self.ottieniDatiAuth()
