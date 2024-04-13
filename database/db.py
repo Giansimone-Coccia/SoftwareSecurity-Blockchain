@@ -1,4 +1,5 @@
 
+import logging
 import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -7,6 +8,8 @@ class db:
 
     def __init__(self):
         # Parametri di connessione al database
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
         config = {
             'user': 'progettoss',
             'password': 'Blockchain@!456',
@@ -15,6 +18,8 @@ class db:
             'port': '3306',
             'raise_on_warnings': True  # Opzionale, solleva un'eccezione su avvisi MySQL
         }
+
+        self.port = config['port']
 
         self.key = 'Lvs5RZsgOSmB7y5R5lF1v5xFy5Z9S0Xr' # Chiave da usare anche nel db 
 
@@ -31,6 +36,14 @@ class db:
             if 'conn' in locals() and self.conn.is_connected():
                 self.conn.close()
     
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Porta: {self.port}")
+            return func(self, *args, **kwargs)
+        return wrapper
+    
+    @log_actions
     def ottieniDatiAuth(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'autenticazione'
@@ -53,6 +66,7 @@ class db:
 
         return utenti
     
+    @log_actions
     def ottieniCurati(self):
         try:
             # Nome della tabella da cui desideri recuperare i dati
@@ -67,6 +81,7 @@ class db:
             print(f"ERRORE ! {err}")
             return []
     
+    @log_actions
     def ottieniAssistiti(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'assistito'
@@ -77,6 +92,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def ottieniCartelle(self):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
@@ -87,6 +103,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def ottieniCartellaFromCF(self,cf):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
@@ -97,7 +114,8 @@ class db:
         rows = cursor.fetchall()
         return rows[0]
     
-    def ottieniVisiteMedico(self, CFPaziente, CFMedico):
+    @log_actions
+    def ottieniVisitePaziente(self, CFPaziente, CFMedico):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaMedico'
         cursor = self.conn.cursor()
@@ -117,6 +135,7 @@ class db:
         rows = cursor.fetchall()
         return rows
 
+    @log_actions
     def ottieniFarmaci(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
@@ -127,6 +146,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def ottieniFarmaco(self, CF, nomeFarmaco):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
@@ -137,6 +157,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def modificaDosaggiofarmaco(self, CF, nomeFarmaco, dosaggio):
         try:
             # Nome della tabella da cui desideri recuperare i dati
@@ -156,6 +177,7 @@ class db:
             print("Errore durante la modifica del dosaggio del farmaco:", e)
             return False
     
+    @log_actions
     def modificaStatoPatologia(self, CF, nomePatologia, stato):
         try:
             # Nome della tabella da cui desideri recuperare i dati
@@ -184,7 +206,7 @@ class db:
             print("Errore durante la modifica dello stato della patologia:", e)
             return ()
 
-    
+    @log_actions
     def ottieniPatologie(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'patologie'
@@ -198,6 +220,7 @@ class db:
 
         return rows
     
+    @log_actions
     def ottieniDatiUtente(self, nomeTabella, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = nomeTabella
@@ -208,16 +231,17 @@ class db:
         rows = cursor.fetchall()
         return rows
     
-    # def ottieniDatiVisite(self, CFMedico):
-    #     # Nome della tabella da cui desideri recuperare i dati
-    #     table_name = 'caretllaClinica'
-    #     cursor = self.conn.cursor()
-    #     # Esegui una query per selezionare solo le righe con il CF specificato
-    #     cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
-    #     # Recupera le righe filtrate
-    #     rows = cursor.fetchall()
-    #     return rows
+    def ottieniCartellaClinicaPaziente(self, CF):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'caretllaClinica'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare solo le righe con il CF specificato
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
+        # Recupera le righe filtrate
+        rows = cursor.fetchall()
+        return rows
 
+    @log_actions
     def gestisciAccesso(self,username,password):
         utenti = self.ottieniDatiAuth()
         for u in utenti:
@@ -226,6 +250,7 @@ class db:
         
         return False
     
+    @log_actions
     def ottieniProfessione(self,username,password):
          utenti = self.ottieniDatiAuth()
 
@@ -233,6 +258,7 @@ class db:
               if(utente['Username'] == username and utente['Password'] == password):
                 return utente['Ruolo']
     
+    @log_actions
     def ottieniCF(self,username,password):
          utenti = self.ottieniDatiAuth()
 
@@ -240,6 +266,7 @@ class db:
               if(utente['Username'] == username and utente['Password'] == password):
                 return utente['CF']
 
+    @log_actions
     def addTupla(self, nomeTabella, *valori):
         try:
             # Crea un cursore dalla connessione al database
@@ -264,7 +291,7 @@ class db:
             # Chiudi il cursore
             cursor.close()
 
-
+    @log_actions
     def fromValueToId(self, nomeTabella, input_value):
         try:
             # Crea un cursore dalla connessione al database
@@ -286,6 +313,7 @@ class db:
             # Chiudi il cursore
             cursor.close()
 
+    @log_actions
     def retrieve_all_rows(self,table_name):
         """
         Metodo per recuperare tutte le tuple da una tabella nel database.
@@ -310,6 +338,7 @@ class db:
             cursor.close()
         return rows
     
+    @log_actions
     def updateCartellaClinica(self, CF, nuovo_trattamento):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
