@@ -10,14 +10,6 @@ class Medico:
         #self.password = password
         self.controller = ControllerMedico.get_instance()
         self.controller.utente = self.utente 
-
-    def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
-        status = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
-        return status
-
-    def _addCurato(self, cf_paziente):
-        receipt = self.controller.addCurato(cf_paziente)
-        return receipt
         
     def menuMedico(self):
         _loop = True
@@ -48,7 +40,7 @@ class Medico:
             elif(scelta == "2"):
                 lista = self._selectPaziente()
                 tupla = lista[0]
-                self._visualizzaVisitaFromNomePaziente(tupla)
+                self.controller.visualizzaRecordVisite(tupla)
 
             elif(scelta == "3"):
                 if(self._addNewCurato() == True):
@@ -73,15 +65,15 @@ class Medico:
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
         print(cf_paziente)
-        ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
+        ricevuta = self.controller.addVisitaMedica(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
         return True
     
     def _addNewCurato(self):
         cf_paziente = input("Inserisci il codice fiscale del paziente: ")
-        ricevuta = self._addCurato(cf_paziente)
+        ricevuta = self.controller.addCurato(cf_paziente)
         while(ricevuta != True):
             cf_paziente = input("Inserisci il codice fiscale del paziente:")
-            ricevuta = self._addCurato(cf_paziente)
+            ricevuta = self.controller.addCurato(cf_paziente)
         return ricevuta
     
     def _selectPaziente(self):
@@ -196,10 +188,7 @@ class Medico:
                     return False
             
         
-        return
-
-    def _visualizzaVisitaFromNomePaziente(self, CFP):
-        return self.controller.visualizzaRecordVisite(CFP)    
+        return  
         
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()

@@ -67,7 +67,7 @@ class ControllerOS:
         
     def pazientiAssistiti(self):
         os_cf = self._utente[0]
-        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
+        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFOperatore è uguale al Cf dell'operatore che ha fatto l'accesso
         return filter(lambda curato: curato[0] == os_cf, self.database.ottieniAssistiti())
 
     def datiPazientiCuratiOS(self):
@@ -114,3 +114,10 @@ class ControllerOS:
             print(f"ERRORE ! {e}")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
+    def addAssistito(self, CFpaziente):
+        IdOperatore = self.utente[0]
+
+        if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
+            return self.database.addTupla("assistito",IdOperatore,CFpaziente)
+        else:
+            return False

@@ -49,7 +49,12 @@ class OperatoreSanitario():
                 tupla = lista[0]
                 self._selectVisitaPaziente(tupla)
             elif scelta == "3":
-                pass
+                if(self._addNewAssistito() == True):
+                    print("Paziente correttamente salvato come assistito !")
+                    print("")
+                else:
+                    print("Paziente non salvato, prego riprovare")
+                    print("")
 
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCuratiOS())
@@ -73,3 +78,11 @@ class OperatoreSanitario():
 
     def _selectVisitaPaziente(self, CFPaziente):
         return self.controller.visualizzaRecordVisite(CFPaziente)    
+    
+    def _addNewAssistito(self,):
+        cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")
+        ricevuta = self.controller.addAssistito(cf_paziente)
+        while(ricevuta != True):
+            cf_paziente = input("Inserisci il codice fiscale dell'assistito:")
+            ricevuta = self.controller.addAssistito(cf_paziente)
+        return ricevuta
