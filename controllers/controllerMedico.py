@@ -135,7 +135,7 @@ class ControllerMedico:
             address = self.w3.eth.accounts[0]
             _tuple = self.database.retrieve_all_rows("patologie")
             for tupla in _tuple:
-                if tupla[0] == IdCartellaClinica:
+                if tupla[0] == IdCartellaClinica and tupla[1] == NomePatologia:
                     self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
                     break
 
@@ -157,11 +157,9 @@ class ControllerMedico:
 
             for patologia in patologie:
                 _check = True
-                for hash in blockchain_hash:
-                    if self.ut.check_integrity(hash, patologia):
-                        patologielist.append(patologia)
-                        _check = False
-                        break
+                if self.ut.hash_row(patologia) in blockchain_hash:
+                    patologielist.append(patologia)
+                    _check = False
                 if(_check):
                     raise IntegrityCheckError("Integrità dati: patologie non rispettata !")
             return patologielist
@@ -327,9 +325,9 @@ class ControllerMedico:
                     all_tuple_blockchain = self.medico_contract.functions.retrieveHashPatologie(tupla[0]).call()
                     for tupla_blockchain in all_tuple_blockchain:
                         if(self.ut.check_integrity(tupla_blockchain,tupla)):
-                            self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
+                            _nuovaTupla = self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
                             address = self.w3.eth.accounts[0]
-                            self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                            self.medico_contract.functions.storeHashPatologie(_nuovaTupla[0],self.ut.hash_row(_nuovaTupla)).transact({'from': address})
                             print("HASH CORRETTAMENTE SALVATO IN BLOCKCHAIN !")
                             return True
                     raise IntegrityCheckError("Integrità dati PATOLOGIE non rispettata")

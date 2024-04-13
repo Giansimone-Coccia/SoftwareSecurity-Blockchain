@@ -187,7 +187,7 @@ class Medico:
                         print("Risposta non valida. Inserisci 'SI' o 'NO'.")
             
                 try:
-                    patologia_da_modificare = patologie[int(inCorso)][1]
+                    patologia_da_modificare = patologie[int(da_modificare)][1]
                     print(f"patologia da modificare {patologia_da_modificare}")
                     insert = self.controller.modificaStatoPatologia(inCorso, patologie[int(da_modificare)])
                     return insert
