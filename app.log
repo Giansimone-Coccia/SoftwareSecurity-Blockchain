@@ -1,0 +1,52 @@
+2024-04-13 16:23:08,262 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:23:09,147 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:23:09,738 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:23:24,848 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:26,430 - INFO - Medico: Chiamato _selectPaziente , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:26,430 - INFO - ControllerMedico: Chiamato datiPazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:26,430 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:28,939 - INFO - Medico: Chiamato _updateCartellaClinica , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:28,942 - INFO - Medico: Chiamato _verificaPazienteHaveCartella , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:28,942 - INFO - ControllerMedico: Chiamato pazienteHaveCartella , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:23:41,131 - INFO - ControllerMedico: Chiamato addFarmaco , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:30:16,865 - ERROR - IntegrityCheckError: Integrita on rispettata
+2024-04-13 16:30:16,872 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:30:22,594 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:30:23,430 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:30:40,689 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:41:50,287 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:41:51,059 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:41:51,651 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-13 16:41:52,129 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:41:52,691 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:41:53,211 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:41:55,118 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:41:56,237 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:41:57,485 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 16:41:57,818 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 16:41:58,679 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 16:42:08,072 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 16:42:08,072 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 16:42:08,164 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 16:42:08,164 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 16:42:08,251 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 16:42:08,252 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 16:42:08,339 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:42:08,464 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:19,319 - INFO - Medico: Chiamato _selectPaziente , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:19,319 - INFO - ControllerMedico: Chiamato datiPazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:19,319 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:19,320 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-13 16:45:19,411 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:45:19,521 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:45:19,609 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:45:19,697 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:45:19,785 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 16:45:24,104 - INFO - Medico: Chiamato _updateCartellaClinica , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:24,108 - INFO - Medico: Chiamato _verificaPazienteHaveCartella , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:24,108 - INFO - ControllerMedico: Chiamato pazienteHaveCartella , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:24,108 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 16:45:27,045 - INFO - ControllerMedico: Chiamato ottieniFarmacoPaziente , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:27,090 - INFO - db: Chiamato ottieniFarmaci , Porta: 3306
+2024-04-13 16:45:31,291 - INFO - ControllerMedico: Chiamato modificaDoseFarmaco , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-13 16:45:31,308 - INFO - db: Chiamato modificaDosaggiofarmaco , Porta: 3306

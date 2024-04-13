@@ -1,6 +1,7 @@
 import datetime
 import web3.eth
 
+from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.controllerOS import ControllerOS
 from controllers.controllerPaziente import ControllerPaziente
@@ -12,6 +13,7 @@ from models.paziente import Paziente
 from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
+import logging
 
 # Press the green button in the gutter to run the script.
 
@@ -20,7 +22,8 @@ Inoltre, importare mysql per l'utilizzo del DB """
 
 
 if __name__ == '__main__':
-    
+
+
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()

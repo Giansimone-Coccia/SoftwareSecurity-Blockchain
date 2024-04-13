@@ -1,4 +1,5 @@
 import datetime
+import logging
 import sys
 from controllers.controllerMedico import ControllerMedico
 
@@ -9,16 +10,30 @@ class Medico:
         self.utente = session.utente
         #self.password = password
         self.controller = ControllerMedico.get_instance()
-        self.controller.utente = self.utente 
+        self.controller.utente = self.utente
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    # Configura il logger
+    
 
+    
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Operatore: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+
+    @log_actions
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
         status = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
         return status
-
+    
+    @log_actions
     def _addCurato(self, cf_paziente):
         receipt = self.controller.addCurato(cf_paziente)
         return receipt
-        
+    
+    @log_actions
     def menuMedico(self):
         _loop = True
         print("Menù per " + self.ruolo)
@@ -66,6 +81,7 @@ class Medico:
                     print("Cartella clinica non aggiornata correttamente")
                     print("")
 
+    @log_actions
     def _addNewVisita(self):
         data_ora_visita = datetime.datetime.now()
         cf_paziente = self._selectPaziente()[0]
@@ -76,6 +92,7 @@ class Medico:
         ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
         return True
     
+    @log_actions
     def _addNewCurato(self):
         cf_paziente = input("Inserisci il codice fiscale del paziente: ")
         ricevuta = self._addCurato(cf_paziente)
@@ -84,6 +101,7 @@ class Medico:
             ricevuta = self._addCurato(cf_paziente)
         return ricevuta
     
+    @log_actions
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCurati())
         print("Seleziona un paziente:")
@@ -97,6 +115,7 @@ class Medico:
         paziente_selezionato = pazienti_curati[int(scelta)]
         return paziente_selezionato[0]
 
+    @log_actions
     def _updateCartellaClinica(self, paziente):
         print("0. Per modificare le allergie")
         print("1. Per modificare i trattamenti")
@@ -135,6 +154,9 @@ class Medico:
         
         elif option == "3":
             farmaci = self.controller.ottieniFarmacoPaziente(paziente)
+            if(len(farmaci)==0):
+                print("Nessun farmaco presente")
+                return False
             for index, farmaco in enumerate(farmaci):
                 print(f"{index}: {farmaco}")
             da_modificare = input("Scegli il farmaco da modificare: ")
@@ -198,12 +220,15 @@ class Medico:
         
         return
 
+    @log_actions
     def _visualizzaVisitaFromNomePaziente(self, CFP):
         return self.controller.visualizzaRecordVisite(CFP)    
-        
+
+    @log_actions  
     def _visualizzaTutteVisiteMediche(self):
         return self.controller.visualizzaTuttiRecordMedici()
  
+    @log_actions
     def _formattaVisita(self, listVisiteMediche):
         for visita in listVisiteMediche:
             print("***********************************")
@@ -218,6 +243,7 @@ class Medico:
             print("* Luogo visita: " + visita["luogo"] )
             print("***********************************")
 
+    @log_actions
     def _verificaPazienteHaveCartella(self, CFpaziente):
         """Questo metodo verifica se il paziente selezionato dispone di una 
            cartella clinica, in caso contrario, ne crea una ed aggiorna la blockchain"""

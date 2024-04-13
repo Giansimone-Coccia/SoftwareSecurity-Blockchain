@@ -20,7 +20,7 @@ class OperatoreSanitario():
         while(_loop):
             print("0. Per uscire dal programma")
             print("1. Per modificare alcuni dati della cartella clinica di un paziente")
-            print("2. Per inserire una visita presso un paziente")
+            print("2. Per inserire una visita presso un paziente") 
             print("3. Per modificare una visita inserita")
             print("4. Per aggiungere un paziente come assistito")
 

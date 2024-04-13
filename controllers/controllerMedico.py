@@ -1,4 +1,5 @@
 import datetime
+import logging
 from web3 import Web3
 import json
 
@@ -14,6 +15,8 @@ class ControllerMedico:
 
     _instance = None
     def __init__(self):
+
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
         self.valoriHashContratto = []
 
@@ -77,7 +80,15 @@ class ControllerMedico:
             self._utente_inizializzato = True
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
+    
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Operatore: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
 
+    @log_actions
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
         IdMedico = self.utente[0]
         nome_tabella = "visitaMedico"
@@ -102,7 +113,7 @@ class ControllerMedico:
             return False
         
 
-
+    @log_actions
     def getVisiteMedico(self, CFpaziente):
         # Ottieni l'ID del medico
         CFMedico = self.utente[0]
@@ -113,7 +124,7 @@ class ControllerMedico:
         # Converti i risultati ottenuti direttamente in una struttura comprensibile
         return visite
 
-    
+    @log_actions
     def addCurato(self, CFpaziente):
 
         IdMedico = self.utente[0]
@@ -122,7 +133,8 @@ class ControllerMedico:
             return self.database.addTupla("curato",IdMedico,CFpaziente)
         else:
             return False
-        
+
+    @log_actions 
     def addPatologia(self, IdCartellaClinica, NomePatologia, DataDiagnosi, InCorso):
         try:
             # Costruisci la tupla dei valori da inserire
@@ -145,7 +157,8 @@ class ControllerMedico:
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
             return False
-        
+
+    @log_actions   
     def ottieniPatologiePaziente(self, CFpaziente):
         patologielist = []
 
@@ -166,7 +179,8 @@ class ControllerMedico:
         except IntegrityCheckError as e:
             print(f"ERRORE ! {e}")
             return []
-        
+
+    @log_actions    
     def addCartellaClinica(self, CFpaziente):
         try:
             # Verifica se esiste già una cartella clinica per il paziente
@@ -195,6 +209,7 @@ class ControllerMedico:
             print("Errore durante l'aggiunta della cartella clinica:", e)
             return False
 
+    @log_actions
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
         ganache_url = "HTTP://127.0.0.1:7545"
@@ -222,6 +237,7 @@ class ControllerMedico:
                 return True
         return False
     
+    @log_actions
     def ottieniFarmacoPaziente(self, CFpaziente):
         cursor = self.database.conn.cursor()
         ganache_url = "HTTP://127.0.0.1:7545"
@@ -238,7 +254,7 @@ class ControllerMedico:
                     medicinali.append(farmaco)
         return medicinali
 
-                    
+    @log_actions               
     def addFarmaco(self, IdCartellaClinica, NomeFarmaco, DataPrescrizione, Dosaggio):
         try:
             # Verifica se esiste già un farmaco con lo stesso nome nella cartella clinica specificata
@@ -260,7 +276,8 @@ class ControllerMedico:
         except Exception as e:
             print("Errore durante l'aggiunta del farmaco:", e)
             return False
-
+    
+    @log_actions
     def visualizzaRecordVisite(self, CFPaziente):
         try:
             pazienti = self.database.ottieniDatiUtente('paziente', CFPaziente)
@@ -292,6 +309,7 @@ class ControllerMedico:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
+    @log_actions
     def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
         e la blockchain"""
@@ -316,7 +334,7 @@ class ControllerMedico:
         except IntegrityCheckError as e:
             print(f"ERRORE ! {e}")
         
-    
+    @log_actions
     def modificaStatoPatologia(self, nuovoStato, tupla_patologia):
         try:
             all_patologie = self.ottieniPatologiePaziente(tupla_patologia[0])
@@ -335,17 +353,20 @@ class ControllerMedico:
         except IntegrityCheckError as e:
             print(e)
             return False
-        
+   
+    @log_actions   
     def pazientiCurati(self):
         print(f"yoylo {self.utente}")
         medico_cf = self.utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
         return filter(lambda curato: curato[0] == medico_cf, self.database.ottieniCurati())
 
+    @log_actions
     def datiPazientiCurati(self):
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
         return map(lambda pazienteCurato: self.database.ottieniDatiUtente('paziente', pazienteCurato[1]), self.pazientiCurati())
 
+    @log_actions
     def _get_cartella_clinica_from_CF(self,cf):
         try:
             # Chiama la funzione retrieveHash del contratto
@@ -355,6 +376,7 @@ class ControllerMedico:
             print(f"Errore durante il recupero degli hash: {e}")
             return None
         
+    @log_actions   
     def visualizza_contenuto_contratto(self,contratto, tx_receipt):
         # Ottieni l'evento 'ContentSet' dal contratto
         event = contratto.events.ContentSet()
@@ -365,6 +387,7 @@ class ControllerMedico:
 
         return contenuto
     
+    @log_actions
     def pazienteHaveCartella(self, CFpaziente):
         """Questo metodo verifica se il paziente ha la cartella clinica, in caso contrario
             ne crea una di default ed aggiorna la blockchain ed il database."""
