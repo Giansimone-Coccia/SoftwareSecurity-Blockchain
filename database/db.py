@@ -97,12 +97,22 @@ class db:
         rows = cursor.fetchall()
         return rows[0]
     
-    def ottieniVisitePaziente(self, CFPaziente, CFMedico):
+    def ottieniVisiteMedico(self, CFPaziente, CFMedico):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaMedico'
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
         cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+    
+    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
