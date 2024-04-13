@@ -128,6 +128,30 @@ class db(Ilog):
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
+    
+    @log_actions
+    def ottieniVisiteMedico(self, CFPaziente, CFMedico):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaMedico'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+    
+    @log_actions
+    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+
+
 
     @log_actions
     def ottieniFarmaci(self, CF):
@@ -355,6 +379,7 @@ class db(Ilog):
             # Chiudi il cursore
             cursor.close()
 
+    @log_actions
     def addNuovoPaziente(self, cf, nome, cognome, residenza):
         # Nome della tabella in cui inserire i nuovi dati
         table_name = 'paziente'
@@ -377,6 +402,7 @@ class db(Ilog):
             # Chiudi il cursore
             cursor.close()
     
+    @log_actions
     def eliminaVisitaOS(self, visita):
         table_name = 'visitaOperatore'
         cursor = self.conn.cursor()
@@ -400,6 +426,7 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
 
+    @log_actions
     def ottieniMedici(self):
         table_name = 'medico'
         try:
@@ -411,6 +438,7 @@ class db(Ilog):
             print("Si è verificato un errore durante l'ottenimento dei dati dal database:", e)
             return None  # Ritorna None in caso di errore
 
+    @log_actions
     def addNuovoCurato(self, CFPaziente, CFMedico):
         # Nome della tabella in cui inserire i nuovi dati
         table_name = 'curato'

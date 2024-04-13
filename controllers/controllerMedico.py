@@ -94,7 +94,7 @@ class ControllerMedico(Ilog):
     def addVisitaMedica(self, DataOra, CFpaziente, TipoPrestazione, Dati, Luogo):
         IdMedico = self.utente[0]
         nome_tabella = "visitaMedico"
-        lista_dati = [CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo]
+        lista_dati = (CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo)
         
         try:
             self.database.addTupla(nome_tabella, *lista_dati)
