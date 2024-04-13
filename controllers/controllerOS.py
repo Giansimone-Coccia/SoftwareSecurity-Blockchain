@@ -101,9 +101,10 @@ class ControllerOS:
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 vistePaziente.append(visita)
+                                print(visita)
                                 integrita_verificata = True
                                 break
-                    if not integrita_verificata:
+                    if not integrita_verificata and visite:
                         raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")

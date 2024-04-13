@@ -76,7 +76,7 @@ class OperatoreSanitario():
     def _selectVisitaPaziente(self, CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
-            print(f"{contatore}: {visita[0][2]} {visita[0][3]}, {visita[0][4]} , {visita[0][5]}")
+            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
             #print(f"{pazienteCurato}")
         counter = len(visite) - 1
         scelta = input("Digitare la scelta: ")
