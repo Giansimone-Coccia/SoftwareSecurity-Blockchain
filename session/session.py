@@ -66,4 +66,3 @@ class session:
             print("")
 
     def _getMaxiAccessi(self): return 5
-            
