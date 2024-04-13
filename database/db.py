@@ -331,3 +331,24 @@ class db:
             # Chiudi il cursore
             cursor.close()
 
+    def addNuovoPaziente(self, cf, nome, cognome, residenza):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'paziente'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CF, Nome, Cognome, Residenza) VALUES (%s, %s, %s, %s)", (cf, nome, cognome, residenza))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            print("Paziente registrato con successo")
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati del paziente:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
