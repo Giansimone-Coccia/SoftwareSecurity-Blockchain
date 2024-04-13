@@ -85,28 +85,35 @@ class OperatoreSanitario():
             scelta = input("Scelta errata, digitare nuovamente: ")
         visita_selezionata = visite[int(scelta)]
         print(visita_selezionata)
-        return visita_selezionata[0]
+        return visita_selezionata
 
     def _modificaVisitaPaziente(self, visita):
         _loop = True
         while(_loop):
             print("0. Per modificare i dati")
-            print("1. Per modificare la data")
-            print("2. Per modificare il tipo di prestazione")
-            print("3. Per modificare il luogo")
+            print("1. Per modificare il tipo di prestazione")
+            print("2. Per modificare il luogo")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(4))):
+            while(scelta not in map(str, range(3))):
                 scelta = input("Digitare la scelta: ")
 
             if scelta == "0":
                 nuovi_dati = input("Digita i nuovi dati:")
+                self.controller.eliminaPrestazioneVisita(visita)
+                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],nuovi_dati, visita[3], visita[4], visita[5]))
+                _loop = False
             elif scelta == "1":
-                nuova_data = input("Digita la nuova data:")
-            elif scelta == "2":
+                self.controller.eliminaPrestazioneVisita(visita)
                 nuova_prestazione = input("Digita la nuova prestazione:")
-            elif scelta == "3":
+                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],visita[2], visita[3], nuova_prestazione , visita[5]))
+                _loop = False
+            elif scelta == "2":
+                self.controller.eliminaPrestazioneVisita(visita)
                 nuovo_luogo = input("Digita il nuovo luogo:")
+                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo))
+                _loop = False
+
 
     
     def _addNewAssistito(self,):

@@ -84,6 +84,10 @@ class ControllerOS:
            visitaOperatore"""
         return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
     
+    def eliminaPrestazioneVisita(self, visita):
+        
+        return self.database.eliminaVisitaOS(visita) 
+    
     def getRecordVisite(self, CFPaziente):
         vistePaziente = []
         try:
@@ -113,6 +117,7 @@ class ControllerOS:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
         return vistePaziente
+    
     def addAssistito(self, CFpaziente):
         IdOperatore = self.utente[0]
 
