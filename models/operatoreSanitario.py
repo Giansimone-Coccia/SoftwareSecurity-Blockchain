@@ -24,7 +24,7 @@ class OperatoreSanitario():
             print("3. Per aggiungere un paziente come assistito")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(5))):
+            while(scelta not in map(str, range(4))):
                 scelta = input("Digitare la scelta: ")
 
             if scelta == "0":
@@ -47,7 +47,8 @@ class OperatoreSanitario():
             elif scelta == "2":
                 lista = self._selectPaziente()
                 tupla = lista[0]
-                self._selectVisitaPaziente(tupla)
+                visita = self._selectVisitaPaziente(tupla)
+                self._modificaVisitaPaziente(visita)
             elif scelta == "3":
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
@@ -85,6 +86,28 @@ class OperatoreSanitario():
         visita_selezionata = visite[int(scelta)]
         print(visita_selezionata)
         return visita_selezionata[0]
+
+    def _modificaVisitaPaziente(self, visita):
+        _loop = True
+        while(_loop):
+            print("0. Per modificare i dati")
+            print("1. Per modificare la data")
+            print("2. Per modificare il tipo di prestazione")
+            print("3. Per modificare il luogo")
+
+            scelta = input("Digitare la scelta: ")
+            while(scelta not in map(str, range(4))):
+                scelta = input("Digitare la scelta: ")
+
+            if scelta == "0":
+                nuovi_dati = input("Digita i nuovi dati:")
+            elif scelta == "1":
+                nuova_data = input("Digita la nuova data:")
+            elif scelta == "2":
+                nuova_prestazione = input("Digita la nuova prestazione:")
+            elif scelta == "3":
+                nuovo_luogo = input("Digita il nuovo luogo:")
+
     
     def _addNewAssistito(self,):
         cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")
