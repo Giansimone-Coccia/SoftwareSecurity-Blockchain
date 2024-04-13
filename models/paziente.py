@@ -1,21 +1,35 @@
+import logging
 import sys
 
 from controllers.controllerPaziente import ControllerPaziente
+from interface.Ilog import Ilog
 
-class Paziente():
+class Paziente(Ilog):
     def __init__(self, session):
         self.ruolo = session.status
         self.utente = session.utente
         #self.password = password
         self.controller = ControllerPaziente.get_instance()
-        self.controller.utente = self.utente 
+        self.controller.utente = self.utente
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Utente: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+
+    @log_actions
     def registerInfo():
         return
 
+    @log_actions
     def accessData():
         return
 
+    @log_actions
     def menuPaziente(self):
         _loop = True
         print("Menù per " + self.ruolo)
@@ -42,9 +56,11 @@ class Paziente():
             elif scelta == "3":
                 self._visualizzaFarmaciPrescritti()
 
+    @log_actions
     def _visualizzaVisiteDelPaziente(self, CFMedico):
         self.controller.getVisitePaziente(CFMedico)
 
+    @log_actions
     def _selectMedico(self):
         medici = list(self.controller.datiMedici())
         print("Seleziona un medico:")
@@ -59,8 +75,10 @@ class Paziente():
         print(paziente_selezionato)
         return paziente_selezionato[0]
     
+    @log_actions
     def _visualizzaCartellaClinica(self):
         self.controller.getCartellaClinica()
 
+    @log_actions
     def _visualizzaFarmaciPrescritti(self):
         self.controller.getFarmaciPrescritti()

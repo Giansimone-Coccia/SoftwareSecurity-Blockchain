@@ -4,7 +4,9 @@ import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
-class db:
+from interface.Ilog import Ilog
+
+class db(Ilog):
 
     def __init__(self):
         # Parametri di connessione al database
@@ -124,16 +126,6 @@ class db:
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
-    
-    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'visitaOperatore'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
-        # Recupera tutte le tuple
-        rows = cursor.fetchall()
-        return rows
 
     @log_actions
     def ottieniFarmaci(self, CF):
@@ -231,6 +223,7 @@ class db:
         rows = cursor.fetchall()
         return rows
     
+    @log_actions
     def ottieniCartellaClinicaPaziente(self, CF):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'caretllaClinica'
@@ -360,24 +353,3 @@ class db:
             # Chiudi il cursore
             cursor.close()
 
-    def addNuovoPaziente(self, cf, nome, cognome, residenza):
-        # Nome della tabella in cui inserire i nuovi dati
-        table_name = 'paziente'
-        cursor = self.conn.cursor()
-        try:
-            # Esegui una query per inserire i nuovi dati nella tabella paziente
-            cursor.execute(f"INSERT INTO {table_name} (CF, Nome, Cognome, Residenza) VALUES (%s, %s, %s, %s)", (cf, nome, cognome, residenza))
-            # Conferma la transazione
-            self.conn.commit()
-            # Ottieni il numero di righe inserite
-            num_rows_inserted = cursor.rowcount
-            print("Paziente registrato con successo")
-            return num_rows_inserted
-        except Exception as e:
-            # Annulla eventuali modifiche in caso di errore
-            self.conn.rollback()
-            print("Si è verificato un errore durante l'inserimento dei dati del paziente:", e)
-            return 0
-        finally:
-            # Chiudi il cursore
-            cursor.close()

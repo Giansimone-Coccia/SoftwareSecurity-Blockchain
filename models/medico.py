@@ -2,8 +2,9 @@ import datetime
 import logging
 import sys
 from controllers.controllerMedico import ControllerMedico
+from interface.Ilog import Ilog
 
-class Medico:
+class Medico(Ilog):
     
     def __init__(self, session):
         self.ruolo = session.status

@@ -11,7 +11,9 @@ from database.db import db
 from deploy import Deploy
 import hashlib
 
-class ControllerMedico:
+from interface.Ilog import Ilog
+
+class ControllerMedico(Ilog):
 
     _instance = None
     def __init__(self):

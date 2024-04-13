@@ -1,19 +1,30 @@
 import datetime
+import logging
 import sys
 from controllers.controllerOS import ControllerOS
+from interface.Ilog import Ilog
 
-class OperatoreSanitario():
+class OperatoreSanitario(Ilog):
     def __init__(self, session):
         self.ruolo = session.status
         self.utente = session.utente
         self.controller = ControllerOS.get_instance()
-        self.controller.utente = self.utente 
+        self.controller.utente = self.utente
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Utente: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+    
     #deve inserire solo informazioni sullo stato di salute del paziente
+    @log_actions
     def registerInfo():
         return
     
-    # TODO : Eliminare impostazioni superflue. l'OP può solo visualizzare e al più aggiungere una prestazione
+    @log_actions
     def menuOS(self):
         _loop = True
         print("Menù per " + self.ruolo)
@@ -56,6 +67,7 @@ class OperatoreSanitario():
                     print("Paziente non salvato, prego riprovare")
                     print("")
 
+    @log_actions
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCuratiOS())
         print("Seleziona un paziente:")
@@ -70,9 +82,11 @@ class OperatoreSanitario():
         print(paziente_selezionato)
         return paziente_selezionato[0]
     
+    @log_actions
     def _aggiungiVisita(self, toAdd):
         return self.controller.aggiungiPrestazioneVisita(toAdd)
 
+    @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
@@ -86,6 +100,7 @@ class OperatoreSanitario():
         print(visita_selezionata)
         return visita_selezionata[0]
     
+    @log_actions
     def _addNewAssistito(self,):
         cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")
         ricevuta = self.controller.addAssistito(cf_paziente)
