@@ -1,0 +1,1304 @@
+{
+  "contractName": "OSContract",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "visita",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_codiceFiscaleMedico",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_codiceFiscalePaziente",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_hashDati",
+          "type": "string"
+        }
+      ],
+      "name": "storeHashVisita",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_codiceFiscaleMedico",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_codiceFiscalePaziente",
+          "type": "string"
+        }
+      ],
+      "name": "retrieveHashVisita",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_codiceFiscaleMedico\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_codiceFiscalePaziente\",\"type\":\"string\"}],\"name\":\"retrieveHashVisita\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_codiceFiscaleMedico\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_codiceFiscalePaziente\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_hashDati\",\"type\":\"string\"}],\"name\":\"storeHashVisita\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"visita\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/solidityContracts/OSContract.sol\":\"OSContract\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/solidityContracts/OSContract.sol\":{\"keccak256\":\"0x53d80d8976d994c25685d056fca03429fd1a3a9c7a7b4f1429a1fd0ed03a5b89\",\"urls\":[\"bzz-raw://4c819c336f9af353815d1b0a2a78d6c127c17db151835fedc5297573e862e79f\",\"dweb:/ipfs/QmTh8bp7TsxDp9gWmBdGj2gSCYRg5ZLTNJ6Qfpb2t3qyAR\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610973806100206000396000f3fe608060405234801561001057600080fd5b50600436106100405760003560e01c806296c47e1461004557806311df4560146100755780638dee3d1014610091575b600080fd5b61005f600480360361005a91908101906104bf565b6100c1565b60405161006c9190610784565b60405180910390f35b61008f600480360361008a919081019061052b565b6101e5565b005b6100ab60048036036100a691908101906105c2565b61025e565b6040516100b891906107a6565b60405180910390f35b60606000836040516100d3919061076d565b9081526020016040518091039020826040516100ef919061076d565b9081526020016040518091039020805480602002602001604051908101604052809291908181526020016000905b828210156101d9578382906000526020600020018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101c55780601f1061019a576101008083540402835291602001916101c5565b820191906000526020600020905b8154815290600101906020018083116101a857829003601f168201915b50505050508152602001906001019061011d565b50505050905092915050565b6000836040516101f5919061076d565b908152602001604051809103902082604051610211919061076d565b90815260200160405180910390208190806001815401808255809150506001900390600052602060002001600090919091909150908051906020019061025892919061035d565b50505050565b6000838051602081018201805184825260208301602085012081835280955050505050508280516020810182018051848252602083016020850120818352809550505050505081815481106102af57fe5b9060005260206000200160009250925050508054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103555780601f1061032a57610100808354040283529160200191610355565b820191906000526020600020905b81548152906001019060200180831161033857829003601f168201915b505050505081565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061039e57805160ff19168380011785556103cc565b828001600101855582156103cc579182015b828111156103cb5782518255916020019190600101906103b0565b5b5090506103d991906103dd565b5090565b6103ff91905b808211156103fb5760008160009055506001016103e3565b5090565b90565b600082601f83011261041357600080fd5b8135610426610421826107f5565b6107c8565b9150808252602083016020830185838301111561044257600080fd5b61044d8382846108d3565b50505092915050565b600082601f83011261046757600080fd5b813561047a61047582610821565b6107c8565b9150808252602083016020830185838301111561049657600080fd5b6104a18382846108d3565b50505092915050565b6000813590506104b981610926565b92915050565b600080604083850312156104d257600080fd5b600083013567ffffffffffffffff8111156104ec57600080fd5b6104f885828601610456565b925050602083013567ffffffffffffffff81111561051557600080fd5b61052185828601610456565b9150509250929050565b60008060006060848603121561054057600080fd5b600084013567ffffffffffffffff81111561055a57600080fd5b61056686828701610456565b935050602084013567ffffffffffffffff81111561058357600080fd5b61058f86828701610456565b925050604084013567ffffffffffffffff8111156105ac57600080fd5b6105b886828701610456565b9150509250925092565b6000806000606084860312156105d757600080fd5b600084013567ffffffffffffffff8111156105f157600080fd5b6105fd86828701610402565b935050602084013567ffffffffffffffff81111561061a57600080fd5b61062686828701610402565b9250506040610637868287016104aa565b9150509250925092565b600061064d83836106fb565b905092915050565b60006106608261085d565b61066a818561088b565b93508360208202850161067c8561084d565b8060005b858110156106b857848403895281516106998582610641565b94506106a48361087e565b925060208a01995050600181019050610680565b50829750879550505050505092915050565b60006106d582610873565b6106df81856108be565b93506106ef8185602086016108e2565b80840191505092915050565b600061070682610868565b610710818561089c565b93506107208185602086016108e2565b61072981610915565b840191505092915050565b600061073f82610868565b61074981856108ad565b93506107598185602086016108e2565b61076281610915565b840191505092915050565b600061077982846106ca565b915081905092915050565b6000602082019050818103600083015261079e8184610655565b905092915050565b600060208201905081810360008301526107c08184610734565b905092915050565b6000604051905081810181811067ffffffffffffffff821117156107eb57600080fd5b8060405250919050565b600067ffffffffffffffff82111561080c57600080fd5b601f19601f8301169050602081019050919050565b600067ffffffffffffffff82111561083857600080fd5b601f19601f8301169050602081019050919050565b6000819050602082019050919050565b600081519050919050565b600081519050919050565b600081519050919050565b6000602082019050919050565b600082825260208201905092915050565b600082825260208201905092915050565b600082825260208201905092915050565b600081905092915050565b6000819050919050565b82818337600083830152505050565b60005b838110156109005780820151818401526020810190506108e5565b8381111561090f576000848401525b50505050565b6000601f19601f8301169050919050565b61092f816108c9565b811461093a57600080fd5b5056fea26469706673582212205e3f087dc52d7a302415aeae8c9f21483334035efd96e5bd6ba5b332c276fae664736f6c63430006000033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100405760003560e01c806296c47e1461004557806311df4560146100755780638dee3d1014610091575b600080fd5b61005f600480360361005a91908101906104bf565b6100c1565b60405161006c9190610784565b60405180910390f35b61008f600480360361008a919081019061052b565b6101e5565b005b6100ab60048036036100a691908101906105c2565b61025e565b6040516100b891906107a6565b60405180910390f35b60606000836040516100d3919061076d565b9081526020016040518091039020826040516100ef919061076d565b9081526020016040518091039020805480602002602001604051908101604052809291908181526020016000905b828210156101d9578382906000526020600020018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101c55780601f1061019a576101008083540402835291602001916101c5565b820191906000526020600020905b8154815290600101906020018083116101a857829003601f168201915b50505050508152602001906001019061011d565b50505050905092915050565b6000836040516101f5919061076d565b908152602001604051809103902082604051610211919061076d565b90815260200160405180910390208190806001815401808255809150506001900390600052602060002001600090919091909150908051906020019061025892919061035d565b50505050565b6000838051602081018201805184825260208301602085012081835280955050505050508280516020810182018051848252602083016020850120818352809550505050505081815481106102af57fe5b9060005260206000200160009250925050508054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103555780601f1061032a57610100808354040283529160200191610355565b820191906000526020600020905b81548152906001019060200180831161033857829003601f168201915b505050505081565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061039e57805160ff19168380011785556103cc565b828001600101855582156103cc579182015b828111156103cb5782518255916020019190600101906103b0565b5b5090506103d991906103dd565b5090565b6103ff91905b808211156103fb5760008160009055506001016103e3565b5090565b90565b600082601f83011261041357600080fd5b8135610426610421826107f5565b6107c8565b9150808252602083016020830185838301111561044257600080fd5b61044d8382846108d3565b50505092915050565b600082601f83011261046757600080fd5b813561047a61047582610821565b6107c8565b9150808252602083016020830185838301111561049657600080fd5b6104a18382846108d3565b50505092915050565b6000813590506104b981610926565b92915050565b600080604083850312156104d257600080fd5b600083013567ffffffffffffffff8111156104ec57600080fd5b6104f885828601610456565b925050602083013567ffffffffffffffff81111561051557600080fd5b61052185828601610456565b9150509250929050565b60008060006060848603121561054057600080fd5b600084013567ffffffffffffffff81111561055a57600080fd5b61056686828701610456565b935050602084013567ffffffffffffffff81111561058357600080fd5b61058f86828701610456565b925050604084013567ffffffffffffffff8111156105ac57600080fd5b6105b886828701610456565b9150509250925092565b6000806000606084860312156105d757600080fd5b600084013567ffffffffffffffff8111156105f157600080fd5b6105fd86828701610402565b935050602084013567ffffffffffffffff81111561061a57600080fd5b61062686828701610402565b9250506040610637868287016104aa565b9150509250925092565b600061064d83836106fb565b905092915050565b60006106608261085d565b61066a818561088b565b93508360208202850161067c8561084d565b8060005b858110156106b857848403895281516106998582610641565b94506106a48361087e565b925060208a01995050600181019050610680565b50829750879550505050505092915050565b60006106d582610873565b6106df81856108be565b93506106ef8185602086016108e2565b80840191505092915050565b600061070682610868565b610710818561089c565b93506107208185602086016108e2565b61072981610915565b840191505092915050565b600061073f82610868565b61074981856108ad565b93506107598185602086016108e2565b61076281610915565b840191505092915050565b600061077982846106ca565b915081905092915050565b6000602082019050818103600083015261079e8184610655565b905092915050565b600060208201905081810360008301526107c08184610734565b905092915050565b6000604051905081810181811067ffffffffffffffff821117156107eb57600080fd5b8060405250919050565b600067ffffffffffffffff82111561080c57600080fd5b601f19601f8301169050602081019050919050565b600067ffffffffffffffff82111561083857600080fd5b601f19601f8301169050602081019050919050565b6000819050602082019050919050565b600081519050919050565b600081519050919050565b600081519050919050565b6000602082019050919050565b600082825260208201905092915050565b600082825260208201905092915050565b600082825260208201905092915050565b600081905092915050565b6000819050919050565b82818337600083830152505050565b60005b838110156109005780820151818401526020810190506108e5565b8381111561090f576000848401525b50505050565b6000601f19601f8301169050919050565b61092f816108c9565b811461093a57600080fd5b5056fea26469706673582212205e3f087dc52d7a302415aeae8c9f21483334035efd96e5bd6ba5b332c276fae664736f6c63430006000033",
+  "sourceMap": "59:709:1:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:709:1;;;;;;;",
+  "deployedSourceMap": "59:709:1:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;59:709:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;545:216;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;213;;;;;;;;;;;;;;;;:::i;:::-;;86:60;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;545:216;668:15;702:6;709:20;702:28;;;;;;;;;;;;;;;;;;;;731:22;702:52;;;;;;;;;;;;;;;;;;;;695:59;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;545:216;;;;:::o;213:::-;354:6;361:20;354:28;;;;;;;;;;;;;;;;;;;;383:22;354:52;;;;;;;;;;;;;;;;;;;;412:9;354:68;;39:1:-1;33:3;27:10;23:18;57:10;52:3;45:23;79:10;72:17;;0:93;354:68:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;213:216;;;:::o;86:60::-;;;28:7:-1;22:14;169:4;160:7;156:18;147:7;143:32;204:13;198:20;246:8;231:13;224:31;316:4;307:7;303:18;296:4;287:7;283:18;273:49;350:9;335:13;328:32;378:4;366:16;;0:388;;;;86:60:1;;28:7:-1;22:14;169:4;160:7;156:18;147:7;143:32;204:13;198:20;246:8;231:13;224:31;316:4;307:7;303:18;296:4;287:7;283:18;273:49;350:9;335:13;328:32;378:4;366:16;;0:388;;;;86:60:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;59:709::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;6:434:-1:-;;104:3;97:4;89:6;85:17;81:27;71:2;;122:1;119;112:12;71:2;159:6;146:20;181:61;196:45;234:6;196:45;;;181:61;;;172:70;;262:6;255:5;248:21;298:4;290:6;286:17;331:4;324:5;320:16;366:3;357:6;352:3;348:16;345:25;342:2;;;383:1;380;373:12;342:2;393:41;427:6;422:3;417;393:41;;;64:376;;;;;;;;449:442;;551:3;544:4;536:6;532:17;528:27;518:2;;569:1;566;559:12;518:2;606:6;593:20;628:65;643:49;685:6;643:49;;;628:65;;;619:74;;713:6;706:5;699:21;749:4;741:6;737:17;782:4;775:5;771:16;817:3;808:6;803:3;799:16;796:25;793:2;;;834:1;831;824:12;793:2;844:41;878:6;873:3;868;844:41;;;511:380;;;;;;;;899:130;;979:6;966:20;957:29;;991:33;1018:5;991:33;;;951:78;;;;;1036:578;;;1177:2;1165:9;1156:7;1152:23;1148:32;1145:2;;;1193:1;1190;1183:12;1145:2;1256:1;1245:9;1241:17;1228:31;1279:18;1271:6;1268:30;1265:2;;;1311:1;1308;1301:12;1265:2;1331:63;1386:7;1377:6;1366:9;1362:22;1331:63;;;1321:73;;1207:193;1459:2;1448:9;1444:18;1431:32;1483:18;1475:6;1472:30;1469:2;;;1515:1;1512;1505:12;1469:2;1535:63;1590:7;1581:6;1570:9;1566:22;1535:63;;;1525:73;;1410:194;1139:475;;;;;;1621:809;;;;1789:2;1777:9;1768:7;1764:23;1760:32;1757:2;;;1805:1;1802;1795:12;1757:2;1868:1;1857:9;1853:17;1840:31;1891:18;1883:6;1880:30;1877:2;;;1923:1;1920;1913:12;1877:2;1943:63;1998:7;1989:6;1978:9;1974:22;1943:63;;;1933:73;;1819:193;2071:2;2060:9;2056:18;2043:32;2095:18;2087:6;2084:30;2081:2;;;2127:1;2124;2117:12;2081:2;2147:63;2202:7;2193:6;2182:9;2178:22;2147:63;;;2137:73;;2022:194;2275:2;2264:9;2260:18;2247:32;2299:18;2291:6;2288:30;2285:2;;;2331:1;2328;2321:12;2285:2;2351:63;2406:7;2397:6;2386:9;2382:22;2351:63;;;2341:73;;2226:194;1751:679;;;;;;2437:687;;;;2587:2;2575:9;2566:7;2562:23;2558:32;2555:2;;;2603:1;2600;2593:12;2555:2;2666:1;2655:9;2651:17;2638:31;2689:18;2681:6;2678:30;2675:2;;;2721:1;2718;2711:12;2675:2;2741:59;2792:7;2783:6;2772:9;2768:22;2741:59;;;2731:69;;2617:189;2865:2;2854:9;2850:18;2837:32;2889:18;2881:6;2878:30;2875:2;;;2921:1;2918;2911:12;2875:2;2941:59;2992:7;2983:6;2972:9;2968:22;2941:59;;;2931:69;;2816:190;3037:2;3055:53;3100:7;3091:6;3080:9;3076:22;3055:53;;;3045:63;;3016:98;2549:575;;;;;;3132:181;;3245:62;3303:3;3295:6;3245:62;;;3231:76;;3224:89;;;;;3350:896;;3507:60;3561:5;3507:60;;;3580:92;3665:6;3660:3;3580:92;;;3573:99;;3695:3;3737:4;3729:6;3725:17;3720:3;3716:27;3764:62;3820:5;3764:62;;;3846:7;3874:1;3859:348;3884:6;3881:1;3878:13;3859:348;;;3946:9;3940:4;3936:20;3931:3;3924:33;3991:6;3985:13;4013:76;4084:4;4069:13;4013:76;;;4005:84;;4106:66;4165:6;4106:66;;;4096:76;;4195:4;4190:3;4186:14;4179:21;;3916:291;3906:1;3903;3899:9;3894:14;;3859:348;;;3863:14;4220:4;4213:11;;4237:3;4230:10;;3486:760;;;;;;;;;;4254:360;;4384:39;4417:5;4384:39;;;4435:89;4517:6;4512:3;4435:89;;;4428:96;;4529:52;4574:6;4569:3;4562:4;4555:5;4551:16;4529:52;;;4602:6;4597:3;4593:16;4586:23;;4364:250;;;;;;4621:319;;4719:35;4748:5;4719:35;;;4766:61;4820:6;4815:3;4766:61;;;4759:68;;4832:52;4877:6;4872:3;4865:4;4858:5;4854:16;4832:52;;;4905:29;4927:6;4905:29;;;4900:3;4896:39;4889:46;;4699:241;;;;;;4947:339;;5055:35;5084:5;5055:35;;;5102:71;5166:6;5161:3;5102:71;;;5095:78;;5178:52;5223:6;5218:3;5211:4;5204:5;5200:16;5178:52;;;5251:29;5273:6;5251:29;;;5246:3;5242:39;5235:46;;5035:251;;;;;;5293:266;;5439:95;5530:3;5521:6;5439:95;;;5432:102;;5551:3;5544:10;;5420:139;;;;;5566:385;;5746:2;5735:9;5731:18;5723:26;;5796:9;5790:4;5786:20;5782:1;5771:9;5767:17;5760:47;5821:120;5936:4;5927:6;5821:120;;;5813:128;;5717:234;;;;;5958:293;;6092:2;6081:9;6077:18;6069:26;;6142:9;6136:4;6132:20;6128:1;6117:9;6113:17;6106:47;6167:74;6236:4;6227:6;6167:74;;;6159:82;;6063:188;;;;;6258:256;;6320:2;6314:9;6304:19;;6358:4;6350:6;6346:17;6457:6;6445:10;6442:22;6421:18;6409:10;6406:34;6403:62;6400:2;;;6478:1;6475;6468:12;6400:2;6498:10;6494:2;6487:22;6298:216;;;;;6521:318;;6661:18;6653:6;6650:30;6647:2;;;6693:1;6690;6683:12;6647:2;6760:4;6756:9;6749:4;6741:6;6737:17;6733:33;6725:41;;6824:4;6818;6814:15;6806:23;;6584:255;;;;6846:322;;6990:18;6982:6;6979:30;6976:2;;;7022:1;7019;7012:12;6976:2;7089:4;7085:9;7078:4;7070:6;7066:17;7062:33;7054:41;;7153:4;7147;7143:15;7135:23;;6913:255;;;;7175:157;;7267:3;7259:11;;7305:4;7300:3;7296:14;7288:22;;7253:79;;;;7339:143;;7454:5;7448:12;7438:22;;7419:63;;;;7489:118;;7579:5;7573:12;7563:22;;7544:63;;;;7614:122;;7708:5;7702:12;7692:22;;7673:63;;;;7743:114;;7847:4;7842:3;7838:14;7830:22;;7824:33;;;;7865:184;;8001:6;7996:3;7989:19;8038:4;8033:3;8029:14;8014:29;;7982:67;;;;;8058:153;;8163:6;8158:3;8151:19;8200:4;8195:3;8191:14;8176:29;;8144:67;;;;;8220:163;;8335:6;8330:3;8323:19;8372:4;8367:3;8363:14;8348:29;;8316:67;;;;;8392:145;;8528:3;8513:18;;8506:31;;;;;8545:72;;8607:5;8596:16;;8590:27;;;;8625:145;8706:6;8701:3;8696;8683:30;8762:1;8753:6;8748:3;8744:16;8737:27;8676:94;;;;8779:268;8844:1;8851:101;8865:6;8862:1;8859:13;8851:101;;;8941:1;8936:3;8932:11;8926:18;8922:1;8917:3;8913:11;8906:39;8887:2;8884:1;8880:10;8875:15;;8851:101;;;8967:6;8964:1;8961:13;8958:2;;;9032:1;9023:6;9018:3;9014:16;9007:27;8958:2;8828:219;;;;;9055:97;;9143:2;9139:7;9134:2;9127:5;9123:14;9119:28;9109:38;;9103:49;;;;9160:117;9229:24;9247:5;9229:24;;;9222:5;9219:35;9209:2;;9268:1;9265;9258:12;9209:2;9203:74;",
+  "source": "pragma solidity ^0.6.0;\npragma experimental ABIEncoderV2;\n\ncontract OSContract {\n\n    mapping(string => mapping(string => string[])) public visita;\n\n        // Funzione per memorizzare un hash nella mappatura\n    function storeHashVisita(string memory _codiceFiscaleMedico, string memory _codiceFiscalePaziente, string memory _hashDati) public {\n        visita[_codiceFiscaleMedico][_codiceFiscalePaziente].push(_hashDati);\n    }\n\n    // Funzione per recuperare l'array di visite per una specifica coppia di codici fiscali medico e paziente\n    function retrieveHashVisita(string memory _codiceFiscaleMedico, string memory _codiceFiscalePaziente) public view returns (string[] memory) {\n        return visita[_codiceFiscaleMedico][_codiceFiscalePaziente];\n    }\n    \n}\n",
+  "sourcePath": "/Users/lauraferretti/Desktop/SoftwareSecurity-Blockchain/solidityContracts/OSContract.sol",
+  "ast": {
+    "absolutePath": "project:/solidityContracts/OSContract.sol",
+    "exportedSymbols": {
+      "OSContract": [
+        203
+      ]
+    },
+    "id": 204,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 158,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "id": 159,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 203,
+        "linearizedBaseContracts": [
+          203
+        ],
+        "name": "OSContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "functionSelector": "8dee3d10",
+            "id": 166,
+            "name": "visita",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 203,
+            "src": "86:60:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$_$",
+              "typeString": "mapping(string => mapping(string => string[]))"
+            },
+            "typeName": {
+              "id": 165,
+              "keyType": {
+                "id": 160,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "94:6:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "86:46:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$_$",
+                "typeString": "mapping(string => mapping(string => string[]))"
+              },
+              "valueType": {
+                "id": 164,
+                "keyType": {
+                  "id": 161,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "112:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "104:27:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$",
+                  "typeString": "mapping(string => string[])"
+                },
+                "valueType": {
+                  "baseType": {
+                    "id": 162,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "122:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 163,
+                  "length": null,
+                  "nodeType": "ArrayTypeName",
+                  "src": "122:8:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 184,
+              "nodeType": "Block",
+              "src": "344:85:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 181,
+                        "name": "_hashDati",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 172,
+                        "src": "412:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 175,
+                            "name": "visita",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 166,
+                            "src": "354:6:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$_$",
+                              "typeString": "mapping(string memory => mapping(string memory => string storage ref[] storage ref))"
+                            }
+                          },
+                          "id": 178,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 176,
+                            "name": "_codiceFiscaleMedico",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 168,
+                            "src": "361:20:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "354:28:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$",
+                            "typeString": "mapping(string memory => string storage ref[] storage ref)"
+                          }
+                        },
+                        "id": 179,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 177,
+                          "name": "_codiceFiscalePaziente",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 170,
+                          "src": "383:22:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "354:52:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+                          "typeString": "string storage ref[] storage ref"
+                        }
+                      },
+                      "id": 180,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "354:57:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_string_storage_$returns$__$",
+                        "typeString": "function (string storage ref)"
+                      }
+                    },
+                    "id": 182,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "354:68:1",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 183,
+                  "nodeType": "ExpressionStatement",
+                  "src": "354:68:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "11df4560",
+            "id": 185,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "storeHashVisita",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 173,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 168,
+                  "name": "_codiceFiscaleMedico",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 185,
+                  "src": "238:34:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 167,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 170,
+                  "name": "_codiceFiscalePaziente",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 185,
+                  "src": "274:36:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 169,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "274:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 172,
+                  "name": "_hashDati",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 185,
+                  "src": "312:23:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 171,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "237:99:1"
+            },
+            "returnParameters": {
+              "id": 174,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "344:0:1"
+            },
+            "scope": 203,
+            "src": "213:216:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 201,
+              "nodeType": "Block",
+              "src": "685:76:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 195,
+                        "name": "visita",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 166,
+                        "src": "702:6:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_string_memory_$_t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$_$",
+                          "typeString": "mapping(string memory => mapping(string memory => string storage ref[] storage ref))"
+                        }
+                      },
+                      "id": 197,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 196,
+                        "name": "_codiceFiscaleMedico",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 187,
+                        "src": "709:20:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "702:28:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_$_t_array$_t_string_storage_$dyn_storage_$",
+                        "typeString": "mapping(string memory => string storage ref[] storage ref)"
+                      }
+                    },
+                    "id": 199,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 198,
+                      "name": "_codiceFiscalePaziente",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 189,
+                      "src": "731:22:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "702:52:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+                      "typeString": "string storage ref[] storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 194,
+                  "id": 200,
+                  "nodeType": "Return",
+                  "src": "695:59:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "0096c47e",
+            "id": 202,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "retrieveHashVisita",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 190,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 187,
+                  "name": "_codiceFiscaleMedico",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 202,
+                  "src": "573:34:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 186,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "573:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 189,
+                  "name": "_codiceFiscalePaziente",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 202,
+                  "src": "609:36:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 188,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "609:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:74:1"
+            },
+            "returnParameters": {
+              "id": 194,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 193,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 202,
+                  "src": "668:15:1",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_memory_$dyn_memory_ptr",
+                    "typeString": "string[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 191,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "668:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "id": 192,
+                    "length": null,
+                    "nodeType": "ArrayTypeName",
+                    "src": "668:8:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                      "typeString": "string[]"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "667:17:1"
+            },
+            "scope": 203,
+            "src": "545:216:1",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 204,
+        "src": "59:709:1"
+      }
+    ],
+    "src": "0:769:1"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/solidityContracts/OSContract.sol",
+      "exportedSymbols": {
+        "OSContract": [
+          203
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.6",
+            ".0"
+          ]
+        },
+        "id": 158,
+        "name": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "attributes": {
+          "literals": [
+            "experimental",
+            "ABIEncoderV2"
+          ]
+        },
+        "id": 159,
+        "name": "PragmaDirective",
+        "src": "24:33:1"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            203
+          ],
+          "name": "OSContract",
+          "scope": 204
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "functionSelector": "8dee3d10",
+              "name": "visita",
+              "overrides": null,
+              "scope": 203,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(string => mapping(string => string[]))",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(string => mapping(string => string[]))"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string"
+                    },
+                    "id": 160,
+                    "name": "ElementaryTypeName",
+                    "src": "94:6:1"
+                  },
+                  {
+                    "attributes": {
+                      "type": "mapping(string => string[])"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 161,
+                        "name": "ElementaryTypeName",
+                        "src": "112:6:1"
+                      },
+                      {
+                        "attributes": {
+                          "length": null,
+                          "type": "string[]"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "string",
+                              "type": "string"
+                            },
+                            "id": 162,
+                            "name": "ElementaryTypeName",
+                            "src": "122:6:1"
+                          }
+                        ],
+                        "id": 163,
+                        "name": "ArrayTypeName",
+                        "src": "122:8:1"
+                      }
+                    ],
+                    "id": 164,
+                    "name": "Mapping",
+                    "src": "104:27:1"
+                  }
+                ],
+                "id": 165,
+                "name": "Mapping",
+                "src": "86:46:1"
+              }
+            ],
+            "id": 166,
+            "name": "VariableDeclaration",
+            "src": "86:60:1"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "functionSelector": "11df4560",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "storeHashVisita",
+              "overrides": null,
+              "scope": 203,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_codiceFiscaleMedico",
+                      "overrides": null,
+                      "scope": 185,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 167,
+                        "name": "ElementaryTypeName",
+                        "src": "238:6:1"
+                      }
+                    ],
+                    "id": 168,
+                    "name": "VariableDeclaration",
+                    "src": "238:34:1"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_codiceFiscalePaziente",
+                      "overrides": null,
+                      "scope": 185,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 169,
+                        "name": "ElementaryTypeName",
+                        "src": "274:6:1"
+                      }
+                    ],
+                    "id": 170,
+                    "name": "VariableDeclaration",
+                    "src": "274:36:1"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_hashDati",
+                      "overrides": null,
+                      "scope": 185,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 171,
+                        "name": "ElementaryTypeName",
+                        "src": "312:6:1"
+                      }
+                    ],
+                    "id": 172,
+                    "name": "VariableDeclaration",
+                    "src": "312:23:1"
+                  }
+                ],
+                "id": 173,
+                "name": "ParameterList",
+                "src": "237:99:1"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 174,
+                "name": "ParameterList",
+                "src": "344:0:1"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_string_memory_ptr",
+                                  "typeString": "string memory"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "push",
+                              "referencedDeclaration": null,
+                              "type": "function (string storage ref)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "string storage ref[] storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": true,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "type": "mapping(string memory => string storage ref[] storage ref)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 166,
+                                          "type": "mapping(string memory => mapping(string memory => string storage ref[] storage ref))",
+                                          "value": "visita"
+                                        },
+                                        "id": 175,
+                                        "name": "Identifier",
+                                        "src": "354:6:1"
+                                      },
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 168,
+                                          "type": "string memory",
+                                          "value": "_codiceFiscaleMedico"
+                                        },
+                                        "id": 176,
+                                        "name": "Identifier",
+                                        "src": "361:20:1"
+                                      }
+                                    ],
+                                    "id": 178,
+                                    "name": "IndexAccess",
+                                    "src": "354:28:1"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 170,
+                                      "type": "string memory",
+                                      "value": "_codiceFiscalePaziente"
+                                    },
+                                    "id": 177,
+                                    "name": "Identifier",
+                                    "src": "383:22:1"
+                                  }
+                                ],
+                                "id": 179,
+                                "name": "IndexAccess",
+                                "src": "354:52:1"
+                              }
+                            ],
+                            "id": 180,
+                            "name": "MemberAccess",
+                            "src": "354:57:1"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 172,
+                              "type": "string memory",
+                              "value": "_hashDati"
+                            },
+                            "id": 181,
+                            "name": "Identifier",
+                            "src": "412:9:1"
+                          }
+                        ],
+                        "id": 182,
+                        "name": "FunctionCall",
+                        "src": "354:68:1"
+                      }
+                    ],
+                    "id": 183,
+                    "name": "ExpressionStatement",
+                    "src": "354:68:1"
+                  }
+                ],
+                "id": 184,
+                "name": "Block",
+                "src": "344:85:1"
+              }
+            ],
+            "id": 185,
+            "name": "FunctionDefinition",
+            "src": "213:216:1"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "functionSelector": "0096c47e",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "retrieveHashVisita",
+              "overrides": null,
+              "scope": 203,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_codiceFiscaleMedico",
+                      "overrides": null,
+                      "scope": 202,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 186,
+                        "name": "ElementaryTypeName",
+                        "src": "573:6:1"
+                      }
+                    ],
+                    "id": 187,
+                    "name": "VariableDeclaration",
+                    "src": "573:34:1"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_codiceFiscalePaziente",
+                      "overrides": null,
+                      "scope": 202,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 188,
+                        "name": "ElementaryTypeName",
+                        "src": "609:6:1"
+                      }
+                    ],
+                    "id": 189,
+                    "name": "VariableDeclaration",
+                    "src": "609:36:1"
+                  }
+                ],
+                "id": 190,
+                "name": "ParameterList",
+                "src": "572:74:1"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "overrides": null,
+                      "scope": 202,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "string[]",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "length": null,
+                          "type": "string[]"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "string",
+                              "type": "string"
+                            },
+                            "id": 191,
+                            "name": "ElementaryTypeName",
+                            "src": "668:6:1"
+                          }
+                        ],
+                        "id": 192,
+                        "name": "ArrayTypeName",
+                        "src": "668:8:1"
+                      }
+                    ],
+                    "id": 193,
+                    "name": "VariableDeclaration",
+                    "src": "668:15:1"
+                  }
+                ],
+                "id": 194,
+                "name": "ParameterList",
+                "src": "667:17:1"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 194
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "string storage ref[] storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "type": "mapping(string memory => string storage ref[] storage ref)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 166,
+                                  "type": "mapping(string memory => mapping(string memory => string storage ref[] storage ref))",
+                                  "value": "visita"
+                                },
+                                "id": 195,
+                                "name": "Identifier",
+                                "src": "702:6:1"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 187,
+                                  "type": "string memory",
+                                  "value": "_codiceFiscaleMedico"
+                                },
+                                "id": 196,
+                                "name": "Identifier",
+                                "src": "709:20:1"
+                              }
+                            ],
+                            "id": 197,
+                            "name": "IndexAccess",
+                            "src": "702:28:1"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 189,
+                              "type": "string memory",
+                              "value": "_codiceFiscalePaziente"
+                            },
+                            "id": 198,
+                            "name": "Identifier",
+                            "src": "731:22:1"
+                          }
+                        ],
+                        "id": 199,
+                        "name": "IndexAccess",
+                        "src": "702:52:1"
+                      }
+                    ],
+                    "id": 200,
+                    "name": "Return",
+                    "src": "695:59:1"
+                  }
+                ],
+                "id": 201,
+                "name": "Block",
+                "src": "685:76:1"
+              }
+            ],
+            "id": 202,
+            "name": "FunctionDefinition",
+            "src": "545:216:1"
+          }
+        ],
+        "id": 203,
+        "name": "ContractDefinition",
+        "src": "59:709:1"
+      }
+    ],
+    "id": 204,
+    "name": "SourceUnit",
+    "src": "0:769:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x473F7244cB30254aaE5417b58334c8F70FCB3f6A",
+      "transactionHash": "0x3eeca7959017a268722b19e0bd8d21b20a09cc5839a206d968aa9395438bc964"
+    }
+  },
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-04-13T15:40:59.752Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
