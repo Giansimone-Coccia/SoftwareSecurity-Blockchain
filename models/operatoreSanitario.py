@@ -69,15 +69,22 @@ class OperatoreSanitario():
         paziente_selezionato = pazienti_curati[int(scelta)]
         print(paziente_selezionato)
         return paziente_selezionato[0]
-
-    def _modificaDatiCartellaClinicaAssistito(self,  CFPaziente):
-        self.controller.modificaDatiCartellaAssistito(CFPaziente)
     
     def _aggiungiVisita(self, toAdd):
         return self.controller.aggiungiPrestazioneVisita(toAdd)
 
     def _selectVisitaPaziente(self, CFPaziente):
-        return self.controller.visualizzaRecordVisite(CFPaziente)    
+        visite = self.controller.getRecordVisite(CFPaziente)
+        for contatore, visita in enumerate(visite, start=0):
+            print(f"{contatore}: {visita[0][2]} {visita[0][3]}, {visita[0][4]} , {visita[0][5]}")
+            #print(f"{pazienteCurato}")
+        counter = len(visite) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+        visita_selezionata = visite[int(scelta)]
+        print(visita_selezionata)
+        return visita_selezionata[0]
     
     def _addNewAssistito(self,):
         cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")

@@ -35,6 +35,7 @@ if __name__ == '__main__':
     ut._resetHashVisiteMedicoM(controller)
     ut._resetHashCartellaClinica(controllerP)
     ut._resetHashCartellaClinicaM(controller)
+    ut._resetHashVisiteOperatoreO(controllerOS)
 
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
