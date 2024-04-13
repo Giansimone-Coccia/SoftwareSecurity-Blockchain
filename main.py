@@ -1,4 +1,5 @@
 import datetime
+import sys
 import web3.eth
 
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
@@ -7,6 +8,7 @@ from controllers.controllerOS import ControllerOS
 from controllers.controllerPaziente import ControllerPaziente
 from controllers.utilities import Utilities
 from database.db import db
+from mainView import mainView
 from models.medico import Medico
 from models.operatoreSanitario import OperatoreSanitario
 from models.paziente import Paziente
@@ -38,36 +40,41 @@ if __name__ == '__main__':
     ut._resetHashVisiteMedicoM(controller)
     ut._resetHashCartellaClinica(controllerP)
     ut._resetHashCartellaClinicaM(controller)
+    ut._resetHashVisiteOperatoreO(controllerOS)
 
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
     istanzaDB = db()
-
-    utentiOttenunti = istanzaDB.ottieniDatiAuth()
-    for utente in utentiOttenunti:
-        print('Professione: ' + utente['Ruolo'])
-        print('Email: ' + utente['Username'])
-        print('Password: ' + utente['Password'])
-        print('***********************************')
-
-        # Inizio la sessione e mpi autentico 
-
     currentSession = session()
-    currentSession.eseguiAccesso()
-    """ print("Status utente: " + currentSession.status)
-    print(currentSession.email + " " + currentSession.password)
-    print(currentSession.utente) """
 
-    if currentSession.status == "Medico":
-        medico = Medico(currentSession)
-        medico.menuMedico()
-    
-    elif currentSession.status == "OperatoreSanitario":
-        os = OperatoreSanitario(currentSession)
-        os.menuOS()
+    mV = mainView()
+    scelta = int(mV.view())
 
-    elif currentSession.status == "Paziente":
-        paziente = Paziente(currentSession)
-        paziente.menuPaziente()
+    if (scelta == 0):
+        print("Arrivederci!")
+        sys.exit()
+    elif(scelta == 1):
+        controllerP.registraUtente()
+    elif(scelta == 2):
+        utentiOttenunti = istanzaDB.ottieniDatiAuth()
+        for utente in utentiOttenunti:
+            print('Professione: ' + utente['Ruolo'])
+            print('Email: ' + utente['Username'])
+            print('Password: ' + utente['Password'])
+            print('***********************************')
+
+        currentSession.eseguiAccesso()
+
+        if currentSession.status == "Medico":
+            medico = Medico(currentSession)
+            medico.menuMedico()
+        
+        elif currentSession.status == "OperatoreSanitario":
+            os = OperatoreSanitario(currentSession)
+            os.menuOS()
+
+        elif currentSession.status == "Paziente":
+            paziente = Paziente(currentSession)
+            paziente.menuPaziente()
   

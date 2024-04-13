@@ -73,7 +73,7 @@ class ControllerPaziente:
             if medici:
                 for index, medico in enumerate(medici):
                     print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
-                    visite = self.database.ottieniVisitePaziente(CFPaziente, medico[0])
+                    visite = self.database.ottieniVisiteMedico(CFPaziente, medico[0])
                     print(f"Elenco delle visite effettuate per il medico {medico[0]}")
                     indice = 0
                     integrita_verificata = False
@@ -141,3 +141,29 @@ class ControllerPaziente:
                 print("Nessun farmaco trovato con il codice fiscale specificato.")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
+
+    def registraUtente(self):
+        # Controllo sul codice fiscale
+        while True:
+            cf = input("Inserisci codice fiscale (16 caratteri): ")
+            if len(cf) != 16:
+                print("Il codice fiscale deve contenere esattamente 16 caratteri.")
+            else:
+                break
+        # Controllo sul nome e cognome
+        while True:
+            nome = input("Inserisci il nome: ")
+            if not nome.isalpha():
+                print("Il nome deve contenere solo lettere.")
+            else:
+                break
+        while True:
+            cognome = input("Inserisci il cognome: ")
+            if not cognome.isalpha():
+                print("Il cognome deve contenere solo lettere.")
+            else:
+                break
+        # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
+        residenza = input("Inserisci la residenza: ")
+
+        self.database.addNuovoPaziente(cf, nome, cognome, residenza)

@@ -63,7 +63,7 @@ class Medico:
             elif(scelta == "2"):
                 lista = self._selectPaziente()
                 tupla = lista[0]
-                self._visualizzaVisitaFromNomePaziente(tupla)
+                self.controller.visualizzaRecordVisite(tupla)
 
             elif(scelta == "3"):
                 if(self._addNewCurato() == True):
@@ -89,16 +89,16 @@ class Medico:
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
         print(cf_paziente)
-        ricevuta = self._addDataVisita(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
+        ricevuta = self.controller.addVisitaMedica(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
         return True
     
     @log_actions
     def _addNewCurato(self):
         cf_paziente = input("Inserisci il codice fiscale del paziente: ")
-        ricevuta = self._addCurato(cf_paziente)
+        ricevuta = self.controller.addCurato(cf_paziente)
         while(ricevuta != True):
             cf_paziente = input("Inserisci il codice fiscale del paziente:")
-            ricevuta = self._addCurato(cf_paziente)
+            ricevuta = self.controller.addCurato(cf_paziente)
         return ricevuta
     
     @log_actions
