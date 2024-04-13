@@ -54,14 +54,18 @@ class db:
         return utenti
     
     def ottieniCurati(self):
-        # Nome della tabella da cui desideri recuperare i dati
-        table_name = 'curato'
-        cursor = self.conn.cursor()
-        # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT * FROM {table_name}")
-        # Recupera tutte le tuple
-        rows = cursor.fetchall()
-        return rows
+        try:
+            # Nome della tabella da cui desideri recuperare i dati
+            table_name = 'curato'
+            cursor = self.conn.cursor()
+            # Esegui una query per selezionare tutti i dati dalla tabella specificata
+            cursor.execute(f"SELECT * FROM {table_name}")
+            # Recupera tutte le tuple
+            rows = cursor.fetchall()
+            return rows
+        except mysql.connector.Error as err:
+            print(f"ERRORE ! {err}")
+            return []
     
     def ottieniAssistiti(self):
         # Nome della tabella da cui desideri recuperare i dati
@@ -152,14 +156,23 @@ class db:
             # Commit delle modifiche al database
             self.conn.commit()
             # Verifica se è stata effettuata almeno una modifica
-            if cursor.rowcount > 0:
-                return True
+            # Definizione di una lambda function per filtrare le righe
+            filter_func = lambda row: row[0] == CF and row[1] == nomePatologia and row[3] == stato
+
+            # Recupero di tutte le righe dalla tabella
+            all_rows = self.retrieve_all_rows(table_name)
+
+            # Filtraggio delle righe usando la lambda function
+            filtered_rows = list(filter(filter_func, all_rows))
+
+            if(len(filtered_rows) != 0):
+                return filtered_rows[0]
             else:
-                return False
+                return ()
         except Exception as e:
             # Gestione degli errori
             print("Errore durante la modifica dello stato della patologia:", e)
-            return False
+            return ()
 
     
     def ottieniPatologie(self, CF):

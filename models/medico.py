@@ -12,8 +12,8 @@ class Medico:
         self.controller.utente = self.utente 
 
     def _addDataVisita(self, data_ora_vista, cf_paziente, nome_prestazione, esito, luogo):
-        receipt = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
-        return receipt
+        status = self.controller.addVisitaMedica(data_ora_vista, cf_paziente, nome_prestazione, esito, luogo)
+        return status
 
     def _addCurato(self, cf_paziente):
         receipt = self.controller.addCurato(cf_paziente)
@@ -105,6 +105,8 @@ class Medico:
         print("4. Per inserire una patologia")
         print("5. Per modificare le patologie")
 
+        self._verificaPazienteHaveCartella(paziente)
+
         option = input("Digitare la scelta: ")
         print(option)
 
@@ -168,29 +170,30 @@ class Medico:
         
         elif(option == "5"):
             patologie = self.controller.ottieniPatologiePaziente(paziente)
-            for index, patologia in enumerate(patologie):
-                print(f"Seleziona {index} per modificare la patologia: {patologia[1]}")
-            da_modificare = input("Scegli la patologia di cui modificare lo stato: ")
+            if(len(patologie) != 0):
+                for index, patologia in enumerate(patologie):
+                    print(f"Seleziona {index} per modificare la patologia: {patologia[1]}")
+                da_modificare = input("Scegli la patologia di cui modificare lo stato: ")
+                
+                while True:
+                    inCorso = input("Inserisci il nuovo stato, patologia in corso? (SI/NO):").strip().upper()
+                    if inCorso == "SI":
+                        inCorso = 1
+                        break
+                    elif inCorso == "NO":
+                        inCorso = 0
+                        break
+                    else:
+                        print("Risposta non valida. Inserisci 'SI' o 'NO'.")
             
-            while True:
-                inCorso = input("Inserisci il nuovo stato, patologia in corso? (SI/NO):").strip().upper()
-                if inCorso == "SI":
-                    inCorso = 1
-                    break
-                elif inCorso == "NO":
-                    inCorso = 0
-                    break
-                else:
-                    print("Risposta non valida. Inserisci 'SI' o 'NO'.")
-            
-            try:
-                patologia_da_modificare = patologie[int(inCorso)][1]
-                print(f"patologia da modificare {patologia_da_modificare}")
-                insert = self.controller.modificaStatoPatologia(inCorso, patologie[int(da_modificare)])
-                return insert
-            except IndexError:
-                print("Indice non valido. Riprova.")
-                return False
+                try:
+                    patologia_da_modificare = patologie[int(da_modificare)][1]
+                    print(f"patologia da modificare {patologia_da_modificare}")
+                    insert = self.controller.modificaStatoPatologia(inCorso, patologie[int(da_modificare)])
+                    return insert
+                except IndexError:
+                    print("Indice non valido. Riprova.")
+                    return False
             
         
         return
@@ -215,3 +218,8 @@ class Medico:
             print("* Data visita: " + visita["data"] )
             print("* Luogo visita: " + visita["luogo"] )
             print("***********************************")
+
+    def _verificaPazienteHaveCartella(self, CFpaziente):
+        """Questo metodo verifica se il paziente selezionato dispone di una 
+           cartella clinica, in caso contrario, ne crea una ed aggiorna la blockchain"""
+        self.controller.pazienteHaveCartella(CFpaziente)

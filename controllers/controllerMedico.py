@@ -1,3 +1,4 @@
+import datetime
 from web3 import Web3
 import json
 
@@ -35,6 +36,11 @@ class ControllerMedico:
                 "nonce": self.nonce,
             }
         )
+
+        # current_nonce = self.w3.eth.get_transaction_count(self.my_address)
+        # if transaction["nonce"] != current_nonce:
+        #     transaction["nonce"] = current_nonce
+
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
         #print("Deploying Contract!")
@@ -85,29 +91,16 @@ class ControllerMedico:
            
             
             # Chiamata al contratto medico per memorizzare l'hash
-            greeting_transaction = self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).build_transaction(
-                {
-                    "chainId": self.chain_id,
-                    "gasPrice": self.w3.eth.gas_price,
-                    "from": self.my_address,
-                    "nonce": self.nonce + 1,
-                }
-            )
-            
-            signed_greeting_txn = self.w3.eth.account.sign_transaction(
-                greeting_transaction, private_key=self.private_key
-            )
-            tx_greeting_hash = self.w3.eth.send_raw_transaction(signed_greeting_txn.rawTransaction)
-
-            tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_greeting_hash)
-            self.nonce += 1
+            self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
             
             # Ottieni e restituisci le visite mediche del paziente
             visite = self.getVisiteMedico(CFpaziente)
-            return visite
+            return True
         
         except Exception as e:
             print("Errore durante l'aggiunta della visita medica:", e)
+            return False
+        
 
 
     def getVisiteMedico(self, CFpaziente):
@@ -122,13 +115,11 @@ class ControllerMedico:
 
     
     def addCurato(self, CFpaziente):
-        cursor = self.database.conn.cursor()
 
         IdMedico = self.utente[0]
 
         if  not any((curato[0] == IdMedico and curato[1] ==CFpaziente )for curato in self.database.ottieniCurati()):
-            self.database.addTupla("curato",IdMedico,CFpaziente)
-            return True
+            return self.database.addTupla("curato",IdMedico,CFpaziente)
         else:
             return False
         
@@ -139,51 +130,42 @@ class ControllerMedico:
             
             
             # Chiama il metodo addTupla di db.py per inserire la nuova patologia
-            inserimento_riuscito_db = self.database.addTupla("patologie", *patologia)
+            _statusTransactionDb = self.database.addTupla("patologie", *patologia)
+            # Aggiungo la transazione al db
+            address = self.w3.eth.accounts[0]
+            _tuple = self.database.retrieve_all_rows("patologie")
+            for tupla in _tuple:
+                if tupla[0] == IdCartellaClinica and tupla[1] == NomePatologia:
+                    self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                    break
+
+            return _statusTransactionDb
             
-            
-            if(inserimento_riuscito_db):
-                # La inserisco nella blockchain, nessun check di integrità tanto è nuova la patologia
-                all_patologie = self.ottieniPatologiePaziente(IdCartellaClinica)
-                for tupla_patologia in all_patologie:
-                    if(tupla_patologia[1]==NomePatologia):
-                        address = self.w3.eth.accounts[0]
-                        self.medico_contract.functions.storeHashPatologie(IdCartellaClinica, self.ut.hash_row(tupla_patologia)).transact({'from': address})
-                        return inserimento_riuscito_db
-
-
-            # """IN PIU"""
-            # listaPatologieDB = self.database.retrieve_all_rows("patologie")
-            # for patologiaa in listaPatologieDB:
-            #     print(f"HASH DAL DB = {self.ut.hash_row(patologiaa)}")
-            # print("***********************************************")
-            # listaPatologieBlockchain = self.medico_contract.functions.retrieveHashPatologie("CFPaziente2").call()
-            # for pt in listaPatologieBlockchain:
-            #     print(f"HASH BLOCKCHAIN = {pt}")
-            # """in piu """
-
-            # Restituisci True se l'inserimento è riuscito, False altrimenti
-            #return inserimento_riuscito_db
             
         except Exception as e:
             print("Errore durante l'aggiunta della patologia:", e)
             return False
         
     def ottieniPatologiePaziente(self, CFpaziente):
-        cursor = self.database.conn.cursor()
-        #ganache_url = "HTTP://127.0.0.1:7545"
-        #web3 = Web3(Web3.HTTPProvider(ganache_url))
         patologielist = []
 
         patologie = self.database.ottieniPatologie(CFpaziente)
-        #address = web3.eth.accounts[0]
-        #blockchain_hash = self.medico_contract.functions.retrieveHashFarmaco(CFpaziente).call({'from': address})
 
-        for patologia in patologie:
-            #for hash in blockchain_hash:
-            #if self.ut.check_integrity(hash, farmaco):
-            patologielist.append(patologia)
-        return patologielist
+        blockchain_hash = self.medico_contract.functions.retrieveHashPatologie(CFpaziente).call()
+
+        try:
+
+            for patologia in patologie:
+                _check = True
+                if self.ut.hash_row(patologia) in blockchain_hash:
+                    patologielist.append(patologia)
+                    _check = False
+                if(_check):
+                    raise IntegrityCheckError("Integrità dati: patologie non rispettata !")
+            return patologielist
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+            return []
         
     def addCartellaClinica(self, CFpaziente):
         try:
@@ -302,9 +284,11 @@ class ControllerMedico:
                                 integrita_verificata = True
                                 break
                     if not integrita_verificata:
-                        print("Problemi con il controllo dell'integrità")
+                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
@@ -312,21 +296,26 @@ class ControllerMedico:
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
         e la blockchain"""
         # Ritorna una lista di hash di farmaci
-        hash_farmaco_blockchain = self.medico_contract.functions.retrieveHashFarmaco(tupla_farmaco[0]).call()
-        check = False
-        for hash_bc in hash_farmaco_blockchain:
-            if(self.ut.check_integrity(hash_bc, tupla_farmaco)):
-                check = True
-                break
-        #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
-        if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
-            address = self.w3.eth.accounts[0]
-            self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
-            print("Dosaggio del farmaco modificato correttamente")
-            return True
-        else:
-            print("Modifica non avvenuta")
-            return False
+        try:
+            hash_farmaco_blockchain = self.medico_contract.functions.retrieveHashFarmaco(tupla_farmaco[0]).call()
+            check = False
+            for hash_bc in hash_farmaco_blockchain:
+                if(self.ut.check_integrity(hash_bc, tupla_farmaco)):
+                    check = True
+                    break
+            #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
+            if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
+                address = self.w3.eth.accounts[0]
+                self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
+                print("Dosaggio del farmaco modificato correttamente")
+                return True
+            else:
+                if(check == False): 
+                    raise IntegrityCheckError("Integrità dati: farmaci non rispettata !")
+                
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        
     
     def modificaStatoPatologia(self, nuovoStato, tupla_patologia):
         try:
@@ -336,9 +325,9 @@ class ControllerMedico:
                     all_tuple_blockchain = self.medico_contract.functions.retrieveHashPatologie(tupla[0]).call()
                     for tupla_blockchain in all_tuple_blockchain:
                         if(self.ut.check_integrity(tupla_blockchain,tupla)):
-                            self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
+                            _nuovaTupla = self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
                             address = self.w3.eth.accounts[0]
-                            self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                            self.medico_contract.functions.storeHashPatologie(_nuovaTupla[0],self.ut.hash_row(_nuovaTupla)).transact({'from': address})
                             print("HASH CORRETTAMENTE SALVATO IN BLOCKCHAIN !")
                             return True
                     raise IntegrityCheckError("Integrità dati PATOLOGIE non rispettata")
@@ -375,6 +364,16 @@ class ControllerMedico:
         contenuto = event_filter[0]['args']['content']
 
         return contenuto
+    
+    def pazienteHaveCartella(self, CFpaziente):
+        """Questo metodo verifica se il paziente ha la cartella clinica, in caso contrario
+            ne crea una di default ed aggiorna la blockchain ed il database."""
+        allCartelle = self.database.retrieve_all_rows("cartellaClinica")
+        if(not any(tupla[0] == CFpaziente for tupla in allCartelle)):
+            self.database.addTupla("cartellaClinica", CFpaziente, "NESSUN TRATTAMENTO", "NESSUNA ALLERGIA")
+            hash = self.ut.hash_row(self.database.ottieniCartellaFromCF(CFpaziente))
+            address = self.w3.eth.accounts[0]
+            self.medico_contract.functions.storeHashCartellaClinica(CFpaziente,hash).transact({'from': address})
     
 
     
