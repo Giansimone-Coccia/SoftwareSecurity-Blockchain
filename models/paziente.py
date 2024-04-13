@@ -1,7 +1,6 @@
 import sys
 
 from controllers.controllerPaziente import ControllerPaziente
-
 class Paziente():
     def __init__(self, session):
         self.ruolo = session.status

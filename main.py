@@ -43,33 +43,33 @@ if __name__ == '__main__':
     istanzaDB = db()
     currentSession = session()
 
-    mV = mainView()
-    scelta = int(mV.view())
+    while (True):
+        mV = mainView()
+        scelta = int(mV.view())
+        if (scelta == 0):
+            print("Arrivederci!")
+            sys.exit()
+        elif(scelta == 1):
+            controllerP.registraUtente()
+        elif(scelta == 2):
+            utentiOttenunti = istanzaDB.ottieniDatiAuth()
+            for utente in utentiOttenunti:
+                print('Professione: ' + utente['Ruolo'])
+                print('Email: ' + utente['Username'])
+                print('Password: ' + utente['Password'])
+                print('***********************************')
 
-    if (scelta == 0):
-        print("Arrivederci!")
-        sys.exit()
-    elif(scelta == 1):
-        controllerP.registraUtente()
-    elif(scelta == 2):
-        utentiOttenunti = istanzaDB.ottieniDatiAuth()
-        for utente in utentiOttenunti:
-            print('Professione: ' + utente['Ruolo'])
-            print('Email: ' + utente['Username'])
-            print('Password: ' + utente['Password'])
-            print('***********************************')
+            currentSession.eseguiAccesso()
 
-        currentSession.eseguiAccesso()
+            if currentSession.status == "Medico":
+                medico = Medico(currentSession)
+                medico.menuMedico()
+            
+            elif currentSession.status == "OperatoreSanitario":
+                os = OperatoreSanitario(currentSession)
+                os.menuOS()
 
-        if currentSession.status == "Medico":
-            medico = Medico(currentSession)
-            medico.menuMedico()
-        
-        elif currentSession.status == "OperatoreSanitario":
-            os = OperatoreSanitario(currentSession)
-            os.menuOS()
-
-        elif currentSession.status == "Paziente":
-            paziente = Paziente(currentSession)
-            paziente.menuPaziente()
+            elif currentSession.status == "Paziente":
+                paziente = Paziente(currentSession)
+                paziente.menuPaziente()
   
