@@ -1,13 +1,18 @@
 
+import logging
 from controllers.controllerMedico import ControllerMedico
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
+from interface.Ilog import Ilog
 
-class ControllerPaziente:
+class ControllerPaziente(Ilog):
 
     _instance = None
     def __init__(self):
+
+        self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
         self.valoriHashContratto = []
 
@@ -64,7 +69,15 @@ class ControllerPaziente:
             self._utente_inizializzato = True
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
-        
+    
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Utente: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+
+    @log_actions  
     def getVisitePaziente(self, CFMedico):
         try:
             CFPaziente = self.utente[0]
@@ -93,15 +106,18 @@ class ControllerPaziente:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
     
+    @log_actions
     def mediciPresenti(self):
         paziente_cf = self.utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFPaziente è uguale al Cf del paziente che ha fatto l'accesso
         return filter(lambda curato: curato[1] == paziente_cf, self.database.ottieniCurati())
 
+    @log_actions
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
         return map(lambda medico: self.database.ottieniDatiUtente('medico', medico[0]), self.mediciPresenti())
     
+    @log_actions
     def getCartellaClinica(self):
         try:
             paziente_cf = self.utente[0]
@@ -120,6 +136,7 @@ class ControllerPaziente:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
+    @log_actions
     def getFarmaciPrescritti(self):
         try:
             paziente_cf = self.utente[0]
@@ -142,7 +159,7 @@ class ControllerPaziente:
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
-
+    @log_actions
     def registraUtente(self):
         # Controllo sul codice fiscale
         while True:

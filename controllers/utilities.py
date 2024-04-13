@@ -106,6 +106,14 @@ class Utilities:
             hash_visita = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
 
+    def _resetHashVisiteOperatoreO(self,controller):
+        """Re-inserisco tutti gli hash riferiti alla tabella visitaMedico nella blockchain"""
+        tupleVisiteO = self._db.retrieve_all_rows("visitaOperatore")
+        address = controller.w3.eth.accounts[0]
+        for tupla in tupleVisiteO:
+            hash_visita = self.hash_row(tupla)
+            controller.os_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
+
 
         
 
