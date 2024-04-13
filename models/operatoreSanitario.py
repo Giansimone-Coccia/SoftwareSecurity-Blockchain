@@ -45,7 +45,9 @@ class OperatoreSanitario():
                 else:
                     print("Prestazione NON aggiunta")
             elif scelta == "2":
-                pass
+                lista = self._selectPaziente()
+                tupla = lista[0]
+                self._selectVisitaPaziente(tupla)
             elif scelta == "3":
                 pass
 
@@ -53,7 +55,7 @@ class OperatoreSanitario():
         pazienti_curati = list(self.controller.datiPazientiCuratiOS())
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
-            print(f"{contatore}: {pazienteCurato[contatore-1][1]} {pazienteCurato[contatore-1][2]}, {pazienteCurato[contatore-1][3]}")
+            print(f"{contatore}: {pazienteCurato[0][1]} {pazienteCurato[0][2]}, {pazienteCurato[0][3]}")
             #print(f"{pazienteCurato}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
@@ -68,3 +70,6 @@ class OperatoreSanitario():
     
     def _aggiungiVisita(self, toAdd):
         return self.controller.aggiungiPrestazioneVisita(toAdd)
+
+    def _selectVisitaPaziente(self, CFPaziente):
+        return self.controller.visualizzaRecordVisite(CFPaziente)    
