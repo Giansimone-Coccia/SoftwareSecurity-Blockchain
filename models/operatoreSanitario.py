@@ -47,7 +47,17 @@ class OperatoreSanitario(Ilog):
                 _statoSalute = input("Stato salute del paziente: ")
                 _prestazione = input("Insersci la prestazione effettuata: ")
                 _luogoPrestazione = input("Inserisci il luogo: ")
-                _dataVisita = datetime.datetime.now()
+                ora_corrente = datetime.datetime.now()
+
+                _dataVisita = datetime.datetime(
+                    ora_corrente.year,
+                    ora_corrente.month,
+                    ora_corrente.day,
+                    ora_corrente.hour,
+                    ora_corrente.minute,
+                    ora_corrente.second
+                )
+                
                 _cfOpSanitario = self.utente[0]
                 
                 if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):

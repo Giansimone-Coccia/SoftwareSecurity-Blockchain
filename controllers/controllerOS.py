@@ -79,7 +79,6 @@ class ControllerOS:
         print(cartella)
         print("Ok")
 
-    @log_actions
     def aggiungiPrestazioneVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
@@ -90,7 +89,7 @@ class ControllerOS:
             if self.database.addTupla("visitaOperatore", *tuplaDaAggiungere):
                 # Se l'aggiunta della tupla ha avuto successo, procedi con le operazioni successive
                 # Calcola l'hash dei dati
-                hash = self.ut.hash_row(self.database.getVisitaOS(tuplaDaAggiungere))
+                hash = self.ut.hash_row(tuplaDaAggiungere)
                 
                 # Chiamata al contratto medico per memorizzare l'hash
                 self.os_contract.functions.storeHashVisita(cfOpSanitario, cfPaziente, hash).transact({'from': self.w3.eth.accounts[0]})
@@ -124,11 +123,9 @@ class ControllerOS:
                     indice = 0
                     for visita in visite:  
                         integrita_verificata = False
-                        print(f"yolo{visita}")
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 visitePaziente.append(visita)
-                                print(visita)
                                 integrita_verificata = True
                                 break
                         if not integrita_verificata:

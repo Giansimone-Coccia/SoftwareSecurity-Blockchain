@@ -84,13 +84,23 @@ class Medico(Ilog):
 
     @log_actions
     def _addNewVisita(self):
-        data_ora_visita = datetime.datetime.now()
+        ora_corrente = datetime.datetime.now()
+
+        _dataVisita = datetime.datetime(
+                ora_corrente.year,
+                ora_corrente.month,
+                ora_corrente.day,
+                ora_corrente.hour,
+                ora_corrente.minute,
+                ora_corrente.second
+            )
+        
         cf_paziente = self._selectPaziente()[0]
         nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
         print(cf_paziente)
-        ricevuta = self.controller.addVisitaMedica(data_ora_visita, cf_paziente, nome_prestazione, esito, luogo)
+        ricevuta = self.controller.addVisitaMedica(_dataVisita, cf_paziente, nome_prestazione, esito, luogo)
         return True
     
     @log_actions
@@ -148,9 +158,19 @@ class Medico(Ilog):
         elif(option == "2"):
             nome_farmaco = input("Inserisci il nome del farmaco che vuoi inserire: ")
             dosaggio = input("Inserisci il dosaggio del farmaco: ")
-            data_prescrizione = datetime.datetime.now()
+            ora_corrente = datetime.datetime.now()
+
+            _dataPre = datetime.datetime(
+                ora_corrente.year,
+                ora_corrente.month,
+                ora_corrente.day,
+                ora_corrente.hour,
+                ora_corrente.minute,
+                ora_corrente.second
+            )
+
             cf_paziente = paziente
-            insert = self.controller.addFarmaco(cf_paziente, nome_farmaco, data_prescrizione, dosaggio)
+            insert = self.controller.addFarmaco(cf_paziente, nome_farmaco, _dataPre, dosaggio)
             return insert
         
         elif option == "3":
@@ -184,10 +204,19 @@ class Medico(Ilog):
                     break
                 else:
                     print("Risposta non valida. Inserisci 'SI' o 'NO'.")
-            data_prescrizione = datetime.datetime.now()
+            ora_corrente = datetime.datetime.now()
+
+            _dataPre = datetime.datetime(
+                    ora_corrente.year,
+                    ora_corrente.month,
+                    ora_corrente.day,
+                    ora_corrente.hour,
+                    ora_corrente.minute,
+                    ora_corrente.second
+                )
             cf_paziente = paziente
             
-            insert = self.controller.addPatologia(cf_paziente, nome_patologia, data_prescrizione, inCorso)
+            insert = self.controller.addPatologia(cf_paziente, nome_patologia, _dataPre, inCorso)
             
             return insert
         
