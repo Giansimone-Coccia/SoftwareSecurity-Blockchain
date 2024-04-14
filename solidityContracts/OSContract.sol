@@ -14,8 +14,8 @@ contract OSContract {
     }
 
     // Funzione per recuperare l'array di visite per una specifica coppia di codici fiscali medico e paziente
-    function retrieveHashVisita(string memory _codiceFiscaleMedico, string memory _codiceFiscalePaziente) public view returns (string[] memory) {
-        return visita[_codiceFiscaleMedico][_codiceFiscalePaziente];
+    function retrieveHashVisita(string memory _codiceFiscaleOS, string memory _codiceFiscalePaziente) public view returns (string[] memory) {
+        return visita[_codiceFiscaleOS][_codiceFiscalePaziente];
     }
     
 }

@@ -36,8 +36,9 @@ class Paziente(Ilog):
         while(_loop):
             print("0. Per uscire dal programma")
             print("1. Per visualizzare le visite mediche")
-            print("2. Per visionare la propria cartella clinica")
-            print("3. Per visionare i farmaci prescritti")
+            print("2. Per visualizzare le visite fatte da un operatore sanitario")
+            print("3. Per visionare la propria cartella clinica")
+            print("4. Per visionare i farmaci prescritti")
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(4))):
@@ -52,8 +53,12 @@ class Paziente(Ilog):
                 tupla = medico[0]
                 self._visualizzaVisiteDelPaziente(tupla)
             elif scelta == "2":
-               self._visualizzaCartellaClinica()
+                operatoreSanitario = self._selectOperatoreSanitario()
+                tupla = operatoreSanitario[0]
+                self._visualizzaVisiteDelPazienteOperatore(tupla)
             elif scelta == "3":
+               self._visualizzaCartellaClinica()
+            elif scelta == "4":
                 self._visualizzaFarmaciPrescritti()
 
     @log_actions
@@ -61,9 +66,28 @@ class Paziente(Ilog):
         self.controller.getVisitePaziente(CFMedico)
 
     @log_actions
+    def _visualizzaVisiteDelPazienteOperatore(self, CFOperatore):
+        self.controller.getVisitePazienteOperatore(CFOperatore)
+
+    @log_actions
     def _selectMedico(self):
         medici = list(self.controller.datiMedici())
         print("Seleziona un medico:")
+        for contatore, medico in enumerate(medici, start=0):
+            print(f"{contatore}: {medico[contatore][1]} {medico[contatore][2]}, {medico[contatore][3]}")
+            contatore += 1
+        counter = len(medici) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+        paziente_selezionato = medici[int(scelta)]
+        print(paziente_selezionato)
+        return paziente_selezionato[0]
+    
+    @log_actions
+    def _selectOperatoreSanitario(self):
+        medici = list(self.controller.datiOperatori())
+        print("Seleziona un operatore:")
         for contatore, medico in enumerate(medici, start=0):
             print(f"{contatore}: {medico[contatore][1]} {medico[contatore][2]}, {medico[contatore][3]}")
             contatore += 1

@@ -31,11 +31,12 @@ class OperatoreSanitario(Ilog):
         while(_loop):
             print("0. Per uscire dal programma")
             print("1. Per inserire una visita presso un paziente")
-            print("2. Per modificare una visita inserita")
-            print("3. Per aggiungere un paziente come assistito")
+            print("2. Per visualizzare le visite mediche effettuate")
+            print("3. Per modificare una visita inserita")
+            print("4. Per aggiungere un paziente come assistito")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(4))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
 
             if scelta == "0":
@@ -47,20 +48,33 @@ class OperatoreSanitario(Ilog):
                 _statoSalute = input("Stato salute del paziente: ")
                 _prestazione = input("Insersci la prestazione effettuata: ")
                 _luogoPrestazione = input("Inserisci il luogo: ")
-                _dataVisita = datetime.datetime.now()
-                _cfOpSanitario = self.utente[0]
-                _toAdd = [_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione]
+                ora_corrente = datetime.datetime.now()
+
+                _dataVisita = datetime.datetime(
+                    ora_corrente.year,
+                    ora_corrente.month,
+                    ora_corrente.day,
+                    ora_corrente.hour,
+                    ora_corrente.minute,
+                    ora_corrente.second
+                )
                 
-                if(self._aggiungiVisita(_toAdd)):
+                _cfOpSanitario = self.utente[0]
+                
+                if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
                     print("Prestazione aggiunta correttamente !")
                 else:
                     print("Prestazione NON aggiunta")
             elif scelta == "2":
                 lista = self._selectPaziente()
                 tupla = lista[0]
+                self._mostraVisite(tupla)
+            elif scelta == "3":
+                lista = self._selectPaziente()
+                tupla = lista[0]
                 visita = self._selectVisitaPaziente(tupla)
                 self._modificaVisitaPaziente(visita)
-            elif scelta == "3":
+            elif scelta == "4":
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
                     print("")
@@ -80,13 +94,17 @@ class OperatoreSanitario(Ilog):
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
         paziente_selezionato = pazienti_curati[int(scelta)]
-        print(paziente_selezionato)
         return paziente_selezionato[0]
     
     @log_actions
-    def _aggiungiVisita(self, toAdd):
-        return self.controller.aggiungiPrestazioneVisita(toAdd)
+    def _aggiungiVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
+        return self.controller.aggiungiPrestazioneVisita(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
 
+    def _mostraVisite(self,CFPaziente):
+        visite = self.controller.getRecordVisite(CFPaziente)
+        for contatore, visita in enumerate(visite, start=0):
+            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
+    
     @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
@@ -115,17 +133,17 @@ class OperatoreSanitario(Ilog):
             if scelta == "0":
                 nuovi_dati = input("Digita i nuovi dati:")
                 self.controller.eliminaPrestazioneVisita(visita)
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],nuovi_dati, visita[3], visita[4], visita[5]))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1],nuovi_dati, visita[3], visita[4], visita[5])
                 _loop = False
             elif scelta == "1":
                 self.controller.eliminaPrestazioneVisita(visita)
                 nuova_prestazione = input("Digita la nuova prestazione:")
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],visita[2], visita[3], nuova_prestazione , visita[5]))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1],visita[2], visita[3], nuova_prestazione , visita[5])
                 _loop = False
             elif scelta == "2":
                 self.controller.eliminaPrestazioneVisita(visita)
                 nuovo_luogo = input("Digita il nuovo luogo:")
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo)
                 _loop = False
 
 
