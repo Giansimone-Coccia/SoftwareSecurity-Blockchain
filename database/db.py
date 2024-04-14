@@ -459,3 +459,15 @@ class db(Ilog):
         finally:
             # Chiudi il cursore
             cursor.close()
+
+    def getVisitaOS(self, tupla):
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+        try:
+            query = f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
+            cursor.execute(query, (tupla[0], tupla[1], tupla[3]))
+            rows = cursor.fetchall()
+            return rows
+        except mysql.connector.Error as err:
+            print("Errore durante il recupero della visita:", err)
+            return []

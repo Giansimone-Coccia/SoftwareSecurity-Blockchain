@@ -49,7 +49,6 @@ class OperatoreSanitario(Ilog):
                 _luogoPrestazione = input("Inserisci il luogo: ")
                 _dataVisita = datetime.datetime.now()
                 _cfOpSanitario = self.utente[0]
-                _toAdd = [_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione]
                 
                 if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
                     print("Prestazione aggiunta correttamente !")
@@ -115,17 +114,17 @@ class OperatoreSanitario(Ilog):
             if scelta == "0":
                 nuovi_dati = input("Digita i nuovi dati:")
                 self.controller.eliminaPrestazioneVisita(visita)
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],nuovi_dati, visita[3], visita[4], visita[5]))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1],nuovi_dati, visita[3], visita[4], visita[5])
                 _loop = False
             elif scelta == "1":
                 self.controller.eliminaPrestazioneVisita(visita)
                 nuova_prestazione = input("Digita la nuova prestazione:")
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1],visita[2], visita[3], nuova_prestazione , visita[5]))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1],visita[2], visita[3], nuova_prestazione , visita[5])
                 _loop = False
             elif scelta == "2":
                 self.controller.eliminaPrestazioneVisita(visita)
                 nuovo_luogo = input("Digita il nuovo luogo:")
-                self.controller.aggiungiPrestazioneVisita((visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo))
+                self.controller.aggiungiPrestazioneVisita(visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo)
                 _loop = False
 
 
