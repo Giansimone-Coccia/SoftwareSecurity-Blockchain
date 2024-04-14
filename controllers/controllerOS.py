@@ -100,8 +100,7 @@ class ControllerOS(Ilog):
            visitaOperatore"""
         return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
     
-    def eliminaPrestazioneVisita(self, visita):
-        
+    def eliminaPrestazioneVisita(self, visita):      
         return self.database.eliminaVisitaOS(visita) 
     
     @log_actions

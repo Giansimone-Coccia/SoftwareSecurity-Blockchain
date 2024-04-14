@@ -31,6 +31,9 @@ if __name__ == '__main__':
     controllerP = ControllerPaziente.get_instance()
     controllerOS = ControllerOS.get_instance()
     ut = Utilities()
+
+    #myfilter = controller.medico_contract.eventFilter('Evento', {'fromBlock': 0,'toBlock': 'latest'});
+    
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controllerP)
@@ -42,6 +45,15 @@ if __name__ == '__main__':
     ut._resetHashCartellaClinicaM(controller)
     ut._resetHashVisiteOperatoreO(controllerOS)
 
+    events = controller.medico_contract.events.Evento().getLogs({
+    'fromBlock': 0  # Blocco iniziale
+    })
+
+    # Processa gli eventi recuperati
+    for event in events:
+        print(event)
+
+    #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
