@@ -87,12 +87,12 @@ class Medico(Ilog):
         ora_corrente = datetime.datetime.now()
 
         _dataVisita = datetime.datetime(
-                ora_corrente.year,
-                ora_corrente.month,
-                ora_corrente.day,
-                ora_corrente.hour,
-                ora_corrente.minute,
-                ora_corrente.second
+            ora_corrente.year,
+            ora_corrente.month,
+            ora_corrente.day,
+            ora_corrente.hour,
+            ora_corrente.minute,
+            ora_corrente.second
             )
         
         cf_paziente = self._selectPaziente()[0]
@@ -207,12 +207,12 @@ class Medico(Ilog):
             ora_corrente = datetime.datetime.now()
 
             _dataPre = datetime.datetime(
-                    ora_corrente.year,
-                    ora_corrente.month,
-                    ora_corrente.day,
-                    ora_corrente.hour,
-                    ora_corrente.minute,
-                    ora_corrente.second
+                ora_corrente.year,
+                ora_corrente.month,
+                ora_corrente.day,
+                ora_corrente.hour,
+                ora_corrente.minute,
+                ora_corrente.second
                 )
             cf_paziente = paziente
             
