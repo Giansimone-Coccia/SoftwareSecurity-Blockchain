@@ -105,6 +105,35 @@ class ControllerPaziente(Ilog):
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
+
+    @log_actions
+    def getVisitePazienteOperatore(self, CFOperatore):
+        try:
+            CFPaziente = self.utente[0]
+            operatori = self.database.ottieniDatiUtente('operatoreSanitario', CFOperatore)
+            hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFOperatore, CFPaziente).call()
+            if operatori:
+                for index, operatore in enumerate(operatori):
+                    print(f"Medico selezionato: {operatore[1]} {operatore[2]}, {operatore[3]}")
+                    visite = self.database.ottieniVisiteMedico(CFPaziente, operatore[0])
+                    print(f"Elenco delle visite effettuate per il medico {operatore[0]}")
+                    indice = 0
+                    integrita_verificata = False
+                    for visita in visite:
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"    Data e ora: {visita[3]}")
+                                print(f"    Tipo prestazione: {visita[4]}")
+                                print(f"    Luogo: {visita[5]}")
+                                indice += 1
+                                integrita_verificata = True
+                    if not integrita_verificata:
+                        print("Problemi con il controllo dell'integrità")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
     
     @log_actions
     def mediciPresenti(self):
@@ -116,6 +145,17 @@ class ControllerPaziente(Ilog):
     def datiMedici(self):
         #Ottengo la lista di dati effettivi del medico per quel paziente
         return map(lambda medico: self.database.ottieniDatiUtente('medico', medico[0]), self.mediciPresenti())
+    
+    @log_actions
+    def operatoriPresenti(self):
+        paziente_cf = self.utente[0]
+        #Ottengo la lista di tuple riprese dalla tabella curato in cui CFPaziente è uguale al Cf del paziente che ha fatto l'accesso
+        return filter(lambda assistito: assistito[1] == paziente_cf, self.database.ottieniAssistiti())
+
+    @log_actions
+    def datiOperatori(self):
+        #Ottengo la lista di dati effettivi del medico per quel paziente
+        return map(lambda operatoreSanitario: self.database.ottieniDatiUtente('operatoreSanitario', operatoreSanitario[0]), self.operatoriPresenti())
     
     @log_actions
     def getCartellaClinica(self):

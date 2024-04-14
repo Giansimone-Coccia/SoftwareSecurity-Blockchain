@@ -30,3 +30,187 @@
 2024-04-13 17:31:32,692 - INFO - ControllerMedico: Chiamato visualizzaRecordVisite , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
 2024-04-13 17:31:32,692 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
 2024-04-13 17:31:32,889 - INFO - db: Chiamato ottieniVisitePaziente , Porta: 3306
+2024-04-13 17:45:09,769 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 17:45:53,283 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 17:45:54,225 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 17:45:54,726 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 17:45:55,333 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:45:56,008 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:45:56,644 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:45:58,828 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:46:00,141 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:46:01,410 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 17:46:01,821 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 17:46:02,174 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 17:50:39,269 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 17:50:44,939 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 17:50:44,939 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 17:50:45,051 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 17:50:45,051 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 17:50:45,126 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 17:50:45,127 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 17:50:45,200 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 17:50:45,333 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:21:54,699 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:21:55,252 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:21:55,807 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:21:56,309 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:21:56,939 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:21:57,523 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:21:59,365 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:22:00,505 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:22:01,622 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:22:01,927 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:22:02,218 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:22:09,182 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:22:14,746 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:22:14,746 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:22:14,826 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:22:14,826 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:22:14,904 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:22:14,904 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:22:14,983 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:22:15,066 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:19,136 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:19,136 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:19,136 - INFO - ControllerPaziente: Chiamato mediciPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:19,136 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-13 18:22:19,428 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:22:21,679 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:21,679 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:22:21,679 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:23:18,966 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:23:19,499 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:23:19,979 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:23:20,453 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:21,091 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:21,640 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:23,614 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:24,690 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:25,800 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:23:26,110 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:23:26,433 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:23:33,135 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:05,381 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:24:05,381 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:05,565 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:24:05,565 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:05,653 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:24:05,653 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:05,749 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:05,880 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-13 18:24:12,759 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-13 18:24:12,759 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-13 18:24:12,846 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:12,949 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:13,056 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:23,811 - INFO - OperatoreSanitario: Chiamato _aggiungiVisita , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-13 18:24:23,811 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-13 18:24:31,976 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:24:32,623 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:24:33,261 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:24:33,706 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:34,268 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:34,813 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:36,604 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:37,668 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:38,755 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:24:39,057 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:24:39,361 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:24:45,923 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:54,632 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:24:54,632 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:54,725 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:24:54,725 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:54,820 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:24:54,820 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:24:54,918 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:55,022 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:56,816 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:56,816 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:56,816 - INFO - ControllerPaziente: Chiamato mediciPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:56,816 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-13 18:24:56,912 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:24:57,865 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:57,865 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:24:57,865 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:26:10,373 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:10,904 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:16,463 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:17,113 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:17,655 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:18,166 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:20,019 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:21,110 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:22,188 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:26:22,515 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:26:22,837 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:25,643 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:30,382 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:26:30,382 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:37,683 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:26:37,683 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:45,805 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:26:45,805 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:45,874 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:26:45,874 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:45,945 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:26:45,946 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:26:46,014 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:26:46,082 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-13 18:26:56,782 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:57,471 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:58,028 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:26:58,573 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:59,195 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:26:59,846 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:27:02,998 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:27:04,777 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:27:06,547 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:27:06,923 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:27:07,293 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:27:12,496 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:27:24,163 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:27:24,164 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:27:24,260 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:27:24,260 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:27:24,353 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:27:24,353 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:27:24,447 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:27:24,539 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:26,955 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:26,957 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:26,957 - INFO - ControllerPaziente: Chiamato mediciPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:26,957 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-13 18:27:27,055 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:27:29,118 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:29,118 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:27:29,118 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:29:51,519 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:29:52,152 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:29:52,983 - INFO - solc 0.6.0 already installed at: C:\Users\aleda\.solcx\solc-v0.6.0
+2024-04-13 18:29:53,550 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:29:54,165 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:29:54,668 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:29:56,526 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:29:57,641 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:29:58,756 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:29:59,167 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-13 18:29:59,539 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-13 18:30:02,461 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:30:11,906 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-13 18:30:11,907 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:30:12,001 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-13 18:30:12,001 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:30:12,100 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-13 18:30:12,100 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-13 18:30:12,216 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:30:12,402 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:15,387 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:15,387 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:15,387 - INFO - ControllerPaziente: Chiamato operatoriPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:15,387 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-13 18:30:15,526 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-13 18:30:16,742 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:16,742 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Ancona, via Piave 2')
+2024-04-13 18:30:16,742 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
