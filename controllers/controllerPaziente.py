@@ -1,5 +1,6 @@
 
 import logging
+from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.utilities import Utilities
 from database.db import db
@@ -100,7 +101,10 @@ class ControllerPaziente(Ilog):
                                 indice += 1
                                 integrita_verificata = True
                     if not integrita_verificata:
-                        print("Problemi con il controllo dell'integrità")
+                        try:
+                            raise IntegrityCheckError("ERRORE ! Violata integrita' dati visite paziente")
+                        except IntegrityCheckError as err:
+                            print(err)
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
@@ -170,9 +174,11 @@ class ControllerPaziente(Ilog):
                     print(f"Patologie: {cartella[2]}")
                     integrita_verificata = True
                     if not integrita_verificata:
-                        print("Problemi con il controllo dell'integrità")
+                        raise IntegrityCheckError("ERRORE ! Violata integrita' dati cartella clinica")
                 else:
                     print("Nessuna cartella clinica trovata con il codice fiscale specificato.")
+        except IntegrityCheckError as err:
+            print(err)
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
@@ -187,15 +193,16 @@ class ControllerPaziente(Ilog):
             if farmaci:
                 print("Lista dei farmaci prescritti: ")
                 for farmaco in farmaci:
+                    integrita_verificata = False
                     for hash in hash_farmaci:
                         if self.ut.check_integrity(hash, farmaco):
                             print(f"{contatore} - {farmaco[1]} prescritto il {farmaco[2]}, dosaggio: {farmaco[3]}")
                             integrita_verificata = True
                             contatore += 1
-                if not integrita_verificata:
-                    print("Problemi con il controllo dell'integrità")
-            else:
-                print("Nessun farmaco trovato con il codice fiscale specificato.")
+                    if not integrita_verificata:
+                     raise IntegrityCheckError("ERRORE ! Violata integrita' dati farmaci paziente")
+        except IntegrityCheckError as err:
+            print(err)           
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
@@ -223,5 +230,19 @@ class ControllerPaziente(Ilog):
                 break
         # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
-
+        medici = self.database.ottieniMedici()
+        print("Seleziona con quale medico vuoi metterti in cura: ")
+        contatore = 0
+        medico_scelto = 0
+        for medico in medici:
+            print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
+            contatore +=1
+        counter = len(medici) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+            medico_scelto = scelta
         self.database.addNuovoPaziente(cf, nome, cognome, residenza)
+        m = medici[medico_scelto]
+        cf_medico = m[0]
+        self.database.addNuovoCurato(cf, cf_medico)

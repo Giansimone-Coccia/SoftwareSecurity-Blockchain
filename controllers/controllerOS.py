@@ -79,13 +79,39 @@ class ControllerOS:
         print(cartella)
         print("Ok")
 
-    def aggiungiPrestazioneVisita(self, tuplaDaAggiungere):
+    @log_actions
+    def aggiungiPrestazioneVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
-        return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
+        
+        tuplaDaAggiungere=(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
+            
+        try:
+            if self.database.addTupla("visitaOperatore", *tuplaDaAggiungere):
+                # Se l'aggiunta della tupla ha avuto successo, procedi con le operazioni successive
+                # Calcola l'hash dei dati
+                hash = self.ut.hash_row(self.database.getVisitaOS(tuplaDaAggiungere))
+                
+                # Chiamata al contratto medico per memorizzare l'hash
+                self.os_contract.functions.storeHashVisita(cfOpSanitario, cfPaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+                
+                # Ottieni e restituisci le visite mediche del paziente
+                visite = self.getRecordVisite(cfPaziente)
+                return True
+            else:
+                # Se l'aggiunta della tupla ha fallito, restituisci False
+                return False
+        
+        except Exception as e:
+            print("Errore durante l'aggiunta della visita medica:", e)
+            return False
+    
+    def eliminaPrestazioneVisita(self, visita):
+        
+        return self.database.eliminaVisitaOS(visita) 
     
     def getRecordVisite(self, CFPaziente):
-        vistePaziente = []
+        visitePaziente = []
         try:
             pazienti = self.database.ottieniDatiUtente('paziente', CFPaziente)
             IdOS = self.utente[0]
@@ -96,22 +122,24 @@ class ControllerOS:
                     visite = self.database.ottieniVisisteOS(paziente[0], IdOS)
                     print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
                     indice = 0
-                    integrita_verificata = False
-                    for visita in visite:
+                    for visita in visite:  
+                        integrita_verificata = False
+                        print(f"yolo{visita}")
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
-                                vistePaziente.append(visita)
+                                visitePaziente.append(visita)
+                                print(visita)
                                 integrita_verificata = True
                                 break
-                    if not integrita_verificata:
-                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                        if not integrita_verificata:
+                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except IntegrityCheckError as e:
             print(f"ERRORE ! {e}")
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
-        return vistePaziente
+        return visitePaziente
     
     def addAssistito(self, CFpaziente):
         IdOperatore = self.utente[0]

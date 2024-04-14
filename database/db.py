@@ -3,6 +3,8 @@ import logging
 import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
+from datetime import datetime
+
 
 from interface.Ilog import Ilog
 
@@ -126,6 +128,30 @@ class db(Ilog):
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
+    
+    @log_actions
+    def ottieniVisiteMedico(self, CFPaziente, CFMedico):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaMedico'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+    
+    @log_actions
+    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
+        # Nome della tabella da cui desideri recuperare i dati
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
+        # Recupera tutte le tuple
+        rows = cursor.fetchall()
+        return rows
+
+
 
     @log_actions
     def ottieniFarmaci(self, CF):
@@ -353,3 +379,95 @@ class db(Ilog):
             # Chiudi il cursore
             cursor.close()
 
+    @log_actions
+    def addNuovoPaziente(self, cf, nome, cognome, residenza):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'paziente'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CF, Nome, Cognome, Residenza) VALUES (%s, %s, %s, %s)", (cf, nome, cognome, residenza))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            print("Paziente registrato con successo")
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati del paziente:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+    
+    @log_actions
+    def eliminaVisitaOS(self, visita):
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+
+        try:
+            # Esegui la query per eliminare la visita
+            query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
+            
+            # Converti la stringa in un oggetto datetime
+            #data_ora_str = visita[3][18:-1]  # Estrai la parte di stringa contenente la data e l'ora effettive
+            #data_ora_datetime = datetime.strptime(data_ora_str, "%Y, %m, %d, %H, %M, %S")  # Converte la stringa in un oggetto datetime
+            #data_ora_formattata = data_ora_datetime.strftime('%Y-%m-%d %H:%M:%S')  # Formatta la data e l'ora in una stringa nel formato desiderato
+
+            # Esegui la query con i parametri della visita
+            cursor.execute(query, (visita[0], visita[1], visita[3]))
+
+            # Commit delle modifiche
+            self.conn.commit()
+            
+            print("Visita eliminata con successo.")
+        except mysql.connector.Error as err:
+            print("Errore durante l'eliminazione della visita:", err)
+
+    @log_actions
+    def ottieniMedici(self):
+        table_name = 'medico'
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(f"SELECT * FROM {table_name}")
+                result = cursor.fetchall()  # Ottieni tutte le righe risultanti dalla query
+                return result
+        except Exception as e:
+            print("Si è verificato un errore durante l'ottenimento dei dati dal database:", e)
+            return None  # Ritorna None in caso di errore
+
+    @log_actions
+    def addNuovoCurato(self, CFPaziente, CFMedico):
+        # Nome della tabella in cui inserire i nuovi dati
+        table_name = 'curato'
+        cursor = self.conn.cursor()
+        try:
+            # Esegui una query per inserire i nuovi dati nella tabella paziente
+            cursor.execute(f"INSERT INTO {table_name} (CFMedico, CFPaziente) VALUES (%s, %s)", (CFMedico, CFPaziente))
+            # Conferma la transazione
+            self.conn.commit()
+            # Ottieni il numero di righe inserite
+            num_rows_inserted = cursor.rowcount
+            return num_rows_inserted
+        except Exception as e:
+            # Annulla eventuali modifiche in caso di errore
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento dei dati nel database:", e)
+            return 0
+        finally:
+            # Chiudi il cursore
+            cursor.close()
+
+    def getVisitaOS(self, tupla):
+        table_name = 'visitaOperatore'
+        cursor = self.conn.cursor()
+        try:
+            query = f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
+            cursor.execute(query, (tupla[0], tupla[1], tupla[3]))
+            rows = cursor.fetchall()
+            return rows
+        except mysql.connector.Error as err:
+            print("Errore durante il recupero della visita:", err)
+            return []
