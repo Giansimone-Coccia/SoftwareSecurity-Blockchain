@@ -1,5 +1,6 @@
 import datetime
 import sys
+from dotenv import load_dotenv
 import web3.eth
 
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
@@ -16,12 +17,13 @@ from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
 import logging
+import os
 
 # Press the green button in the gutter to run the script.
 
 """ Da non usare con wi-fi pubblico (es. università) in quanto il database non consente l'accesso con tale tipo di connessione.
 Inoltre, importare mysql per l'utilizzo del DB """
-
+load_dotenv()
 
 if __name__ == '__main__':
 
@@ -45,13 +47,9 @@ if __name__ == '__main__':
     ut._resetHashCartellaClinicaM(controller)
     ut._resetHashVisiteOperatoreO(controllerOS)
 
-    events = controller.medico_contract.events.Evento().getLogs({
-    'fromBlock': 0  # Blocco iniziale
-    })
 
-    # Processa gli eventi recuperati
-    for event in events:
-        print(event)
+
+    
 
     #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
     #hash_visite = controller.medico_contract.functions.

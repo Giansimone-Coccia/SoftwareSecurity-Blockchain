@@ -59,13 +59,14 @@ class Deploy:
         w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
         chain_id = 1337
 
-        my_address = ""
-        private_key = ""
+        load_dotenv("Chiavi.env")
+        my_address = os.getenv("MY_ADDRESS")
+        private_key = os.getenv("PRIVATE_KEY")
 
-        with open('address_key.txt', 'r') as file:
-            my_address = file.read().split()[0]
+        #with open('address_key.txt', 'r') as file:
+         #   my_address = file.read().split()[0]
 
-        with open('private_key.txt', 'r') as file:
-            private_key = file.read().split()[0]
+        #with open('private_key.txt', 'r') as file:
+         #   private_key = file.read().split()[0]
 
         return abi, bytecode, w3, chain_id, my_address, private_key

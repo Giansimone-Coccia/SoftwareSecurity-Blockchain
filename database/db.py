@@ -1,5 +1,7 @@
 
 import logging
+import os
+from dotenv import load_dotenv
 import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -25,7 +27,8 @@ class db(Ilog):
 
         self.port = config['port']
 
-        self.key = 'Lvs5RZsgOSmB7y5R5lF1v5xFy5Z9S0Xr' # Chiave da usare anche nel db 
+        load_dotenv("Chiavi.env")
+        self.key = os.getenv("PRIVATE_KEY_DEC_ENC_DB") # Chiave da usare anche nel db 
 
         try:
             # Connessione al database
