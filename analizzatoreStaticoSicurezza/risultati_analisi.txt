@@ -1,0 +1,731 @@
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\deploy.py
+Run started:2024-04-14 19:01:01.780771
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 46
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\main.py
+Run started:2024-04-14 19:01:02.326770
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 62
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\mainView.py
+Run started:2024-04-14 19:01:02.899761
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 12
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\tempCodeRunnerFile.py
+Run started:2024-04-14 19:01:03.390827
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 0
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerMedico.py
+Run started:2024-04-14 19:01:03.960150
+
+Test results:
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerMedico.py:241:35
+240	
+241	                update_query = f"""
+242	                    UPDATE cartellaClinica
+243	                    SET {nomeCampo} = %s
+244	                    WHERE CFpaziente = %s
+245	                    """
+246	                cursor.execute(update_query, (nuovo_valore, CFpaziente))
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 334
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 1
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 1
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerOS.py
+Run started:2024-04-14 19:01:04.491509
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 104
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerPaziente.py
+Run started:2024-04-14 19:01:05.031444
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 206
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\utilities.py
+Run started:2024-04-14 19:01:05.580084
+
+Test results:
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b324_hashlib.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\utilities.py:14:22
+13	        #print(f"sql_row {row_string}")
+14	        hash_object = hashlib.md5()
+15	
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 85
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 1
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 1
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\Exceptions\IntegrityCheckError.py
+Run started:2024-04-14 19:01:06.084529
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 9
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py
+Run started:2024-04-14 19:01:06.640180
+
+Test results:
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:59:25
+58	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+59	        cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
+60	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:83:29
+82	            # Esegui una query per selezionare tutti i dati dalla tabella specificata
+83	            cursor.execute(f"SELECT * FROM {table_name}")
+84	            # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:97:25
+96	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+97	        cursor.execute(f"SELECT * FROM {table_name}")
+98	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:108:25
+107	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+108	        cursor.execute(f"SELECT * FROM {table_name}")
+109	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:119:25
+118	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+119	        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = '{cf}'")
+120	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:130:25
+129	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+130	        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+131	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:141:25
+140	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+141	        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s", (CFPaziente, CFMedico))
+142	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:152:25
+151	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+152	        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s", (CFPaziente, CFOperatore))
+153	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:165:25
+164	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+165	        cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s", (CF,))
+166	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:176:25
+175	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+176	        cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s AND NomeFarmaco = %s", (CF, nomeFarmaco))
+177	        # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:188:29
+187	            # Esegui una query per aggiornare il dosaggio del farmaco nella tabella specificata
+188	            cursor.execute(f"UPDATE {table_name} SET Dosaggio = %s WHERE IdCartellaClinica = %s AND NomeFarmaco = %s", (dosaggio, CF, nomeFarmaco))
+189	            # Commit delle modifiche al database
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:208:29
+207	            # Esegui una query per aggiornare il dosaggio del farmaco nella tabella specificata
+208	            cursor.execute(f"UPDATE {table_name} SET InCorso = %s WHERE IdCartellaClinica = %s AND NomePatologia = %s", (stato, CF, nomePatologia))
+209	            # Commit delle modifiche al database
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:237:25
+236	        # Esegui una query per selezionare tutti i dati dalla tabella specificata
+237	        cursor.execute(f"SELECT * FROM {table_name} WHERE IdCartellaClinica = %s", (CF,))
+238	
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:250:25
+249	        # Esegui una query per selezionare solo le righe con il CF specificato
+250	        cursor.execute(f"SELECT * FROM {table_name} WHERE CF = %s", (CF,))
+251	        # Recupera le righe filtrate
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:261:25
+260	        # Esegui una query per selezionare solo le righe con il CF specificato
+261	        cursor.execute(f"SELECT * FROM {table_name} WHERE CFPaziente = %s", (CF,))
+262	        # Recupera le righe filtrate
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:297:27
+296	
+297	            cursor.execute("SELECT * FROM {} LIMIT 1".format(nomeTabella))
+298	            colonne = [desc[0] for desc in cursor.description]
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:302:22
+301	            # Costruisci la query di inserimento dinamica
+302	            query = f"INSERT INTO {nomeTabella} ({', '.join(colonne)}) VALUES ({', '.join(['%s'] * len(colonne))})"
+303	            print(query)
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:322:29
+321	            # Esegui una query per selezionare tutte le tuple dalla tabella specificata
+322	            cursor.execute(f"SELECT * FROM {nomeTabella}")
+323	            # Recupera tutte le tuple
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:353:29
+352	            # Esecuzione della query per recuperare tutte le tuple dalla tabella
+353	            cursor.execute(f"SELECT * FROM {table_name}")
+354	            # Recupero di tutte le righe dalla query
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:370:29
+369	            # Esegui una query per aggiornare il campo "Trattamento" per il paziente con il CF specificato
+370	            cursor.execute(f"UPDATE {table_name} SET Trattamento = %s WHERE CF = %s", (nuovo_trattamento, CF))
+371	            # Conferma la transazione
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:392:29
+391	            # Esegui una query per inserire i nuovi dati nella tabella paziente
+392	            cursor.execute(f"INSERT INTO {table_name} (CF, Nome, Cognome, Residenza) VALUES (%s, %s, %s, %s)", (cf, nome, cognome, residenza))
+393	            # Conferma la transazione
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:415:22
+414	            # Esegui la query per eliminare la visita
+415	            query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
+416	            
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:438:22
+437	            # Esegui la query per eliminare la visita
+438	            query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s AND DataOra = %s"
+439	            
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:461:33
+460	            with self.conn.cursor() as cursor:
+461	                cursor.execute(f"SELECT * FROM {table_name}")
+462	                result = cursor.fetchall()  # Ottieni tutte le righe risultanti dalla query
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Medium
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:475:29
+474	            # Esegui una query per inserire i nuovi dati nella tabella paziente
+475	            cursor.execute(f"INSERT INTO {table_name} (CFMedico, CFPaziente) VALUES (%s, %s)", (CFMedico, CFPaziente))
+476	            # Conferma la transazione
+
+--------------------------------------------------
+>> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
+   Severity: Medium   Confidence: Low
+   CWE: CWE-89 (https://cwe.mitre.org/data/definitions/89.html)
+   More Info: https://bandit.readthedocs.io/en/1.7.8/plugins/b608_hardcoded_sql_expressions.html
+   Location: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py:494:22
+493	        try:
+494	            query = f"SELECT * FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
+495	            cursor.execute(query, (tupla[0], tupla[1], tupla[3]))
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 329
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 26
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 4
+		Medium: 22
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\tempCodeRunnerFile.py
+Run started:2024-04-14 19:01:07.192696
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 1
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\interface\Ilog.py
+Run started:2024-04-14 19:01:07.688742
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 5
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\medico.py
+Run started:2024-04-14 19:01:08.242697
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 275
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\operatoreSanitario.py
+Run started:2024-04-14 19:01:08.773528
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 136
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\paziente.py
+Run started:2024-04-14 19:01:09.341068
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 91
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\tempCodeRunnerFile.py
+Run started:2024-04-14 19:01:09.863650
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 1
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\user.py
+Run started:2024-04-14 19:01:10.383599
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 5
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
+Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\session\session.py
+Run started:2024-04-14 19:01:10.890123
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 51
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (0):
+
+
