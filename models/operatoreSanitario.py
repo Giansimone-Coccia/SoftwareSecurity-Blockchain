@@ -51,7 +51,7 @@ class OperatoreSanitario(Ilog):
                 _cfOpSanitario = self.utente[0]
                 _toAdd = [_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione]
                 
-                if(self._aggiungiVisita(_toAdd)):
+                if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
                     print("Prestazione aggiunta correttamente !")
                 else:
                     print("Prestazione NON aggiunta")
@@ -84,8 +84,8 @@ class OperatoreSanitario(Ilog):
         return paziente_selezionato[0]
     
     @log_actions
-    def _aggiungiVisita(self, toAdd):
-        return self.controller.aggiungiPrestazioneVisita(toAdd)
+    def _aggiungiVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
+        return self.controller.aggiungiPrestazioneVisita(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
 
     @log_actions
     def _selectVisitaPaziente(self, CFPaziente):

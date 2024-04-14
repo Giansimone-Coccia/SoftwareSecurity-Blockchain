@@ -95,10 +95,31 @@ class ControllerOS(Ilog):
         print("Ok")
 
     @log_actions
-    def aggiungiPrestazioneVisita(self, tuplaDaAggiungere):
+    def aggiungiPrestazioneVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
-        return self.database.addTupla("visitaOperatore",*tuplaDaAggiungere)    
+        
+        tuplaDaAggiungere=(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
+            
+        try:
+            if self.database.addTupla("visitaOperatore", *tuplaDaAggiungere):
+                # Se l'aggiunta della tupla ha avuto successo, procedi con le operazioni successive
+                # Calcola l'hash dei dati
+                hash = self.ut.hash_row(tuplaDaAggiungere)
+                
+                # Chiamata al contratto medico per memorizzare l'hash
+                self.os_contract.functions.storeHashVisita(cfOpSanitario, cfPaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+                
+                # Ottieni e restituisci le visite mediche del paziente
+                visite = self.getRecordVisite(cfPaziente)
+                return True
+            else:
+                # Se l'aggiunta della tupla ha fallito, restituisci False
+                return False
+        
+        except Exception as e:
+            print("Errore durante l'aggiunta della visita medica:", e)
+            return False
     
     def eliminaPrestazioneVisita(self, visita):
         
