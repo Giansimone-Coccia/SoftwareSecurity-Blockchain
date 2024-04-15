@@ -43,7 +43,7 @@ directory_da_analizzare = os.getcwd()
 file_risultati = 'risultati_analisi.txt'
 
 # Cartelle da escludere
-cartelle_da_escludere = ['analizzatoreStaticoSicurezza', 'contracts', 'solidityContracts']
+cartelle_da_escludere = ['analizzatoreStaticoSicurezza', 'contracts', 'solidityContracts', 'test']
 
 # Esegui Bandit su tutti i file Python nella directory e salva i risultati
 run_bandit_on_files(directory_da_analizzare, file_risultati, exclude_folders=cartelle_da_escludere)
