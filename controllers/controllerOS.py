@@ -105,8 +105,7 @@ class ControllerOS:
             print("Errore durante l'aggiunta della visita medica:", e)
             return False
     
-    def eliminaPrestazioneVisita(self, visita):
-        
+    def eliminaPrestazioneVisita(self, visita):      
         return self.database.eliminaVisitaOS(visita) 
     
     def getRecordVisite(self, CFPaziente):

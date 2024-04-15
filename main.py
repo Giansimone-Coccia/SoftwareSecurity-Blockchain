@@ -1,5 +1,6 @@
 import datetime
 import sys
+from dotenv import load_dotenv
 import web3.eth
 
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
@@ -16,12 +17,13 @@ from session.session import session
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend 
 import logging
+import os
 
 # Press the green button in the gutter to run the script.
 
 """ Da non usare con wi-fi pubblico (es. università) in quanto il database non consente l'accesso con tale tipo di connessione.
 Inoltre, importare mysql per l'utilizzo del DB """
-
+load_dotenv()
 
 if __name__ == '__main__':
 
@@ -31,6 +33,9 @@ if __name__ == '__main__':
     controllerP = ControllerPaziente.get_instance()
     controllerOS = ControllerOS.get_instance()
     ut = Utilities()
+
+    #myfilter = controller.medico_contract.eventFilter('Evento', {'fromBlock': 0,'toBlock': 'latest'});
+    
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controllerP)
@@ -43,6 +48,11 @@ if __name__ == '__main__':
     ut._resetHashVisiteOperatoreO(controllerOS)
     ut._resetHashVisiteOperatore(controllerP)
 
+
+
+    
+
+    #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
     #hash_visite = controller.medico_contract.functions.
     # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
     #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        

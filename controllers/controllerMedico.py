@@ -59,11 +59,18 @@ class ControllerMedico(Ilog):
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
+        # self.event_filter = self.medico_contract.events.Evento.create_filter(
+        #     fromBlock='latest',  # Blocco da cui iniziare a filtrare gli eventi
+        #     toBlock='latest' # Filtri sugli argomenti dell'evento
+        # )
+
         # Attivo lo smart contract: "Cartella Clinica"
         #self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
         #self.ut.resetHashBlockchain(self)
         #self.utilities = utilities.Utilities()
+
+
 
     @classmethod
     def get_instance(cls):
