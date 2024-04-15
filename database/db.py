@@ -151,8 +151,6 @@ class db(Ilog):
         rows = cursor.fetchall()
         return rows
 
-
-
     @log_actions
     def ottieniFarmaci(self, CF):
         # Nome della tabella da cui desideri recuperare i dati

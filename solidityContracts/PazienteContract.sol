@@ -7,7 +7,6 @@ contract PazienteContract {
     mapping(string => mapping(string => string[])) public visita;
     mapping(string => string[]) public farmaco;
 
-
     // Funzione per memorizzare un hash nella mappatura
     function storeHashVisita(string memory _codiceFiscaleMedico, string memory _codiceFiscalePaziente, string memory _hashDati) public {
         visita[_codiceFiscaleMedico][_codiceFiscalePaziente].push(_hashDati);
