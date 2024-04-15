@@ -8,7 +8,6 @@ contract PazienteContract {
     mapping(string => string[]) public farmaco;
     event Evento(address msg, string message);
 
-
     // Funzione per memorizzare un hash nella mappatura
     function storeHashVisita(string memory _codiceFiscaleMedico, string memory _codiceFiscalePaziente, string memory _hashDati) public {
         require(bytes(_hashDati).length == 32, "Hash non corretto");

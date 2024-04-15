@@ -86,18 +86,18 @@ class Paziente(Ilog):
     
     @log_actions
     def _selectOperatoreSanitario(self):
-        medici = list(self.controller.datiOperatori())
+        operatori = list(self.controller.datiOperatori())
         print("Seleziona un operatore:")
-        for contatore, medico in enumerate(medici, start=0):
-            print(f"{contatore}: {medico[contatore][1]} {medico[contatore][2]}, {medico[contatore][3]}")
+        for contatore, operatore in enumerate(operatori, start=0):
+            print(f"{contatore}: {operatore[contatore][1]} {operatore[contatore][2]}, {operatore[contatore][3]}")
             contatore += 1
-        counter = len(medici) - 1
+        counter = len(operatori) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
-        paziente_selezionato = medici[int(scelta)]
-        print(paziente_selezionato)
-        return paziente_selezionato[0]
+        operatore_selezionato = operatori[int(scelta)]
+        print(operatore_selezionato)
+        return operatore_selezionato[0]
     
     @log_actions
     def _visualizzaCartellaClinica(self):

@@ -107,12 +107,20 @@ class Utilities:
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
 
     def _resetHashVisiteOperatoreO(self,controller):
-        """Re-inserisco tutti gli hash riferiti alla tabella visitaMedico nella blockchain"""
+        """Re-inserisco gli hash di tutte le visite-mediche effettuate nello smart contract"""
+        tuple_visite = self._db.retrieve_all_rows("visitaOperatore")
+        address = controller.w3.eth.accounts[0]
+        for tupla in tuple_visite:
+            hash_visita = self.hash_row(tupla)
+            controller.os_contract.functions.storeHashVisita(tupla[1],tupla[0],hash_visita).transact({'from': address})
+
+    def _resetHashVisiteOperatore(self,controller):
+        """Re-inserisco tutti gli hash riferiti alla tabella visitaOperatore nella blockchain"""
         tupleVisiteO = self._db.retrieve_all_rows("visitaOperatore")
         address = controller.w3.eth.accounts[0]
         for tupla in tupleVisiteO:
             hash_visita = self.hash_row(tupla)
-            controller.os_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
+            controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
 
 
         
