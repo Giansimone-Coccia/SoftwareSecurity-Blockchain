@@ -27,7 +27,6 @@ load_dotenv()
 
 if __name__ == '__main__':
 
-
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
@@ -53,10 +52,6 @@ if __name__ == '__main__':
     ut._resetHashCartellaClinicaM(controller)
     ut._resetHashVisiteOperatoreO(controllerOS)
     ut._resetHashVisiteOperatore(controllerP)
-
-
-
-    
 
     #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
     #hash_visite = controller.medico_contract.functions.

@@ -1,5 +1,4 @@
 import hashlib
-
 import web3
 
 from database.db import db
@@ -123,11 +122,4 @@ class Utilities:
         for tupla in tupleVisiteO:
             hash_visita = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
-
-
         
-
-        
-
-
-    

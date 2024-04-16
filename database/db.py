@@ -1,12 +1,19 @@
 
 import logging
 import os
+import re
 from dotenv import load_dotenv
 import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from datetime import datetime
-
+from controllers.Exceptions.SQLInjectionError import SQLInjectionError
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives import padding
+import base64
+from cryptography.hazmat.primitives.padding import PKCS7
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 from interface.Ilog import Ilog
 
@@ -29,7 +36,6 @@ class db(Ilog):
 
         load_dotenv("Chiavi.env")
         self.key = os.getenv("PRIVATE_KEY_DEC_ENC_DB") # Chiave da usare anche nel db 
-
         try:
             # Connessione al database
             self.conn = mysql.connector.connect(**config)
@@ -49,6 +55,15 @@ class db(Ilog):
             logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Porta: {self.port}")
             return func(self, *args, **kwargs)
         return wrapper
+    
+    def _sqlInjectionCheck(*params):
+        """Controlla la presenza di potenziali SQL injection nei parametri."""
+        # Espressione regolare per cercare caratteri che potrebbero indicare una query SQL
+        sql_pattern = re.compile(r'\b(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|OR|AND|UNION|DROP|ALTER|EXEC)\b', re.IGNORECASE)
+
+        for param in params:
+            if re.search(sql_pattern, str(param)):
+                raise SQLInjectionError("Potenziale SQL injection rilevata.")
     
     @log_actions
     def ottieniDatiAuth(self):
@@ -113,6 +128,7 @@ class db(Ilog):
     @log_actions
     def ottieniCartellaFromCF(self,cf):
         # Nome della tabella da cui desideri recuperare i dati
+        self._sqlInjectionCheck(cf)
         table_name = 'cartellaClinica'
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
@@ -123,6 +139,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniVisitePaziente(self, CFPaziente, CFMedico):
+        self._sqlInjectionCheck(CFPaziente, CFMedico)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaMedico'
         cursor = self.conn.cursor()
@@ -134,6 +151,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniVisiteMedico(self, CFPaziente, CFMedico):
+        self._sqlInjectionCheck(CFPaziente, CFMedico)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaMedico'
         cursor = self.conn.cursor()
@@ -145,6 +163,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniVisiteOS(self, CFPaziente, CFOperatore):
+        self._sqlInjectionCheck(CFPaziente, CFOperatore)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaOperatore'
         cursor = self.conn.cursor()
@@ -156,6 +175,7 @@ class db(Ilog):
 
     @log_actions
     def ottieniFarmaci(self, CF):
+        self._sqlInjectionCheck(CF)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
         cursor = self.conn.cursor()
@@ -167,6 +187,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniFarmaco(self, CF, nomeFarmaco):
+        self._sqlInjectionCheck(CF, nomeFarmaco)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'farmaci'
         cursor = self.conn.cursor()
@@ -179,6 +200,7 @@ class db(Ilog):
     @log_actions
     def modificaDosaggiofarmaco(self, CF, nomeFarmaco, dosaggio):
         try:
+            self._sqlInjectionCheck(CF, nomeFarmaco, dosaggio)
             # Nome della tabella da cui desideri recuperare i dati
             table_name = 'farmaci'
             cursor = self.conn.cursor()         
@@ -199,6 +221,7 @@ class db(Ilog):
     @log_actions
     def modificaStatoPatologia(self, CF, nomePatologia, stato):
         try:
+            self._sqlInjectionCheck(CF, nomePatologia, stato)
             # Nome della tabella da cui desideri recuperare i dati
             table_name = 'patologie'
             cursor = self.conn.cursor()         
@@ -227,6 +250,7 @@ class db(Ilog):
 
     @log_actions
     def ottieniPatologie(self, CF):
+        self._sqlInjectionCheck(CF)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'patologie'
     
@@ -241,6 +265,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniDatiUtente(self, nomeTabella, CF):
+        self._sqlInjectionCheck(nomeTabella, CF)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = nomeTabella
         cursor = self.conn.cursor()
@@ -252,6 +277,7 @@ class db(Ilog):
     
     @log_actions
     def ottieniCartellaClinicaPaziente(self, CF):
+        self._sqlInjectionCheck(CF)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'caretllaClinica'
         cursor = self.conn.cursor()
@@ -314,6 +340,7 @@ class db(Ilog):
     @log_actions
     def fromValueToId(self, nomeTabella, input_value):
         try:
+            self._sqlInjectionCheck(nomeTabella)
             # Crea un cursore dalla connessione al database
             cursor = self.conn.cursor()
             # Esegui una query per selezionare tutte le tuple dalla tabella specificata
@@ -346,6 +373,7 @@ class db(Ilog):
             list: Una lista di tuple rappresentanti le righe della tabella.
         """
         try:
+            self._sqlInjectionCheck(table_name)
             cursor = self.conn.cursor()
             # Esecuzione della query per recuperare tutte le tuple dalla tabella
             cursor.execute(f"SELECT * FROM {table_name}")
@@ -360,6 +388,7 @@ class db(Ilog):
     
     @log_actions
     def updateCartellaClinica(self, CF, nuovo_trattamento):
+        self._sqlInjectionCheck(CF, nuovo_trattamento)
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'cartellaClinica'
         cursor = self.conn.cursor()
@@ -382,6 +411,7 @@ class db(Ilog):
 
     @log_actions
     def addNuovoPaziente(self, cf, nome, cognome, residenza):
+        self._sqlInjectionCheck(cf, nome, cognome, residenza)
         # Nome della tabella in cui inserire i nuovi dati
         table_name = 'paziente'
         cursor = self.conn.cursor()
@@ -465,6 +495,7 @@ class db(Ilog):
 
     @log_actions
     def addNuovoCurato(self, CFPaziente, CFMedico):
+        self._sqlInjectionCheck(CFPaziente, CFMedico)
         # Nome della tabella in cui inserire i nuovi dati
         table_name = 'curato'
         cursor = self.conn.cursor()
@@ -497,15 +528,53 @@ class db(Ilog):
             print("Errore durante il recupero della visita:", err)
             return []
         
+    def aes_encrypt(self, key, plaintext):
+        backend = default_backend()
+        iv = os.urandom(16)  # Genera un IV casuale
+        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
+        encryptor = cipher.encryptor()
+        # Non aggiungere il padding PKCS7
+        ciphertext = encryptor.update(plaintext.encode()) + encryptor.finalize()
+        # Restituisci il risultato come esadecimale
+        return ciphertext.hex()
+
+    def aes_decrypt(self, key, ciphertext):
+        backend = default_backend()
+        iv = b'1234567890123456'  # Initialization vector (IV)
+        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
+        decryptor = cipher.decryptor()
+        unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
+        ciphertext = base64.b64decode(ciphertext)
+        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+        unpadded_data = unpadder.update(plaintext) + unpadder.finalize()
+        return unpadded_data.decode()
+        
+    def pad_key(self, key, length):
+        padder = PKCS7(length * 8).padder()
+        padded_key = padder.update(key) + padder.finalize()
+        return padded_key
+
     def addNuovoAuth(self, CF, Username, Password, Ruolo):
-        table_name = 'autenticazione'
+        """ table_name = 'autenticazione'
         cursor = self.conn.cursor()
+        chiave = self.pad_key(self.key, 16)
         try:
-            padded_key = self.key.ljust(16, '\0')
-            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'))", (CF, Username, Password, Ruolo))
+            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'))", (CF, Username, Password, Ruolo))
             self.conn.commit()
             print("Nuovo record aggiunto alla tabella 'autenticazione'.")
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della nuova autenticazione:", err)
-
+            return [] """
+        table_name = 'autenticazione'
+        cursor = self.conn.cursor()
+        CF_encrypted = self.aes_encrypt(self.key.encode(), CF)
+        user_encrypted = self.aes_encrypt(self.key.encode(), Username)
+        pwd_encrypted = self.aes_encrypt(self.key.encode(), Password)
+        role_encrypted = self.aes_encrypt(self.key.encode(), Ruolo)
+        try:
+            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (%s, %s, %s, %s)", (CF_encrypted, user_encrypted, pwd_encrypted, role_encrypted))
+            self.conn.commit()
+            print("Nuovo record aggiunto alla tabella 'autenticazione'.")
+        except mysql.connector.Error as err:
+            print("Errore durante l'aggiunta della nuova autenticazione:", err)
             return []
