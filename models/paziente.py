@@ -41,7 +41,7 @@ class Paziente(Ilog):
             print("4. Per visionare i farmaci prescritti")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(4))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
 
             if scelta == "0":
