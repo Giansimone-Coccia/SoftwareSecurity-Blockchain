@@ -3,7 +3,7 @@ import sys
 from dotenv import load_dotenv
 import web3.eth
 
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.controllerOS import ControllerOS
 from controllers.controllerPaziente import ControllerPaziente

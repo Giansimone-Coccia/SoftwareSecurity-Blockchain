@@ -5,7 +5,7 @@ import json
 
 import web3
 
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -111,9 +111,12 @@ class ControllerMedico(Ilog):
            
             
             # Chiamata al contratto medico per memorizzare l'hash
-            self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+            tx_hash= self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
             #tx_receipt = self.w3.eth.get_transaction_receipt(a)
            # event = self.paziente_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+            tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+            evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+            logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
             
             # Ottieni e restituisci le visite mediche del paziente
             visite = self.getVisiteMedico(CFpaziente)
@@ -159,7 +162,10 @@ class ControllerMedico(Ilog):
             _tuple = self.database.retrieve_all_rows("patologie")
             for tupla in _tuple:
                 if tupla[0] == IdCartellaClinica and tupla[1] == NomePatologia:
-                    self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                    tx_hash = self.medico_contract.functions.storeHashPatologie(tupla[0],self.ut.hash_row(tupla)).transact({'from': address})
+                    tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                    evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                    logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                     break
 
             return _statusTransactionDb
@@ -208,6 +214,9 @@ class ControllerMedico(Ilog):
                     #print("hash tupla iniziale: " + hash_tupla)
                     # Effettua la transazione per memorizzare l'hash della cartella clinica nel contratto medico
                     tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
+                    tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                    evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                    logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                     # Aggiungi l'hash della transazione alla lista dei valori hash del contratto
                     self.valoriHashContratto.append(tx_hash)
                     return True
@@ -291,7 +300,10 @@ class ControllerMedico(Ilog):
                     farmaco = self.database.ottieniFarmaco(IdCartellaClinica, NomeFarmaco)
                     hash_tupla = self.ut.hash_row(farmaco[0])
                     address = self.w3.eth.accounts[0]
-                    self.medico_contract.functions.storeHashFarmaco(IdCartellaClinica, hash_tupla).transact({'from': address})
+                    tx_hash = self.medico_contract.functions.storeHashFarmaco(IdCartellaClinica, hash_tupla).transact({'from': address})
+                    tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                    evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                    logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                     return True
                 else:
                     return False
@@ -378,7 +390,10 @@ class ControllerMedico(Ilog):
             #self.database.modificaDosaggiofarmaco(IdCartella, NomeFarmaco, NuovaDose)           
             if (self.database.modificaDosaggiofarmaco(tupla_farmaco[0], tupla_farmaco[1], NuovaDose) and check):
                 address = self.w3.eth.accounts[0]
-                self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
+                tx_hash = self.medico_contract.functions.storeHashFarmaco(tupla_farmaco[0], self.ut.hash_row(tupla_farmaco)).transact({'from': address})
+                tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                 print("Dosaggio del farmaco modificato correttamente")
                 return True
             else:
@@ -399,7 +414,10 @@ class ControllerMedico(Ilog):
                         if(self.ut.check_integrity(tupla_blockchain,tupla)):
                             _nuovaTupla = self.database.modificaStatoPatologia(tupla_patologia[0], tupla_patologia[1], nuovoStato)
                             address = self.w3.eth.accounts[0]
-                            self.medico_contract.functions.storeHashPatologie(_nuovaTupla[0],self.ut.hash_row(_nuovaTupla)).transact({'from': address})
+                            tx_hash = self.medico_contract.functions.storeHashPatologie(_nuovaTupla[0],self.ut.hash_row(_nuovaTupla)).transact({'from': address})
+                            tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                            evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                            logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                             print("HASH CORRETTAMENTE SALVATO IN BLOCKCHAIN !")
                             return True
                     raise IntegrityCheckError("Integrità dati PATOLOGIE non rispettata")
@@ -450,7 +468,10 @@ class ControllerMedico(Ilog):
             self.database.addTupla("cartellaClinica", CFpaziente, "NESSUN TRATTAMENTO", "NESSUNA ALLERGIA")
             hash = self.ut.hash_row(self.database.ottieniCartellaFromCF(CFpaziente))
             address = self.w3.eth.accounts[0]
-            self.medico_contract.functions.storeHashCartellaClinica(CFpaziente,hash).transact({'from': address})
+            tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente,hash).transact({'from': address})
+            tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+            evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+            logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
     
     def eliminaVisitaM(self, visita):
         
