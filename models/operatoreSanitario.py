@@ -100,6 +100,7 @@ class OperatoreSanitario(Ilog):
     def _aggiungiVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         return self.controller.aggiungiPrestazioneVisita(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
 
+    @log_actions
     def _mostraVisite(self,CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
@@ -150,9 +151,20 @@ class OperatoreSanitario(Ilog):
     
     @log_actions
     def _addNewAssistito(self,):
-        cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")
-        ricevuta = self.controller.addAssistito(cf_paziente)
+        # Mi ricavo i nuovi assistiti
+        _assistitiDisponibili = self.controller.pazientiDisponibili()
+        # Gestisco il caso in cui non ci sono pazienti disponibili
+        if(len(_assistitiDisponibili) == 0):
+            return False
+        for (i, assistitoDisponibile) in enumerate(_assistitiDisponibili, 1):
+            print(f"{i}. {assistitoDisponibile}")
+
+        scelta = input("Inserisci il numero corrispondente al paziente: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_assistitiDisponibili)-1:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+
+        ricevuta = self.controller.addAssistito(scelta)
         while(ricevuta != True):
-            cf_paziente = input("Inserisci il codice fiscale dell'assistito:")
+            cf_paziente = input("Errore nell'aggiunta ! Per favore inserisci nuovamente il paziente: ")
             ricevuta = self.controller.addAssistito(cf_paziente)
         return ricevuta

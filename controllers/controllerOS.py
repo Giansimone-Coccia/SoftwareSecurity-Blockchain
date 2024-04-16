@@ -165,7 +165,6 @@ class ControllerOS:
                 for assistito in allAssistito:
                     if(assistito[0] == IdOperatore and assistito[1] ==CFpaziente ):
                         # Salvo in blockchain
-                        blocco = "A"
                         tx_hash = self.os_contract.functions.storeHashVisita(IdOperatore,CFpaziente,self.ut.hash_row(assistito)).transact({'from': self.w3.eth.accounts[0]})
                         tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
                         evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
@@ -175,3 +174,24 @@ class ControllerOS:
                 return False
         else:
             return False
+        
+
+    @log_actions
+    def pazientiDisponibili(self):
+        #TODO: Check di integrità
+        _allPazienti = self.database.retrieve_all_rows("paziente")
+        _pazientiSanitari= self.datiPazientiCuratiOS() # Non ho capito come funziona 
+        _cfPazientiOccupati = [tupla[1] for tupla in _pazientiSanitari]
+    
+        
+        _pazientiNonAssistiti = []
+        for paziente in _allPazienti:
+            if(paziente[0] not in _cfPazientiOccupati):
+                _pazientiNonAssistiti.append(paziente)
+        
+        return _pazientiNonAssistiti
+                    
+
+
+        
+            
