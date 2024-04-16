@@ -471,3 +471,16 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante il recupero della visita:", err)
             return []
+        
+    def addNuovoAuth(self, CF, Username, Password, Ruolo):
+        table_name = 'autenticazione'
+        cursor = self.conn.cursor()
+        try:
+            padded_key = self.key.ljust(16, '\0')
+            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'), AES_ENCRYPT(%s, '{padded_key}'))", (CF, Username, Password, Ruolo))
+            self.conn.commit()
+            print("Nuovo record aggiunto alla tabella 'autenticazione'.")
+        except mysql.connector.Error as err:
+            print("Errore durante l'aggiunta della nuova autenticazione:", err)
+
+

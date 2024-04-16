@@ -1,5 +1,6 @@
 
 import logging
+import re
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.utilities import Utilities
@@ -230,19 +231,32 @@ class ControllerPaziente(Ilog):
                 break
         # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
-        medici = self.database.ottieniMedici()
-        print("Seleziona con quale medico vuoi metterti in cura: ")
-        contatore = 0
-        medico_scelto = 0
-        for medico in medici:
-            print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
-            contatore +=1
-        counter = len(medici) - 1
-        scelta = input("Digitare la scelta: ")
-        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
-            scelta = input("Scelta errata, digitare nuovamente: ")
-            medico_scelto = scelta
-        self.database.addNuovoPaziente(cf, nome, cognome, residenza)
-        m = medici[medico_scelto]
-        cf_medico = m[0]
-        self.database.addNuovoCurato(cf, cf_medico)
+        regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+        while True:
+            psw = input("Inserisci la password (almeno 8 caratteri alfanumerici): ")
+            if re.match(regex, psw):
+                psw_confirm = input("Conferma la password: ")
+                if (psw == psw_confirm):
+                    print("Ok, le password coincidono")
+                    medici = self.database.ottieniMedici()
+                    print("Seleziona con quale medico vuoi metterti in cura: ")
+                    contatore = 0
+                    medico_scelto = 0
+                    for medico in medici:
+                        print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
+                        contatore +=1
+                    counter = len(medici) - 1
+                    scelta = input("Digitare la scelta: ")
+                    while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+                        scelta = input("Scelta errata, digitare nuovamente: ")
+                        medico_scelto = scelta
+                    self.database.addNuovoPaziente(cf, nome, cognome, residenza)
+                    m = medici[medico_scelto]
+                    cf_medico = m[0]
+                    self.database.addNuovoCurato(cf, cf_medico)
+                    self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    break
+                else:
+                    print("Le password non coincidono. Riprova.")
+            else:
+                print("La password non è valida. Assicurati che abbia almeno 8 caratteri, includa almeno una maiuscola, una minuscola ed un numero.")
