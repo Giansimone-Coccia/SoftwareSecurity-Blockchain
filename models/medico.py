@@ -42,11 +42,12 @@ class Medico(Ilog):
             print("0. Per uscire dal programma")
             print("1. Per inserire una nuova visita medica")
             print("2. Per visualizzare le visite mediche effettuate")
-            print("3. Per aggiungere un nuovo paziente in cura")
-            print("4. Per aggiornare la Cartella Clinica di un paziente")
+            print("3. Per aggiornare una visita medica")
+            print("4. Per aggiungere un nuovo paziente in cura")
+            print("5. Per aggiornare la Cartella Clinica di un paziente")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(6))):
+            while(scelta not in map(str, range(7))):
                 scelta = input("Digitare la scelta: ")
             
             if(scelta == "0"):
@@ -65,8 +66,14 @@ class Medico(Ilog):
                 lista = self._selectPaziente()
                 tupla = lista[0]
                 self.controller.visualizzaRecordVisite(tupla)
-
+            
             elif(scelta == "3"):
+                lista = self._selectPaziente()
+                tupla = lista[0]
+                visita = self._selectVisitaPaziente(tupla)
+                self._modificaVisitaPaziente(visita)
+
+            elif(scelta == "4"):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
@@ -74,13 +81,53 @@ class Medico(Ilog):
                     print("Paziente in cura non salvato, prego riprovare")
                     print("")
             
-            elif(scelta == "4"):
+            elif(scelta == "5"):
                 if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
                     print("Cartella clinica correttamente aggiornata!")
                     print("")
                 else:
                     print("Cartella clinica non aggiornata correttamente")
                     print("")
+
+    def _selectVisitaPaziente(self, CFPaziente):
+        visite = self.controller.getRecordVisite(CFPaziente)
+        for contatore, visita in enumerate(visite, start=0):
+            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
+            #print(f"{pazienteCurato}")
+        counter = len(visite) - 1
+        scelta = input("Digitare la scelta: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+        visita_selezionata = visite[int(scelta)]
+        print(visita_selezionata)
+        return visita_selezionata
+    
+    def _modificaVisitaPaziente(self, visita):
+        _loop = True
+        while(_loop):
+            print("0. Per modificare i dati")
+            print("1. Per modificare il tipo di prestazione")
+            print("2. Per modificare il luogo")
+
+            scelta = input("Digitare la scelta: ")
+            while(scelta not in map(str, range(3))):
+                scelta = input("Digitare la scelta: ")
+
+            if scelta == "0":
+                nuovi_dati = input("Digita i nuovi dati:")
+                self.controller.eliminaVisitaM(visita)
+                self.controller.addVisitaMedica(visita[3],visita[0], visita[4], nuovi_dati, visita[5])
+                _loop = False
+            elif scelta == "1":
+                self.controller.eliminaVisitaM(visita)
+                nuova_prestazione = input("Digita la nuova prestazione:")
+                self.controller.addVisitaMedica(visita[3],visita[0], nuova_prestazione, visita[2] , visita[5])
+                _loop = False
+            elif scelta == "2":
+                self.controller.eliminaVisitaM(visita)
+                nuovo_luogo = input("Digita il nuovo luogo:")
+                self.controller.addVisitaMedica(visita[3],visita[0], visita[4], visita[2] , nuovo_luogo)
+                _loop = False
 
     @log_actions
     def _addNewVisita(self):

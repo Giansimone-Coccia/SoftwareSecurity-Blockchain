@@ -105,8 +105,7 @@ class ControllerOS:
             print("Errore durante l'aggiunta della visita medica:", e)
             return False
     
-    def eliminaPrestazioneVisita(self, visita):
-        
+    def eliminaPrestazioneVisita(self, visita):      
         return self.database.eliminaVisitaOS(visita) 
     
     def getRecordVisite(self, CFPaziente):
@@ -118,7 +117,7 @@ class ControllerOS:
             if pazienti:
                 for index, paziente in enumerate(pazienti):
                     print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
-                    visite = self.database.ottieniVisisteOS(paziente[0], IdOS)
+                    visite = self.database.ottieniVisiteOS(paziente[0], IdOS)
                     print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
                     indice = 0
                     for visita in visite:  

@@ -1,0 +1,154 @@
+Return code: 4294967295
+
+Standard Output:
+
+
+Standard Error:
+'truffle.cmd compile --all' running (use --truffle-version truffle@x.x.x to use specific version)
+
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+INFO:Detectors:
+Version constraint ^0.6.0 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)
+	- AbiReencodingHeadOverflowWithStaticArrayCleanup
+	- DirtyBytesArrayToStorage
+	- NestedCalldataArrayAbiReencodingSizeValidation
+	- ABIDecodeTwoDimensionalArrayMemory
+	- KeccakCaching
+	- EmptyByteArrayCopy
+	- DynamicArrayCleanup
+	- MissingEscapingInFormatting
+	- ArraySliceDynamicallyEncodedBaseType
+	- ImplicitConstructorCallvalueCheck
+	- TupleAssignmentMultiStackSlotComponents
+	- MemoryArrayCreationOverflow
+	- YulOptimizerRedundantAssignmentBreakContinue.
+ It is used by:
+	- solidityContracts/MedicoContract.sol#1
+	- solidityContracts/OSContract.sol#1
+	- solidityContracts/PazienteContract.sol#1
+solc-0.6.0 is an outdated solc version. Use a more recent version (at least 0.8.0), if possible.
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+INFO:Detectors:
+Parameter MedicoContract.storeHashVisita(string,string,string)._codiceFiscaleMedico (solidityContracts/MedicoContract.sol#14) is not in mixedCase
+Parameter MedicoContract.storeHashVisita(string,string,string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#14-15) is not in mixedCase
+Parameter MedicoContract.storeHashVisita(string,string,string)._hashDati (solidityContracts/MedicoContract.sol#15) is not in mixedCase
+Parameter MedicoContract.retrieveHashVisita(string,string)._codiceFiscaleMedico (solidityContracts/MedicoContract.sol#18) is not in mixedCase
+Parameter MedicoContract.retrieveHashVisita(string,string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#18-21) is not in mixedCase
+Parameter MedicoContract.storeHashCartellaClinica(string,string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#22) is not in mixedCase
+Parameter MedicoContract.storeHashCartellaClinica(string,string)._hashDati (solidityContracts/MedicoContract.sol#22-23) is not in mixedCase
+Parameter MedicoContract.retrieveHashCartellaClinica(string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#27-28) is not in mixedCase
+Parameter MedicoContract.modifyHashCartellaClinica(string,string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#31-33) is not in mixedCase
+Parameter MedicoContract.modifyHashCartellaClinica(string,string)._newHash (solidityContracts/MedicoContract.sol#33) is not in mixedCase
+Parameter MedicoContract.storeHashFarmaco(string,string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#35) is not in mixedCase
+Parameter MedicoContract.storeHashFarmaco(string,string)._hashDati (solidityContracts/MedicoContract.sol#35-38) is not in mixedCase
+Parameter MedicoContract.retrieveHashFarmaco(string)._codiceFiscalePaziente (solidityContracts/MedicoContract.sol#39-40) is not in mixedCase
+Parameter MedicoContract.storeHashPatologie(string,string)._idCartellaClinica (solidityContracts/MedicoContract.sol#44-45) is not in mixedCase
+Parameter MedicoContract.storeHashPatologie(string,string)._hashDati (solidityContracts/MedicoContract.sol#45) is not in mixedCase
+Parameter MedicoContract.retrieveHashPatologie(string)._idCartellaClinica (solidityContracts/MedicoContract.sol#47-48) is not in mixedCase
+Parameter OSContract.storeHashVisita(string,string,string)._codiceFiscaleMedico (solidityContracts/OSContract.sol#9-10) is not in mixedCase
+Parameter OSContract.storeHashVisita(string,string,string)._codiceFiscalePaziente (solidityContracts/OSContract.sol#10) is not in mixedCase
+Parameter OSContract.storeHashVisita(string,string,string)._hashDati (solidityContracts/OSContract.sol#10) is not in mixedCase
+Parameter OSContract.retrieveHashVisita(string,string)._codiceFiscaleMedico (solidityContracts/OSContract.sol#13) is not in mixedCase
+Parameter OSContract.retrieveHashVisita(string,string)._codiceFiscalePaziente (solidityContracts/OSContract.sol#13-14) is not in mixedCase
+Parameter PazienteContract.storeHashVisita(string,string,string)._codiceFiscaleMedico (solidityContracts/PazienteContract.sol#12-13) is not in mixedCase
+Parameter PazienteContract.storeHashVisita(string,string,string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#13) is not in mixedCase
+Parameter PazienteContract.storeHashVisita(string,string,string)._hashDati (solidityContracts/PazienteContract.sol#13) is not in mixedCase
+Parameter PazienteContract.storeHashCartellaClinica(string,string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#15-16) is not in mixedCase
+Parameter PazienteContract.storeHashCartellaClinica(string,string)._hashDati (solidityContracts/PazienteContract.sol#16) is not in mixedCase
+Parameter PazienteContract.retrieveHashCartellaClinica(string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#20-21) is not in mixedCase
+Parameter PazienteContract.retrieveHashVisita(string,string)._codiceFiscaleMedico (solidityContracts/PazienteContract.sol#26-27) is not in mixedCase
+Parameter PazienteContract.retrieveHashVisita(string,string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#27) is not in mixedCase
+Parameter PazienteContract.storeHashFarmaco(string,string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#31) is not in mixedCase
+Parameter PazienteContract.storeHashFarmaco(string,string)._hashDati (solidityContracts/PazienteContract.sol#31-32) is not in mixedCase
+Parameter PazienteContract.retrieveHashFarmaco(string)._codiceFiscalePaziente (solidityContracts/PazienteContract.sol#33) is not in mixedCase
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#conformance-to-solidity-naming-conventions
+INFO:Detectors:
+storeHashVisita(string,string,string) should be declared external:
+	- MedicoContract.storeHashVisita(string,string,string) (solidityContracts/MedicoContract.sol#11-16)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashVisita(string,string) should be declared external:
+	- MedicoContract.retrieveHashVisita(string,string) (solidityContracts/MedicoContract.sol#17-22)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+storeHashCartellaClinica(string,string) should be declared external:
+	- MedicoContract.storeHashCartellaClinica(string,string) (solidityContracts/MedicoContract.sol#22-26)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashCartellaClinica(string) should be declared external:
+	- MedicoContract.retrieveHashCartellaClinica(string) (solidityContracts/MedicoContract.sol#27-29)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+modifyHashCartellaClinica(string,string) should be declared external:
+	- MedicoContract.modifyHashCartellaClinica(string,string) (solidityContracts/MedicoContract.sol#30-34)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+_newHash location should be calldata
+storeHashFarmaco(string,string) should be declared external:
+	- MedicoContract.storeHashFarmaco(string,string) (solidityContracts/MedicoContract.sol#34-39)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashFarmaco(string) should be declared external:
+	- MedicoContract.retrieveHashFarmaco(string) (solidityContracts/MedicoContract.sol#39-41)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+storeHashPatologie(string,string) should be declared external:
+	- MedicoContract.storeHashPatologie(string,string) (solidityContracts/MedicoContract.sol#42-46)
+Moreover, the following function parameters should change its data location:
+_idCartellaClinica location should be calldata
+_hashDati location should be calldata
+retrieveHashPatologie(string) should be declared external:
+	- MedicoContract.retrieveHashPatologie(string) (solidityContracts/MedicoContract.sol#47-49)
+Moreover, the following function parameters should change its data location:
+_idCartellaClinica location should be calldata
+storeHashVisita(string,string,string) should be declared external:
+	- OSContract.storeHashVisita(string,string,string) (solidityContracts/OSContract.sol#9-11)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashVisita(string,string) should be declared external:
+	- OSContract.retrieveHashVisita(string,string) (solidityContracts/OSContract.sol#12-16)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+storeHashVisita(string,string,string) should be declared external:
+	- PazienteContract.storeHashVisita(string,string,string) (solidityContracts/PazienteContract.sol#12-14)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+storeHashCartellaClinica(string,string) should be declared external:
+	- PazienteContract.storeHashCartellaClinica(string,string) (solidityContracts/PazienteContract.sol#15-19)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashCartellaClinica(string) should be declared external:
+	- PazienteContract.retrieveHashCartellaClinica(string) (solidityContracts/PazienteContract.sol#20-23)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+retrieveHashVisita(string,string) should be declared external:
+	- PazienteContract.retrieveHashVisita(string,string) (solidityContracts/PazienteContract.sol#26-28)
+Moreover, the following function parameters should change its data location:
+_codiceFiscaleMedico location should be calldata
+_codiceFiscalePaziente location should be calldata
+storeHashFarmaco(string,string) should be declared external:
+	- PazienteContract.storeHashFarmaco(string,string) (solidityContracts/PazienteContract.sol#31-32)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+_hashDati location should be calldata
+retrieveHashFarmaco(string) should be declared external:
+	- PazienteContract.retrieveHashFarmaco(string) (solidityContracts/PazienteContract.sol#32-37)
+Moreover, the following function parameters should change its data location:
+_codiceFiscalePaziente location should be calldata
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-function-that-could-be-declared-external
+INFO:Slither:. analyzed (3 contracts with 95 detectors), 51 result(s) found

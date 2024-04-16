@@ -1,8 +1,8 @@
-
 import logging
 import re
 from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
+from controllers.controllerOS import ControllerOS
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -119,9 +119,9 @@ class ControllerPaziente(Ilog):
             hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFOperatore, CFPaziente).call()
             if operatori:
                 for index, operatore in enumerate(operatori):
-                    print(f"Medico selezionato: {operatore[1]} {operatore[2]}, {operatore[3]}")
-                    visite = self.database.ottieniVisiteMedico(CFPaziente, operatore[0])
-                    print(f"Elenco delle visite effettuate per il medico {operatore[0]}")
+                    print(f"Operatore selezionato: {operatore[1]} {operatore[2]}, {operatore[3]}")
+                    visite = self.database.ottieniVisiteOS(CFPaziente, operatore[0])
+                    print(f"Elenco delle visite effettuate per l'operatore {operatore[0]}")
                     indice = 0
                     integrita_verificata = False
                     for visita in visite:

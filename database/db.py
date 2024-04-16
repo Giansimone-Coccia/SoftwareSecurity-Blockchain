@@ -1,5 +1,7 @@
 
 import logging
+import os
+from dotenv import load_dotenv
 import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
@@ -25,7 +27,8 @@ class db(Ilog):
 
         self.port = config['port']
 
-        self.key = 'Lvs5RZsgOSmB7y5R5lF1v5xFy5Z9S0Xr' # Chiave da usare anche nel db 
+        load_dotenv("Chiavi.env")
+        self.key = os.getenv("PRIVATE_KEY_DEC_ENC_DB") # Chiave da usare anche nel db 
 
         try:
             # Connessione al database
@@ -141,7 +144,7 @@ class db(Ilog):
         return rows
     
     @log_actions
-    def ottieniVisisteOS(self, CFPaziente, CFOperatore):
+    def ottieniVisiteOS(self, CFPaziente, CFOperatore):
         # Nome della tabella da cui desideri recuperare i dati
         table_name = 'visitaOperatore'
         cursor = self.conn.cursor()
@@ -150,8 +153,6 @@ class db(Ilog):
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         return rows
-
-
 
     @log_actions
     def ottieniFarmaci(self, CF):
@@ -426,6 +427,30 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
 
+    def eliminaVisitaM(self, visita):
+        table_name = 'visitaMedico'
+        cursor = self.conn.cursor()
+
+        try:
+            # Esegui la query per eliminare la visita
+            query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s AND DataOra = %s"
+            
+            # Converti la stringa in un oggetto datetime
+            #data_ora_str = visita[3][18:-1]  # Estrai la parte di stringa contenente la data e l'ora effettive
+            #data_ora_datetime = datetime.strptime(data_ora_str, "%Y, %m, %d, %H, %M, %S")  # Converte la stringa in un oggetto datetime
+            #data_ora_formattata = data_ora_datetime.strftime('%Y-%m-%d %H:%M:%S')  # Formatta la data e l'ora in una stringa nel formato desiderato
+
+            # Esegui la query con i parametri della visita
+            cursor.execute(query, (visita[0], visita[1], visita[3]))
+
+            # Commit delle modifiche
+            self.conn.commit()
+            
+            print("Visita eliminata con successo.")
+        except mysql.connector.Error as err:
+            print("Errore durante l'eliminazione della visita:", err)
+
+
     @log_actions
     def ottieniMedici(self):
         table_name = 'medico'
@@ -483,4 +508,4 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della nuova autenticazione:", err)
 
-
+            return []

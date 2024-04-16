@@ -59,11 +59,18 @@ class ControllerMedico(Ilog):
         # Working with deployed Contracts
         self.medico_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
 
+        # self.event_filter = self.medico_contract.events.Evento.create_filter(
+        #     fromBlock='latest',  # Blocco da cui iniziare a filtrare gli eventi
+        #     toBlock='latest' # Filtri sugli argomenti dell'evento
+        # )
+
         # Attivo lo smart contract: "Cartella Clinica"
         #self.cartella_clinica = self._deploy_cartella_clinica("CartellaClinica")
         self.database = db()
         #self.ut.resetHashBlockchain(self)
         #self.utilities = utilities.Utilities()
+
+
 
     @classmethod
     def get_instance(cls):
@@ -305,8 +312,8 @@ class ControllerMedico(Ilog):
                     visite = self.database.ottieniVisitePaziente(paziente[0], IdMedico)
                     print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
                     indice = 0
-                    integrita_verificata = False
                     for visita in visite:
+                        integrita_verificata = False
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 print(f"{indice} - Dati: {visita[2]}")
@@ -316,8 +323,8 @@ class ControllerMedico(Ilog):
                                 indice += 1
                                 integrita_verificata = True
                                 break
-                    if not integrita_verificata:
-                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                        if not integrita_verificata:
+                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except IntegrityCheckError as e:
@@ -325,6 +332,35 @@ class ControllerMedico(Ilog):
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
+    def getRecordVisite(self, CFPaziente):
+        visitePaziente = []
+        try:
+            pazienti = self.database.ottieniDatiUtente('paziente', CFPaziente)
+            IdMedico = self.utente[0]
+            hash_visite = self.medico_contract.functions.retrieveHashVisita(IdMedico, CFPaziente).call()
+            if pazienti:
+                for index, paziente in enumerate(pazienti):
+                    print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
+                    visite = self.database.ottieniVisiteMedico(paziente[0], IdMedico)
+                    print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
+                    indice = 0
+                    for visita in visite:  
+                        integrita_verificata = False
+                        for hash_v in hash_visite:
+                            if self.ut.check_integrity(hash_v, visita):
+                                visitePaziente.append(visita)
+                                integrita_verificata = True
+                                break
+                        if not integrita_verificata:
+                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
+        return visitePaziente
+    
     @log_actions
     def modificaDoseFarmaco(self, NuovaDose, tupla_farmaco):
         """Questo metodo permette la modifica del dosaggio di un farmaco, aggiornando il  DB
@@ -414,5 +450,7 @@ class ControllerMedico(Ilog):
             address = self.w3.eth.accounts[0]
             self.medico_contract.functions.storeHashCartellaClinica(CFpaziente,hash).transact({'from': address})
     
-
+    def eliminaVisitaM(self, visita):
+        
+        return self.database.eliminaVisitaM(visita) 
     
