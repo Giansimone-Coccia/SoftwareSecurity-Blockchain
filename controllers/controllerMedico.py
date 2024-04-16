@@ -112,6 +112,8 @@ class ControllerMedico(Ilog):
             
             # Chiamata al contratto medico per memorizzare l'hash
             self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+            #tx_receipt = self.w3.eth.get_transaction_receipt(a)
+           # event = self.paziente_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
             
             # Ottieni e restituisci le visite mediche del paziente
             visite = self.getVisiteMedico(CFpaziente)
