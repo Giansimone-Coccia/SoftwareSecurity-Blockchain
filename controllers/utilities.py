@@ -73,6 +73,8 @@ class Utilities:
         for tupla in tupleFarmaci:
             hash_farmaco = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+
+    
     
     def _resetHashFarmaciM(self,controller):
         """Re-inserisco gli hash di tutti i farmaci dei vari pazineti nello smart contract"""

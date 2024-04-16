@@ -35,7 +35,13 @@ if __name__ == '__main__':
     ut = Utilities()
 
     #myfilter = controller.medico_contract.eventFilter('Evento', {'fromBlock': 0,'toBlock': 'latest'});
-    
+    """TODO LUCA:
+            tx_hash = controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+            tx_receipt = controller.w3.eth.get_transaction_receipt(tx_hash)
+            evento = controller.paziente_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+            mittente = evento['msg']
+            messaggio = evento['message']
+            logging.info(f"EVENTO BLOCKCHAIN     Mittente = {mittente}      Messaggio = {messaggio}")"""
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controllerP)
