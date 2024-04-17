@@ -225,7 +225,6 @@ class ControllerPaziente(Ilog):
                 print("Il cognome deve contenere solo lettere.")
             else:
                 break
-        # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
         regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
         while True:
@@ -248,8 +247,8 @@ class ControllerPaziente(Ilog):
                         medico_scelto = scelta
                     utenti_presenti = self.database.ottieniDatiAuth()
                     conta = 0
-                    for u in utenti_presenti:
-                        if cf == u[conta]['CF']:
+                    for utente in utenti_presenti:
+                        if utente['Ruolo'] == 'Paziente' and utente['CF'] == cf:
                             print("Utente già presente con questo codice fiscale, provi a fare login")
                             return
                         conta += 1

@@ -59,4 +59,4 @@
 2024-04-17 15:51:51,409 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
 2024-04-17 15:51:51,409 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
 2024-04-17 15:51:51,687 - INFO - session: Chiamato _controlloAccessi
-2024-04-17 15:51:51,687 - WARNING - Utente h Ha effettuato il numero massimo di tentativi di inserimento password(15) ed è stato disconnesso
+2024-04-17 15:51:51,687 - WARNING - Utente h Ha effettuato il numero massimo di tentativi di inserimento password(15) ed ï¿½ stato disconnesso
