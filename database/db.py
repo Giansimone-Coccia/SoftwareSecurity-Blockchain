@@ -559,7 +559,6 @@ class db(Ilog):
     @log_actions
     def inserisciDatiAuth(self, CF, Username, Password, Ruolo):
         table_name = 'autenticazione'
-        #cursor = self.conn.cursor()
         try:
             cursor = self.conn.cursor()
             CF_encoded = bytearray(CF, 'utf-8')
