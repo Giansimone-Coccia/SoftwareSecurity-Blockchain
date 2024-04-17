@@ -1,6 +1,6 @@
 import logging
 import re
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.controllerOS import ControllerOS
 from controllers.utilities import Utilities

@@ -1,4 +1,5 @@
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+import logging
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.utilities import Utilities
 from database.db import db
 from deploy import Deploy
@@ -65,20 +66,31 @@ class ControllerOS:
         else:
             raise Exception("Impossibile modificare l'utente dopo l'inizializzazione.")
         
+    def log_actions(func):
+        """Implementazione di un decorator per il logger"""
+        def wrapper(self, *args, **kwargs):
+            logging.info(f"{self.__class__.__name__}: Chiamato {func.__name__} , Operatore: {self.utente}")
+            return func(self, *args, **kwargs)
+        return wrapper
+        
+    @log_actions
     def pazientiAssistiti(self):
         os_cf = self._utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFOperatore è uguale al Cf dell'operatore che ha fatto l'accesso
         return filter(lambda curato: curato[0] == os_cf, self.database.ottieniAssistiti())
 
+    @log_actions
     def datiPazientiCuratiOS(self):
         #Ottengo la lista di dati effettivi dei pazienti curati dal medico che ha fatto l'accesso
         return map(lambda assistito: self.database.ottieniDatiUtente('paziente', assistito[1]), self.pazientiAssistiti())
-        
+
+    @log_actions 
     def modificaDatiCartellaAssistito(self, CFPaziente):
         cartella = self.database.ottieniCartellaFromCF(CFPaziente)
         print(cartella)
         print("Ok")
 
+    @log_actions
     def aggiungiPrestazioneVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         """Questo metodo aggiunge una visita al db all'interno della tabella
            visitaOperatore"""
@@ -92,7 +104,10 @@ class ControllerOS:
                 hash = self.ut.hash_row(tuplaDaAggiungere)
                 
                 # Chiamata al contratto medico per memorizzare l'hash
-                self.os_contract.functions.storeHashVisita(cfOpSanitario, cfPaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+                tx_hash = self.os_contract.functions.storeHashVisita(cfOpSanitario, cfPaziente, hash).transact({'from': self.w3.eth.accounts[0]})
+                tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                 
                 # Ottieni e restituisci le visite mediche del paziente
                 visite = self.getRecordVisite(cfPaziente)
@@ -105,9 +120,29 @@ class ControllerOS:
             print("Errore durante l'aggiunta della visita medica:", e)
             return False
     
-    def eliminaPrestazioneVisita(self, visita):      
-        return self.database.eliminaVisitaOS(visita) 
+    @log_actions
+    def eliminaPrestazioneVisita(self, visita):
+        try:
+            paziente = self.database.ottieniDatiUtente('paziente', visita[0])
+            IdOS = self.utente[0]
+            hash_visite = self.os_contract.functions.retrieveHashVisita(IdOS, visita[0]).call()
+            if paziente:
+                integrita_verificata = False
+                for hash_v in hash_visite:
+                    if self.ut.check_integrity(hash_v, visita):
+                        integrita_verificata = True
+                        self.database.eliminaVisitaOS(visita) 
+                        break
+                if not integrita_verificata:
+                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
     
+    @log_actions
     def getRecordVisite(self, CFPaziente):
         visitePaziente = []
         try:
@@ -137,10 +172,44 @@ class ControllerOS:
             print(f"Si è verificato un'errore: {e}")
         return visitePaziente
     
+    @log_actions
     def addAssistito(self, CFpaziente):
         IdOperatore = self.utente[0]
 
         if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
-            return self.database.addTupla("assistito",IdOperatore,CFpaziente)
+            check = self.database.addTupla("assistito",IdOperatore,CFpaziente)
+            if(check):
+                allAssistito = self.database.ottieniAssistiti()
+                for assistito in allAssistito:
+                    if(assistito[0] == IdOperatore and assistito[1] ==CFpaziente ):
+                        # Salvo in blockchain
+                        tx_hash = self.os_contract.functions.storeHashVisita(IdOperatore,CFpaziente,self.ut.hash_row(assistito)).transact({'from': self.w3.eth.accounts[0]})
+                        tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                        evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                        logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
+                        return True
+            else:
+                return False
         else:
             return False
+        
+
+    @log_actions
+    def pazientiDisponibili(self):
+        #TODO: Check di integrità
+        _allPazienti = self.database.retrieve_all_rows("paziente")
+        _pazientiSanitari= self.datiPazientiCuratiOS() # Non ho capito come funziona 
+        _cfPazientiOccupati = [tupla[1] for tupla in _pazientiSanitari]
+    
+        
+        _pazientiNonAssistiti = []
+        for paziente in _allPazienti:
+            if(paziente[0] not in _cfPazientiOccupati):
+                _pazientiNonAssistiti.append(paziente)
+        
+        return _pazientiNonAssistiti
+                    
+
+
+        
+            

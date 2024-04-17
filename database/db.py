@@ -7,7 +7,7 @@ import mysql.connector
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from datetime import datetime
-from controllers.Exceptions.SQLInjectionError import SQLInjectionError
+from Exceptions.SQLInjectionError import SQLInjectionError
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 import base64
