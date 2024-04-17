@@ -77,9 +77,7 @@ class Medico(Ilog):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
-                else:
-                    print("Paziente in cura non salvato, prego riprovare")
-                    print("")
+                    
             
             elif(scelta == "5"):
                 if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
@@ -152,11 +150,25 @@ class Medico(Ilog):
     
     @log_actions
     def _addNewCurato(self):
-        cf_paziente = input("Inserisci il codice fiscale del paziente: ")
-        ricevuta = self.controller.addCurato(cf_paziente)
-        while(ricevuta != True):
-            cf_paziente = input("Inserisci il codice fiscale del paziente:")
-            ricevuta = self.controller.addCurato(cf_paziente)
+         # Mi ricavo i nuovi assistiti
+        _curatiDisponibili = self.controller.pazientiDisponibili()
+        # Gestisco il caso in cui non ci sono pazienti disponibili
+        if(len(_curatiDisponibili) == 0):
+            print("Nessun paziente da curare disponibile")
+            return False
+        for (i, curatoDisponibile) in enumerate(_curatiDisponibili, 1):
+            print(f"{i}. {curatoDisponibile[1]} {curatoDisponibile[2]}, {curatoDisponibile[3]}")
+
+        scelta = input("Inserisci il numero corrispondente al paziente: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_curatiDisponibili)-1:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+
+        ricevuta = self.controller.addCurato(_curatiDisponibili[int(scelta)-1][0])
+        
+        if(ricevuta == False):
+            print("Paziente in cura non salvato, prego riprovare")
+            print("")
+    
         return ricevuta
     
     @log_actions

@@ -33,24 +33,19 @@ class ControllerOS:
         )
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
-        #print("Deploying Contract!")
         # Send it!
         tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
         # Wait for the transaction to be mined, and get the transaction receipt
-        #print("Waiting for transaction to finish...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
-        #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
-
         # Working with deployed Contracts
         self.os_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
-
         # Attivo lo smart contract: "Cartella Clinica"
         self.database = db()
 
     @classmethod
     def get_instance(cls):
         if cls._instance is None:
-            cls._instance = cls() #super().__new__(cls)
+            cls._instance = cls()
         return cls._instance
 
     @property
@@ -178,36 +173,17 @@ class ControllerOS:
 
         if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
             check = self.database.addTupla("assistito",IdOperatore,CFpaziente)
-            if(check):
-                allAssistito = self.database.ottieniAssistiti()
-                for assistito in allAssistito:
-                    if(assistito[0] == IdOperatore and assistito[1] ==CFpaziente ):
-                        # Salvo in blockchain
-                        tx_hash = self.os_contract.functions.storeHashVisita(IdOperatore,CFpaziente,self.ut.hash_row(assistito)).transact({'from': self.w3.eth.accounts[0]})
-                        tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
-                        evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
-                        logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
-                        return True
-            else:
-                return False
+            return check
         else:
             return False
         
-
     @log_actions
     def pazientiDisponibili(self):
-        #TODO: Check di integrità
         _allPazienti = self.database.retrieve_all_rows("paziente")
-        _pazientiSanitari= self.datiPazientiCuratiOS() # Non ho capito come funziona 
-        _cfPazientiOccupati = [tupla[1] for tupla in _pazientiSanitari]
-    
+        _pazientiSanitari= list(self.datiPazientiCuratiOS()) 
         
-        _pazientiNonAssistiti = []
-        for paziente in _allPazienti:
-            if(paziente[0] not in _cfPazientiOccupati):
-                _pazientiNonAssistiti.append(paziente)
-        
-        return _pazientiNonAssistiti
+        return list(filter(lambda paziente: paziente[0] not in set(map(lambda p: p[0][0], _pazientiSanitari)), _allPazienti))
+
                     
 
 

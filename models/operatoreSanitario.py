@@ -157,14 +157,12 @@ class OperatoreSanitario(Ilog):
         if(len(_assistitiDisponibili) == 0):
             return False
         for (i, assistitoDisponibile) in enumerate(_assistitiDisponibili, 1):
-            print(f"{i}. {assistitoDisponibile}")
+            print(f"{i}. {assistitoDisponibile[1]} {assistitoDisponibile[2]}, {assistitoDisponibile[3]}")
 
         scelta = input("Inserisci il numero corrispondente al paziente: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_assistitiDisponibili)-1:
             scelta = input("Scelta errata, digitare nuovamente: ")
 
-        ricevuta = self.controller.addAssistito(scelta)
-        while(ricevuta != True):
-            cf_paziente = input("Errore nell'aggiunta ! Per favore inserisci nuovamente il paziente: ")
-            ricevuta = self.controller.addAssistito(cf_paziente)
+        ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)-1][0])
+        
         return ricevuta

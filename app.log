@@ -3201,3 +3201,609 @@
 2024-04-17 12:44:04,698 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
 2024-04-17 12:44:06,037 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
 2024-04-17 12:44:10,123 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:29,245 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:12:30,218 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:12:31,140 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:12:36,975 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:38,856 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:40,644 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:45,561 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:49,602 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:53,718 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:12:54,415 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:12:55,088 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:12:59,864 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:14:12,724 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:14:22,696 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:14:22,696 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:14:22,777 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:14:22,777 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:14:22,854 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:14:22,854 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:14:22,906 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:14:22,984 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:14:25,119 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:14:25,121 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:14:25,121 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:14:25,208 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:14:25,209 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:14:25,209 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:14:25,311 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:21:35,507 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:21:36,566 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:21:37,643 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:21:43,475 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:21:45,935 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:21:48,310 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:21:54,246 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:21:59,267 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:22:05,782 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:22:06,727 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:22:07,519 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:22:13,284 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:22:45,331 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:22:55,148 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:22:55,148 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:22:55,255 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:22:55,255 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:22:55,357 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:22:55,358 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:22:55,460 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:22:55,564 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:22:58,303 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:22:58,304 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:22:58,304 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:22:58,376 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:22:58,376 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:22:58,376 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:23:39,401 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:23:45,229 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:23:45,999 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:23:46,769 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:23:48,796 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:23:50,641 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:23:58,086 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:24:02,720 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:24:06,918 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:24:07,580 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:24:08,241 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:24:12,901 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:24:38,768 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:24:48,469 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:24:48,469 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:24:48,556 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:24:48,556 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:24:48,636 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:24:48,636 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:24:48,714 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:24:48,764 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:24:54,444 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:24:54,444 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:24:54,446 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:24:54,494 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:24:54,495 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:24:54,495 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:24:54,572 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:24:54,652 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:24:54,697 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:24:54,777 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:24:54,857 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:27:14,094 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:27:14,890 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:27:20,811 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:27:21,595 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:23,514 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:25,201 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:29,774 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:33,659 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:37,555 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:27:38,194 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:27:38,818 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:27:43,186 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:29:03,630 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:29:13,925 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:29:13,925 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:29:13,975 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:29:13,976 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:29:14,056 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:29:14,056 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:29:14,133 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:29:14,186 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:29:17,709 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:29:17,709 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:29:17,710 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:29:17,818 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:29:17,818 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:29:17,818 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:29:17,920 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:29:18,023 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:29:18,125 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:29:18,227 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:29:18,329 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:30:05,922 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:30:07,281 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:30:08,307 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:30:14,445 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:17,978 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:20,782 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:29,067 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:35,438 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:41,708 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:30:42,775 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:30:43,938 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:30:51,213 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:31:44,273 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:31:51,167 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:31:51,168 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:31:51,315 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:31:51,315 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:31:51,416 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:31:51,416 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:31:51,518 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:31:51,622 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:31:58,619 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:31:58,619 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:31:58,620 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:31:58,727 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:31:58,727 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:31:58,728 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:33:59,295 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:34:00,139 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:34:01,158 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:34:01,974 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:03,738 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:05,388 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:10,377 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:14,963 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:18,975 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:34:19,681 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:34:20,390 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:25,056 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:43,770 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:34:54,016 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:34:54,016 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:34:54,127 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:34:54,128 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:34:54,231 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:34:54,232 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:34:54,334 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:34:54,440 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:34:59,588 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:34:59,588 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:34:59,588 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:34:59,728 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:34:59,729 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:34:59,729 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:34:59,832 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:34:59,934 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:35:00,035 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:35:00,137 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:35:00,239 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:35:57,395 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:36:03,220 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:36:03,989 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:36:09,619 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:11,916 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:13,617 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:18,164 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:21,909 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:25,800 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:36:26,464 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:36:27,213 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:33,647 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:36:59,047 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:37:09,997 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:37:09,998 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:37:10,082 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:37:10,082 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:37:10,133 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:37:10,133 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:37:10,209 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:37:10,288 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:37:13,399 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:37:13,399 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:37:13,399 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:37:13,494 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:37:13,494 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:37:13,494 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:37:13,587 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:37:13,667 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:37:13,716 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:37:13,867 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:37:14,178 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:38:03,032 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:38:08,810 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:38:09,888 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:38:10,833 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:12,569 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:14,233 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:18,869 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:22,831 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:26,801 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:38:27,515 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:38:28,172 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:32,843 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:38:54,719 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:39:01,717 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:39:01,718 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:39:01,799 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:39:01,800 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:39:01,902 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:39:01,902 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:39:02,004 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:39:02,108 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:39:06,643 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:39:06,643 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:39:06,643 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:39:06,743 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:39:06,744 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:39:06,744 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:39:06,847 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:39:06,950 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:39:07,055 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:39:07,155 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:39:07,257 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:40:04,833 - INFO - ControllerOS: Chiamato addAssistito , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:40:04,834 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:40:05,033 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:44:18,142 - INFO - ControllerOS: Chiamato addAssistito , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:44:18,142 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:44:18,243 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:44:32,880 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:44:39,131 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:44:44,844 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:44:45,659 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:44:47,467 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:44:49,177 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:44:53,695 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:44:57,960 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:45:01,888 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:45:02,549 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:45:03,235 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:45:07,666 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:45:26,230 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:45:37,868 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:45:37,868 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:45:37,928 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:45:37,928 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:45:38,006 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:45:38,007 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:45:38,107 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:45:38,186 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:45:41,851 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:45:41,851 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:45:41,851 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:45:41,976 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:45:41,977 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:45:41,977 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:45:42,076 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:45:42,179 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:45:42,281 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:45:42,384 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:45:42,487 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:46:40,978 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:46:41,809 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:46:42,702 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:46:43,413 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:46:45,134 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:46:46,993 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:46:51,531 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:46:55,425 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:46:59,209 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:46:59,853 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:47:00,549 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:47:04,981 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:47:23,302 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:47:31,005 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:47:31,006 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:47:31,169 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:47:31,170 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:47:31,260 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:47:31,260 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:47:31,360 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:31,646 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:33,119 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:33,119 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:33,119 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:47:33,282 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:33,282 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:33,282 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:47:33,592 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:33,641 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:33,740 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:33,821 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:33,897 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:36,228 - INFO - ControllerOS: Chiamato addAssistito , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:36,228 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:47:36,355 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:47:36,690 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:47:36,961 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 10:47:55,226 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:55,226 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:55,226 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:47:55,334 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:55,335 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:47:55,335 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:47:55,527 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:55,605 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:55,655 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:55,754 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:55,836 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:47:55,912 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:18,683 - INFO - ControllerOS: Chiamato addAssistito , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:50:18,683 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:50:19,374 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:50:20,122 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:50:20,385 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 10:50:32,239 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:50:32,239 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:50:32,240 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:50:32,382 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:50:32,382 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:50:32,382 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:50:32,516 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:32,608 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:32,709 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:32,789 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:32,840 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:32,938 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:50:33,018 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:52:13,624 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:52:14,903 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:52:21,028 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:52:26,860 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:28,591 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:30,204 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:34,805 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:38,536 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:42,197 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:52:42,803 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:52:43,432 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:52:47,827 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:53:32,042 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:53:40,334 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:53:40,335 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:53:40,486 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:53:40,486 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:53:40,588 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:53:40,588 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:53:40,690 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:40,794 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:53:42,795 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:53:42,795 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:53:42,796 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:53:42,944 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:53:42,944 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:53:42,944 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:53:43,045 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,148 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,249 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,355 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,455 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,558 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:53:43,661 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:54:07,551 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:54:08,446 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:54:09,367 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 10:54:10,216 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:12,000 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:13,597 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:18,179 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:21,888 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:25,919 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:54:26,554 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 10:54:27,184 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:54:31,599 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:55:49,440 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:55:56,386 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 10:55:56,386 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:55:56,472 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 10:55:56,472 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:55:56,669 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 10:55:56,670 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 10:55:56,779 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:55:56,882 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:55:59,328 - INFO - OperatoreSanitario: Chiamato _addNewAssistito , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:55:59,329 - INFO - ControllerOS: Chiamato pazientiDisponibili , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:55:59,329 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 10:55:59,441 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:55:59,441 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:55:59,441 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:55:59,545 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:55:59,650 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:55:59,749 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:55:59,851 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:55:59,954 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:56:00,055 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:56:00,159 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:56:02,415 - INFO - ControllerOS: Chiamato addAssistito , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:56:02,415 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:56:02,513 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:56:02,821 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:56:03,087 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 11:15:54,951 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:16:00,843 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:16:01,864 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:16:02,830 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:05,052 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:07,345 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:13,152 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:17,406 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:21,727 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:16:22,644 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:16:23,409 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:28,480 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:16:37,251 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:16:49,048 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:16:49,048 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:16:49,143 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:16:49,145 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:16:49,260 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:16:49,260 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:16:49,349 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:49,453 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:16:53,183 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:16:53,184 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:16:53,184 - INFO - ControllerMedico: Chiamato datiPazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:16:53,184 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:16:53,185 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:16:53,260 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:16:53,338 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,415 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,466 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,546 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,621 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,723 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:16:53,776 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:17:43,010 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:17:44,211 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:17:45,068 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:17:45,982 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:17:48,053 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:17:49,962 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:17:57,833 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:18:03,245 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:18:08,378 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:18:09,108 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:18:09,815 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:18:14,990 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:18:34,823 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:18:43,137 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:18:43,137 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:18:43,290 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:18:43,290 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:18:43,336 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:18:43,337 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:18:43,415 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:43,495 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:18:47,509 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:18:47,509 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:18:47,510 - INFO - ControllerMedico: Chiamato datiPazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:18:47,510 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:18:47,510 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:18:47,622 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:18:47,726 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:47,827 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:47,933 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:48,036 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:48,134 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:48,237 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:18:48,341 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:22:22,851 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:22:28,675 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:22:34,534 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:22:40,387 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:22:42,900 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:22:44,790 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:22:49,474 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:22:53,330 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:22:57,406 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:22:58,126 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:22:58,884 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:23:05,377 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:27,555 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:24:33,421 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:24:34,168 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:24:40,177 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:42,019 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:43,627 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:48,232 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:52,537 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:24:57,167 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:24:58,095 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:24:59,103 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:25:04,987 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:25:43,892 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:25:53,413 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:25:53,414 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:26:00,070 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:26:00,072 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:26:00,154 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:26:00,154 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:26:00,258 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:26:00,258 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:26:00,360 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:26:00,463 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:26:03,948 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:26:03,948 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:26:03,948 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:26:03,949 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:26:04,040 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:27:48,236 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:27:54,097 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:27:59,985 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:28:00,806 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:03,096 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:05,057 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:09,827 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:13,745 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:17,380 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:28:17,995 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:28:18,644 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:22,946 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:28:43,347 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:28:51,298 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:28:51,298 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:28:51,554 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:28:51,556 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:28:51,643 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:28:51,643 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:28:51,745 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:28:52,258 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:28:54,824 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:28:54,826 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:28:54,826 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:28:54,826 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:28:54,919 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:29:33,545 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:29:34,477 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:29:40,215 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:29:46,016 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:29:48,102 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:29:49,886 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:29:55,326 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:29:59,898 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:30:04,223 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:30:04,936 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:30:05,681 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:30:10,534 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:30:39,898 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:30:49,576 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:30:49,578 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:30:49,655 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:30:49,656 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:30:49,735 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:30:49,736 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:30:49,810 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:30:49,864 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:30:52,771 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:30:52,771 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:30:52,771 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:30:52,772 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:30:52,829 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:14,779 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:32:20,977 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:32:26,711 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 11:32:32,570 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:34,375 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:36,370 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:41,030 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:44,650 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:48,707 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:32:49,358 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 11:32:49,989 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:32:54,266 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 11:33:05,835 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:33:17,798 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 11:33:17,799 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:33:17,910 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 11:33:17,910 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:33:18,017 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 11:33:18,017 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 11:33:18,118 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 11:33:18,233 - INFO - Medico: Chiamato menuMedico , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:33:29,976 - INFO - Medico: Chiamato _addNewCurato , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:33:29,977 - INFO - ControllerMedico: Chiamato pazientiDisponibili , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:33:29,977 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
+2024-04-17 11:33:29,977 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 11:33:30,065 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
