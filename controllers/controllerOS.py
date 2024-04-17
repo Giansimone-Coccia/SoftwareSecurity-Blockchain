@@ -196,18 +196,11 @@ class ControllerOS:
 
     @log_actions
     def pazientiDisponibili(self):
-        #TODO: Check di integrità
         _allPazienti = self.database.retrieve_all_rows("paziente")
-        _pazientiSanitari= self.datiPazientiCuratiOS() # Non ho capito come funziona 
-        _cfPazientiOccupati = [tupla[1] for tupla in _pazientiSanitari]
-    
+        _pazientiSanitari= list(self.datiPazientiCuratiOS()) # Non ho capito come funziona
         
-        _pazientiNonAssistiti = []
-        for paziente in _allPazienti:
-            if(paziente[0] not in _cfPazientiOccupati):
-                _pazientiNonAssistiti.append(paziente)
-        
-        return _pazientiNonAssistiti
+        return list(filter(lambda paziente: paziente[0] not in set(map(lambda p: p[0][0], _pazientiSanitari)), _allPazienti))
+
                     
 
 
