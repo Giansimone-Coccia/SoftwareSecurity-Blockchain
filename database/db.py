@@ -71,7 +71,8 @@ class db(Ilog):
         table_name = 'autenticazione'
         cursor = self.conn.cursor()
         # Esegui una query per selezionare tutti i dati dalla tabella specificata
-        cursor.execute(f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}")
+        query = f"SELECT AES_DECRYPT(CF,'{self.key}'), AES_DECRYPT(Username,'{self.key}'), AES_DECRYPT(Password,'{self.key}'), AES_DECRYPT(Ruolo,'{self.key}') FROM {table_name}"
+        cursor.execute(query)
         # Recupera tutte le tuple
         rows = cursor.fetchall()
         # Stampa i valori decodificati per ogni tupla
@@ -578,3 +579,27 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della nuova autenticazione:", err)
             return []
+        
+    @log_actions
+    def inserisciDatiAuth(self, CF, Username, Password, Ruolo):
+        table_name = 'autenticazione'
+        #cursor = self.conn.cursor()
+        try:
+            cursor = self.conn.cursor()
+            CF_encoded = bytearray(CF, 'utf-8')
+            Username_encoded = bytearray(Username, 'utf-8')
+            Password_encoded = bytearray(Password, 'utf-8')
+            Ruolo_encoded = bytearray(Ruolo, 'utf-8')
+            """ CF_encoded = CF.encode('utf-8')
+            Username_encoded = Username.encode('utf-8')
+            Password_encoded = Password.encode('utf-8')
+            Ruolo_encoded = Ruolo.encode('utf-8') """
+            #query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s))", (CF_encoded, self.key, Username_encoded, self.key, Password_encoded, self.key, Ruolo_encoded, self.key)
+            query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'))", (CF_encoded, Username_encoded, Password_encoded, Ruolo_encoded)
+            cursor.execute(query)
+            self.conn.commit()
+            print("Inserimento completato con successo!")
+        except Exception as e:
+
+            self.conn.rollback()
+            print("Si è verificato un errore durante l'inserimento:", str(e))
