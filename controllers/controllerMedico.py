@@ -400,7 +400,6 @@ class ControllerMedico(Ilog):
    
     @log_actions   
     def pazientiCurati(self):
-        print(f"yoylo {self.utente}")
         medico_cf = self.utente[0]
         #Ottengo la lista di tuple riprese dalla tabella curato in cui CFMedico è uguale al Cf del medico che ha fatto l'accesso
         return filter(lambda curato: curato[0] == medico_cf, self.database.ottieniCurati())

@@ -3923,3 +3923,65 @@
 2024-04-17 15:53:44,881 - INFO - ControllerMedico: Chiamato datiPazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
 2024-04-17 15:53:44,881 - INFO - ControllerMedico: Chiamato pazientiCurati , Operatore: ('CFMedico1', 'Mario', 'Rossi', 'Oculista')
 2024-04-17 15:53:44,882 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-17 15:46:29,917 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-17 15:46:35,899 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-17 15:46:41,899 - INFO - solc 0.6.0 already installed at: C:\Users\lucab\.solcx\solc-v0.6.0
+2024-04-17 15:46:47,820 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:48,030 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:48,268 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:48,537 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:48,908 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:49,148 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 15:46:49,572 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 15:46:50,088 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:46:50,383 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 15:47:02,636 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:02,912 - INFO - session: Chiamato eseguiAccesso
+2024-04-17 15:47:15,314 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:47:15,314 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:15,614 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:47:17,749 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:47:17,749 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:18,029 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:47:19,273 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:47:19,273 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:19,517 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:47:20,968 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:47:20,968 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:21,210 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:47:24,444 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:47:24,444 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:47:24,761 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:47:24,762 - WARNING - Utente luca ha eseguito 5
+2024-04-17 15:49:28,545 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:49:28,545 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:49:28,909 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:49:30,839 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:49:30,839 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:49:31,185 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:49:33,083 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:49:33,083 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:49:33,382 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:49:35,255 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:49:35,264 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:49:35,542 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:49:38,289 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:49:38,289 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:49:38,616 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:49:38,616 - WARNING - Utente g ha eseguito 10
+2024-04-17 15:51:42,773 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:51:42,773 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:51:43,098 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:51:44,423 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:51:44,423 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:51:44,700 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:51:45,977 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:51:45,977 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:51:46,269 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:51:47,415 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:51:47,415 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:51:47,655 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:51:51,409 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 15:51:51,409 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 15:51:51,687 - INFO - session: Chiamato _controlloAccessi
+2024-04-17 15:51:51,687 - WARNING - Utente h Ha effettuato il numero massimo di tentativi di inserimento password(15) ed � stato disconnesso

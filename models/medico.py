@@ -58,20 +58,19 @@ class Medico(Ilog):
                 if(self._addNewVisita() == True):
                     print("Visita correttamente salvata nel sistema !")
                     print("")
-                else:
-                    print("Visita non salvata, prego riprovare")
-                    print("")
 
             elif(scelta == "2"):
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                self.controller.visualizzaRecordVisite(tupla)
+                if(lista):
+                    tupla = lista[0]
+                    self.controller.visualizzaRecordVisite(tupla)
             
             elif(scelta == "3"):
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                visita = self._selectVisitaPaziente(tupla)
-                self._modificaVisitaPaziente(visita)
+                if(lista):
+                    tupla = lista[0]
+                    visita = self._selectVisitaPaziente(tupla)
+                    self._modificaVisitaPaziente(visita)
 
             elif(scelta == "4"):
                 if(self._addNewCurato() == True):
@@ -79,13 +78,17 @@ class Medico(Ilog):
                     print("")
 
             elif(scelta == "5"):
-                if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
-                    print("Cartella clinica correttamente aggiornata!")
-                    print("")
-                else:
-                    print("Cartella clinica non aggiornata correttamente")
-                    print("")
+                cf_paziente = self._selectPaziente()[0] if self._selectPaziente() else False
+                if(cf_paziente):
+                    if(self._updateCartellaClinica(cf_paziente) == True):
+                        print("Cartella clinica correttamente aggiornata!")
+                        print("")
+                    else:
+                        print("Cartella clinica non aggiornata correttamente")
+                        print("")
 
+
+    @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
         try:
             visite = self.controller.getRecordVisite(CFPaziente)
@@ -151,12 +154,18 @@ class Medico(Ilog):
             ora_corrente.second
             )
         
-        cf_paziente = self._selectPaziente()[0]
+        cf_paziente = self._selectPaziente()[0] if self._selectPaziente() else False
+        if ( cf_paziente == False):
+            return False
         nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
         print(cf_paziente)
         ricevuta = self.controller.addVisitaMedica(_dataVisita, cf_paziente, nome_prestazione, esito, luogo)
+        if (ricevuta==False):
+            print("Visita non salvata, prego riprovare")
+            print("")
+            return False
         return True
     
     @log_actions
@@ -185,10 +194,13 @@ class Medico(Ilog):
     @log_actions
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCurati())
+        if(not pazienti_curati):
+            print("Non hai alcun paziente in cura")
+            print("")
+            return False
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
-            print(f"{contatore}: ")
-            print(f"{pazienteCurato}")
+            print(f"{contatore}: {pazienteCurato[0][1]} {pazienteCurato[0][2]}, {pazienteCurato[0][3]}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
