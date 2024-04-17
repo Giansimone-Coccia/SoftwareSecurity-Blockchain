@@ -173,21 +173,10 @@ class ControllerOS:
 
         if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
             check = self.database.addTupla("assistito",IdOperatore,CFpaziente)
-            if(check):
-                allAssistito = self.database.ottieniAssistiti()
-                for assistito in allAssistito:
-                    if(assistito[0] == IdOperatore and assistito[1] ==CFpaziente ):
-                        tx_hash = self.os_contract.functions.storeHashVisita(IdOperatore,CFpaziente,self.ut.hash_row(assistito)).transact({'from': self.w3.eth.accounts[0]})
-                        tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
-                        evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
-                        logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
-                        return True
-            else:
-                return False
+            return check
         else:
             return False
         
-
     @log_actions
     def pazientiDisponibili(self):
         _allPazienti = self.database.retrieve_all_rows("paziente")
