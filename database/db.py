@@ -23,18 +23,19 @@ class db(Ilog):
         # Parametri di connessione al database
         self.logging = logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+        load_dotenv("Chiavi.env")
         config = {
-            'user': 'progettoss',
-            'password': 'Blockchain@!456',
-            'host': 'db4free.net',
-            'database': 'softwaresecurity',
-            'port': '3306',
+            'user': os.getenv('USER_DB'),
+            'password': os.getenv('PASSWORD_DB'),
+            'host': os.getenv('HOST_DB'),
+            'database': os.getenv('NOME_DB'),
+            'port': os.getenv('PORTA_DB'),
             'raise_on_warnings': True  # Opzionale, solleva un'eccezione su avvisi MySQL
         }
 
         self.port = config['port']
 
-        load_dotenv("Chiavi.env")
+        
         self.key = os.getenv("PRIVATE_KEY_DEC_ENC_DB") # Chiave da usare anche nel db 
         try:
             # Connessione al database
