@@ -225,7 +225,6 @@ class ControllerPaziente(Ilog):
                 print("Il cognome deve contenere solo lettere.")
             else:
                 break
-        # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
         regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
         while True:

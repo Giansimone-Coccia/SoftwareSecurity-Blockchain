@@ -183,9 +183,3 @@ class ControllerOS:
         _pazientiSanitari= list(self.datiPazientiCuratiOS()) 
         
         return list(filter(lambda paziente: paziente[0] not in set(map(lambda p: p[0][0], _pazientiSanitari)), _allPazienti))
-
-                    
-
-
-        
-            
