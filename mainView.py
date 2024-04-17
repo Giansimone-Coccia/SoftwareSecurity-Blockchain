@@ -6,7 +6,7 @@ class mainView:
         print("Benvenuto!")
         print("0. Per uscire dal programma")
         print("1. Per registrarti come paziente")
-        print("2. per eseguire l'accesso come utente già registrato")
+        print("2. Per eseguire l'accesso come utente già registrato")
         scelta = input("Digitare la scelta: ")
         while(scelta not in map(str, range(4))):
             scelta = input("Digitare la scelta: ")

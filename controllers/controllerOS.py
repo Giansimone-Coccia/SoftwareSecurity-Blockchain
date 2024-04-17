@@ -170,7 +170,6 @@ class ControllerOS:
     @log_actions
     def addAssistito(self, CFpaziente):
         IdOperatore = self.utente[0]
-
         if  not any((assistito[0] == IdOperatore and assistito[1] ==CFpaziente )for assistito in self.database.ottieniAssistiti()):
             check = self.database.addTupla("assistito",IdOperatore,CFpaziente)
             return check
@@ -180,6 +179,5 @@ class ControllerOS:
     @log_actions
     def pazientiDisponibili(self):
         _allPazienti = self.database.retrieve_all_rows("paziente")
-        _pazientiSanitari= list(self.datiPazientiCuratiOS()) 
-        
+        _pazientiSanitari= list(self.datiPazientiCuratiOS())
         return list(filter(lambda paziente: paziente[0] not in set(map(lambda p: p[0][0], _pazientiSanitari)), _allPazienti))

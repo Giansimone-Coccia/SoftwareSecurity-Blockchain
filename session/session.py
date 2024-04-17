@@ -30,7 +30,7 @@ class session(Ilog):
 
         while(_isLogin):
 
-            email = input("Inserisci email: ")
+            email = input("Inserisci username: ")
             self._emailTmp = email
             password = input("Inserisci la password: ")
 
