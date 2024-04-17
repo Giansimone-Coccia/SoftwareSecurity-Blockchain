@@ -254,7 +254,8 @@ class ControllerPaziente(Ilog):
                     m = medici[medico_scelto]
                     cf_medico = m[0]
                     self.database.addNuovoCurato(cf, cf_medico)
-                    self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    #self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    self.database.inserisciDatiAuth(cf, nome, psw, 'Paziente')
                     break
                 else:
                     print("Le password non coincidono. Riprova.")
