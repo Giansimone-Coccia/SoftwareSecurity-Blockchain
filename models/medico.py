@@ -87,6 +87,8 @@ class Medico(Ilog):
                     print("Cartella clinica non aggiornata correttamente")
                     print("")
 
+
+    @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
@@ -100,6 +102,7 @@ class Medico(Ilog):
         print(visita_selezionata)
         return visita_selezionata
     
+    @log_actions
     def _modificaVisitaPaziente(self, visita):
         _loop = True
         while(_loop):
