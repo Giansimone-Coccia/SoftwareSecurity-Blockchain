@@ -346,6 +346,7 @@ class ControllerMedico(Ilog):
         except Exception as e:
             print(f"Si è verificato un'errore: {e}")
 
+    @log_actions
     def getRecordVisite(self, CFPaziente):
         visitePaziente = []
         try:
@@ -480,6 +481,7 @@ class ControllerMedico(Ilog):
             evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
             logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
     
+    @log_actions
     def eliminaVisitaM(self, visita):
         
         return self.database.eliminaVisitaM(visita) 

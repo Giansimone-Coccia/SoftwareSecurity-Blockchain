@@ -325,11 +325,9 @@ class db(Ilog):
             cursor.fetchall()
             # Costruisci la query di inserimento dinamica
             query = f"INSERT INTO {nomeTabella} ({', '.join(colonne)}) VALUES ({', '.join(['%s'] * len(colonne))})"
-            print(query)
             # Esegui l'inserimento
             cursor.execute(query, valori)
             self.conn.commit()
-            print("Nuova tupla inserita correttamente")
             return True
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della tupla:", err)
@@ -443,18 +441,12 @@ class db(Ilog):
             # Esegui la query per eliminare la visita
             query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFOperatoreSanitario = %s AND DataOra = %s"
             
-            # Converti la stringa in un oggetto datetime
-            #data_ora_str = visita[3][18:-1]  # Estrai la parte di stringa contenente la data e l'ora effettive
-            #data_ora_datetime = datetime.strptime(data_ora_str, "%Y, %m, %d, %H, %M, %S")  # Converte la stringa in un oggetto datetime
-            #data_ora_formattata = data_ora_datetime.strftime('%Y-%m-%d %H:%M:%S')  # Formatta la data e l'ora in una stringa nel formato desiderato
-
             # Esegui la query con i parametri della visita
             cursor.execute(query, (visita[0], visita[1], visita[3]))
 
             # Commit delle modifiche
             self.conn.commit()
             
-            print("Visita eliminata con successo.")
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
 
@@ -466,18 +458,12 @@ class db(Ilog):
             # Esegui la query per eliminare la visita
             query = f"DELETE FROM {table_name} WHERE CFPaziente = %s AND CFMedico = %s AND DataOra = %s"
             
-            # Converti la stringa in un oggetto datetime
-            #data_ora_str = visita[3][18:-1]  # Estrai la parte di stringa contenente la data e l'ora effettive
-            #data_ora_datetime = datetime.strptime(data_ora_str, "%Y, %m, %d, %H, %M, %S")  # Converte la stringa in un oggetto datetime
-            #data_ora_formattata = data_ora_datetime.strftime('%Y-%m-%d %H:%M:%S')  # Formatta la data e l'ora in una stringa nel formato desiderato
-
             # Esegui la query con i parametri della visita
             cursor.execute(query, (visita[0], visita[1], visita[3]))
 
             # Commit delle modifiche
             self.conn.commit()
             
-            print("Visita eliminata con successo.")
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
 
@@ -556,16 +542,6 @@ class db(Ilog):
         return padded_key
 
     def addNuovoAuth(self, CF, Username, Password, Ruolo):
-        """ table_name = 'autenticazione'
-        cursor = self.conn.cursor()
-        chiave = self.pad_key(self.key, 16)
-        try:
-            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'))", (CF, Username, Password, Ruolo))
-            self.conn.commit()
-            print("Nuovo record aggiunto alla tabella 'autenticazione'.")
-        except mysql.connector.Error as err:
-            print("Errore durante l'aggiunta della nuova autenticazione:", err)
-            return [] """
         table_name = 'autenticazione'
         cursor = self.conn.cursor()
         CF_encrypted = self.aes_encrypt(self.key.encode(), CF)
@@ -589,16 +565,9 @@ class db(Ilog):
             CF_encoded = bytearray(CF, 'utf-8')
             Username_encoded = bytearray(Username, 'utf-8')
             Password_encoded = bytearray(Password, 'utf-8')
-            Ruolo_encoded = bytearray(Ruolo, 'utf-8')
-            """ CF_encoded = CF.encode('utf-8')
-            Username_encoded = Username.encode('utf-8')
-            Password_encoded = Password.encode('utf-8')
-            Ruolo_encoded = Ruolo.encode('utf-8') """
-            #query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s))", (CF_encoded, self.key, Username_encoded, self.key, Password_encoded, self.key, Ruolo_encoded, self.key)
             query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'))", (CF_encoded, Username_encoded, Password_encoded, Ruolo_encoded)
             cursor.execute(query)
             self.conn.commit()
-            print("Inserimento completato con successo!")
         except Exception as e:
 
             self.conn.rollback()
