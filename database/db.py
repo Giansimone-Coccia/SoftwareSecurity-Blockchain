@@ -441,6 +441,7 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante l'eliminazione della visita:", err)
 
+    @log_actions
     def eliminaVisitaM(self, visita):
         table_name = 'visitaMedico'
         cursor = self.conn.cursor()
