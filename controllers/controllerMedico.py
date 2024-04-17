@@ -439,6 +439,13 @@ class ControllerMedico(Ilog):
         return map(lambda pazienteCurato: self.database.ottieniDatiUtente('paziente', pazienteCurato[1]), self.pazientiCurati())
 
     @log_actions
+    def pazientiDisponibili(self):
+        _pazientiCurati = list(self.pazientiCurati())
+        _allPazienti = self.database.retrieve_all_rows("paziente")
+
+        return list(filter(lambda paziente: paziente[0] not in set(map(lambda p: p[1], _pazientiCurati)), _allPazienti))
+
+    @log_actions
     def _get_cartella_clinica_from_CF(self,cf):
         try:
             # Chiama la funzione retrieveHash del contratto
