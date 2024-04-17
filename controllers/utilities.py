@@ -1,6 +1,7 @@
 import hashlib
 import web3
 
+
 from database.db import db
 
 class Utilities:
@@ -38,12 +39,6 @@ class Utilities:
         except Exception as e:
             print(f"Errore durante la modifica dell'hash: {e}")
 
-    """ def resetHashBlockchain(self, controller):
-        #Questo metodo re-setta gli hash nella blockchain. Da scartare questo metodo
-        self._resetHashCartellaClinica(controller)
-        self._resetHashFarmaci(controller)
-        self._resetHashVisiteMedico(controller)
-        self._resetHashPatologie(controller) """
         
     def _resetHashCartellaClinicaM(self,controller):
         """Re-inserisco gli hash nella cartella clinica"""
@@ -122,4 +117,16 @@ class Utilities:
         for tupla in tupleVisiteO:
             hash_visita = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
+
+
+    def startApplication(self,controller,controllerP,controllerOS):
+        self._resetHashFarmaci(controllerP)
+        self._resetHashFarmaciM(controller)
+        self._resetHashPatologie(controller)
+        self._resetHashVisiteMedico(controllerP)
+        self._resetHashVisiteMedicoM(controller)
+        self._resetHashCartellaClinica(controllerP)
+        self._resetHashCartellaClinicaM(controller)
+        self._resetHashVisiteOperatoreO(controllerOS)
+        self._resetHashVisiteOperatore(controllerP)
         
