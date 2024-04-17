@@ -361,16 +361,6 @@ class db(Ilog):
 
     @log_actions
     def retrieve_all_rows(self,table_name):
-        """
-        Metodo per recuperare tutte le tuple da una tabella nel database.
-
-        Args:
-            table_name (str): Il nome della tabella da cui recuperare le tuple.
-            conn (sqlite3.Connection): Oggetto di connessione al database.
-
-        Returns:
-            list: Una lista di tuple rappresentanti le righe della tabella.
-        """
         try:
             self._sqlInjectionCheck(table_name)
             cursor = self.conn.cursor()
@@ -564,6 +554,7 @@ class db(Ilog):
             CF_encoded = bytearray(CF, 'utf-8')
             Username_encoded = bytearray(Username, 'utf-8')
             Password_encoded = bytearray(Password, 'utf-8')
+            Ruolo_encoded = bytearray(Ruolo, 'utf-8')
             query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'))", (CF_encoded, Username_encoded, Password_encoded, Ruolo_encoded)
             cursor.execute(query)
             self.conn.commit()
