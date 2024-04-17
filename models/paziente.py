@@ -41,7 +41,7 @@ class Paziente(Ilog):
             print("4. Per visionare i farmaci prescritti")
 
             scelta = input("Digitare la scelta: ")
-            while(scelta not in map(str, range(4))):
+            while(scelta not in map(str, range(5))):
                 scelta = input("Digitare la scelta: ")
 
             if scelta == "0":
@@ -50,12 +50,14 @@ class Paziente(Ilog):
             elif scelta == "1":
                 #CFP = self.controller.database.ottieniDatiAuth[1]
                 medico = self._selectMedico()
-                tupla = medico[0]
-                self._visualizzaVisiteDelPaziente(tupla)
+                if(medico):
+                    tupla = medico[0]
+                    self._visualizzaVisiteDelPaziente(tupla)
             elif scelta == "2":
                 operatoreSanitario = self._selectOperatoreSanitario()
-                tupla = operatoreSanitario[0]
-                self._visualizzaVisiteDelPazienteOperatore(tupla)
+                if(operatoreSanitario):
+                    tupla = operatoreSanitario[0]
+                    self._visualizzaVisiteDelPazienteOperatore(tupla)
             elif scelta == "3":
                self._visualizzaCartellaClinica()
             elif scelta == "4":
@@ -72,6 +74,10 @@ class Paziente(Ilog):
     @log_actions
     def _selectMedico(self):
         medici = list(self.controller.datiMedici())
+        if(not medici):
+            print("Non hai alcun medico al momento")
+            print("")
+            return False
         print("Seleziona un medico:")
         for contatore, medico in enumerate(medici, start=0):
             print(f"{contatore}: {medico[contatore][1]} {medico[contatore][2]}, {medico[contatore][3]}")
@@ -87,6 +93,10 @@ class Paziente(Ilog):
     @log_actions
     def _selectOperatoreSanitario(self):
         operatori = list(self.controller.datiOperatori())
+        if(not operatori):
+            print("Non hai alcun operatore sanitario al momento")
+            print("")
+            return False
         print("Seleziona un operatore:")
         for contatore, operatore in enumerate(operatori, start=0):
             print(f"{contatore}: {operatore[contatore][1]} {operatore[contatore][2]}, {operatore[contatore][3]}")

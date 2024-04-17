@@ -58,50 +58,62 @@ class Medico(Ilog):
                 if(self._addNewVisita() == True):
                     print("Visita correttamente salvata nel sistema !")
                     print("")
-                else:
-                    print("Visita non salvata, prego riprovare")
-                    print("")
 
             elif(scelta == "2"):
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                self.controller.visualizzaRecordVisite(tupla)
+                if(lista):
+                    tupla = lista[0]
+                    self.controller.visualizzaRecordVisite(tupla)
             
             elif(scelta == "3"):
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                visita = self._selectVisitaPaziente(tupla)
-                self._modificaVisitaPaziente(visita)
+                if(lista):
+                    tupla = lista[0]
+                    visita = self._selectVisitaPaziente(tupla)
+                    self._modificaVisitaPaziente(visita)
 
             elif(scelta == "4"):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
-                else:
-                    print("Paziente in cura non salvato, prego riprovare")
-                    print("")
-            
-            elif(scelta == "5"):
-                if(self._updateCartellaClinica(self._selectPaziente()[0]) == True):
-                    print("Cartella clinica correttamente aggiornata!")
-                    print("")
-                else:
-                    print("Cartella clinica non aggiornata correttamente")
-                    print("")
 
+            elif(scelta == "5"):
+                cf_paziente = self._selectPaziente()[0] if self._selectPaziente() else False
+                if(cf_paziente):
+                    if(self._updateCartellaClinica(cf_paziente) == True):
+                        print("Cartella clinica correttamente aggiornata!")
+                        print("")
+                    else:
+                        print("Cartella clinica non aggiornata correttamente")
+                        print("")
+
+
+    @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
-        visite = self.controller.getRecordVisite(CFPaziente)
-        for contatore, visita in enumerate(visite, start=0):
-            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
-            #print(f"{pazienteCurato}")
-        counter = len(visite) - 1
-        scelta = input("Digitare la scelta: ")
-        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
-            scelta = input("Scelta errata, digitare nuovamente: ")
-        visita_selezionata = visite[int(scelta)]
-        print(visita_selezionata)
-        return visita_selezionata
-    
+        try:
+            visite = self.controller.getRecordVisite(CFPaziente)
+            if not visite:
+                print("Nessuna visita trovata per il paziente specificato.")
+                return None
+            for contatore, visita in enumerate(visite, start=0):
+                print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
+            counter = len(visite) - 1
+            scelta = input("Digitare la scelta: ")
+            while True:
+                try:
+                    scelta = int(scelta)
+                    if scelta < 0 or scelta > counter:
+                        raise ValueError
+                    break
+                except ValueError:
+                    scelta = input("Scelta errata, digitare nuovamente: ")
+            visita_selezionata = visite[scelta]
+            print(visita_selezionata)
+            return visita_selezionata
+        except Exception as e:
+            print(f"Si è verificato un errore durante la selezione della visita: {e}")
+            return None
+
     def _modificaVisitaPaziente(self, visita):
         _loop = True
         while(_loop):
@@ -142,30 +154,53 @@ class Medico(Ilog):
             ora_corrente.second
             )
         
-        cf_paziente = self._selectPaziente()[0]
+        cf_paziente = self._selectPaziente()[0] if self._selectPaziente() else False
+        if ( cf_paziente == False):
+            return False
         nome_prestazione = input("Inserisci il nome della prestazione offerta: ")
         esito = input("Inserisci l'esito della prestazione: ")
         luogo = input("Inserisci il luogo dove è avvenuta la prestazione: ")
         print(cf_paziente)
         ricevuta = self.controller.addVisitaMedica(_dataVisita, cf_paziente, nome_prestazione, esito, luogo)
+        if (ricevuta==False):
+            print("Visita non salvata, prego riprovare")
+            print("")
+            return False
         return True
     
     @log_actions
     def _addNewCurato(self):
-        cf_paziente = input("Inserisci il codice fiscale del paziente: ")
-        ricevuta = self.controller.addCurato(cf_paziente)
-        while(ricevuta != True):
-            cf_paziente = input("Inserisci il codice fiscale del paziente:")
-            ricevuta = self.controller.addCurato(cf_paziente)
+         # Mi ricavo i nuovi assistiti
+        _curatiDisponibili = self.controller.pazientiDisponibili()
+        # Gestisco il caso in cui non ci sono pazienti disponibili
+        if(len(_curatiDisponibili) == 0):
+            print("Nessun paziente da curare disponibile")
+            return False
+        for (i, curatoDisponibile) in enumerate(_curatiDisponibili, 1):
+            print(f"{i}. {curatoDisponibile[1]} {curatoDisponibile[2]}, {curatoDisponibile[3]}")
+
+        scelta = input("Inserisci il numero corrispondente al paziente: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_curatiDisponibili)-1:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+
+        ricevuta = self.controller.addCurato(_curatiDisponibili[int(scelta)-1][0])
+        
+        if(ricevuta == False):
+            print("Paziente in cura non salvato, prego riprovare")
+            print("")
+    
         return ricevuta
     
     @log_actions
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCurati())
+        if(not pazienti_curati):
+            print("Non hai alcun paziente in cura")
+            print("")
+            return False
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
-            print(f"{contatore}: ")
-            print(f"{pazienteCurato}")
+            print(f"{contatore}: {pazienteCurato[0][1]} {pazienteCurato[0][2]}, {pazienteCurato[0][3]}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:

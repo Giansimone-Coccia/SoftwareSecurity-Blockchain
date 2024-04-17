@@ -3,7 +3,7 @@ import sys
 from dotenv import load_dotenv
 import web3.eth
 
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.controllerOS import ControllerOS
 from controllers.controllerPaziente import ControllerPaziente
@@ -27,7 +27,6 @@ load_dotenv()
 
 if __name__ == '__main__':
 
-
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
@@ -35,7 +34,13 @@ if __name__ == '__main__':
     ut = Utilities()
 
     #myfilter = controller.medico_contract.eventFilter('Evento', {'fromBlock': 0,'toBlock': 'latest'});
-    
+    """TODO LUCA:
+            tx_hash = controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+            tx_receipt = controller.w3.eth.get_transaction_receipt(tx_hash)
+            evento = controller.paziente_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+            mittente = evento['msg']
+            messaggio = evento['message']
+            logging.info(f"EVENTO BLOCKCHAIN     Mittente = {mittente}      Messaggio = {messaggio}")"""
     #ut.resetHashBlockchain(controller)
     #ut._resetHashCartellaClinica(controller)
     ut._resetHashFarmaci(controllerP)
@@ -47,10 +52,6 @@ if __name__ == '__main__':
     ut._resetHashCartellaClinicaM(controller)
     ut._resetHashVisiteOperatoreO(controllerOS)
     ut._resetHashVisiteOperatore(controllerP)
-
-
-
-    
 
     #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
     #hash_visite = controller.medico_contract.functions.
@@ -71,7 +72,7 @@ if __name__ == '__main__':
             utentiOttenunti = istanzaDB.ottieniDatiAuth()
             for utente in utentiOttenunti:
                 print('Professione: ' + utente['Ruolo'])
-                print('Email: ' + utente['Username'])
+                print('Username: ' + utente['Username'])
                 print('Password: ' + utente['Password'])
                 print('***********************************')
 

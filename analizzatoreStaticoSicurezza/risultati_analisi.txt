@@ -1,5 +1,5 @@
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\deploy.py
-Run started:2024-04-14 19:01:01.780771
+Run started:2024-04-15 18:16:53.516656
 
 Test results:
 	No issues identified.
@@ -24,7 +24,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\main.py
-Run started:2024-04-14 19:01:02.326770
+Run started:2024-04-15 18:16:53.997516
 
 Test results:
 	No issues identified.
@@ -49,7 +49,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\mainView.py
-Run started:2024-04-14 19:01:02.899761
+Run started:2024-04-15 18:16:54.473847
 
 Test results:
 	No issues identified.
@@ -74,7 +74,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\tempCodeRunnerFile.py
-Run started:2024-04-14 19:01:03.390827
+Run started:2024-04-15 18:16:54.910338
 
 Test results:
 	No issues identified.
@@ -99,7 +99,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerMedico.py
-Run started:2024-04-14 19:01:03.960150
+Run started:2024-04-15 18:16:55.397308
 
 Test results:
 >> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
@@ -137,7 +137,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerOS.py
-Run started:2024-04-14 19:01:04.491509
+Run started:2024-04-15 18:16:55.890324
 
 Test results:
 	No issues identified.
@@ -162,7 +162,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\controllerPaziente.py
-Run started:2024-04-14 19:01:05.031444
+Run started:2024-04-15 18:16:56.354892
 
 Test results:
 	No issues identified.
@@ -187,7 +187,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\utilities.py
-Run started:2024-04-14 19:01:05.580084
+Run started:2024-04-15 18:16:56.858142
 
 Test results:
 >> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
@@ -221,7 +221,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\controllers\Exceptions\IntegrityCheckError.py
-Run started:2024-04-14 19:01:06.084529
+Run started:2024-04-15 18:16:57.285173
 
 Test results:
 	No issues identified.
@@ -246,7 +246,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\db.py
-Run started:2024-04-14 19:01:06.640180
+Run started:2024-04-15 18:16:57.768473
 
 Test results:
 >> Issue: [B608:hardcoded_sql_expressions] Possible SQL injection vector through string-based query construction.
@@ -530,7 +530,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\database\tempCodeRunnerFile.py
-Run started:2024-04-14 19:01:07.192696
+Run started:2024-04-15 18:16:58.245158
 
 Test results:
 	No issues identified.
@@ -555,7 +555,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\interface\Ilog.py
-Run started:2024-04-14 19:01:07.688742
+Run started:2024-04-15 18:16:58.676023
 
 Test results:
 	No issues identified.
@@ -580,7 +580,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\medico.py
-Run started:2024-04-14 19:01:08.242697
+Run started:2024-04-15 18:16:59.162522
 
 Test results:
 	No issues identified.
@@ -605,7 +605,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\operatoreSanitario.py
-Run started:2024-04-14 19:01:08.773528
+Run started:2024-04-15 18:16:59.622272
 
 Test results:
 	No issues identified.
@@ -630,7 +630,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\paziente.py
-Run started:2024-04-14 19:01:09.341068
+Run started:2024-04-15 18:17:00.110471
 
 Test results:
 	No issues identified.
@@ -655,7 +655,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\tempCodeRunnerFile.py
-Run started:2024-04-14 19:01:09.863650
+Run started:2024-04-15 18:17:00.549267
 
 Test results:
 	No issues identified.
@@ -680,7 +680,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\models\user.py
-Run started:2024-04-14 19:01:10.383599
+Run started:2024-04-15 18:17:00.976160
 
 Test results:
 	No issues identified.
@@ -705,7 +705,7 @@ Files skipped (0):
 
 
 Risultati per il file: C:\Users\lucab\OneDrive\Desktop\Ingegneria\Magistrale\PRIMO ANNO\PRIMO SEMESTRE\Software-security and Blockchain\Progetto\Software-Security\Software-Security\SoftwareSecurity-Blockchain\session\session.py
-Run started:2024-04-14 19:01:10.890123
+Run started:2024-04-15 18:17:01.449969
 
 Test results:
 	No issues identified.

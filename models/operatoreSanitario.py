@@ -44,36 +44,39 @@ class OperatoreSanitario(Ilog):
                 sys.exit()
             elif scelta == "1":
                 lista = self._selectPaziente()
-                _cfPaziente = lista[0]
-                _statoSalute = input("Stato salute del paziente: ")
-                _prestazione = input("Insersci la prestazione effettuata: ")
-                _luogoPrestazione = input("Inserisci il luogo: ")
-                ora_corrente = datetime.datetime.now()
+                if(lista):
+                    _cfPaziente = lista[0]
+                    _statoSalute = input("Stato salute del paziente: ")
+                    _prestazione = input("Insersci la prestazione effettuata: ")
+                    _luogoPrestazione = input("Inserisci il luogo: ")
+                    ora_corrente = datetime.datetime.now()
 
-                _dataVisita = datetime.datetime(
-                    ora_corrente.year,
-                    ora_corrente.month,
-                    ora_corrente.day,
-                    ora_corrente.hour,
-                    ora_corrente.minute,
-                    ora_corrente.second
-                )
-                
-                _cfOpSanitario = self.utente[0]
-                
-                if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
-                    print("Prestazione aggiunta correttamente !")
-                else:
-                    print("Prestazione NON aggiunta")
+                    _dataVisita = datetime.datetime(
+                        ora_corrente.year,
+                        ora_corrente.month,
+                        ora_corrente.day,
+                        ora_corrente.hour,
+                        ora_corrente.minute,
+                        ora_corrente.second
+                    )
+                    
+                    _cfOpSanitario = self.utente[0]
+                    
+                    if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
+                        print("Prestazione aggiunta correttamente !")
+                    else:
+                        print("Prestazione NON aggiunta")
             elif scelta == "2":
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                self._mostraVisite(tupla)
+                if(lista):
+                    tupla = lista[0]
+                    self._mostraVisite(tupla)
             elif scelta == "3":
                 lista = self._selectPaziente()
-                tupla = lista[0]
-                visita = self._selectVisitaPaziente(tupla)
-                self._modificaVisitaPaziente(visita)
+                if(lista):
+                    tupla = lista[0]
+                    visita = self._selectVisitaPaziente(tupla)
+                    self._modificaVisitaPaziente(visita)
             elif scelta == "4":
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
@@ -85,6 +88,10 @@ class OperatoreSanitario(Ilog):
     @log_actions
     def _selectPaziente(self):
         pazienti_curati = list(self.controller.datiPazientiCuratiOS())
+        if(not pazienti_curati):
+            print("Non hai alcun paziente in cura")
+            print("")
+            return False
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
             print(f"{contatore}: {pazienteCurato[0][1]} {pazienteCurato[0][2]}, {pazienteCurato[0][3]}")
@@ -100,6 +107,7 @@ class OperatoreSanitario(Ilog):
     def _aggiungiVisita(self, cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione):
         return self.controller.aggiungiPrestazioneVisita(cfPaziente,cfOpSanitario, statoSalute, dataVisita, prestazione, luogoPrestazione)
 
+    @log_actions
     def _mostraVisite(self,CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
@@ -149,10 +157,22 @@ class OperatoreSanitario(Ilog):
 
     
     @log_actions
-    def _addNewAssistito(self,):
-        cf_paziente = input("Inserisci il codice fiscale dell'assistito: ")
-        ricevuta = self.controller.addAssistito(cf_paziente)
-        while(ricevuta != True):
-            cf_paziente = input("Inserisci il codice fiscale dell'assistito:")
-            ricevuta = self.controller.addAssistito(cf_paziente)
+    def _addNewAssistito(self):
+        # Mi ricavo i nuovi assistiti
+        _assistitiDisponibili = self.controller.pazientiDisponibili()
+        
+        # Stampa un messaggio se non ci sono pazienti disponibili
+        if len(_assistitiDisponibili) == 0:
+            print("Non ci sono pazienti disponibili tra cui scegliere.")
+            return
+        for (i, assistitoDisponibile) in enumerate(_assistitiDisponibili, 1):
+            print(f"{i}. {assistitoDisponibile[1]} {assistitoDisponibile[2]}, {assistitoDisponibile[3]}")
+
+        scelta = input("Inserisci il numero corrispondente al paziente: ")
+        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_assistitiDisponibili)-1:
+            scelta = input("Scelta errata, digitare nuovamente: ")
+
+        ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)-1][0])
+            
         return ricevuta
+

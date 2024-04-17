@@ -1,5 +1,4 @@
 import hashlib
-
 import web3
 
 from database.db import db
@@ -73,6 +72,8 @@ class Utilities:
         for tupla in tupleFarmaci:
             hash_farmaco = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
+
+    
     
     def _resetHashFarmaciM(self,controller):
         """Re-inserisco gli hash di tutti i farmaci dei vari pazineti nello smart contract"""
@@ -121,11 +122,4 @@ class Utilities:
         for tupla in tupleVisiteO:
             hash_visita = self.hash_row(tupla)
             controller.paziente_contract.functions.storeHashVisita(tupla[1], tupla[0], hash_visita).transact({'from': address})
-
-
         
-
-        
-
-
-    

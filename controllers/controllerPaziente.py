@@ -1,5 +1,6 @@
 import logging
-from controllers.Exceptions.IntegrityCheckError import IntegrityCheckError
+import re
+from Exceptions.IntegrityCheckError import IntegrityCheckError
 from controllers.controllerMedico import ControllerMedico
 from controllers.controllerOS import ControllerOS
 from controllers.utilities import Utilities
@@ -25,7 +26,6 @@ class ControllerPaziente(Ilog):
         self.abi, self.bytecode, self.w3, self.chain_id, self.my_address, self.private_key = deploy.create_contract()
 
         PazienteContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
-        #MedicoContract = self.w3.eth.contract(abi=self.abi, bytecode=self.bytecode)
         # Get the latest transaction
         self.nonce = self.w3.eth.get_transaction_count(self.my_address)
         # Submit the transaction that deploys the contract
@@ -39,13 +39,10 @@ class ControllerPaziente(Ilog):
         )
         # Sign the transaction
         signed_txn = self.w3.eth.account.sign_transaction(transaction, private_key=self.private_key)
-        #print("Deploying Contract!")
         # Send it!
         tx_hash = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
         # Wait for the transaction to be mined, and get the transaction receipt
-        #print("Waiting for transaction to finish...")
         tx_receipt = self.w3.eth.wait_for_transaction_receipt(tx_hash)
-        #print(f"Done! Contract deployed to {tx_receipt.contractAddress}")
 
         # Working with deployed Contracts
         self.paziente_contract = self.w3.eth.contract(address=tx_receipt.contractAddress, abi=self.abi)
@@ -56,7 +53,7 @@ class ControllerPaziente(Ilog):
     @classmethod
     def get_instance(cls):
         if cls._instance is None:
-            cls._instance = cls() #super().__new__(cls)
+            cls._instance = cls()
         return cls._instance
 
     @property
@@ -228,21 +225,40 @@ class ControllerPaziente(Ilog):
                 print("Il cognome deve contenere solo lettere.")
             else:
                 break
-        # Controllo sulla residenza (in questo esempio non faccio controlli specifici)
         residenza = input("Inserisci la residenza: ")
-        medici = self.database.ottieniMedici()
-        print("Seleziona con quale medico vuoi metterti in cura: ")
-        contatore = 0
-        medico_scelto = 0
-        for medico in medici:
-            print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
-            contatore +=1
-        counter = len(medici) - 1
-        scelta = input("Digitare la scelta: ")
-        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
-            scelta = input("Scelta errata, digitare nuovamente: ")
-            medico_scelto = scelta
-        self.database.addNuovoPaziente(cf, nome, cognome, residenza)
-        m = medici[medico_scelto]
-        cf_medico = m[0]
-        self.database.addNuovoCurato(cf, cf_medico)
+        regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+        while True:
+            psw = input("Inserisci la password (almeno 8 caratteri alfanumerici): ")
+            if re.match(regex, psw):
+                psw_confirm = input("Conferma la password: ")
+                if (psw == psw_confirm):
+                    print("Ok, le password coincidono")
+                    medici = self.database.ottieniMedici()
+                    print("Seleziona con quale medico vuoi metterti in cura: ")
+                    contatore = 0
+                    medico_scelto = 0
+                    for medico in medici:
+                        print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
+                        contatore +=1
+                    counter = len(medici) - 1
+                    scelta = input("Digitare la scelta: ")
+                    while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
+                        scelta = input("Scelta errata, digitare nuovamente: ")
+                        medico_scelto = scelta
+                    utenti_presenti = self.database.ottieniDatiAuth()
+                    conta = 0
+                    for utente in utenti_presenti:
+                        if utente['Ruolo'] == 'Paziente' and utente['CF'] == cf:
+                            print("Utente già presente con questo codice fiscale, provi a fare login")
+                            return
+                        conta += 1
+                    self.database.addNuovoPaziente(cf, nome, cognome, residenza)
+                    m = medici[medico_scelto]
+                    cf_medico = m[0]
+                    self.database.addNuovoCurato(cf, cf_medico)
+                    self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    break
+                else:
+                    print("Le password non coincidono. Riprova.")
+            else:
+                print("La password non è valida. Assicurati che abbia almeno 8 caratteri, includa almeno una maiuscola, una minuscola ed un numero.")
