@@ -190,3 +190,110 @@
 2024-04-16 21:45:14,505 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
 2024-04-16 21:45:14,586 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
 2024-04-16 21:45:14,666 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:54:47,601 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 09:54:48,890 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 09:54:49,839 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-17 09:54:55,942 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:54:59,146 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:01,735 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:07,459 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:11,987 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:16,282 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 09:55:16,911 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-17 09:55:17,641 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:22,642 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-17 09:55:37,624 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 09:55:48,531 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-17 09:55:48,531 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 09:55:48,655 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-17 09:55:48,655 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 09:55:48,753 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-17 09:55:48,753 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-17 09:55:48,854 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:55:48,909 - INFO - OperatoreSanitario: Chiamato menuOS , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:04,948 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:04,949 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:04,949 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:04,950 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 09:56:05,064 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:05,168 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:05,272 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:05,375 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:05,478 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:07,750 - INFO - OperatoreSanitario: Chiamato _selectVisitaPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:07,752 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:07,752 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:08,114 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 09:56:16,825 - INFO - ControllerOS: Chiamato eliminaPrestazioneVisita , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:16,825 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:17,208 - INFO - db: Chiamato eliminaVisitaOS , Porta: 3306
+2024-04-17 09:56:21,449 - INFO - ControllerOS: Chiamato aggiungiPrestazioneVisita , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:21,449 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 09:56:22,130 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 09:56:22,131 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:22,131 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:22,473 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 09:56:30,490 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:30,490 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:30,490 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:30,490 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 09:56:30,632 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:30,735 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:30,838 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:30,939 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:31,042 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:32,595 - INFO - OperatoreSanitario: Chiamato _selectVisitaPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:32,595 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:32,595 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:32,895 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 09:56:40,246 - INFO - ControllerOS: Chiamato eliminaPrestazioneVisita , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:40,246 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:40,568 - INFO - db: Chiamato eliminaVisitaOS , Porta: 3306
+2024-04-17 09:56:44,942 - INFO - ControllerOS: Chiamato aggiungiPrestazioneVisita , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:44,942 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 09:56:45,453 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 09:56:45,453 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:45,453 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:45,780 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 09:56:53,507 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:53,508 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:53,508 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:53,508 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 09:56:53,602 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:53,707 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:53,805 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:53,908 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:54,011 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:55,673 - INFO - OperatoreSanitario: Chiamato _mostraVisite , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:55,674 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 09:56:55,674 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 09:56:56,046 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 10:00:08,841 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:08,841 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:08,841 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:08,841 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:00:10,275 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:10,581 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:10,684 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:10,786 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:10,888 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:27,922 - INFO - OperatoreSanitario: Chiamato _aggiungiVisita , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:27,923 - INFO - ControllerOS: Chiamato aggiungiPrestazioneVisita , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:27,923 - INFO - db: Chiamato addTupla , Porta: 3306
+2024-04-17 10:00:29,515 - INFO - EVENTO BLOCKCHAIN ---------->     AttributeDict({'msg': '0xCC72D969FFA48980F408d41cBE7F62FA89e6CE37', 'message': 'Hash visita Operatore sanitario correttamente salvato'})
+2024-04-17 10:00:29,516 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:29,516 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:29,877 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-17 10:00:38,219 - INFO - OperatoreSanitario: Chiamato _selectPaziente , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:38,219 - INFO - ControllerOS: Chiamato datiPazientiCuratiOS , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:38,219 - INFO - ControllerOS: Chiamato pazientiAssistiti , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:38,219 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-17 10:00:38,336 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:38,541 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:38,643 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:38,745 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:38,848 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:46,008 - INFO - OperatoreSanitario: Chiamato _mostraVisite , Utente: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:46,009 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
+2024-04-17 10:00:46,009 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-17 10:00:46,314 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306

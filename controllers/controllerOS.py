@@ -121,8 +121,26 @@ class ControllerOS:
             return False
     
     @log_actions
-    def eliminaPrestazioneVisita(self, visita):      
-        return self.database.eliminaVisitaOS(visita) 
+    def eliminaPrestazioneVisita(self, visita):
+        try:
+            paziente = self.database.ottieniDatiUtente('paziente', visita[0])
+            IdOS = self.utente[0]
+            hash_visite = self.os_contract.functions.retrieveHashVisita(IdOS, visita[0]).call()
+            if paziente:
+                integrita_verificata = False
+                for hash_v in hash_visite:
+                    if self.ut.check_integrity(hash_v, visita):
+                        integrita_verificata = True
+                        self.database.eliminaVisitaOS(visita) 
+                        break
+                if not integrita_verificata:
+                        raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+            else:
+                print("Nessun paziente trovato con il codice fiscale specificato.")
+        except IntegrityCheckError as e:
+            print(f"ERRORE ! {e}")
+        except Exception as e:
+            print(f"Si è verificato un'errore: {e}")
     
     @log_actions
     def getRecordVisite(self, CFPaziente):
