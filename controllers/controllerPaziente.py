@@ -250,12 +250,18 @@ class ControllerPaziente(Ilog):
                     while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
                         scelta = input("Scelta errata, digitare nuovamente: ")
                         medico_scelto = scelta
+                    utenti_presenti = self.database.ottieniDatiAuth()
+                    conta = 0
+                    for u in utenti_presenti:
+                        if cf == u[conta]['CF']:
+                            print("Utente già presente con questo codice fiscale, provi a fare login")
+                            return
+                        conta += 1
                     self.database.addNuovoPaziente(cf, nome, cognome, residenza)
                     m = medici[medico_scelto]
                     cf_medico = m[0]
                     self.database.addNuovoCurato(cf, cf_medico)
-                    #self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
-                    self.database.inserisciDatiAuth(cf, nome, psw, 'Paziente')
+                    self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
                     break
                 else:
                     print("Le password non coincidono. Riprova.")

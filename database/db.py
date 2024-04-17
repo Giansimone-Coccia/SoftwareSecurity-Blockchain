@@ -517,6 +517,7 @@ class db(Ilog):
             # Chiudi il cursore
             cursor.close()
 
+    @log_actions
     def getVisitaOS(self, tupla):
         table_name = 'visitaOperatore'
         cursor = self.conn.cursor()
@@ -528,78 +529,17 @@ class db(Ilog):
         except mysql.connector.Error as err:
             print("Errore durante il recupero della visita:", err)
             return []
-        
-    def aes_encrypt(self, key, plaintext):
-        backend = default_backend()
-        iv = os.urandom(16)  # Genera un IV casuale
-        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
-        encryptor = cipher.encryptor()
-        # Non aggiungere il padding PKCS7
-        ciphertext = encryptor.update(plaintext.encode()) + encryptor.finalize()
-        # Restituisci il risultato come esadecimale
-        return ciphertext.hex()
-
-    def aes_decrypt(self, key, ciphertext):
-        backend = default_backend()
-        iv = b'1234567890123456'  # Initialization vector (IV)
-        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=backend)
-        decryptor = cipher.decryptor()
-        unpadder = padding.PKCS7(algorithms.AES.block_size).unpadder()
-        ciphertext = base64.b64decode(ciphertext)
-        plaintext = decryptor.update(ciphertext) + decryptor.finalize()
-        unpadded_data = unpadder.update(plaintext) + unpadder.finalize()
-        return unpadded_data.decode()
-        
-    def pad_key(self, key, length):
-        padder = PKCS7(length * 8).padder()
-        padded_key = padder.update(key) + padder.finalize()
-        return padded_key
-
+    
+    @log_actions
     def addNuovoAuth(self, CF, Username, Password, Ruolo):
-        """ table_name = 'autenticazione'
-        cursor = self.conn.cursor()
-        chiave = self.pad_key(self.key, 16)
-        try:
-            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'), AES_ENCRYPT(%s, '{chiave}'))", (CF, Username, Password, Ruolo))
-            self.conn.commit()
-            print("Nuovo record aggiunto alla tabella 'autenticazione'.")
-        except mysql.connector.Error as err:
-            print("Errore durante l'aggiunta della nuova autenticazione:", err)
-            return [] """
         table_name = 'autenticazione'
         cursor = self.conn.cursor()
-        CF_encrypted = self.aes_encrypt(self.key.encode(), CF)
-        user_encrypted = self.aes_encrypt(self.key.encode(), Username)
-        pwd_encrypted = self.aes_encrypt(self.key.encode(), Password)
-        role_encrypted = self.aes_encrypt(self.key.encode(), Ruolo)
         try:
-            cursor.execute(f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (%s, %s, %s, %s)", (CF_encrypted, user_encrypted, pwd_encrypted, role_encrypted))
+            query = f"INSERT INTO autenticazione (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'))"
+            values = (CF, Username, Password, Ruolo)
+            cursor.execute(query, values)
             self.conn.commit()
             print("Nuovo record aggiunto alla tabella 'autenticazione'.")
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della nuova autenticazione:", err)
             return []
-        
-    @log_actions
-    def inserisciDatiAuth(self, CF, Username, Password, Ruolo):
-        table_name = 'autenticazione'
-        #cursor = self.conn.cursor()
-        try:
-            cursor = self.conn.cursor()
-            CF_encoded = bytearray(CF, 'utf-8')
-            Username_encoded = bytearray(Username, 'utf-8')
-            Password_encoded = bytearray(Password, 'utf-8')
-            Ruolo_encoded = bytearray(Ruolo, 'utf-8')
-            """ CF_encoded = CF.encode('utf-8')
-            Username_encoded = Username.encode('utf-8')
-            Password_encoded = Password.encode('utf-8')
-            Ruolo_encoded = Ruolo.encode('utf-8') """
-            #query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s), AES_ENCRYPT(%s, %s))", (CF_encoded, self.key, Username_encoded, self.key, Password_encoded, self.key, Ruolo_encoded, self.key)
-            query = f"INSERT INTO {table_name} (CF, Username, Password, Ruolo) VALUES (AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'), AES_ENCRYPT(%s, '{self.key}'))", (CF_encoded, Username_encoded, Password_encoded, Ruolo_encoded)
-            cursor.execute(query)
-            self.conn.commit()
-            print("Inserimento completato con successo!")
-        except Exception as e:
-
-            self.conn.rollback()
-            print("Si è verificato un errore durante l'inserimento:", str(e))
