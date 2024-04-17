@@ -76,8 +76,7 @@ class Medico(Ilog):
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")
-                    
-            
+
             elif(scelta == "5"):
                 cf_paziente = self._selectPaziente()[0] if self._selectPaziente() else False
                 if(cf_paziente):
@@ -89,18 +88,30 @@ class Medico(Ilog):
                         print("")
 
     def _selectVisitaPaziente(self, CFPaziente):
-        visite = self.controller.getRecordVisite(CFPaziente)
-        for contatore, visita in enumerate(visite, start=0):
-            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
-            #print(f"{pazienteCurato}")
-        counter = len(visite) - 1
-        scelta = input("Digitare la scelta: ")
-        while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
-            scelta = input("Scelta errata, digitare nuovamente: ")
-        visita_selezionata = visite[int(scelta)]
-        print(visita_selezionata)
-        return visita_selezionata
-    
+        try:
+            visite = self.controller.getRecordVisite(CFPaziente)
+            if not visite:
+                print("Nessuna visita trovata per il paziente specificato.")
+                return None
+            for contatore, visita in enumerate(visite, start=0):
+                print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
+            counter = len(visite) - 1
+            scelta = input("Digitare la scelta: ")
+            while True:
+                try:
+                    scelta = int(scelta)
+                    if scelta < 0 or scelta > counter:
+                        raise ValueError
+                    break
+                except ValueError:
+                    scelta = input("Scelta errata, digitare nuovamente: ")
+            visita_selezionata = visite[scelta]
+            print(visita_selezionata)
+            return visita_selezionata
+        except Exception as e:
+            print(f"Si è verificato un errore durante la selezione della visita: {e}")
+            return None
+
     def _modificaVisitaPaziente(self, visita):
         _loop = True
         while(_loop):

@@ -87,28 +87,21 @@ class ControllerMedico(Ilog):
         IdMedico = self.utente[0]
         nome_tabella = "visitaMedico"
         lista_dati = (CFpaziente, IdMedico, Dati, DataOra, TipoPrestazione, Luogo)
-        
         try:
             self.database.addTupla(nome_tabella, *lista_dati)
-            
             # Calcola l'hash dei dati
             hash = self.ut.hash_row(lista_dati)
-           
-            
             # Chiamata al contratto medico per memorizzare l'hash
             tx_hash= self.medico_contract.functions.storeHashVisita(IdMedico, CFpaziente, hash).transact({'from': self.w3.eth.accounts[0]})
             tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
             evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
             logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
-            
             # Ottieni e restituisci le visite mediche del paziente
             visite = self.getVisiteMedico(CFpaziente)
             return True
-        
         except Exception as e:
             print("Errore durante l'aggiunta della visita medica:", e)
             return False
-        
 
     @log_actions
     def getVisiteMedico(self, CFpaziente):
@@ -460,6 +453,5 @@ class ControllerMedico(Ilog):
     
     @log_actions
     def eliminaVisitaM(self, visita):
-        
         return self.database.eliminaVisitaM(visita) 
     
