@@ -31,32 +31,11 @@ if __name__ == '__main__':
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
     controllerOS = ControllerOS.get_instance()
-    ut = Utilities()
 
-    #myfilter = controller.medico_contract.eventFilter('Evento', {'fromBlock': 0,'toBlock': 'latest'});
-    """TODO LUCA:
-            tx_hash = controller.paziente_contract.functions.storeHashFarmaco(tupla[0], hash_farmaco).transact({'from': address})
-            tx_receipt = controller.w3.eth.get_transaction_receipt(tx_hash)
-            evento = controller.paziente_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
-            mittente = evento['msg']
-            messaggio = evento['message']
-            logging.info(f"EVENTO BLOCKCHAIN     Mittente = {mittente}      Messaggio = {messaggio}")"""
-    #ut.resetHashBlockchain(controller)
-    #ut._resetHashCartellaClinica(controller)
-    ut._resetHashFarmaci(controllerP)
-    ut._resetHashFarmaciM(controller)
-    ut._resetHashPatologie(controller)
-    ut._resetHashVisiteMedico(controllerP)
-    ut._resetHashVisiteMedicoM(controller)
-    ut._resetHashCartellaClinica(controllerP)
-    ut._resetHashCartellaClinicaM(controller)
-    ut._resetHashVisiteOperatoreO(controllerOS)
-    ut._resetHashVisiteOperatore(controllerP)
 
-    #hash = controller.medico_contract.functions.retrieveHashCartellaClinica("CFPazziente55").call()
-    #hash_visite = controller.medico_contract.functions.
-    # Ha l'unico scopo di osservare i dati presenti nel db, va levato alla fine 
-    #print(web3.eth.get_transaction('0xfc55eee07abb48ccb60ca7286fc83536edcd1cdaeae92009d2e9e1ce141f3b71'))        
+    # Resetto l'applicazione
+    Utilities().startApplication(controller,controllerP,controllerOS)   
+        
     istanzaDB = db()
     currentSession = session()
 
