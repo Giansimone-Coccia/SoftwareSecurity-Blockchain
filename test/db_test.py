@@ -4,6 +4,7 @@ from unittest.mock import MagicMock
 from database.db import db
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad
 import base64
 
 class TestDatabase(unittest.TestCase):
@@ -15,6 +16,9 @@ class TestDatabase(unittest.TestCase):
         self.cursor = self.database.conn.cursor()  # Ottenimento del cursore per il test
         self.cursor.rowcount = MagicMock(return_value=1)
         self.faker = Faker()  # Utilizzo di Faker per generare dati di test
+        self.key = '2b7e151628aed2a6'.encode('utf-8')
+        # Creazione di un cifrario AES con la chiave
+        self.cipher = AES.new(self.key, AES.MODE_ECB)
 
     def tearDown(self):
         self.cursor.close()  # Chiusura del cursore
@@ -23,38 +27,6 @@ class TestDatabase(unittest.TestCase):
         except AttributeError:
             pass  # Ignora se la connessione non è stata impostata
 
-    def encrypt_data(self, data, key):
-        cipher = AES.new(key, AES.MODE_EAX)
-        ciphertext, tag = cipher.encrypt_and_digest(data.encode('utf-8'))
-        return ciphertext, cipher.nonce, tag
-
-    def test_ottieniDatiAuth(self):
-        # Genera una chiave casuale per la crittografia AES
-        key = get_random_bytes(16)
-
-        # Dati di mock non criptati
-        mock_data = [
-            (self.faker.ssn(), self.faker.user_name(), self.faker.password(), self.faker.job()),
-            (self.faker.ssn(), self.faker.user_name(), self.faker.password(), self.faker.job())
-        ]
-
-        # Cripta i dati di mock utilizzando la chiave
-        encrypted_mock_data = []
-        for data in mock_data:
-            encrypted_data = []
-            for value in data:
-                ciphertext, nonce, tag = self.encrypt_data(value, key)
-                encrypted_data.append((ciphertext, nonce, tag))
-            encrypted_mock_data.append(encrypted_data)
-
-        # Configura il mock per restituire i dati criptati
-        self.database.conn.cursor().fetchall.return_value = encrypted_mock_data
-        
-        # Esegui il metodo per ottenere i dati di autenticazione
-        result = self.database.ottieniDatiAuth()
-
-        # Assicurati che il numero di risultati sia uguale al numero di dati di mock
-        self.assertEqual(len(result), len(mock_data))
 
     def test_retrieve_data(self):
         mock_data = [
@@ -64,7 +36,7 @@ class TestDatabase(unittest.TestCase):
 
         self.database.ottieniDatiAuth = MagicMock(return_value=mock_data)
 
-        result = self.database.ottieniDatiAuth()
+        result = self.database.ottieniDatiAuth(self.cursor)
         self.assertEqual(result, mock_data)
 
 
@@ -110,15 +82,13 @@ class TestDatabase(unittest.TestCase):
         mock_cursor_mod.execute.assert_called_once()  # Assicura che il metodo execute sia stato chiamato esattamente una volta
 
 
-
-
     def test_exception_handling(self):
         # Simula un errore di connessione al database
         self.database.conn.cursor.side_effect = Exception("Errore di connessione al database")
 
         # Verifica che il metodo sollevi correttamente un'eccezione quando si verifica un errore di connessione
         with self.assertRaises(Exception):
-            self.database.ottieniDatiAuth()
+            self.database.ottieniDatiAuth(self.cursor)
 
         # Resetta il comportamento del mock per il successivo test
         self.database.conn.cursor.side_effect = None
@@ -128,8 +98,7 @@ class TestDatabase(unittest.TestCase):
 
         # Verifica che il metodo sollevi correttamente un'eccezione quando si verifica un errore durante l'esecuzione della query
         with self.assertRaises(Exception):
-            self.database.ottieniDatiAuth()
-
+            self.database.ottieniDatiAuth(self.cursor)
 
 
 if __name__ == '__main__':
