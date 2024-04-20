@@ -303,7 +303,7 @@ class ControllerMedico(Ilog):
                         integrita_verificata = False
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
-                                print(f"{indice} - Dati: {visita[2]}")
+                                print(f"{indice}.  Dati: {visita[2]}")
                                 print(f"    Data e ora: {visita[3]}")
                                 print(f"    Tipo prestazione: {visita[4]}")
                                 print(f"    Luogo: {visita[5]}")
