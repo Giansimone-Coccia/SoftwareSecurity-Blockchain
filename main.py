@@ -56,6 +56,7 @@ if __name__ == '__main__':
                 print('***********************************')
 
             currentSession.eseguiAccesso()
+            print("")
 
             if currentSession.status == "Medico":
                 medico = Medico(currentSession)

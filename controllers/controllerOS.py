@@ -104,8 +104,6 @@ class ControllerOS:
                 evento = self.os_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
                 logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
                 
-                # Ottieni e restituisci le visite mediche del paziente
-                visite = self.getRecordVisite(cfPaziente)
                 return True
             else:
                 # Se l'aggiunta della tupla ha fallito, restituisci False
@@ -148,7 +146,7 @@ class ControllerOS:
                 for index, paziente in enumerate(pazienti):
                     print(f"Paziente selezionato: {paziente[1]} {paziente[2]}, {paziente[3]}")
                     visite = self.database.ottieniVisiteOS(paziente[0], IdOS)
-                    print(f"Elenco delle visite effettuate per il paziente {paziente[0]}")
+                    print(f"Visite effettuate per il paziente {paziente[0]}")
                     indice = 0
                     for visita in visite:  
                         integrita_verificata = False
