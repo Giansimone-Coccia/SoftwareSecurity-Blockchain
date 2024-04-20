@@ -37,12 +37,15 @@ class OperatoreSanitario(Ilog):
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(5))):
-                scelta = input("Digitare la scelta: ")
+                scelta = input("Scelta errata, digitare nuovamente: ")
 
             if scelta == "0":
+                print("")
                 print("Arrivederci !")
                 sys.exit()
+
             elif scelta == "1":
+                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     _cfPaziente = lista[0]
@@ -64,20 +67,28 @@ class OperatoreSanitario(Ilog):
                     
                     if(self._aggiungiVisita(_cfPaziente,_cfOpSanitario, _statoSalute, _dataVisita, _prestazione, _luogoPrestazione)):
                         print("Prestazione aggiunta correttamente !")
+                        print("")
                     else:
                         print("Prestazione NON aggiunta")
+                        print("")
+
             elif scelta == "2":
+                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
                     self._mostraVisite(tupla)
+
             elif scelta == "3":
+                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
                     visita = self._selectVisitaPaziente(tupla)
                     self._modificaVisitaPaziente(visita)
+
             elif scelta == "4":
+                print("")
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
                     print("")
@@ -100,6 +111,7 @@ class OperatoreSanitario(Ilog):
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
+        print("")
         paziente_selezionato = pazienti_curati[int(scelta)]
         return paziente_selezionato[0]
     
@@ -111,20 +123,26 @@ class OperatoreSanitario(Ilog):
     def _mostraVisite(self,CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
-            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
+            print(f"{contatore}.  Dati: {visita[2]}")
+            print(f"    Data e ora: {visita[3]}")
+            print(f"    Tipo prestazione: {visita[4]}")
+            print(f"    Luogo: {visita[5]}")
+        print("")
     
     @log_actions
     def _selectVisitaPaziente(self, CFPaziente):
         visite = self.controller.getRecordVisite(CFPaziente)
         for contatore, visita in enumerate(visite, start=0):
-            print(f"{contatore}: {visita[2]} {visita[3]}, {visita[4]} , {visita[5]}")
-            #print(f"{pazienteCurato}")
+            print(f"{contatore}.  Dati: {visita[2]}")
+            print(f"    Data e ora: {visita[3]}")
+            print(f"    Tipo prestazione: {visita[4]}")
+            print(f"    Luogo: {visita[5]}")
         counter = len(visite) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
+        print("")
         visita_selezionata = visite[int(scelta)]
-        print(visita_selezionata)
         return visita_selezionata
 
     def _modificaVisitaPaziente(self, visita):
@@ -136,7 +154,8 @@ class OperatoreSanitario(Ilog):
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(3))):
-                scelta = input("Digitare la scelta: ")
+                scelta = input("Scelta errata, digitare nuovamente: ")
+            print("")
 
             if scelta == "0":
                 nuovi_dati = input("Digita i nuovi dati:")
@@ -153,6 +172,7 @@ class OperatoreSanitario(Ilog):
                 nuovo_luogo = input("Digita il nuovo luogo:")
                 self.controller.aggiungiPrestazioneVisita(visita[0],visita[1], visita[2], visita[3],visita[4], nuovo_luogo)
                 _loop = False
+            print("")
 
 
     
@@ -165,13 +185,15 @@ class OperatoreSanitario(Ilog):
         if len(_assistitiDisponibili) == 0:
             print("Non ci sono pazienti disponibili tra cui scegliere.")
             return
-        for (i, assistitoDisponibile) in enumerate(_assistitiDisponibili, 1):
+        
+        for (i, assistitoDisponibile) in enumerate(_assistitiDisponibili, 0):
             print(f"{i}. {assistitoDisponibile[1]} {assistitoDisponibile[2]}, {assistitoDisponibile[3]}")
 
         scelta = input("Inserisci il numero corrispondente al paziente: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > len(_assistitiDisponibili)-1:
             scelta = input("Scelta errata, digitare nuovamente: ")
 
+        print("")
         ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)-1][0])
             
         return ricevuta

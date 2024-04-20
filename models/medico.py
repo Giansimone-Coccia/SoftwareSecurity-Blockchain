@@ -43,8 +43,8 @@ class Medico(Ilog):
             print("1. Per inserire una nuova visita medica")
             print("2. Per visualizzare le visite mediche effettuate")
             print("3. Per aggiornare una visita medica")
-            print("4. Per aggiungere un nuovo paziente in cura")
-            print("5. Per aggiornare la Cartella Clinica di un paziente")
+            print("4. Per aggiornare la Cartella Clinica di un paziente")
+            print("5. Per aggiungere un nuovo paziente in cura")
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(7))):
@@ -77,12 +77,6 @@ class Medico(Ilog):
 
             elif(scelta == "4"):
                 print("")
-                if(self._addNewCurato() == True):
-                    print("Paziente in cura correttamente salvato nel sistema !")
-                    print("")
-
-            elif(scelta == "5"):
-                print("")
                 cf_paziente = self._selectPaziente()
                     
                 if(cf_paziente):
@@ -93,6 +87,12 @@ class Medico(Ilog):
                     else:
                         print("Cartella clinica non aggiornata correttamente")
                         print("")
+            
+            elif(scelta == "5"):
+                print("")
+                if(self._addNewCurato() == True):
+                    print("Paziente in cura correttamente salvato nel sistema !")
+                    print("")
 
 
     @log_actions
@@ -346,7 +346,7 @@ class Medico(Ilog):
 
                 while not da_modificare.isdigit() or not 0 <= int(da_modificare) < len(patologie):
                     da_modificare = input(" Scelta errata, digitare nuovamente: ")
-                    
+
                 while True:
                     inCorso = input("Inserisci il nuovo stato, patologia in corso? (SI/NO):").strip().upper()
                     if inCorso == "SI":

@@ -312,6 +312,7 @@ class ControllerMedico(Ilog):
                                 break
                         if not integrita_verificata:
                             raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                print("")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except IntegrityCheckError as e:
