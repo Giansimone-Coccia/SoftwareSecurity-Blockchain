@@ -1,6 +1,8 @@
 import logging
 import sys
 import time
+
+import keyboard
 from database.db import db
 from interface.Ilog import Ilog
 
@@ -73,6 +75,9 @@ class session(Ilog):
             
             print("Hai eseguito troppi tentativi, aspetta: ")
             logging.warning(f"Utente {self._emailTmp} ha eseguito {self._tentativi}")
+    
+            for i in range(150):
+                keyboard.block_key(i)
             for i in range(60*cinquineSbagliate, -1, -1):
                 #print(f"Tempo rimasto: {i // 60}:{i % 60:02}", end='\r')
                 sys.stdout.write(f"\rTempo rimasto: {i // 60}:{i % 60:02}")
@@ -80,5 +85,9 @@ class session(Ilog):
                 time.sleep(1)
             print("")
             self._tentativi += tentativi
+            for i in range(150):
+                keyboard.unblock_key(i)
+
+      
 
     def _getMaxiAccessi(self): return 5

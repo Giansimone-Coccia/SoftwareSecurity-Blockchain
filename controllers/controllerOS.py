@@ -54,7 +54,7 @@ class ControllerOS:
 
     @utente.setter
     def utente(self, value):
-        print(self._utente_inizializzato)
+        
         if not self._utente_inizializzato:
             self._utente = value
             self._utente_inizializzato = True
