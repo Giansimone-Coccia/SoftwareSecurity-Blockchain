@@ -5820,3 +5820,5 @@
 2024-04-21 10:46:40,781 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
 2024-04-21 10:46:41,002 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
 2024-04-21 10:46:41,347 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 16:12:33,332 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 16:37:57,112 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0

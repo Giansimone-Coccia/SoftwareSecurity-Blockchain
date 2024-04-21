@@ -1,0 +1,11 @@
+'cryptography',
+'python-dotenv',
+        'solc-select',
+        'py-solc-x',
+        'slither',
+        'bandit',
+        'web3',
+        'python-abc',
+        'keyboard',
+        'Faker',
+        'mysql-connector-python'
