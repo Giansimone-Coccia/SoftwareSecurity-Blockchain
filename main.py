@@ -48,13 +48,6 @@ if __name__ == '__main__':
         elif(scelta == 1):
             controllerP.registraUtente()
         elif(scelta == 2):
-            utentiOttenunti = istanzaDB.ottieniDatiAuth()
-            for utente in utentiOttenunti:
-                print('Professione: ' + utente['Ruolo'])
-                print('Username: ' + utente['Username'])
-                print('Password: ' + utente['Password'])
-                print('***********************************')
-
             currentSession.eseguiAccesso()
             print("")
 
