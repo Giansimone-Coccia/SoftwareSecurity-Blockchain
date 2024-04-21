@@ -37,7 +37,9 @@ Per installare e utilizzare CareChain, segui questi passaggi:
    Affinché risulti possibile utilizzare il programma correttamente con l'utilizzo della blockchain Ganache è necessario:
    - Aprire Ganache
    - Scegliere uno dei possibili profili messi a disposizione
-   - Copiare e incollare l'indirizzo e la chiave privata, da Ganache, nel file Chiavi.env del progetto
+   - Copiare e incollare l'indirizzo e la chiave privata, da Ganache, nel file Chiavi.env del progetto nei seguenti campi:
+      - MY_ADDRESS="la_tua_chiave"
+      - PRIVATE_KEY="la_tua_chiave_privata"
 6. Avvia il software:
    - Semplicemente mandando in run il programma attraverso l'IDE Visual Studio Code
    - oppure posizionandosi nella directory corretta e, da terminale, attraverso la direttiva **python3** main.py
