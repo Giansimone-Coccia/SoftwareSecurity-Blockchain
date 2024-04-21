@@ -517,7 +517,6 @@ class db(Ilog):
             values = (CF, Username, Password, Ruolo)
             cursor.execute(query, values)
             self.conn.commit()
-            print("Nuovo record aggiunto alla tabella 'autenticazione'.")
         except mysql.connector.Error as err:
             print("Errore durante l'aggiunta della nuova autenticazione:", err)
             return []

@@ -206,12 +206,19 @@ class ControllerPaziente(Ilog):
 
     @log_actions
     def registraUtente(self):
+        print("")
         # Controllo sul codice fiscale
         while True:
             cf = input("Inserisci codice fiscale (16 caratteri): ")
             if len(cf) != 16:
                 print("Il codice fiscale deve contenere esattamente 16 caratteri.")
             else:
+                utenti_presenti = self.database.ottieniDatiAuth()
+                for utente in utenti_presenti:
+                    if utente['Ruolo'] == 'Paziente' and utente['CF'] == cf:
+                        print("Utente già presente con questo codice fiscale, provi a fare login")
+                        print("")
+                        return
                 break
         # Controllo sul nome e cognome
         while True:
@@ -235,6 +242,7 @@ class ControllerPaziente(Ilog):
                 if (psw == psw_confirm):
                     print("Ok, le password coincidono")
                     medici = self.database.ottieniMedici()
+                    print("")
                     print("Seleziona con quale medico vuoi metterti in cura: ")
                     contatore = 0
                     medico_scelto = 0
@@ -242,22 +250,20 @@ class ControllerPaziente(Ilog):
                         print(f"{contatore}: {medico[1]} {medico[2]}, {medico[3]}")
                         contatore +=1
                     counter = len(medici) - 1
+
                     scelta = input("Digitare la scelta: ")
                     while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
                         scelta = input("Scelta errata, digitare nuovamente: ")
                         medico_scelto = scelta
+                    print("")
+
                     utenti_presenti = self.database.ottieniDatiAuth()
-                    conta = 0
-                    for utente in utenti_presenti:
-                        if utente['Ruolo'] == 'Paziente' and utente['CF'] == cf:
-                            print("Utente già presente con questo codice fiscale, provi a fare login")
-                            return
-                        conta += 1
                     self.database.addNuovoPaziente(cf, nome, cognome, residenza)
                     m = medici[medico_scelto]
                     cf_medico = m[0]
                     self.database.addNuovoCurato(cf, cf_medico)
                     self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    print("")
                     break
                 else:
                     print("Le password non coincidono. Riprova.")
