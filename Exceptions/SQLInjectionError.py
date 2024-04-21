@@ -6,10 +6,12 @@ logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s 
 
 
 class SQLInjectionError(Exception):
-    """Eccezione personalizzata per gestire situazioni specifiche."""
+    """Eccezione personalizzata per gestire SQL INJECTION."""
     
     def __init__(self, messaggio):
         """Inizializzazione dell'eccezione con un messaggio specifico."""
         self.messaggio = messaggio
         logging.error(f"SQLInjectionError: {messaggio}")
         super().__init__(self.messaggio)
+
+

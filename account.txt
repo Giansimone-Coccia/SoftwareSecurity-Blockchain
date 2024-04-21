@@ -1,0 +1,32 @@
+Professione: Paziente
+Username: e
+Password: Qwerty1234
+***********************************
+Professione: OperatoreSanitario
+Username: Alessandro
+Password: alessandro1234
+***********************************
+Professione: Paziente
+Username: qwerrt
+Password: Qwerty1234567
+***********************************
+Professione: Paziente
+Username: Luigi
+Password: luigi1234
+***********************************
+Professione: Paziente
+Username: dgs
+Password: Pass1234
+***********************************
+Professione: Paziente
+Username: vdfs
+Password: Pass1234
+***********************************
+Professione: Paziente
+Username: fdbfd
+Password: Pass1234
+***********************************
+Professione: Medico
+Username: Mario
+Password: mario1234
+***********************************
