@@ -1,0 +1,2 @@
+[console_scripts]
+CareChain = main:main

@@ -25,8 +25,8 @@ import os
 Inoltre, importare mysql per l'utilizzo del DB """
 load_dotenv()
 
-if __name__ == '__main__':
-
+def main():
+    
     # Re-set blockchain:
     controller = ControllerMedico.get_instance()
     controllerP = ControllerPaziente.get_instance()
@@ -63,3 +63,7 @@ if __name__ == '__main__':
                 paziente = Paziente(currentSession)
                 paziente.menuPaziente()
   
+    
+
+if __name__ == '__main__':
+    main()

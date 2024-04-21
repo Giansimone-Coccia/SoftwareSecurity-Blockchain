@@ -1,0 +1,8 @@
+README.md
+setup.py
+CareChain.egg-info/PKG-INFO
+CareChain.egg-info/SOURCES.txt
+CareChain.egg-info/dependency_links.txt
+CareChain.egg-info/entry_points.txt
+CareChain.egg-info/requires.txt
+CareChain.egg-info/top_level.txt

@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: CareChain
+Version: 1.0.0
+Summary: ____                           ____     __                               
+Author: Bellante Luca, Coccia Giansimone, D’Anna Alessandra, Di Sabatino Walter, Ferretti Laura
+Requires-Dist: cryptography
+Requires-Dist: python-dotenv
+Requires-Dist: solc-select
+Requires-Dist: py-solc-x
+Requires-Dist: slither
+Requires-Dist: bandit
+Requires-Dist: web3
+Requires-Dist: python-abc
+Requires-Dist: keyboard
+Requires-Dist: Faker
+Requires-Dist: mysql-connector-python
+
+
+ ____                           ____     __                               
+/\  _`\                        /\  _`\  /\ \                __            
+\ \ \/\_\     __     _ __    __\ \ \/\_\ \ \___      __   /\_\    ___    
+ \ \ \/_/_  /'__`\  /\`'__\/'__`\ \ \/_/_\ \  _ `\  /'__`\ \/\ \ /' _ `\  
+  \ \ \L\ \/\ \L\.\_\ \ \//\  __/\ \ \L\ \ \ \ \ \/\ \L\.\_\ \ \/\ \/\ \ 
+   \ \____/\ \__/.\_\ \_\ \____\ \____/ \ \_\ \_\ \__/.\_\ \_\ \_\ \_    \/___/  \/__/\/_/ \/_/ \/____/ \/___/   \/_/\/_/\/__/\/_/ \/_/\/_/\/_/
+                                                                          
+                                                                          
+
+
+ Installazione di CareChain in corso...
