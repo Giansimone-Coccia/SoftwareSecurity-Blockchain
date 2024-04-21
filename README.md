@@ -1,6 +1,9 @@
 # CareChain
 
-![CareChain Logo](Logo-progetto.jpg)
+<p align="center">
+  <img src="Logo-progetto.jpg">
+</p>
+
 
 CareChain è un software che facilita la gestione e la condivisione dei dati tra pazienti, medici e operatori sanitari utilizzando la tecnologia blockchain. È progettato per fornire una base solida sulla quale gli utenti possono sviluppare il proprio operato e condividere informazioni sensibili in modo sicuro e trasparente.
 
