@@ -22,6 +22,8 @@ CareChain è un software che facilita la gestione e la condivisione dei dati tra
 
 ## Installazione
 
+***Affinché risulti possibile utilizzare il programma, è consigliato non utilizzare la rete UnivPM per testare il programma***
+
 Per installare e utilizzare CareChain, segui questi passaggi:
 
 1. Clona il repository sul tuo computer: ci sono vari modi per farlo
