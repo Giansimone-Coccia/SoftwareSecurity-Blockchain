@@ -38,14 +38,12 @@ class OperatoreSanitario(Ilog):
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(5))):
                 scelta = input("Scelta errata, digitare nuovamente: ")
-
+            print("")
             if scelta == "0":
-                print("")
                 print("Arrivederci !")
                 sys.exit()
 
             elif scelta == "1":
-                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     _cfPaziente = lista[0]
@@ -73,14 +71,12 @@ class OperatoreSanitario(Ilog):
                         print("")
 
             elif scelta == "2":
-                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
                     self._mostraVisite(tupla)
 
             elif scelta == "3":
-                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
@@ -88,7 +84,6 @@ class OperatoreSanitario(Ilog):
                     self._modificaVisitaPaziente(visita)
 
             elif scelta == "4":
-                print("")
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
                     print("")
@@ -106,7 +101,6 @@ class OperatoreSanitario(Ilog):
         print("Seleziona un paziente:")
         for contatore, pazienteCurato in enumerate(pazienti_curati, start=0):
             print(f"{contatore}: {pazienteCurato[0][1]} {pazienteCurato[0][2]}, {pazienteCurato[0][3]}")
-            #print(f"{pazienteCurato}")
         counter = len(pazienti_curati) - 1
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:

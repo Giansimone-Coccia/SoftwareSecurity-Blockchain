@@ -49,9 +49,10 @@ class Medico(Ilog):
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(7))):
                 scelta = input("Scelta errata, digitare nuovamente: ")
-            
+            print("")
+
             if(scelta == "0"):
-                print("")
+                
                 print("Arrividerci !")
                 sys.exit()
 
@@ -61,14 +62,12 @@ class Medico(Ilog):
                     print("")
 
             elif(scelta == "2"):
-                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
                     self.controller.visualizzaRecordVisite(tupla)
             
             elif(scelta == "3"):
-                print("")
                 lista = self._selectPaziente()
                 if(lista):
                     tupla = lista[0]
@@ -76,7 +75,6 @@ class Medico(Ilog):
                     self._modificaVisitaPaziente(visita)
 
             elif(scelta == "4"):
-                print("")
                 cf_paziente = self._selectPaziente()
                     
                 if(cf_paziente):
@@ -89,7 +87,6 @@ class Medico(Ilog):
                         print("")
             
             elif(scelta == "5"):
-                print("")
                 if(self._addNewCurato() == True):
                     print("Paziente in cura correttamente salvato nel sistema !")
                     print("")

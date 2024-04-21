@@ -83,12 +83,12 @@ class ControllerPaziente(Ilog):
             hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFMedico, CFPaziente).call()
             if medici:
                 for index, medico in enumerate(medici):
-                    print(f"Medico selezionato: {medico[1]} {medico[2]}, {medico[3]}")
                     visite = self.database.ottieniVisiteMedico(CFPaziente, medico[0])
-                    print(f"Elenco delle visite effettuate per il medico {medico[0]}")
+                    print("")
+                    print(f"Visite effettuate per il medico {medico[0]}")
                     indice = 0
-                    integrita_verificata = False
                     for visita in visite:
+                        integrita_verificata = False
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 print(f"{indice} - Dati: {visita[2]}")
@@ -97,11 +97,9 @@ class ControllerPaziente(Ilog):
                                 print(f"    Luogo: {visita[5]}")
                                 indice += 1
                                 integrita_verificata = True
-                    if not integrita_verificata:
-                        try:
-                            raise IntegrityCheckError("ERRORE ! Violata integrita' dati visite paziente")
-                        except IntegrityCheckError as err:
-                            print(err)
+                        if not integrita_verificata:
+                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                    print("")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
@@ -115,12 +113,12 @@ class ControllerPaziente(Ilog):
             hash_visite = self.paziente_contract.functions.retrieveHashVisita(CFOperatore, CFPaziente).call()
             if operatori:
                 for index, operatore in enumerate(operatori):
-                    print(f"Operatore selezionato: {operatore[1]} {operatore[2]}, {operatore[3]}")
                     visite = self.database.ottieniVisiteOS(CFPaziente, operatore[0])
                     print(f"Elenco delle visite effettuate per l'operatore {operatore[0]}")
                     indice = 0
-                    integrita_verificata = False
+                    
                     for visita in visite:
+                        integrita_verificata = False
                         for hash_v in hash_visite:
                             if self.ut.check_integrity(hash_v, visita):
                                 print(f"{indice} - Dati: {visita[2]}")
@@ -129,8 +127,9 @@ class ControllerPaziente(Ilog):
                                 print(f"    Luogo: {visita[5]}")
                                 indice += 1
                                 integrita_verificata = True
-                    if not integrita_verificata:
-                        print("Problemi con il controllo dell'integrità")
+                        if not integrita_verificata:
+                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                    print("")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
@@ -169,6 +168,7 @@ class ControllerPaziente(Ilog):
                 if self.ut.check_integrity(hash_cartella, cartella):
                     print(f"Trattamenti: {cartella[1]}")
                     print(f"Patologie: {cartella[2]}")
+                    print("")
                     integrita_verificata = True
                     if not integrita_verificata:
                         raise IntegrityCheckError("ERRORE ! Violata integrita' dati cartella clinica")
@@ -198,6 +198,7 @@ class ControllerPaziente(Ilog):
                             contatore += 1
                     if not integrita_verificata:
                      raise IntegrityCheckError("ERRORE ! Violata integrita' dati farmaci paziente")
+                print("")
         except IntegrityCheckError as err:
             print(err)           
         except Exception as e:

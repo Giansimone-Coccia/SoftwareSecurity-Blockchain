@@ -5564,3 +5564,157 @@
 2024-04-20 17:49:38,857 - INFO - ControllerOS: Chiamato getRecordVisite , Operatore: ('CFOperatore1', 'Alessandro', 'Manghi', 'OperatoreSanitario')
 2024-04-20 17:49:38,857 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
 2024-04-20 17:49:38,967 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-20 17:51:16,886 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-20 17:51:17,609 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-20 17:51:18,489 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-20 17:51:19,553 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:19,786 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:20,060 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:20,297 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:20,585 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:20,865 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-20 17:51:21,109 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-20 17:51:21,394 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:21,774 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-20 17:51:37,231 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-20 17:51:37,333 - INFO - session: Chiamato eseguiAccesso
+2024-04-20 17:51:47,566 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-20 17:51:47,566 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-20 17:51:47,666 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-20 17:51:47,666 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-20 17:51:47,769 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-20 17:51:47,770 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-20 17:51:47,871 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-20 17:51:47,975 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:54:52,942 - INFO - Paziente: Chiamato _selectMedico , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:54:52,942 - INFO - ControllerPaziente: Chiamato datiMedici , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:54:52,943 - INFO - ControllerPaziente: Chiamato mediciPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:54:52,943 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-20 17:54:53,048 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-20 17:55:03,716 - INFO - Paziente: Chiamato _visualizzaVisiteDelPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:55:03,717 - INFO - ControllerPaziente: Chiamato getVisitePaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:55:03,717 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-20 17:55:03,861 - INFO - db: Chiamato ottieniVisiteMedico , Porta: 3306
+2024-04-20 17:57:11,234 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:57:11,234 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:57:11,234 - INFO - ControllerPaziente: Chiamato operatoriPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:57:11,234 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-20 17:57:11,298 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-20 17:57:19,067 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:57:19,068 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-20 17:57:19,068 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-20 17:57:19,201 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-21 10:01:45,001 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:01:46,181 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:01:46,954 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:01:47,665 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:48,186 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:48,654 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:48,951 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:49,277 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:49,564 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:01:49,854 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:01:50,083 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:50,505 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:01:54,170 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:01:54,329 - INFO - session: Chiamato eseguiAccesso
+2024-04-21 10:02:01,436 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-21 10:02:01,436 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:02:01,512 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-21 10:02:01,512 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:02:01,592 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-21 10:02:01,592 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:02:01,636 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:02:01,721 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:06,662 - INFO - Paziente: Chiamato _selectMedico , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:06,662 - INFO - ControllerPaziente: Chiamato datiMedici , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:06,662 - INFO - ControllerPaziente: Chiamato mediciPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:06,662 - INFO - db: Chiamato ottieniCurati , Porta: 3306
+2024-04-21 10:02:06,813 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:02:09,224 - INFO - Paziente: Chiamato _visualizzaVisiteDelPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:09,224 - INFO - ControllerPaziente: Chiamato getVisitePaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:09,224 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:02:09,374 - INFO - db: Chiamato ottieniVisiteMedico , Porta: 3306
+2024-04-21 10:02:24,654 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:24,654 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:24,654 - INFO - ControllerPaziente: Chiamato operatoriPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:24,654 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-21 10:02:24,734 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:02:26,471 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:26,471 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:02:26,472 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:02:26,630 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-21 10:03:15,191 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:03:16,088 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:03:16,780 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:03:17,572 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:18,019 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:18,544 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:18,793 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:19,051 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:19,290 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:03:19,551 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:03:19,764 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:20,171 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:03:23,143 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:03:23,242 - INFO - session: Chiamato eseguiAccesso
+2024-04-21 10:03:28,888 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-21 10:03:28,888 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:03:28,970 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-21 10:03:28,970 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:03:29,073 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-21 10:03:29,074 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:03:29,174 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:03:29,276 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:31,580 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:31,580 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:31,580 - INFO - ControllerPaziente: Chiamato operatoriPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:31,580 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-21 10:03:31,648 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:03:33,065 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:33,065 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:03:33,065 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:03:33,208 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-21 10:04:54,570 - INFO - Paziente: Chiamato _visualizzaCartellaClinica , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:04:54,571 - INFO - ControllerPaziente: Chiamato getCartellaClinica , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:04:54,571 - INFO - db: Chiamato ottieniCartellaFromCF , Porta: 3306
+2024-04-21 10:05:35,240 - INFO - Paziente: Chiamato _visualizzaFarmaciPrescritti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:05:35,240 - INFO - ControllerPaziente: Chiamato getFarmaciPrescritti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:05:35,242 - INFO - db: Chiamato ottieniFarmaci , Porta: 3306
+2024-04-21 10:06:35,109 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:06:35,922 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:06:36,681 - INFO - solc 0.6.0 already installed at: C:\Users\dswal\.solcx\solc-v0.6.0
+2024-04-21 10:06:37,301 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:37,677 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:38,076 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:38,337 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:38,568 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:38,781 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:06:38,952 - INFO - db: Chiamato ottieniCartelle , Porta: 3306
+2024-04-21 10:06:39,185 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:39,503 - INFO - db: Chiamato retrieve_all_rows , Porta: 3306
+2024-04-21 10:06:42,553 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:06:42,633 - INFO - session: Chiamato eseguiAccesso
+2024-04-21 10:06:47,335 - INFO - db: Chiamato gestisciAccesso , Porta: 3306
+2024-04-21 10:06:47,336 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:06:47,419 - INFO - db: Chiamato ottieniProfessione , Porta: 3306
+2024-04-21 10:06:47,419 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:06:47,520 - INFO - db: Chiamato ottieniCF , Porta: 3306
+2024-04-21 10:06:47,521 - INFO - db: Chiamato ottieniDatiAuth , Porta: 3306
+2024-04-21 10:06:47,623 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:06:47,726 - INFO - Paziente: Chiamato menuPaziente , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:51,943 - INFO - Paziente: Chiamato _selectOperatoreSanitario , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:51,943 - INFO - ControllerPaziente: Chiamato datiOperatori , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:51,943 - INFO - ControllerPaziente: Chiamato operatoriPresenti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:51,945 - INFO - db: Chiamato ottieniAssistiti , Porta: 3306
+2024-04-21 10:06:52,246 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:06:54,859 - INFO - Paziente: Chiamato _visualizzaVisiteDelPazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:54,859 - INFO - ControllerPaziente: Chiamato getVisitePazienteOperatore , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:06:54,859 - INFO - db: Chiamato ottieniDatiUtente , Porta: 3306
+2024-04-21 10:06:55,035 - INFO - db: Chiamato ottieniVisiteOS , Porta: 3306
+2024-04-21 10:07:03,686 - INFO - Paziente: Chiamato _visualizzaCartellaClinica , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:07:03,686 - INFO - ControllerPaziente: Chiamato getCartellaClinica , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:07:03,686 - INFO - db: Chiamato ottieniCartellaFromCF , Porta: 3306
+2024-04-21 10:07:10,644 - INFO - Paziente: Chiamato _visualizzaFarmaciPrescritti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:07:10,644 - INFO - ControllerPaziente: Chiamato getFarmaciPrescritti , Utente: ('CFPaziente1', 'Luigi', 'Verdi', 'Via malpensa, Milano')
+2024-04-21 10:07:10,644 - INFO - db: Chiamato ottieniFarmaci , Porta: 3306

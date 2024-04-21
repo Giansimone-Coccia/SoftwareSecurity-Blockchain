@@ -42,13 +42,13 @@ class Paziente(Ilog):
 
             scelta = input("Digitare la scelta: ")
             while(scelta not in map(str, range(5))):
-                scelta = input("Digitare la scelta: ")
+                scelta = input("Scelta errata, digitare nuovamente: ")
+            print("")
 
             if scelta == "0":
                 print("Arrivederci !")
                 sys.exit()
             elif scelta == "1":
-                #CFP = self.controller.database.ottieniDatiAuth[1]
                 medico = self._selectMedico()
                 if(medico):
                     tupla = medico[0]
@@ -86,8 +86,8 @@ class Paziente(Ilog):
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
+        print("")
         paziente_selezionato = medici[int(scelta)]
-        print(paziente_selezionato)
         return paziente_selezionato[0]
     
     @log_actions
@@ -105,8 +105,8 @@ class Paziente(Ilog):
         scelta = input("Digitare la scelta: ")
         while not scelta.isdigit() or int(scelta) < 0 or int(scelta) > counter:
             scelta = input("Scelta errata, digitare nuovamente: ")
+        print("")
         operatore_selezionato = operatori[int(scelta)]
-        print(operatore_selezionato)
         return operatore_selezionato[0]
     
     @log_actions
