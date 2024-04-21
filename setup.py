@@ -34,7 +34,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'CareChain = main:__main__',
+            'CareChain = main:main',
         ],
     },
 
