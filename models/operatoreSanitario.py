@@ -87,9 +87,7 @@ class OperatoreSanitario(Ilog):
                 if(self._addNewAssistito() == True):
                     print("Paziente correttamente salvato come assistito !")
                     print("")
-                else:
-                    print("Paziente non salvato, prego riprovare")
-                    print("")
+                
 
     @log_actions
     def _selectPaziente(self):
@@ -189,6 +187,10 @@ class OperatoreSanitario(Ilog):
 
         print("")
         ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)-1][0])
+
+        if not ricevuta:
+            print("Paziente non salvato, prego riprovare")
+            print("")
             
         return ricevuta
 
