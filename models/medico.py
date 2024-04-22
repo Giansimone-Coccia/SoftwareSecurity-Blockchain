@@ -231,7 +231,7 @@ class Medico(Ilog):
         return paziente_selezionato[0]
 
     @log_actions
-    def _updateCartellaClinica(self, paziente):
+    def _updateClinica(self, paziente):
         print("0. Per modificare le allergie")
         print("1. Per modificare i trattamenti")
         print("2. Per inserire un farmaco")

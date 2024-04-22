@@ -84,22 +84,26 @@ class ControllerPaziente(Ilog):
             if medici:
                 for index, medico in enumerate(medici):
                     visite = self.database.ottieniVisiteMedico(CFPaziente, medico[0])
-                    print("")
-                    print(f"Visite effettuate per il medico {medico[0]}")
-                    indice = 0
-                    for visita in visite:
-                        integrita_verificata = False
-                        for hash_v in hash_visite:
-                            if self.ut.check_integrity(hash_v, visita):
-                                print(f"{indice} - Dati: {visita[2]}")
-                                print(f"    Data e ora: {visita[3]}")
-                                print(f"    Tipo prestazione: {visita[4]}")
-                                print(f"    Luogo: {visita[5]}")
-                                indice += 1
-                                integrita_verificata = True
-                        if not integrita_verificata:
-                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
-                    print("")
+                    if(visite):
+                        print(f"Visite effettuate per il medico {medico[0]}")
+                        indice = 0
+                        for visita in visite:
+                            integrita_verificata = False
+                            for hash_v in hash_visite:
+                                if self.ut.check_integrity(hash_v, visita):
+                                    print(f"{indice} - Dati: {visita[2]}")
+                                    print(f"    Data e ora: {visita[3]}")
+                                    print(f"    Tipo prestazione: {visita[4]}")
+                                    print(f"    Luogo: {visita[5]}")
+                                    indice += 1
+                                    integrita_verificata = True
+                            if not integrita_verificata:
+                                raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                        print("")
+                    else:
+                        print("Nessuna visita effettuata con questo medico")
+                        print("")
+
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
@@ -116,20 +120,23 @@ class ControllerPaziente(Ilog):
                     visite = self.database.ottieniVisiteOS(CFPaziente, operatore[0])
                     print(f"Elenco delle visite effettuate per l'operatore {operatore[0]}")
                     indice = 0
-                    
-                    for visita in visite:
-                        integrita_verificata = False
-                        for hash_v in hash_visite:
-                            if self.ut.check_integrity(hash_v, visita):
-                                print(f"{indice} - Dati: {visita[2]}")
-                                print(f"    Data e ora: {visita[3]}")
-                                print(f"    Tipo prestazione: {visita[4]}")
-                                print(f"    Luogo: {visita[5]}")
-                                indice += 1
-                                integrita_verificata = True
-                        if not integrita_verificata:
-                            raise IntegrityCheckError("Integrità dati: visite non rispettata !")
-                    print("")
+                    if(visite):
+                        for visita in visite:
+                            integrita_verificata = False
+                            for hash_v in hash_visite:
+                                if self.ut.check_integrity(hash_v, visita):
+                                    print(f"{indice} - Dati: {visita[2]}")
+                                    print(f"    Data e ora: {visita[3]}")
+                                    print(f"    Tipo prestazione: {visita[4]}")
+                                    print(f"    Luogo: {visita[5]}")
+                                    indice += 1
+                                    integrita_verificata = True
+                            if not integrita_verificata:
+                                raise IntegrityCheckError("Integrità dati: visite non rispettata !")
+                        print("")
+                    else:
+                        print("Nessuna visita effettuata con questo Operatore Sanitario")
+                        print("")
             else:
                 print("Nessun paziente trovato con il codice fiscale specificato.")
         except Exception as e:
@@ -157,6 +164,37 @@ class ControllerPaziente(Ilog):
         #Ottengo la lista di dati effettivi del medico per quel paziente
         return map(lambda operatoreSanitario: self.database.ottieniDatiUtente('operatoreSanitario', operatoreSanitario[0]), self.operatoriPresenti())
     
+    @log_actions    
+    def addCartellaClinica(self, CFpaziente):
+        try:
+            # Verifica se esiste già una cartella clinica per il paziente
+            if not any((cartella[0] == CFpaziente) for cartella in self.database.ottieniCartelle()):
+                # Crea una nuova cartella clinica nel database
+                inserimento_riuscito = self.database.addTupla("cartellaClinica", CFpaziente, "", "")
+                if inserimento_riuscito:
+                    # Ottieni la tupla della cartella clinica dal database
+                    tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
+                    # Calcola l'hash della tupla della cartella clinica
+                    hash_tupla = self.ut.hash_row(tupla_cartella)
+                    # Ottieni l'indirizzo dell'account Ethereum da utilizzare per la transazione
+                    address = self.w3.eth.accounts[0]
+                    # Effettua la transazione per memorizzare l'hash della cartella clinica nel contratto medico
+                    tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
+                    tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
+                    evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
+                    logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
+                    # Aggiungi l'hash della transazione alla lista dei valori hash del contratto
+                    self.valoriHashContratto.append(tx_hash)
+                    return True
+                else:
+                    return False
+            else:
+                # Se esiste già una cartella clinica per il paziente, restituisci False
+                return False
+        except Exception as e:
+            print("Errore durante l'aggiunta della cartella clinica:", e)
+            return False
+        
     @log_actions
     def getCartellaClinica(self):
         try:
@@ -174,6 +212,7 @@ class ControllerPaziente(Ilog):
                         raise IntegrityCheckError("ERRORE ! Violata integrita' dati cartella clinica")
                 else:
                     print("Nessuna cartella clinica trovata con il codice fiscale specificato.")
+                    print("")
         except IntegrityCheckError as err:
             print(err)
         except Exception as e:
@@ -199,6 +238,9 @@ class ControllerPaziente(Ilog):
                     if not integrita_verificata:
                      raise IntegrityCheckError("ERRORE ! Violata integrita' dati farmaci paziente")
                 print("")
+            else:
+                print("Nessun farmaco prescritto")
+                print("")
         except IntegrityCheckError as err:
             print(err)           
         except Exception as e:
@@ -215,7 +257,7 @@ class ControllerPaziente(Ilog):
             else:
                 utenti_presenti = self.database.ottieniDatiAuth()
                 for utente in utenti_presenti:
-                    if utente['Ruolo'] == 'Paziente' and utente['CF'] == cf:
+                    if utente['CF'] == cf:
                         print("Utente già presente con questo codice fiscale, provi a fare login")
                         print("")
                         return
@@ -233,6 +275,15 @@ class ControllerPaziente(Ilog):
                 print("Il cognome deve contenere solo lettere.")
             else:
                 break
+        while True:
+            username = input("Inserisci l'username (min 3 caratteri, max 16 caratteri): ")
+            if not (re.match(r'^[a-zA-Z0-9_-]{3,16}$', username)):
+                print("Username non valido. Assicurati che l'username contenga solo lettere, numeri, trattini bassi e trattini, e che sia lungo da 3 a 16 caratteri.")
+            else:
+                if  any(username == utente['Username'] for utente in self.database.ottieniDatiAuth()):
+                    print("Username non disponibile.")
+                else:
+                    break
         residenza = input("Inserisci la residenza: ")
         regex = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
         while True:
@@ -262,7 +313,8 @@ class ControllerPaziente(Ilog):
                     m = medici[medico_scelto]
                     cf_medico = m[0]
                     self.database.addNuovoCurato(cf, cf_medico)
-                    self.database.addNuovoAuth(cf, nome, psw, 'Paziente')
+                    self.database.addNuovoAuth(cf, username, psw, 'Paziente')
+                    self.addCartellaClinica(cf)
                     print("")
                     break
                 else:

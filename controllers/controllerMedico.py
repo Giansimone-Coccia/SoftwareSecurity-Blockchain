@@ -173,37 +173,6 @@ class ControllerMedico(Ilog):
             print(f"ERRORE ! {e}")
             return []
 
-    @log_actions    
-    def addCartellaClinica(self, CFpaziente):
-        try:
-            # Verifica se esiste già una cartella clinica per il paziente
-            if not any((cartella[0] == CFpaziente) for cartella in self.database.ottieniCartelle()):
-                # Crea una nuova cartella clinica nel database
-                inserimento_riuscito = self.database.addTupla("cartellaClinica", CFpaziente, "", "")
-                if inserimento_riuscito:
-                    # Ottieni la tupla della cartella clinica dal database
-                    tupla_cartella = self.database.ottieniCartellaFromCF(CFpaziente)
-                    # Calcola l'hash della tupla della cartella clinica
-                    hash_tupla = self.ut.hash_row(tupla_cartella)
-                    # Ottieni l'indirizzo dell'account Ethereum da utilizzare per la transazione
-                    address = self.w3.eth.accounts[0]
-                    # Effettua la transazione per memorizzare l'hash della cartella clinica nel contratto medico
-                    tx_hash = self.medico_contract.functions.storeHashCartellaClinica(CFpaziente, hash_tupla).transact({'from': address})
-                    tx_receipt = self.w3.eth.get_transaction_receipt(tx_hash)
-                    evento = self.medico_contract.events.Evento().process_receipt(tx_receipt)[0]['args']
-                    logging.info(f"EVENTO BLOCKCHAIN ---------->     {evento}")
-                    # Aggiungi l'hash della transazione alla lista dei valori hash del contratto
-                    self.valoriHashContratto.append(tx_hash)
-                    return True
-                else:
-                    return False
-            else:
-                # Se esiste già una cartella clinica per il paziente, restituisci False
-                return False
-        except Exception as e:
-            print("Errore durante l'aggiunta della cartella clinica:", e)
-            return False
-
     @log_actions
     def updateCartellaClinica(self, CFpaziente, nomeCampo, nuovo_valore):
         cursor = self.database.conn.cursor()
