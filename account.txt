@@ -9,3 +9,15 @@ Password: Medico1
 Professione: Paziente
 Username: Paziente1
 Password: Paziente1
+************************************
+Professione: Medico
+Username: Medico2
+Password: Medico2
+************************************
+Professione: Paziente
+Username: Paziente2
+Password: Paziente2
+************************************
+Professione: Operatore sanitario
+Username: Operatore2
+Password: Operatore2

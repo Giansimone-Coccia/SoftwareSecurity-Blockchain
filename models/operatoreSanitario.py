@@ -186,7 +186,7 @@ class OperatoreSanitario(Ilog):
             scelta = input("Scelta errata, digitare nuovamente: ")
 
         print("")
-        ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)-1][0])
+        ricevuta = self.controller.addAssistito(_assistitiDisponibili[int(scelta)][0])
 
         if not ricevuta:
             print("Paziente non salvato, prego riprovare")
